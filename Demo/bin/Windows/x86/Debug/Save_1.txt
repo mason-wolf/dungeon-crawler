@@ -1,0 +1,5 @@
+player_health=92.8500000000004
+arrows=35
+location=Level_1
+player_position=186.6002,207.9993
+inventory_item=Chicken,12
