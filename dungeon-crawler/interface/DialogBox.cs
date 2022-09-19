@@ -81,13 +81,13 @@ namespace DungeonCrawler
         /// The amount of characters allowed on a given line
         /// NOTE: If you want to use a font that is not monospaced, this will need to be reevaluated
         /// </summary>
-        private int MaxCharsPerLine => (int)Math.Floor((Size.X - DialogBoxMargin) / _characterSize.X);
+        private int MaxCharsPerLine => 30;
 
         /// <summary>
         /// Determine the maximum amount of lines allowed per page
         /// NOTE: This will change automatically with font size
         /// </summary>
-        private int MaxLines => (int)Math.Floor((Size.Y - DialogBoxMargin) / _characterSize.Y) - 1;
+        private int MaxLines => 2;
 
         /// <summary>
         /// The index of the current page
@@ -140,6 +140,8 @@ namespace DungeonCrawler
         /// 
         private SpriteFont font;
         private Game game;
+        private Stopwatch stopWatch;
+
 
         public DialogBox(Game game, SpriteFont font)
         {
@@ -147,8 +149,9 @@ namespace DungeonCrawler
             this.game = game;
             BorderWidth = 2;
             DialogColor = Color.White;
-            _characterSize = font.MeasureString(new StringBuilder("W", 5)); ;
-
+            _characterSize = font.MeasureString(new StringBuilder("W", 1));
+            stopWatch = new Stopwatch();
+            stopWatch.Start();
             FillColor = new Color(0f, 0f, 0f, 0.8f);
 
             BorderColor = new Color(0f, 0f, 0f, 0.8f);
@@ -162,7 +165,7 @@ namespace DungeonCrawler
             _pages = new List<string>();
             _currentPage = 0;
 
-            var sizeX = (int)(200);
+            var sizeX = (int)(250);
             var sizeY = (int)(50);
 
             Size = new Vector2(sizeX, sizeY);
@@ -236,6 +239,9 @@ namespace DungeonCrawler
                     }
                     else
                     {
+                        pageContent = "";
+                        timer = 0;
+                        index = 0;
                         _currentPage++;
                         _stopwatch.Restart();
                     }
@@ -257,6 +263,12 @@ namespace DungeonCrawler
         /// Draw the dialog box on screen if it's currently active
         /// </summary>
         /// <param name="spriteBatch"></param>
+        /// 
+
+        float timer = 0;
+        int index = 0;
+        string pageContent = "";
+
         public void Draw(SpriteBatch spriteBatch)
         {
             if (Active)
@@ -270,8 +282,16 @@ namespace DungeonCrawler
                 // Draw background fill texture (in this example, it's 50% transparent white)
                 spriteBatch.Draw(_fillTexture, null, TextRectangle);
 
-                // Draw the current page onto the dialog box
-                spriteBatch.DrawString(font, _pages[_currentPage], TextPosition, DialogColor);
+                timer += stopWatch.ElapsedMilliseconds;
+
+                if (stopWatch.ElapsedMilliseconds > 25 && index < _pages[_currentPage].Length)
+                {
+                    pageContent += _pages[_currentPage][index];
+                    index++;
+                    stopWatch.Restart();
+                }
+
+                spriteBatch.DrawString(font, pageContent, TextPosition, DialogColor);
 
                 // Draw a blinking indicator to guide the player through to the next page
                 // This stops blinking on the last page

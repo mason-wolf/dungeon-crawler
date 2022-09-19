@@ -15,6 +15,7 @@ namespace DungeonCrawler.Engine
         {
             for (int i = 0; i < tileList.Length; i++)
             {
+                Console.WriteLine(tileList[i]);
                 Tiles.Add(Int32.Parse(tileList[i]));
             }
         }

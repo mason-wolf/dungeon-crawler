@@ -103,9 +103,9 @@ namespace DungeonCrawler.Scenes
         protected override void LoadContent()
         {
             teleporterList = new List<Teleporter>();
-            StartingAreaMap = new Map(Content, "Content/maps/StartingArea.tmx");
-            Sprites sprites = new Sprites();
-            sprites.LoadContent(Content);
+            //StartingAreaMap = new Map(Content, "Content/maps/castle.tmx");
+            //Sprites sprites = new Sprites();
+            //sprites.LoadContent(Content);
       
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/level_1.tmx"));
@@ -142,20 +142,20 @@ namespace DungeonCrawler.Scenes
 
             inventory = new Inventory(Content);
 
+     
             dialogBox = new DialogBox(game, Font)
             {
-                Text = "\n" + 
-                       "Oh..are you here to ascend the mount?\n" +
-                       "Hmph..you'll be needing some help then.\n" +
-                       "I had some friends enter the beast a few days ago.\n" +
-                       "Help me find them and we'll be sure to repay you.\n"
+                Text = 
+                       "\nI wonder what it's like out there." + 
+                       "\nI'm still a newbie, you know."
             };
 
-            dialogBox.Position = new Vector2(Player.Position.X - 175, Player.Position.Y + 100);
+            dialogBox.Position = new Vector2(Player.Position.X, Player.Position.Y);
 
             campfire = Sprites.campfireSprite;
             campfire.Position = new Vector2(300, 260);
-            StartingAreaMap.AddCollidable(campfire.Position.X, campfire.Position.Y, 8, 8);
+          //  StartingAreaMap.AddCollidable(campfire.Position.X, campfire.Position.Y, 8, 8);
+            // LEVEL START
             SelectedScene = Scene.Level_1;
             Item chickenItem = new Item();
             chickenItem.HealthAmount = 10;
@@ -428,7 +428,7 @@ namespace DungeonCrawler.Scenes
 
         public void HandleDialog()
         {
-            //if (Player.BoundingBox.Intersects(sittingWarriorEntity.BoundingBox) && KeyBoardNewState.IsKeyDown(Keys.E) && KeyBoardOldState.IsKeyUp(Keys.E))
+            //if (KeyBoardNewState.IsKeyDown(Keys.E) && KeyBoardOldState.IsKeyUp(Keys.E))
             //{
             //    dialogBox.Show();
             //}

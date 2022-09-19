@@ -117,14 +117,14 @@ namespace DungeonCrawler
                         Vector2 oppositeDirection = Position - enemy.Position;
                         oppositeDirection.Normalize();
 
-                        if(IntersectsCollidable(enemy))
-                        {
-                            enemy.Position -= CorrectIntersection(enemy) * (float)(0.4f);
-                        }
-                        else
-                        {
-                            enemy.Position -= oppositeDirection * (float)(0.01f * 1500);
-                        }
+                        //if(IntersectsCollidable(enemy))
+                        //{
+                        //    enemy.Position -= CorrectIntersection(enemy) * (float)(0.4f);
+                        //}
+                        //else
+                        //{
+                        //    enemy.Position -= oppositeDirection * (float)(0.01f * 1500);
+                        //}
                     }
                 }
             }
