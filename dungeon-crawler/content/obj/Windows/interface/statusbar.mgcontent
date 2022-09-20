@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/statusbar.png</SourceFile>
-  <SourceTime>2022-01-21T14:16:07.5360056-06:00</SourceTime>
+  <SourceTime>2022-09-20T14:25:53.5539781-05:00</SourceTime>
   <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/interface/statusbar.xnb</DestFile>
-  <DestTime>2022-09-19T14:23:50.4131678-05:00</DestTime>
+  <DestTime>2022-09-20T15:35:15.3238086-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

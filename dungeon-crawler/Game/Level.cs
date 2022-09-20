@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using MonoGame.Extended.Shapes;
 using MonoGame.Extended.Sprites;
@@ -23,6 +24,7 @@ namespace DungeonCrawler
     {
         EnemyAI enemyAI;
         private List<Entity> enemyList = new List<Entity>();
+        private List<Entity> npcList = new List<Entity>();
         RoyT.AStar.Grid collisionGrid;
         Map map;
         string levelName;
@@ -30,6 +32,7 @@ namespace DungeonCrawler
         AnimatedSprite barrelSprite;
         AnimatedSprite chestSprite;
         AnimatedSprite rockSprite;
+        AnimatedSprite deskSprite;
         Texture2D arrowsSprite;
         List<SoundEffect> soundEffects;
         bool objectsPopulated = false;
@@ -162,6 +165,13 @@ namespace DungeonCrawler
                         goblinEntity.Name = "Goblin";
                         enemyList.Add(goblinEntity);
                         break;
+                    case ("FIRE_PROFESSOR"):
+                        Entity fireProfessorEntity = new Entity(Sprites.fireProfessorAnimation);
+                        fireProfessorEntity.LoadContent(content);
+                        fireProfessorEntity.State = Action.IdleSouth1;
+                        fireProfessorEntity.Position = mapObject.GetPosition();
+                        npcList.Add(fireProfessorEntity);
+                        break;
                     case ("Torch"):
                         torchSprite = new AnimatedSprite(Sprites.torchAnimation);
                         torchSprite.Play("burning");
@@ -191,6 +201,14 @@ namespace DungeonCrawler
                         mapObject.SetSprite(rockSprite);
                         IBox rockCollidable = map.GetWorld().Create(rockSprite.Position.X, rockSprite.Position.Y, 16, 16);
                         mapObject.SetCollisionBox(rockCollidable);
+                        break;
+                    case ("Desk"):
+                        deskSprite = new AnimatedSprite(Sprites.deskAnimation);
+                        deskSprite.Play("idle");
+                        deskSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(deskSprite);
+                        IBox deskCollidable = map.GetWorld().Create(deskSprite.Position.X, deskSprite.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(deskCollidable);
                         break;
                     case ("start"):
                         // Map object with the name "start", specifies the starting position.
@@ -268,6 +286,18 @@ namespace DungeonCrawler
                 }
             }
 
+            foreach (Entity npc in npcList)
+            {
+                if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
+                {
+                    Init.dialogBox.Text =
+                       "\nI am the fire professor." +
+                       "\nWelcome to the academy.";
+                    Init.startDialog = true;
+                    Init.HandleDialog();
+                }
+            }
+
             if (map != null)
             {
                 map.Update(gameTime);
@@ -281,6 +311,11 @@ namespace DungeonCrawler
                 enemy.Draw(spriteBatch);
                 Vector2 AIHealthPosition = new Vector2(enemy.Position.X - 8, enemy.Position.Y - 20);
                 enemy.DrawHUD(spriteBatch, AIHealthPosition, false);
+            }
+            
+            foreach (Entity npc in npcList)
+            {
+                npc.Draw(spriteBatch);
             }
 
             // Randomly place loot in some objects.

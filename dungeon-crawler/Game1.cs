@@ -26,8 +26,8 @@ namespace DungeonCrawler
         {
             graphics = new GraphicsDeviceManager(this);
             graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferWidth = 1080;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = 1920;
+            graphics.PreferredBackBufferHeight = 1080;
             Content.RootDirectory = "Content";
         }
 

@@ -173,3 +173,6 @@ C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\obj\x86\Debug\De
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\obj\x86\Debug\Demo.pdb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\interface\npc-statusbar.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\mage.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\tilesets\castle.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\objects\desk.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\fire_mage.xnb

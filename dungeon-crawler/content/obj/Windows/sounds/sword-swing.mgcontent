@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/sword-swing.mp3</SourceFile>
   <SourceTime>2021-02-17T10:34:05.6190851-06:00</SourceTime>
   <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/sounds/sword-swing.xnb</DestFile>
-  <DestTime>2022-09-19T14:23:50.6213026-05:00</DestTime>
+  <DestTime>2022-09-20T15:35:15.5279716-05:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

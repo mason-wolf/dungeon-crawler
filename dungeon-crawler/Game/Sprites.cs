@@ -75,6 +75,11 @@ namespace DungeonCrawler
         // Single dynamite sprite
         public static Texture2D singleDynamiteTexture;
 
+        // Desk sprite
+        public static Texture2D deskTexture;
+        public TextureAtlas deskAtlas;
+        public static SpriteSheetAnimationFactory deskAnimation;
+
         // Rock sprite
         public static Texture2D rockTexture;
         public TextureAtlas rockAtlas;
@@ -94,6 +99,11 @@ namespace DungeonCrawler
         public static Texture2D bowTexture;
         public TextureAtlas bowAtlas;
         public static SpriteSheetAnimationFactory bowAnimation;
+
+        // Fire Professor
+        public static Texture2D fireProfessorTexture;
+        public TextureAtlas fireProfessorTextureAtlas;
+        public static SpriteSheetAnimationFactory fireProfessorAnimation;
 
         public void LoadContent(ContentManager content)
         {
@@ -224,6 +234,12 @@ namespace DungeonCrawler
             // Chicken
             chickenTexture = content.Load<Texture2D>(@"items\Chicken");
 
+            // Desk
+            deskTexture = content.Load<Texture2D>(@"objects\desk");
+            deskAtlas = TextureAtlas.Create(deskTexture, 24, 24);
+            deskAnimation = new SpriteSheetAnimationFactory(deskAtlas);
+            deskAnimation.Add("idle", new SpriteSheetAnimationData(new[] { 0 }, 0.09f, isLooping: false));
+
             // Arrow
             arrowTexture = content.Load<Texture2D>(@"objects\Arrow");
             arrowAtlas = TextureAtlas.Create(arrowTexture, 32, 32);
@@ -273,6 +289,13 @@ namespace DungeonCrawler
             chainedGateAnimation = new SpriteSheetAnimationFactory(chainedGateAtlas);
             chainedGateAnimation.Add("idle", new SpriteSheetAnimationData(new[] { 0 }, 1f, isLooping: false));
             chainedGateAnimation.Add("open", new SpriteSheetAnimationData(new[] { 1, 2, 3, 4 }, 0.05f, isLooping: false));
+
+            // Fire Professor
+            fireProfessorTexture = content.Load<Texture2D>(@"spritesheets\fire_mage");
+            fireProfessorTextureAtlas = TextureAtlas.Create(fireProfessorTexture, 24, 24);
+            fireProfessorAnimation = new SpriteSheetAnimationFactory(fireProfessorTextureAtlas);
+            fireProfessorAnimation.Add("idle", new SpriteSheetAnimationData(new[] { 0 }, animationSpeed, isLooping: false));
+
         }
     }
 }
