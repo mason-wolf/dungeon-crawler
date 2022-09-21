@@ -20,31 +20,24 @@ namespace DungeonCrawler.Interface
         SpriteFont inventoryFont;
         KeyboardState oldKeyboardState;
         KeyboardState newKeyboardState;
-        AnimatedSprite dynamiteSprite;
-        Entity explosionEntity;
-        public static int SelectedItem { get; set; }
-        public static List<Item> itemList = Player.InventoryList;
-        public static bool InventoryOpen { get; set; }
-        public static bool SavedGameLoaded { get; set; }
-        Vector2 Position { get; set; }
-        public static int TotalItems { get; set; }
-        public static int TotalChickens { get; set; }
-        public static int TotalArrows { get; set; }
-        public static int TotalDynamite { get; set;  }
 
+        public int SelectedItem { get; set; }
+        public List<Item> itemList = Player.InventoryList;
+        public bool InventoryOpen { get; set; }
+        public string MenuTitle { get; set; }
+        public bool SavedGameLoaded { get; set; }
+        Vector2 Position { get; set; }
+        public int TotalItems { get; set; }
         public static int TotalKeys { get; set; }
+
         public int itemSlot;
-        public bool dynamiteUsed;
-        public enum Items
-        {
-            Chicken,
-            Dynamite
-        }
 
         public Inventory(ContentManager content)
         {
             LoadContent(content);
         }
+
+        public List<Item> Contents = new List<Item>();
 
         public override void LoadContent(ContentManager content)
         {
@@ -56,25 +49,11 @@ namespace DungeonCrawler.Interface
             inventoryTexture.SetData(new[] { interfaceColor });
             selectedItemTexture.SetData(new[] { selectedItemTextureColor });
             InventoryOpen = false;
-
-            TotalDynamite = 0;
-            TotalKeys = 1;
-
-            if (!SavedGameLoaded)
-            {
-                TotalChickens = 12;
-                TotalArrows = 25;
-            }
-
             GenerateGrid();
-            dynamiteSprite = new AnimatedSprite(Sprites.dynamiteAnimation);
-            explosionEntity = new Entity(Sprites.explosionAnimation);
-            explosionEntity.LoadContent(content);
         }
 
         public override void Update(GameTime gameTime)
         {
-            explosionEntity.Update(gameTime);
             // Store & remember the selected item.
             if (InventoryOpen)
             {
@@ -94,7 +73,7 @@ namespace DungeonCrawler.Interface
             }
 
             // Move Left
-            if (newKeyboardState.IsKeyDown(Keys.A) && oldKeyboardState.IsKeyUp(Keys.A))
+            if (newKeyboardState.IsKeyDown(Keys.A) && oldKeyboardState.IsKeyUp(Keys.A) && InventoryOpen)
             {
                 if (SelectedItem != 0)
                 {
@@ -103,19 +82,19 @@ namespace DungeonCrawler.Interface
             }
 
             // Move Down
-            if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
+            if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S) && InventoryOpen)
             {
                 MoveToNextRow();
             }
 
-            //Move Up
-            if (newKeyboardState.IsKeyDown(Keys.W) && oldKeyboardState.IsKeyUp(Keys.W))
+            // Move Up
+            if (newKeyboardState.IsKeyDown(Keys.W) && oldKeyboardState.IsKeyUp(Keys.W) && InventoryOpen)
             {
                 MoveToPreviousRow();
             }
 
-            //Move Up
-            if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E))
+            // Use Item
+            if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E) && InventoryOpen)
             {
                 itemUsed = true;
             }
@@ -137,113 +116,16 @@ namespace DungeonCrawler.Interface
                 newKeyboardState = Keyboard.GetState();
             }
 
-            dynamiteSprite.Update(gameTime);
         }
-
-        Vector2 dynamitePosition;
-        int dynamiteTimer = 0;
-        int explosionTimer = 0;
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             if (InventoryOpen)
             {
                 spriteBatch.Draw(inventoryTexture, null, inventoryInterface);
-                spriteBatch.DrawString(inventoryFont, "Items", new Vector2(Position.X + 25, Position.Y + 10), Color.White, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(inventoryFont, MenuTitle, new Vector2(Position.X + 25, Position.Y + 10), Color.White, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 0);
                 DrawSelectedItem(spriteBatch);
             }
-
-            if (dynamiteUsed && dynamiteTimer < 120)
-            {
-                dynamiteSprite.Play("burning");
-                dynamiteSprite.Position = dynamitePosition;
-                dynamiteSprite.Draw(spriteBatch);
-                dynamiteTimer++;
-            }
-            else
-            {
-                if (dynamiteTimer >= 120)
-                {
-                    dynamiteUsed = false;
-                    explosionEntity.Position = dynamitePosition;
-                    explosionEntity.Sprite.Play("explosion");
-                    explosionEntity.Draw(spriteBatch);
-
-                    foreach(MapObject mapObject in Init.SelectedMap.GetMapObjects())
-                    {
-                        if (mapObject.GetName() == "Rock" && explosionEntity.BoundingBox.Intersects(mapObject.GetBoundingBox()) && !mapObject.IsDestroyed())
-                        {
-                            mapObject.GetSprite().Play("broken");
-                            mapObject.Destroy();
-                            Init.SelectedMap.GetWorld().Remove(mapObject.GetCollisionBox());
-                        }
-                    }
-                    if (explosionTimer < 35)
-                    {
-                        explosionTimer++;
-                    }
-                    else
-                    {
-                        explosionEntity.Sprite.Play("idle");
-                        dynamiteTimer = 0;
-                        explosionTimer = 0;
-                    }
-                }
-                else
-                {
-                    dynamitePosition = Init.Player.Position;
-                }
-
-            }
-        }
-
-        /// <summary>
-        /// Adds an item to the player's inventory.
-        /// </summary>
-        /// <param name="item">Item Name</param>
-        public void AddToInventory(Items item)
-        {
-
-            TotalItems++;
-            switch (item)
-            {
-                case Items.Chicken:
-
-                    Item chicken = new Item();
-                    chicken.ItemTexture = Sprites.chickenTexture;
-
-                    itemSlot = AssignSlot(chicken);
-
-                    if (itemSlot < TotalItems)
-                    {
-                        itemList[itemSlot].ItemTexture = chicken.ItemTexture;
-                        itemList[itemSlot].Name = "Chicken";
-                        itemList[itemSlot].Description = "Restores health.";
-                        itemList[itemSlot].Quantity = TotalChickens;
-                    }
-
-                    itemSlot = 0;
-                    break;
-                case Items.Dynamite: 
-
-                    Item dynamite = new Item();
-                    dynamite.ItemTexture = Sprites.singleDynamiteTexture;
-
-                    itemSlot = AssignSlot(dynamite);
-
-                    if (itemSlot < TotalItems)
-                    {
-                        itemList[itemSlot].ItemTexture = dynamite.ItemTexture;
-                        itemList[itemSlot].Name = "Dynamite";
-                        itemList[itemSlot].Description = "Blows stuff up.";
-                        itemList[itemSlot].Quantity = TotalDynamite;
-                    }
-
-                    itemSlot = 0;
-                    break;
-            }
-
-
         }
 
         /// <summary>
@@ -366,32 +248,45 @@ namespace DungeonCrawler.Interface
 
             TotalItems = 0;
 
-            for (int i = 0; i < TotalChickens; i++)
+            foreach (Item item in Contents)
             {
-                AddToInventory(Items.Chicken);
+                DrawItem(item);
             }
 
-            for (int i = 0; i < TotalDynamite; i++)
-            {
-                AddToInventory(Items.Dynamite);
-            }
             if (itemUsed)
             {
-                if (itemList[SelectedItem].Name == "Chicken")
-                {
-                    TotalChickens -= 1;
-                    if (Init.Player.CurrentHealth < Init.Player.MaxHealth)
-                    {
-                        Init.Player.CurrentHealth += 25;
-                    }
-                }
-                if (itemList[SelectedItem].Name == "Dynamite")
-                {
-                    TotalDynamite -= 1;
-                    InventoryOpen = false;
-                    dynamiteUsed = true;
-                }
+                Init.Message = itemList[SelectedItem].Name;
+                Init.MessageEnabled = true;
+                Player.SelectedItem = itemList[SelectedItem];
+                //if (itemList[SelectedItem].Name == "Chicken")
+                //{
+                //    TotalChickens -= 1;
+                //    if (Init.Player.CurrentHealth < Init.Player.MaxHealth)
+                //    {
+                //        Init.Player.CurrentHealth += 25;
+                //    }
+                //}
+                //if (itemList[SelectedItem].Name == "Dynamite")
+                //{
+                //    TotalDynamite -= 1;
+                //    InventoryOpen = false;
+                //    dynamiteUsed = true;
+                //}
             }
+        }
+
+        /// <summary>
+        /// Draws an item on the inventory screen.
+        /// </summary>
+        /// <param name="item">Item Name</param>
+        public void DrawItem(Item item)
+        {
+            TotalItems++;
+            itemSlot = AssignSlot(item);
+            itemList[itemSlot].ItemTexture = item.ItemTexture;
+            itemList[itemSlot].Name = item.Name;
+            itemList[itemSlot].Description = item.Description;
+            itemList[itemSlot].ID = item.ID;
         }
 
         // Create a delay before drawing to allow time for positioning to update correctly.
@@ -402,19 +297,22 @@ namespace DungeonCrawler.Interface
             itemUsed = false;
 
             frames++;
-
-            if (frames > 10)
+            
+            if (frames > 20)
             {
                 for (int i = 0; i < itemList.Count; i++)
                 {
-                    if (i < 32 && itemList[i].ItemTexture != null)
+                    if (itemList[i].ItemTexture != null)
                     {
                         // Draw the item texture on the inventory slot.
                         spriteBatch.Draw(itemList[i].ItemTexture, new Rectangle(itemList[i].ItemRectangle.X, itemList[i].ItemRectangle.Y, 32, 32), Color.White);
 
                         // Draw the item name and description.
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
-                        spriteBatch.DrawString(inventoryFont, itemList[i].Quantity.ToString(), new Vector2(itemList[i].ItemRectangle.X + 25, itemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+                        if (itemList[i].Quantity != 0)
+                        {
+                            spriteBatch.DrawString(inventoryFont, itemList[i].Quantity.ToString(), new Vector2(itemList[i].ItemRectangle.X + 25, itemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+                        }
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
                     }
                 }
@@ -438,7 +336,7 @@ namespace DungeonCrawler.Interface
         /// <summary>
         /// Move to next row on grid.
         /// </summary>
-        public static void MoveToNextRow()
+        public void MoveToNextRow()
         {
             bool found = false;
 
@@ -461,7 +359,7 @@ namespace DungeonCrawler.Interface
         /// <summary>
         /// Move to previous row on grid.
         /// </summary>
-        public static void MoveToPreviousRow()
+        public void MoveToPreviousRow()
         {
             bool found = false;
 

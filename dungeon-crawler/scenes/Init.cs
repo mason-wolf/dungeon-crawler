@@ -42,7 +42,8 @@ namespace DungeonCrawler.Scenes
         public static SaveMenu saveMenu;
         public static LoadMenu loadMenu;
 
-        public Inventory inventory;
+        public static Inventory itemInventory;
+        public static Inventory spellInventory;
  
         // Stores a list of teleporters from imported maps.
         public static List<Teleporter> teleporterList;
@@ -130,9 +131,26 @@ namespace DungeonCrawler.Scenes
             string[] items = { "Continue", "Save", "Load", "Quit" };
             escapeMenu.SetMenuItems(items);
 
-            inventory = new Inventory(Content);
+            itemInventory = new Inventory(Content);
+            itemInventory.MenuTitle = "Items";
 
+            spellInventory = new Inventory(Content);
+            spellInventory.MenuTitle = "Spells";
 
+            Item fireballSpell = new Item();
+            fireballSpell.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
+            fireballSpell.Name = "FIREBALL";
+            fireballSpell.ID = 1;
+            fireballSpell.Description = "Shoots a flame.";
+
+            Item iceBoltSpell = new Item();
+            iceBoltSpell.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
+            iceBoltSpell.Name = "ICEBOLT";
+            iceBoltSpell.ID = 2;
+            iceBoltSpell.Description = "Casts a bolt of ice.";
+
+            spellInventory.Contents.Add(fireballSpell);
+            spellInventory.Contents.Add(iceBoltSpell);
             dialogBox = new DialogBox(game, Font);
 
 
@@ -178,7 +196,7 @@ namespace DungeonCrawler.Scenes
             {
                 if (teleporter.Enabled)
                 {
-                    if (Player.BoundingBox.Intersects(teleporter.GetRectangle()) && teleporter.GetDestinationMap() == "StartingArea")
+                    if (Player.BoundingBox.Intersects(teleporter.GetRectangle()))
                     {
                         if (Player.EnemyList.Count > 0)
                         {
@@ -191,17 +209,8 @@ namespace DungeonCrawler.Scenes
                         }
 
                         levelList.Clear();
-
-                        FadeInMap("StartingArea");
-                        TransitionState = true;
                         Content.Unload();
                         LoadContent();
-                        SelectedScene = Scene.StartingArea;
-                        Player.Position = new Vector2(335f, 150f);
-                    }
-
-                    if (Player.BoundingBox.Intersects(teleporter.GetRectangle()))
-                    {
                         TransitionState = true;
                         FadeInMap(teleporter.GetDestinationMap());
                         SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
@@ -294,11 +303,12 @@ namespace DungeonCrawler.Scenes
             HandleDialog();
 
             dialogBox.Update();
-            inventory.Update(gameTime);
+            itemInventory.Update(gameTime);
+            spellInventory.Update(gameTime);
 
             Player.Update(gameTime);
-            OffsetWeaponPosition();
-            Player.PlayerWeapon.Update(gameTime);
+          //  OffsetWeaponPosition();
+        //    Player.PlayerWeapon.Update(gameTime);
 
             // Handle player's collision.        
 
@@ -367,6 +377,7 @@ namespace DungeonCrawler.Scenes
                 Vector2 playerHealthPosition = new Vector2(Player.Position.X - 170, Player.Position.Y - 110);
 
                 Player.Draw(spriteBatch);
+             //   Player.PlayerWeapon.Draw(spriteBatch);
                 Player.DrawHUD(spriteBatch, playerHealthPosition, true);
 
                 //int health = (int)Player.CurrentHealth;
@@ -374,7 +385,8 @@ namespace DungeonCrawler.Scenes
                 //spriteBatch.DrawString(Font, health.ToString() + " / 100", healthStatus, Color.White);
 
                 dialogBox.Draw(spriteBatch);
-                inventory.Draw(spriteBatch);
+                itemInventory.Draw(spriteBatch);
+                spellInventory.Draw(spriteBatch);
             }
 
             if (Player.Dead)

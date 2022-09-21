@@ -146,16 +146,16 @@ namespace DungeonCrawler.Scenes
             using (StreamWriter streamWriter = new StreamWriter("Save_" + saveSlot + ".txt"))
             {
                 streamWriter.WriteLine("player_health="+Init.Player.CurrentHealth);
-                streamWriter.WriteLine("arrows=" + Inventory.TotalArrows);
+             //   streamWriter.WriteLine("arrows=" + Inventory.TotalArrows);
                 streamWriter.WriteLine("location=" + Player.CurrentLevel);
                 streamWriter.WriteLine("player_position=" + Init.Player.Position.X + "," + Init.Player.Position.Y);
-                foreach(Item item in Inventory.itemList)
-                {
-                    if (item.Name != "")
-                    {
-                        streamWriter.WriteLine("inventory_item=" + item.Name + "," + item.Quantity);
-                    }
-                }
+                //foreach(Item item in Init.itemInventory.itemList)
+                //{
+                //    if (item.Name != "")
+                //    {
+                //        streamWriter.WriteLine("inventory_item=" + item.Name + "," + item.Quantity);
+                //    }
+                //}
             }
             savedSlots[saveSlot - 1] = 1;
             GameSaved = true;

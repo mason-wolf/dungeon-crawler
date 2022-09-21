@@ -38,13 +38,10 @@ namespace DungeonCrawler
         public static bool ActionButtonPressed = false;
         public static Vector2 MotionVector;
         public static string CurrentLevel { get; set; }
-        private string EquipedWeapon = "Sword";
 
-        private Entity swordWeapon;
-        private Entity bowWeapon;
+        public static Item SelectedItem { get; set; }
 
         public static Entity PlayerWeapon;
-        AnimatedSprite arrow;
         public bool InMenu = false;
         // Store currently running scene to revert back after exiting escape menu.
         Init.Scene currentScene = Init.SelectedScene;
@@ -59,14 +56,14 @@ namespace DungeonCrawler
             Sprites sprites = new Sprites();
             sprites.LoadContent(content);
 
-            swordWeapon = new Entity(Sprites.swordAnimation);
-            swordWeapon.State = Action.AttackEastPattern1;
+            //swordWeapon = new Entity(Sprites.swordAnimation);
+            //swordWeapon.State = Action.AttackEastPattern1;
 
-            bowWeapon = new Entity(Sprites.bowAnimation);
-            bowWeapon.State = Action.IdleSouth1;
-            PlayerWeapon = swordWeapon;
+            //bowWeapon = new Entity(Sprites.bowAnimation);
+            //bowWeapon.State = Action.IdleSouth1;
+            //PlayerWeapon = swordWeapon;
 
-            arrow = new AnimatedSprite(Sprites.arrowAnimation);
+            //arrow = new AnimatedSprite(Sprites.arrowAnimation);
             float animationSpeed = .15f;
             float attackSpeed = 0.05f;
             playerAnimation.Add("idleSouth1", new SpriteSheetAnimationData(new[] { 0 }));
@@ -204,24 +201,37 @@ namespace DungeonCrawler
                 }
             }
 
-            // Handle inventory
+            // Handle item inventory
             if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I))
             {
-                if (Inventory.InventoryOpen)
+                if (Init.itemInventory.InventoryOpen)
                 {
-                    Inventory.InventoryOpen = false;
+                    Init.itemInventory.InventoryOpen = false;
                 }
                 else
                 {
-                    Inventory.InventoryOpen = true;
+                    Init.itemInventory.InventoryOpen = true;
+                }
+            }
+
+            // Handle spell inventory
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab))
+            {
+                if (Init.spellInventory.InventoryOpen)
+                {
+                    Init.spellInventory.InventoryOpen = false;
+                }
+                else
+                {
+                    Init.spellInventory.InventoryOpen = true;
                 }
             }
 
             // Equip sword if 1 is pressed.
             if (newState.IsKeyDown(Keys.D1) && oldState.IsKeyDown(Keys.D1))
             {
-                EquipedWeapon = "Sword";
-                PlayerWeapon = swordWeapon;
+                //EquipedWeapon = "Sword";
+                //PlayerWeapon = swordWeapon;
                 switch (State)
                 {
                     case (Action.IdleEast2):
@@ -239,14 +249,14 @@ namespace DungeonCrawler
                 }
             }
 
-            // Equip bow if 2 is pressed.
-            if (newState.IsKeyDown(Keys.D2) && oldState.IsKeyDown(Keys.D2))
-            {
-                EquipedWeapon = "Bow";
-                PlayerWeapon = bowWeapon;
-            }
+            //// Equip bow if 2 is pressed.
+            //if (newState.IsKeyDown(Keys.D2) && oldState.IsKeyDown(Keys.D2))
+            //{
+            //    EquipedWeapon = "Bow";
+            //    PlayerWeapon = bowWeapon;
+            //}
 
-            if (!InMenu && !Inventory.InventoryOpen)
+            if (!InMenu && !Init.itemInventory.InventoryOpen && !Init.spellInventory.InventoryOpen)
             {
                 // Attacking south
                 if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern1 ||
@@ -254,23 +264,8 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleSouth2 ||
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern2)
                 {
-                    PlayerWeapon.State = Action.AttackSouthPattern1;
-                    player.State = Action.AttackSouthPattern1;
-
-                    if (EquipedWeapon == "Sword")
-                    {
-                        soundEffects[0].Play();
-                    }
-                    else if (EquipedWeapon == "Bow")
-                    {
-                        if (Inventory.TotalArrows > 0)
-                        {
-                            ShootProjectile(arrow, "south");
-                            Inventory.TotalArrows -= 1;
-                            soundEffects[1].Play();
-                        }
-                    }
-                    Attack();
+                    player.State = Action.IdleSouth1;
+                    CastSpell("south");
                 }
 
                 // Attacking West
@@ -279,23 +274,8 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleWest2 ||
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkWestPattern2)
                 {
-                    PlayerWeapon.State = Action.AttackWestPattern1;
-                    player.State = Action.AttackWestPattern1;
-
-                    if (EquipedWeapon == "Sword")
-                    {
-                        soundEffects[0].Play();
-                    }
-                    else if (EquipedWeapon == "Bow")
-                    {
-                        if (Inventory.TotalArrows > 0)
-                        {
-                            ShootProjectile(arrow, "west");
-                            Inventory.TotalArrows -= 1;
-                            soundEffects[1].Play();
-                        }
-                    }
-                    Attack();
+                    player.State = Action.IdleWest1;
+                    CastSpell("west");
                 }
 
 
@@ -305,23 +285,9 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkEastPattern2 ||
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleEast2 && IsAttacking)
                 {
-                    PlayerWeapon.State = Action.AttackEastPattern1;
-                    player.State = Action.AttackEastPattern1;
-
-                    if (EquipedWeapon == "Sword")
-                    {
-                        soundEffects[0].Play();
-                    }
-                    else if (EquipedWeapon == "Bow")
-                    {
-                        if (Inventory.TotalArrows > 0)
-                        {
-                            ShootProjectile(arrow, "east");
-                            Inventory.TotalArrows -= 1;
-                            soundEffects[1].Play();
-                        }
-                    }
-                    Attack();
+                 //   PlayerWeapon.State = Action.AttackEastPattern1;
+                    player.State = Action.IdleEast1;
+                    CastSpell("east");
                 }
 
                 // Attacking North
@@ -330,23 +296,9 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkNorthPattern2 ||
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleNorth2)
                 {
-                    PlayerWeapon.State = Action.AttackNorthPattern1;
-                    player.State = Action.AttackNorthPattern1;
-
-                    if (EquipedWeapon == "Sword")
-                    {
-                        soundEffects[0].Play();
-                    }
-                    else if (EquipedWeapon == "Bow")
-                    {
-                        if (Inventory.TotalArrows > 0)
-                        {
-                            ShootProjectile(arrow, "north");
-                            Inventory.TotalArrows -= 1;
-                            soundEffects[1].Play();
-                        }
-                    }
-                        Attack();
+                  //  PlayerWeapon.State = Action.AttackNorthPattern1;
+                    player.State = Action.IdleNorth1;
+                    CastSpell("north");
                 }
                 else
                 {
@@ -450,6 +402,29 @@ namespace DungeonCrawler
                 }
             }
             oldMouseState = newMouseState;
+        }
+
+        public void CastSpell(string direction)
+        {
+            AnimatedSprite spell = null;
+            if (SelectedItem != null)
+            {
+                Console.WriteLine(SelectedItem.ID);
+                switch (SelectedItem.ID)
+                {
+                    case (1):
+                        spell = new AnimatedSprite(Sprites.GetSprite("FIREBALL_1"));
+                        break;
+                    case (2):
+                        spell = new AnimatedSprite(Sprites.GetSprite("ICEBOLT_1"));
+                        break;
+                }
+                if (spell != null)
+                {
+                    ShootProjectile(spell, direction);
+                    Attack();
+                }
+            }
         }
         /// <summary>
         /// Detects if an entity has intersected an object on the collision layer.

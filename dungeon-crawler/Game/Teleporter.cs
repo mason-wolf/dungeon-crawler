@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace DungeonCrawler
 {
+    /// <summary>
+    /// Handles teleporter object from Tiled.
+    /// Name: target_map_name
+    /// Type: teleporter
+    /// Custom Properties
+    /// targetX: destination X
+    /// targetY: destiation Y
+    /// </summary>
     public class Teleporter
     {
         private Rectangle rectangle;

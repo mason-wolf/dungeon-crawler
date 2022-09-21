@@ -34,12 +34,7 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Goblin.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Chest.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Key.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Dynamite.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/Dynamite</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Dynamite.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Explosion.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Skeleton.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/BigRock.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/ChainedGate.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/music/level_1.mp3</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/music/boss_fight.mp3</File>
@@ -54,5 +49,9 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/fire_mage.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/green_portal.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/bookshelf.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FIREBALL_1.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/FIREBALL_1_ICON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/ICEBOLT_1.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/ICEBOLT_1_ICON.png</File>
   </SourceFiles>
 </SourceFileCollection>

@@ -10,6 +10,7 @@ namespace DungeonCrawler
 {
     public class Item
     {
+        public int ID { get; set; }
         public Texture2D ItemTexture { get; set; }
         public int HealthAmount { get; set; }
         public Rectangle ItemRectangle { get; set; }

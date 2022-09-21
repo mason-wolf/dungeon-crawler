@@ -142,12 +142,12 @@ namespace DungeonCrawler
             {
                 switch (containedItem.Name)
                 {
-                    case "Chicken":
-                        Inventory.TotalChickens = Inventory.TotalChickens + 1;
-                        break;
-                    case "Arrow":
-                        Inventory.TotalArrows = Inventory.TotalArrows + 5;
-                        break;
+                    //case "Chicken":
+                    //    Inventory.TotalChickens = Inventory.TotalChickens + 1;
+                    //    break;
+                    //case "Arrow":
+                    //    Inventory.TotalArrows = Inventory.TotalArrows + 5;
+                    //    break;
                 }
 
                 itemPickedUp = true;

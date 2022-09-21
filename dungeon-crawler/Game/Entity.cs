@@ -314,7 +314,7 @@ namespace DungeonCrawler
             projectileStartingPosition = projectilePosition;
             projectile.MaxHealth = 10;
             projectile.CurrentHealth = 10;
-            this.projectileDirection = direction;
+            projectileDirection = direction;
             targetHit = false;
         }
 
@@ -333,6 +333,8 @@ namespace DungeonCrawler
                 if (projectileBoundingBox.Intersects(tile.Rectangle))
                 {
                     collided = true;
+                    // Toggle false to show when projectile hits obstacle.
+                    targetHit = true;
                 }
             }
             return collided;
@@ -342,7 +344,7 @@ namespace DungeonCrawler
         {
             if (projectile != null && !ProjectileCollision(projectile))
             {
-                int speed = 7;
+                int speed = 4;
 
                 if (projectileDirection == "north")
                 {
@@ -361,7 +363,7 @@ namespace DungeonCrawler
                 if (projectileDirection == "east")
                 {
                     ProjectileCollision(projectile);
-                    projectile.State = Action.IdleEast1;
+                    projectile.State = Action.AttackEastPattern1;
                     projectilePosition.X += speed;
                     projectile.Position = projectilePosition;
                 }
