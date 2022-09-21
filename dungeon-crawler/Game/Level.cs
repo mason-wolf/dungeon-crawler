@@ -33,6 +33,7 @@ namespace DungeonCrawler
         AnimatedSprite chestSprite;
         AnimatedSprite rockSprite;
         AnimatedSprite deskSprite;
+        AnimatedSprite bookshelfSprite;
         Texture2D arrowsSprite;
         List<SoundEffect> soundEffects;
         bool objectsPopulated = false;
@@ -172,6 +173,12 @@ namespace DungeonCrawler
                         fireProfessorEntity.Position = mapObject.GetPosition();
                         npcList.Add(fireProfessorEntity);
                         break;
+                    case ("GREEN_PORTAL"):
+                        torchSprite = new AnimatedSprite(Sprites.greenPortalAnimation);
+                        torchSprite.Play("idle");
+                        torchSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(torchSprite);
+                        break;
                     case ("Torch"):
                         torchSprite = new AnimatedSprite(Sprites.torchAnimation);
                         torchSprite.Play("burning");
@@ -209,6 +216,14 @@ namespace DungeonCrawler
                         mapObject.SetSprite(deskSprite);
                         IBox deskCollidable = map.GetWorld().Create(deskSprite.Position.X, deskSprite.Position.Y, 16, 16);
                         mapObject.SetCollisionBox(deskCollidable);
+                        break;
+                    case ("bookshelf"):
+                        bookshelfSprite = new AnimatedSprite(Sprites.bookshelfAnimation);
+                        bookshelfSprite.Play("idle");
+                        bookshelfSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(bookshelfSprite);
+                        IBox bookshelfCollidable = map.GetWorld().Create(bookshelfSprite.Position.X, bookshelfSprite.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(bookshelfCollidable);
                         break;
                     case ("start"):
                         // Map object with the name "start", specifies the starting position.

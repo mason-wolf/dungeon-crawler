@@ -105,6 +105,16 @@ namespace DungeonCrawler
         public TextureAtlas fireProfessorTextureAtlas;
         public static SpriteSheetAnimationFactory fireProfessorAnimation;
 
+        // Green Portal
+        public static Texture2D greenPortalTexture;
+        public TextureAtlas greenPortalTextureAtlas;
+        public static SpriteSheetAnimationFactory greenPortalAnimation;
+
+        // Bookshelf
+        public static Texture2D bookshelfTexture;
+        public TextureAtlas bookshelfTextureAtlas;
+        public static SpriteSheetAnimationFactory bookshelfAnimation;
+
         public void LoadContent(ContentManager content)
         {
             // Sword
@@ -296,6 +306,17 @@ namespace DungeonCrawler
             fireProfessorAnimation = new SpriteSheetAnimationFactory(fireProfessorTextureAtlas);
             fireProfessorAnimation.Add("idle", new SpriteSheetAnimationData(new[] { 0 }, animationSpeed, isLooping: false));
 
+            // Green Portal
+            greenPortalTexture = content.Load<Texture2D>(@"spritesheets\green_portal");
+            greenPortalTextureAtlas = TextureAtlas.Create(greenPortalTexture, 32, 32);
+            greenPortalAnimation = new SpriteSheetAnimationFactory(greenPortalTextureAtlas);
+            greenPortalAnimation.Add("idle", new SpriteSheetAnimationData(new[] { 0, 1, 2, 3, 4 }, .09f, isLooping: true));
+
+            // Bookshelf
+            bookshelfTexture = content.Load<Texture2D>(@"objects\bookshelf");
+            bookshelfTextureAtlas = TextureAtlas.Create(bookshelfTexture, 24, 24);
+            bookshelfAnimation = new SpriteSheetAnimationFactory(bookshelfTextureAtlas);
+            bookshelfAnimation.Add("idle", new SpriteSheetAnimationData(new[] { 0 }, 0.09f, isLooping: false));
         }
     }
 }

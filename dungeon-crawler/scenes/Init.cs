@@ -43,8 +43,7 @@ namespace DungeonCrawler.Scenes
         public static LoadMenu loadMenu;
 
         public Inventory inventory;
-        private Texture2D HUDArrows;
-        private Texture2D HUDKeys;
+ 
         // Stores a list of teleporters from imported maps.
         public static List<Teleporter> teleporterList;
 
@@ -55,8 +54,6 @@ namespace DungeonCrawler.Scenes
         public static string SavedGameLocation;
         public static DialogBox dialogBox;
         public static bool TransitionState = false;
-        // Create entities for this map.
-        AnimatedSprite campfire;
 
         // Store the player's collision state to pass to different scenes.
         IBox playerCollision;
@@ -96,8 +93,6 @@ namespace DungeonCrawler.Scenes
             Inventory,
             StartingArea,
             Level_1,
-            Level_1A,
-            Level_1C,
             Castle
         }
 
@@ -122,19 +117,6 @@ namespace DungeonCrawler.Scenes
             newLevel.LoadContent(Content);
             levelList.Add(newLevel);
 
-            newLevel = new Level();
-            newLevel.SetMap(new Map(Content, "Content/maps/level_1A.tmx"));
-            newLevel.SetScene(new Level_1A());
-            newLevel.SetLevelName("Level_1A");
-            newLevel.LoadContent(Content);
-            levelList.Add(newLevel);
-
-            newLevel = new Level();
-            newLevel.SetMap(new Map(Content, "Content/maps/level_1C.tmx"));
-            newLevel.SetScene(new Level_1C());
-            newLevel.LoadContent(Content);
-            newLevel.SetLevelName("Level_1C");
-            levelList.Add(newLevel);
 
             Font = Content.Load<SpriteFont>(@"interface\font");
             Player.LoadContent(Content);
@@ -150,25 +132,12 @@ namespace DungeonCrawler.Scenes
 
             inventory = new Inventory(Content);
 
-     
-            dialogBox = new DialogBox(game, Font)
-            {
-                Text = 
-                       "\nI wonder what it's like out there." + 
-                       "\nI'm still a newbie, you know."
-            };
 
-            campfire = Sprites.campfireSprite;
-            campfire.Position = new Vector2(300, 260);
-          //  StartingAreaMap.AddCollidable(campfire.Position.X, campfire.Position.Y, 8, 8);
-            // LEVEL START
+            dialogBox = new DialogBox(game, Font);
+
+
             SelectedScene = Scene.Castle;
             Player.Position = new Vector2(335f, 900f);
-            Item chickenItem = new Item();
-            chickenItem.HealthAmount = 10;
-            chickenItem.ItemTexture = Sprites.chickenTexture;
-            HUDArrows = Content.Load<Texture2D>(@"objects\arrows");
-            HUDKeys = Content.Load<Texture2D>(@"objects\key");
             base.LoadContent();
         }
 
@@ -334,7 +303,6 @@ namespace DungeonCrawler.Scenes
             // Handle player's collision.        
 
             playerCollision.Move(Player.Position.X, Player.Position.Y, (collision) => CollisionResponses.Slide);
-            campfire.Update(gameTime);
 
             Camera.Zoom = 3;
 
@@ -362,7 +330,6 @@ namespace DungeonCrawler.Scenes
             if (SelectedScene == Scene.StartingArea)
             {
                 StartingAreaMap.Draw(spriteBatch);
-                campfire.Draw(spriteBatch);
             }
             else
             {
@@ -400,20 +367,12 @@ namespace DungeonCrawler.Scenes
                 Vector2 playerHealthPosition = new Vector2(Player.Position.X - 170, Player.Position.Y - 110);
 
                 Player.Draw(spriteBatch);
-                Player.PlayerWeapon.Draw(spriteBatch);
                 Player.DrawHUD(spriteBatch, playerHealthPosition, true);
 
-                //// Draw arrows
-                //spriteBatch.Draw(HUDArrows, new Vector2(Init.Player.Position.X + 110, Init.Player.Position.Y - 110), Color.White);
-                //spriteBatch.DrawString(Init.Font, Inventory.TotalArrows.ToString(), new Vector2(Init.Player.Position.X + 125, Init.Player.Position.Y - 107), Color.White);
-
-                //// Draw keys
-                //spriteBatch.Draw(HUDKeys, new Vector2(Init.Player.Position.X + 140, Init.Player.Position.Y - 115), Color.White);
-                //spriteBatch.DrawString(Init.Font, Inventory.TotalKeys.ToString(), new Vector2(Init.Player.Position.X + 165, Init.Player.Position.Y - 107), Color.White);
-
                 //int health = (int)Player.CurrentHealth;
-                //Vector2 healthStatus = new Vector2(playerHealthPosition.X + 32, playerHealthPosition.Y);
+                //Vector2 healthStatus = new Vector2(playerHealthPosition.X + 10, playerHealthPosition.Y);
                 //spriteBatch.DrawString(Font, health.ToString() + " / 100", healthStatus, Color.White);
+
                 dialogBox.Draw(spriteBatch);
                 inventory.Draw(spriteBatch);
             }
