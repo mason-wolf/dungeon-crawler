@@ -44,7 +44,8 @@ namespace DungeonCrawler.Scenes
 
         public static Inventory itemInventory;
         public static Inventory spellInventory;
- 
+        public static Inventory shopInventory;
+
         // Stores a list of teleporters from imported maps.
         public static List<Teleporter> teleporterList;
 
@@ -113,7 +114,7 @@ namespace DungeonCrawler.Scenes
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/level_1.tmx"));
-            newLevel.SetScene(new Level_1());
+            newLevel.SetScene(new Level_1A());
             newLevel.SetLevelName("Level_1");
             newLevel.LoadContent(Content);
             levelList.Add(newLevel);
@@ -137,6 +138,9 @@ namespace DungeonCrawler.Scenes
             spellInventory = new Inventory(Content);
             spellInventory.MenuTitle = "Spells";
 
+            shopInventory = new Inventory(Content);
+            shopInventory.MenuTitle = "Shop";
+
             Item fireballSpell = new Item();
             fireballSpell.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
             fireballSpell.Name = "FIREBALL";
@@ -151,6 +155,8 @@ namespace DungeonCrawler.Scenes
 
             spellInventory.Contents.Add(fireballSpell);
             spellInventory.Contents.Add(iceBoltSpell);
+            shopInventory.Contents.Add(fireballSpell);
+
             dialogBox = new DialogBox(game, Font);
 
 
@@ -305,6 +311,7 @@ namespace DungeonCrawler.Scenes
             dialogBox.Update();
             itemInventory.Update(gameTime);
             spellInventory.Update(gameTime);
+            shopInventory.Update(gameTime);
 
             Player.Update(gameTime);
           //  OffsetWeaponPosition();
@@ -387,6 +394,8 @@ namespace DungeonCrawler.Scenes
                 dialogBox.Draw(spriteBatch);
                 itemInventory.Draw(spriteBatch);
                 spellInventory.Draw(spriteBatch);
+                shopInventory.Draw(spriteBatch);
+
             }
 
             if (Player.Dead)

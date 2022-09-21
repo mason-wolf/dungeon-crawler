@@ -24,7 +24,7 @@ namespace DungeonCrawler
     {
         EnemyAI enemyAI;
         private List<Entity> enemyList = new List<Entity>();
-        private List<Entity> npcList = new List<Entity>();
+        public static List<Entity> NPCList = new List<Entity>();
         RoyT.AStar.Grid collisionGrid;
         Map map;
         string levelName;
@@ -131,7 +131,7 @@ namespace DungeonCrawler
                         fireProfessorEntity.LoadContent(content);
                         fireProfessorEntity.State = Action.IdleSouth1;
                         fireProfessorEntity.Position = mapObject.GetPosition();
-                        npcList.Add(fireProfessorEntity);
+                        NPCList.Add(fireProfessorEntity);
                         break;
                     case ("GREEN_PORTAL"):
                         AnimatedSprite greenPortalSprite = new AnimatedSprite(Sprites.GetSprite("GREEN_PORTAL"));
@@ -237,18 +237,6 @@ namespace DungeonCrawler
                 //}
             }
 
-            foreach (Entity npc in npcList)
-            {
-                if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
-                {
-                    Init.dialogBox.Text =
-                       "\nI am the fire professor." +
-                       "\nWelcome to the academy.";
-                    Init.startDialog = true;
-                    Init.HandleDialog();
-                }
-            }
-
             if (map != null)
             {
                 map.Update(gameTime);
@@ -264,7 +252,7 @@ namespace DungeonCrawler
                 enemy.DrawHUD(spriteBatch, AIHealthPosition, false);
             }
             
-            foreach (Entity npc in npcList)
+            foreach (Entity npc in NPCList)
             {
                 npc.Draw(spriteBatch);
             }

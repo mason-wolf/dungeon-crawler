@@ -46,7 +46,23 @@ namespace DungeonCrawler.Scenes
 
         public override void Update(GameTime gameTime)
         {
-     //       throw new NotImplementedException();
+            foreach (Entity npc in Level.NPCList)
+            {
+                if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
+                {
+                    Console.WriteLine("true");
+                    Init.dialogBox.Text =
+                       "\nI am the fire professor." +
+                       "\nWelcome to the academy.";
+                    Init.startDialog = true;
+                    Init.HandleDialog();
+                }
+                else
+                {
+                    Init.startDialog = false;
+                }
+            }
+
         }
     }
 }

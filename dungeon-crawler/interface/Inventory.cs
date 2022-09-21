@@ -32,6 +32,7 @@ namespace DungeonCrawler.Interface
 
         public int itemSlot;
 
+
         public Inventory(ContentManager content)
         {
             LoadContent(content);

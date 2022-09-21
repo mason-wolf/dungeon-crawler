@@ -139,7 +139,7 @@
  </layer>
  <objectgroup id="4" name="Object Layer 1">
   <object id="201" name="DESK" x="96" y="865" width="15.6667" height="15.3333"/>
-  <object id="202" name="START" x="377.75" y="303.5" width="15.6667" height="15.3333"/>
+  <object id="202" name="START" x="380" y="286" width="15.6667" height="15.3333"/>
   <object id="203" name="DESK" x="167" y="865" width="15.6667" height="15.3333"/>
   <object id="204" name="DESK" x="132" y="865" width="15.6667" height="15.3333"/>
   <object id="205" name="DESK" x="96" y="908" width="15.6667" height="15.3333"/>

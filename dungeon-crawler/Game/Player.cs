@@ -202,7 +202,7 @@ namespace DungeonCrawler
             }
 
             // Handle item inventory
-            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I))
+            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.spellInventory.InventoryOpen)
             {
                 if (Init.itemInventory.InventoryOpen)
                 {
@@ -215,15 +215,15 @@ namespace DungeonCrawler
             }
 
             // Handle spell inventory
-            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab))
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.itemInventory.InventoryOpen)
             {
-                if (Init.spellInventory.InventoryOpen)
+                if (Init.shopInventory.InventoryOpen)
                 {
-                    Init.spellInventory.InventoryOpen = false;
+                    Init.shopInventory.InventoryOpen = false;
                 }
                 else
                 {
-                    Init.spellInventory.InventoryOpen = true;
+                    Init.shopInventory.InventoryOpen = true;
                 }
             }
 
@@ -256,7 +256,7 @@ namespace DungeonCrawler
             //    PlayerWeapon = bowWeapon;
             //}
 
-            if (!InMenu && !Init.itemInventory.InventoryOpen && !Init.spellInventory.InventoryOpen)
+            if (!InMenu && !Init.itemInventory.InventoryOpen && !Init.spellInventory.InventoryOpen && !Init.shopInventory.InventoryOpen)
             {
                 // Attacking south
                 if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern1 ||
