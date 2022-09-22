@@ -73,7 +73,6 @@ namespace DungeonCrawler.Interface
             }
         }
 
-
         public override void LoadContent(ContentManager content)
         {
             menuItem = content.Load<Texture2D>(@"interface\menu");

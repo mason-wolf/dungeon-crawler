@@ -21,13 +21,10 @@ namespace DungeonCrawler.Scenes
         int selectedIndex = 0;
         int[] savedSlots = new int[3];
         Texture2D floppy;
-        SavedGame savedGame;
         Texture2D transitionTexture;
         bool fadeIn = false;
         bool hasFaded = false;
         public Color transitionColor;
-
-        public static bool GameLoaded { get; set; }
         new int SelectedIndex
         {
             get { return selectedIndex; }
@@ -183,8 +180,6 @@ namespace DungeonCrawler.Scenes
         /// <param name="saveSlot"></param>
         void LoadGame(int saveSlot)
         {
-            savedGame = new SavedGame();
-
             using (StreamReader streamReader = new StreamReader("Save_" + saveSlot + ".txt"))
             {
                 string line;
@@ -194,52 +189,31 @@ namespace DungeonCrawler.Scenes
                     string value = line.Split('=').First();
                     switch(value)
                     {
-                        case ("player_health"):
+                        case ("PLAYER_HEALTH"):
                             value = line.Split('=').Last();
-                            savedGame.PlayerHealth = (int)Math.Round(Double.Parse(value));
+                            Init.Player.CurrentHealth = (int)Math.Round(Double.Parse(value));
                             break;
-                        case ("arrows"):
+                        case ("PLAYER_GOLD"):
                             value = line.Split('=').Last();
-                            savedGame.Arrows = Int32.Parse(value);
+                            Init.Player.Gold = Int32.Parse(value);
                             break;
-                        case ("location"):
-                            value = line.Split('=').Last();
-                            savedGame.Location = value;
-                            break;
-                        case ("player_position"):
-                            value = line.Split('=').Last();
-                            string[] vector = value.Split(',');
-                            savedGame.Position = new Vector2(float.Parse(vector[0]), float.Parse(vector[1]));
-                            break;
-                        case ("inventory_item"):
+                        case ("INVENTORY_ITEM"):
                             value = line.Split('=').Last();
                             string[] tempItem = value.Split(',');
                             Item item = new Item();
                             item.Name = tempItem[0];
                             item.Quantity = Int32.Parse(tempItem[1]);
-                            savedGame.InventoryList.Add(item);
+                            Init.itemInventory.Contents.Add(item);
+                            break;
+                        case ("SPELL"):
+                            value = line.Split('=').Last();
+                            string[] tempSpell = value.Split(',');
+                            Item spell = new Item();
+                            spell.Name = tempSpell[0];
+                            Init.itemInventory.Contents.Add(spell);
                             break;
                     }
                 }
-
-                Init.SavedGamePosition = savedGame.Position;
-                Init.Player.CurrentHealth = savedGame.PlayerHealth;
-                Init.Player.Position = new Vector2();
-                //Inventory.SavedGameLoaded = true;
-                //Inventory.TotalArrows = savedGame.Arrows;
-                Init.SavedGameLocation = savedGame.Location;
-
-                Init.Player.InMenu = false;
-                foreach (Item item in savedGame.InventoryList)
-                {
-                    switch(item.Name)
-                    {
-                        //case ("chicken"):
-                        //    Inventory.TotalChickens = item.Quantity;
-                        //    break;
-                    }
-                }
-
             }
         }
     }

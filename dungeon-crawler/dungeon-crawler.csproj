@@ -44,7 +44,6 @@
     <Compile Include="Game\Item.cs" />
     <Compile Include="Game\Level.cs" />
     <Compile Include="Game\MapObject.cs" />
-    <Compile Include="Game\SavedGame.cs" />
     <Compile Include="Game\Scene.cs" />
     <Compile Include="Game\PathFinder.cs" />
     <Compile Include="Game\Layer.cs" />

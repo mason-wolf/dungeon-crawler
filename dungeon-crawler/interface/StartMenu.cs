@@ -78,8 +78,6 @@ namespace DungeonCrawler
                     init.Show();
                     // Pause player movement because they're in the menu.
                     Init.Player.InMenu = true;
-                    // Store the loaded state to tigger loading from file.
-                    LoadMenu.GameLoaded = true;
                     Init.SelectedScene = Init.Scene.LoadMenu;
                 }
             }

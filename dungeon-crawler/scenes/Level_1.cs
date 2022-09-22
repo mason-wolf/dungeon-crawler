@@ -50,7 +50,6 @@ namespace DungeonCrawler.Scenes
             {
                 if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
                 {
-                    Console.WriteLine("true");
                     Init.dialogBox.Text =
                        "\nI am the fire professor." +
                        "\nWelcome to the academy.";

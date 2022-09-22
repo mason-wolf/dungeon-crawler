@@ -26,7 +26,6 @@ namespace DungeonCrawler.Interface
         public bool InventoryOpen { get; set; }
         public string MenuTitle { get; set; }
         public string InventoryType { get; set; }
-        public bool SavedGameLoaded { get; set; }
         Vector2 Position { get; set; }
         public int TotalItems { get; set; }
         public static int TotalKeys { get; set; }
@@ -318,10 +317,6 @@ namespace DungeonCrawler.Interface
             }
         }
 
-        public void AddItem(Item item)
-        {
-
-        }
         /// <summary>
         /// Assigns an item to a slot on the inventory screen.
         /// </summary>

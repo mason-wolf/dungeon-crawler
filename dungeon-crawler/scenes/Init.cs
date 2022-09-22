@@ -21,6 +21,7 @@ using MonoGame.Extended.Sprites;
 using Microsoft.Xna.Framework.Content;
 using DungeonCrawler.Interface;
 using Demo.Interface;
+using System.Diagnostics;
 
 namespace DungeonCrawler.Scenes
 {
@@ -32,11 +33,7 @@ namespace DungeonCrawler.Scenes
         public static KeyboardState KeyBoardNewState;
         public static Player Player;
         public static Camera2D Camera;
-        // Store the maps.
-        public static Map StartingAreaMap;
-        //public static Map Level_1Map;
-        //public static Map Level_1AMap;
-        //public static Map Level_1BMap;
+
         public static SpriteFont Font;
 
         public EscapeMenu escapeMenu;
@@ -53,8 +50,6 @@ namespace DungeonCrawler.Scenes
         private GameWindow window;
         public static Scene SelectedScene { get; set; }
         public static Map SelectedMap { get; set; }
-        public static Vector2 SavedGamePosition;
-        public static string SavedGameLocation;
         public static DialogBox dialogBox;
         public static bool TransitionState = false;
 
@@ -95,7 +90,6 @@ namespace DungeonCrawler.Scenes
             SaveMenu,
             LoadMenu,
             Inventory,
-            StartingArea,
             Level_1,
             Castle
         }
@@ -103,10 +97,7 @@ namespace DungeonCrawler.Scenes
         protected override void LoadContent()
         {
             teleporterList = new List<Teleporter>();
-            StartingAreaMap = new Map(Content, "Content/maps/castle.tmx");
-            Sprites sprites = new Sprites();
-            sprites.LoadContent(Content);
-
+ 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/castle.tmx"));
             newLevel.SetScene(new Level_1());
@@ -178,46 +169,28 @@ namespace DungeonCrawler.Scenes
 
             dialogBox = new DialogBox(game, Font);
 
-
             SelectedScene = Scene.Castle;
-            Player.Position = new Vector2(335f, 900f);
             base.LoadContent();
         }
 
         int transitionFrames = 0;
         int pauseAfterDeathFrames = 0;
-
         public override void Update(GameTime gameTime)
         {
             // If save was loaded, create transition effects, assign the player's saved scene and position.
             if (Reloaded)
             {
                 TransitionState = true;
-                SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), SavedGameLocation);
-
-                if(SelectedScene.ToString() == "StartingArea")
-                {
-                    FadeInMap("StartingArea");
-                    Player.Position = new Vector2(335f, 150f);
-                }
-                else
-                {
-                    foreach (Level level in levelList)
-                    {
-                        if (level.GetLevelName() == SelectedScene.ToString())
-                        {
-                            FadeInMap(level.GetMap().GetMapName());
-                        }
-                    }
-                }
-
-                Player.Position = SavedGamePosition;
-                Player.MotionVector = SavedGamePosition;
+                SelectedScene = Scene.Castle;
+                SelectedMap = levelList.Find(map => map.GetLevelName() == "Castle").GetMap();
+                FadeInMap("Castle");
+                Player.State = Action.IdleSouth1;
+                Player.InMenu = false;
+                Player.Position = levelList.Find(level => level.GetLevelName() == Scene.Castle.ToString()).GetStartingPosition();
                 Reloaded = false;
             }
-
             // Handle Teleportation
-            foreach(Teleporter teleporter in teleporterList)
+            foreach (Teleporter teleporter in teleporterList)
             {
                 if (teleporter.Enabled)
                 {
@@ -234,9 +207,9 @@ namespace DungeonCrawler.Scenes
                         }
 
                         levelList.Clear();
+                        TransitionState = true;
                         Content.Unload();
                         LoadContent();
-                        TransitionState = true;
                         FadeInMap(teleporter.GetDestinationMap());
                         SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
                         Player.Position = teleporter.GetTargetPosition();
@@ -258,12 +231,10 @@ namespace DungeonCrawler.Scenes
             }
 
             // Scene switching.
-            if (SelectedScene == Scene.StartingArea)
+            if (SelectedScene == Scene.LoadMenu)
             {
-                playerCollision = StartingAreaMap.GetCollisionWorld();
-                StartingAreaMap.Update(gameTime);
-                SelectedMap = StartingAreaMap;
-                ToggleTeleporters(SelectedMap.GetMapName());
+                Player.Position = levelList.Find(map => map.GetLevelName() == Scene.Castle.ToString()).GetStartingPosition();
+                playerCollision = levelList.Find(level => level.GetLevelName() == "Castle").GetMap().GetCollisionWorld();
             }
             else
             {
@@ -273,7 +244,7 @@ namespace DungeonCrawler.Scenes
                     if (level.GetLevelName() == SelectedScene.ToString())
                     {
                         playerCollision = level.GetMap().GetCollisionWorld();
-                        SelectedMap = level.GetMap();          
+                        SelectedMap = level.GetMap();
                         level.SetPlayerStartPosition(Player);
                         ToggleTeleporters(SelectedMap.GetMapName());
                         Player.EnemyList = level.GetEnemyList();
@@ -305,8 +276,8 @@ namespace DungeonCrawler.Scenes
                 Content.Unload();
                 LoadContent();
 
-                FadeInMap("StartingArea");
-                SelectedScene = Scene.StartingArea;
+                FadeInMap("Castle");
+                SelectedScene = Scene.Castle;
                 Player.Position = new Vector2(335f, 150f);
                 pauseAfterDeathFrames = 0;
                 Player.Dead = false;
@@ -333,11 +304,8 @@ namespace DungeonCrawler.Scenes
             shopInventory.Update(gameTime);
 
             Player.Update(gameTime);
-          //  OffsetWeaponPosition();
-        //    Player.PlayerWeapon.Update(gameTime);
 
-            // Handle player's collision.        
-
+            // Handle player's collision.
             playerCollision.Move(Player.Position.X, Player.Position.Y, (collision) => CollisionResponses.Slide);
 
             Camera.Zoom = 3;
@@ -361,24 +329,16 @@ namespace DungeonCrawler.Scenes
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
-            // Draw the selected screen.
 
-            if (SelectedScene == Scene.StartingArea)
+            // Draw the selected screen.
+            foreach (Level level in levelList)
             {
-                StartingAreaMap.Draw(spriteBatch);
-            }
-            else
-            {
-                foreach (Level level in levelList)
+                if (level.GetLevelName() == SelectedScene.ToString())
                 {
-                    if (level.GetLevelName() == SelectedScene.ToString())
-                    {
-                        level.GetMap().Draw(spriteBatch);
-                        level.Draw(spriteBatch);
-                    }
+                    level.GetMap().Draw(spriteBatch);
+                    level.Draw(spriteBatch);
                 }
             }
-
 
             // Escape menu.
             if (SelectedScene == Scene.EscapeMenu)
@@ -455,30 +415,18 @@ namespace DungeonCrawler.Scenes
         /// <param name="map">Map to fade in.</param>
         public void FadeInMap(string mapName)
         {
-            if (mapName == "StartingArea")
+            foreach (Level level in levelList)
             {
-                StartingAreaMap.FadeIn();
-                if (StartingAreaMap.HasFaded())
+                if (level.GetLevelName() == mapName)
                 {
-                    StartingAreaMap.HasFaded(false);
-                    StartingAreaMap.SetTransitionColor(new Color(255, 255, 255, 255));
-                }
-            }
-            else
-            {
-                foreach (Level level in levelList)
-                {
-                    if (level.GetLevelName() == mapName)
-                    {
-                        // Fade in the screen
-                        level.GetMap().FadeIn();
+                    // Fade in the screen
+                    level.GetMap().FadeIn();
 
-                        // The effect occured once, so set the trigger back to false and reset visibility color.
-                        if (level.GetMap().HasFaded())
-                        {
-                            level.GetMap().HasFaded(false);
-                            level.GetMap().SetTransitionColor(new Color(255, 255, 255, 255));
-                        }
+                    // The effect occured once, so set the trigger back to false and reset visibility color.
+                    if (level.GetMap().HasFaded())
+                    {
+                        level.GetMap().HasFaded(false);
+                        level.GetMap().SetTransitionColor(new Color(255, 255, 255, 255));
                     }
                 }
             }

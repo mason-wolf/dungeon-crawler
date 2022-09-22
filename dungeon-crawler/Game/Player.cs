@@ -19,6 +19,7 @@ using System.Timers;
 using Humper;
 using DungeonCrawler.Interface;
 using DungeonCrawler.Engine;
+using Humper.Responses;
 
 namespace DungeonCrawler
 {
@@ -29,8 +30,7 @@ namespace DungeonCrawler
         public SpriteSheetAnimationFactory playerAnimation;
         MouseState oldMouseState;
         MouseState newMouseState;
-        Entity playerEntity;
-
+   
         public List<Entity> EnemyList { get; set; }
         public static List<Item> InventoryList = new List<Item>();
         public static bool PressedContinue = false;
@@ -144,7 +144,6 @@ namespace DungeonCrawler
         // Handle attacking and movement animations.
         public void HandleInput(GameTime gameTime, Entity player, IBox playerCollisionBox, KeyboardState newState, KeyboardState oldState)
         {
-            playerEntity = player;
             MotionVector = new Vector2((playerCollisionBox.X), playerCollisionBox.Y);
 
             float speed = 0;
@@ -217,13 +216,13 @@ namespace DungeonCrawler
             // Handle spell inventory
             if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.itemInventory.InventoryOpen)
             {
-                if (Init.spellInventory.InventoryOpen)
+                if (Init.shopInventory.InventoryOpen)
                 {
-                    Init.spellInventory.InventoryOpen = false;
+                    Init.shopInventory.InventoryOpen = false;
                 }
                 else
                 {
-                    Init.spellInventory.InventoryOpen = true;
+                    Init.shopInventory.InventoryOpen = true;
                 }
             }
 
@@ -409,7 +408,6 @@ namespace DungeonCrawler
             AnimatedSprite spell = null;
             if (SelectedItem != null)
             {
-                Console.WriteLine(SelectedItem.ID);
                 switch (SelectedItem.ID)
                 {
                     case (1):
