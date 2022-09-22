@@ -40,7 +40,7 @@ namespace DungeonCrawler
         public static string CurrentLevel { get; set; }
 
         public static Item SelectedItem { get; set; }
-
+        public int Gold { get; set; }
         public static Entity PlayerWeapon;
         public bool InMenu = false;
         // Store currently running scene to revert back after exiting escape menu.
@@ -217,13 +217,13 @@ namespace DungeonCrawler
             // Handle spell inventory
             if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.itemInventory.InventoryOpen)
             {
-                if (Init.shopInventory.InventoryOpen)
+                if (Init.spellInventory.InventoryOpen)
                 {
-                    Init.shopInventory.InventoryOpen = false;
+                    Init.spellInventory.InventoryOpen = false;
                 }
                 else
                 {
-                    Init.shopInventory.InventoryOpen = true;
+                    Init.spellInventory.InventoryOpen = true;
                 }
             }
 

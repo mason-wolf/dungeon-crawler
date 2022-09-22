@@ -20,6 +20,7 @@ using RoyT.AStar;
 using MonoGame.Extended.Sprites;
 using Microsoft.Xna.Framework.Content;
 using DungeonCrawler.Interface;
+using Demo.Interface;
 
 namespace DungeonCrawler.Scenes
 {
@@ -83,6 +84,7 @@ namespace DungeonCrawler.Scenes
             Player.MaxStamina = 75;
             Player.CurrentStamina = 75;
             Player.AttackDamage = 3.5;
+            Player.Gold = 50;
             base.Initialize();
         }
 
@@ -134,11 +136,14 @@ namespace DungeonCrawler.Scenes
 
             itemInventory = new Inventory(Content);
             itemInventory.MenuTitle = "Items";
+            itemInventory.InventoryType = "inventory";
 
             spellInventory = new Inventory(Content);
             spellInventory.MenuTitle = "Spells";
+            spellInventory.InventoryType = "spells";
 
             shopInventory = new Inventory(Content);
+            shopInventory.InventoryType = "shop";
             shopInventory.MenuTitle = "Shop";
 
             Item fireballSpell = new Item();
@@ -153,9 +158,23 @@ namespace DungeonCrawler.Scenes
             iceBoltSpell.ID = 2;
             iceBoltSpell.Description = "Casts a bolt of ice.";
 
+            Item healthPotion = new Item();
+            healthPotion.ItemTexture = Sprites.GetTexture("HEALTH_POTION_ICON");
+            healthPotion.Name = "HEALTH POTION";
+            healthPotion.Description = "Restores some health.";
+            healthPotion.ID = 3;
+            healthPotion.Price = 5;
+
+            Item manaPotion = new Item();
+            manaPotion.ItemTexture = Sprites.GetTexture("MANA_POTION_ICON");
+            manaPotion.Name = "MANA POTION";
+            manaPotion.Description = "Restores some mana.";
+            manaPotion.Price = 5;
+
             spellInventory.Contents.Add(fireballSpell);
             spellInventory.Contents.Add(iceBoltSpell);
-            shopInventory.Contents.Add(fireballSpell);
+            shopInventory.Contents.Add(healthPotion);
+            shopInventory.Contents.Add(manaPotion);
 
             dialogBox = new DialogBox(game, Font);
 

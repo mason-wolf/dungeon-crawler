@@ -153,6 +153,14 @@ namespace DungeonCrawler
                         IBox deskCollidable = map.GetWorld().Create(deskSprite.Position.X, deskSprite.Position.Y, 16, 16);
                         mapObject.SetCollisionBox(deskCollidable);
                         break;
+                    case ("BED"):
+                        AnimatedSprite bedSprite = new AnimatedSprite(Sprites.GetSprite("BED"));
+                        bedSprite.Play("idle");
+                        bedSprite.Position = mapObject.GetPosition();
+                        IBox bedCollidable = map.GetWorld().Create(bedSprite.Position.X, bedSprite.Position.Y - 10, 16, 24);
+                        mapObject.SetCollisionBox(bedCollidable);
+                        mapObject.SetSprite(bedSprite);
+                        break;
                     case ("BOOKSHELF"):
                         AnimatedSprite bookshelfSprite = new AnimatedSprite(Sprites.GetSprite("BOOKSHELF"));
                         bookshelfSprite.Play("idle");

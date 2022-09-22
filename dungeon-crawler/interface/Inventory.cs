@@ -25,6 +25,7 @@ namespace DungeonCrawler.Interface
         public List<Item> itemList = Player.InventoryList;
         public bool InventoryOpen { get; set; }
         public string MenuTitle { get; set; }
+        public string InventoryType { get; set; }
         public bool SavedGameLoaded { get; set; }
         Vector2 Position { get; set; }
         public int TotalItems { get; set; }
@@ -37,6 +38,7 @@ namespace DungeonCrawler.Interface
         {
             LoadContent(content);
         }
+
 
         public List<Item> Contents = new List<Item>();
 
@@ -125,7 +127,7 @@ namespace DungeonCrawler.Interface
             {
                 spriteBatch.Draw(inventoryTexture, null, inventoryInterface);
                 spriteBatch.DrawString(inventoryFont, MenuTitle, new Vector2(Position.X + 25, Position.Y + 10), Color.White, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 0);
-                DrawSelectedItem(spriteBatch);
+                DrawItems(spriteBatch);
             }
         }
 
@@ -251,36 +253,80 @@ namespace DungeonCrawler.Interface
 
             foreach (Item item in Contents)
             {
-                DrawItem(item);
+                AssignItem(item);
             }
 
             if (itemUsed)
             {
-                Init.Message = itemList[SelectedItem].Name;
-                Init.MessageEnabled = true;
-                Player.SelectedItem = itemList[SelectedItem];
-                //if (itemList[SelectedItem].Name == "Chicken")
-                //{
-                //    TotalChickens -= 1;
-                //    if (Init.Player.CurrentHealth < Init.Player.MaxHealth)
-                //    {
-                //        Init.Player.CurrentHealth += 25;
-                //    }
-                //}
-                //if (itemList[SelectedItem].Name == "Dynamite")
-                //{
-                //    TotalDynamite -= 1;
-                //    InventoryOpen = false;
-                //    dynamiteUsed = true;
-                //}
+                if (InventoryType == "shop")
+                {
+                    if (itemList[SelectedItem].Price > Init.Player.Gold)
+                    {
+                        Init.Message = "You don't have enough gold.";
+                        Init.MessageEnabled = true;
+                    }
+                    else
+                    {
+                        Init.Player.Gold -= itemList[SelectedItem].Price;
+                        bool exists = false;
+
+                        foreach (Item item in Init.itemInventory.Contents)
+                        {
+                            if (item.ID == itemList[SelectedItem].ID)
+                            {
+                                item.Quantity += 1;
+                                AssignItem(item);
+                                exists = true;
+                            }
+                        }
+
+                        if (!exists)
+                        {
+                            Init.itemInventory.Contents.Add(itemList[SelectedItem]);
+                        } 
+                    }
+                }
+                else if (InventoryType == "inventory")
+                {
+                    Item foundItem = null;
+
+                    foreach (Item item in Init.itemInventory.Contents)
+                    {
+                        if (item.ID == itemList[SelectedItem].ID)
+                        {
+                            if (item.ID == 3)
+                            {
+                                Init.Player.CurrentHealth += 25;
+                            }
+                            item.Quantity -= 1;
+                            AssignItem(item);
+                            foundItem = item;
+                        }
+                    }
+
+                    if (foundItem != null && foundItem.Quantity == -1)
+                    {
+                        Init.itemInventory.Contents.Remove(foundItem);
+                    }
+                }
+                else if (InventoryType == "spells")
+                {
+                    Init.Message = itemList[SelectedItem].Name;
+                    Init.MessageEnabled = true;
+                    Player.SelectedItem = itemList[SelectedItem];
+                }
             }
         }
 
+        public void AddItem(Item item)
+        {
+
+        }
         /// <summary>
-        /// Draws an item on the inventory screen.
+        /// Assigns an item to a slot on the inventory screen.
         /// </summary>
         /// <param name="item">Item Name</param>
-        public void DrawItem(Item item)
+        public void AssignItem(Item item)
         {
             TotalItems++;
             itemSlot = AssignSlot(item);
@@ -288,11 +334,13 @@ namespace DungeonCrawler.Interface
             itemList[itemSlot].Name = item.Name;
             itemList[itemSlot].Description = item.Description;
             itemList[itemSlot].ID = item.ID;
+            itemList[itemSlot].Price = item.Price;
+            itemList[itemSlot].Quantity = item.Quantity;
         }
 
         // Create a delay before drawing to allow time for positioning to update correctly.
         int frames = 0;
-        public void DrawSelectedItem(SpriteBatch spriteBatch)
+        public void DrawItems(SpriteBatch spriteBatch)
         {
             GenerateGrid();
             itemUsed = false;
@@ -310,11 +358,24 @@ namespace DungeonCrawler.Interface
 
                         // Draw the item name and description.
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
-                        if (itemList[i].Quantity != 0)
+
+                        if (itemList[i].Quantity != 0 && InventoryType != "shop" && itemList[i].Quantity != -1)
                         {
                             spriteBatch.DrawString(inventoryFont, itemList[i].Quantity.ToString(), new Vector2(itemList[i].ItemRectangle.X + 25, itemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
                         }
+       
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
+                        if (InventoryType == "shop" && itemList[SelectedItem].Price != 0)
+                        {
+                            // Item price
+                            spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 250, Position.Y + 180));
+                            spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Price.ToString(), new Vector2(Position.X + 270, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
+                            // Player Gold
+                            spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 275, Position.Y - 25));
+                            spriteBatch.DrawString(inventoryFont, Init.Player.Gold.ToString(), new Vector2(Position.X + 295, Position.Y - 20), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+                        }
                     }
                 }
                 int itemPositionX = itemList[SelectedItem].ItemRectangle.X;

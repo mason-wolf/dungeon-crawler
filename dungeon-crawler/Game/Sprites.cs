@@ -87,11 +87,33 @@ namespace DungeonCrawler
 
             // Fireball 1 Icon
             SpriteLoader fireBall1Icon = new SpriteLoader(content, "FIREBALL_1_ICON", @"items\FIREBALL_1_ICON", 16, 16);
+
             // Icebolt 1 Icon
             SpriteLoader icebolt1Icon = new SpriteLoader(content, "ICEBOLT_1_ICON", @"items\ICEBOLT_1_ICON", 16, 16);
 
+            // Health Potion Icon
+            SpriteLoader healthPotionIcon = new SpriteLoader(content, "HEALTH_POTION_ICON", @"items\HEALTH_POTION_ICON", 16, 16);
+
+            // Mana Potion Icon
+            SpriteLoader manaPotionIcon = new SpriteLoader(content, "MANA_POTION_ICON", @"items\MANA_POTION_ICON", 16, 16);
+
+            // Gold Icon
+            SpriteLoader goldIcon = new SpriteLoader(content, "GOLD_ICON", @"items\GOLD_ICON", 16, 16);
+
+            // Bed
+            //SpriteLoader bookshelfSprite = new SpriteLoader(content, "BOOKSHELF", @"objects\bookshelf", 24, 24);
+            //bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
+            //SpriteList.Add(bookshelfSprite);
+            SpriteLoader bedSprite = new SpriteLoader(content, "BED", @"objects\BED", 24, 32);
+            bedSprite.AddAnimation("idle", new[] { 0 }, 1f, true);
+
             SpriteList.Add(fireBall1Icon);
             SpriteList.Add(icebolt1Icon);
+            SpriteList.Add(healthPotionIcon);
+            SpriteList.Add(goldIcon);
+            SpriteList.Add(manaPotionIcon);
+            SpriteList.Add(bedSprite);
+
         }
 
         public static Texture2D GetTexture(string spriteName)

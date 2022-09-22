@@ -61,6 +61,7 @@
     <Compile Include="Interface\DialogBox.cs" />
     <Compile Include="Interface\EscapeMenu.cs" />
     <Compile Include="Interface\Inventory.cs" />
+    <Compile Include="Interface\Shop.cs" />
     <Compile Include="Scenes\Level_1.cs" />
     <Compile Include="Interface\LoadMenu.cs" />
     <Compile Include="Interface\SaveMenu.cs" />

@@ -19,7 +19,6 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Torch.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Player.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Campfire.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/Chicken.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Barrel.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Arrow.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/Arrows.png</File>
@@ -53,5 +52,9 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/FIREBALL_1_ICON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/ICEBOLT_1.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/ICEBOLT_1_ICON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/HEALTH_POTION_ICON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/GOLD_ICON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/MANA_POTION_ICON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/objects/BED.png</File>
   </SourceFiles>
 </SourceFileCollection>
