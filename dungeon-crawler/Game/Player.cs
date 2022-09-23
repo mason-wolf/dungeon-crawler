@@ -142,6 +142,7 @@ namespace DungeonCrawler
         }
 
         // Handle attacking and movement animations.
+        private Vector2 oldPosition;
         public void HandleInput(GameTime gameTime, Entity player, IBox playerCollisionBox, KeyboardState newState, KeyboardState oldState)
         {
             MotionVector = new Vector2((playerCollisionBox.X), playerCollisionBox.Y);
@@ -186,9 +187,11 @@ namespace DungeonCrawler
                     Init.SelectedScene = currentScene;
                     InMenu = false;
                     PressedContinue = false;
+                    Init.Player.Position = oldPosition;
                 }
                 else
                 {
+                    oldPosition = Init.Player.Position;
                     // Open the menu if escape is pressed.
                     currentScene = Init.SelectedScene;
                     // Store the current level to save progress later.
