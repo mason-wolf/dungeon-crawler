@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="225">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="237">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -141,5 +141,17 @@
   <object id="208" name="START" x="785.25" y="311.758"/>
   <object id="210" name="GREEN_PORTAL" x="792.407" y="269.348"/>
   <object id="224" name="CASTLE" type="TELEPORTER" x="792.161" y="269.348"/>
+  <object id="225" name="SKELETON" x="448" y="258.5"/>
+  <object id="226" name="SKELETON" x="320" y="652"/>
+  <object id="227" name="SKELETON" x="310" y="559.333"/>
+  <object id="228" name="SKELETON" x="464.667" y="600"/>
+  <object id="229" name="SKELETON" x="210" y="727.333"/>
+  <object id="230" name="SKELETON" x="434.667" y="823.333"/>
+  <object id="231" name="SKELETON" x="697" y="615"/>
+  <object id="232" name="SKELETON" x="768" y="640"/>
+  <object id="233" name="SKELETON" x="680.5" y="480"/>
+  <object id="234" name="SKELETON" x="237.333" y="252"/>
+  <object id="235" name="SKELETON" x="534.667" y="156"/>
+  <object id="236" name="SKELETON" x="538.667" y="834.667"/>
  </objectgroup>
 </map>

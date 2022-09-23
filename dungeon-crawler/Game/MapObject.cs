@@ -33,18 +33,30 @@ namespace DungeonCrawler
 
         public MapObject(int objectId, string objectName, string objectType, Vector2 position)
         {
-            this.id = objectId;
-            this.name = objectName;
-            this.type = objectType;
+            id = objectId;
+            name = objectName;
+            type = objectType;
             this.position = position;
-            this.objectBoundingBox = new Rectangle((int)position.X - 5, (int)position.Y - 5, 10, 10);
+            objectBoundingBox = new Rectangle((int)position.X - 5, (int)position.Y - 5, 10, 10);
         }
 
-        public MapObject() { }
+        public MapObject() {}
+
+        public void CreateBoundingBox()
+        {
+            objectBoundingBox = new Rectangle((int)position.X - 5, (int)position.Y - 5, 10, 10);
+        }
+
         public int GetId()
         {
             return id;
         }
+
+        public void SetName(string objName)
+        {
+            name = objName;
+        }
+
         public string GetName()
         {
             return name;
@@ -53,6 +65,11 @@ namespace DungeonCrawler
         public string GetObjectType()
         {
             return type;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
         }
 
         public Vector2 GetPosition()
@@ -82,7 +99,7 @@ namespace DungeonCrawler
 
         public void SetContainedItem(Item item)
         {
-            this.containedItem = item;
+            containedItem = item;
         }
 
         public void SetCollisionBox(IBox collisionBox)
@@ -112,6 +129,7 @@ namespace DungeonCrawler
 
         public void PickUpItem()
         {
+            objectBoundingBox = new Rectangle();
             itemPickedUp = true;
         }
         public bool ItemPickedUp()
@@ -138,7 +156,6 @@ namespace DungeonCrawler
                 animatedSprite.Update(gameTime);
             }
 
-            // If the player picks up an item, add it to the inventory.
             if (containedItem != null && Init.Player.BoundingBox.Intersects(containedItemBoundingBox) && !itemPickedUp)
             {
                 switch (containedItem.Name)

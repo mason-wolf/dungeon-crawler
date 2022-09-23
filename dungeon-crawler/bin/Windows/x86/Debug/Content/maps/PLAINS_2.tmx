@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="306">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="321">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Walkable" width="64" height="64">
   <data encoding="csv">
@@ -141,6 +141,21 @@
   <object id="208" name="START" x="413" y="246.758"/>
   <object id="210" name="GREEN_PORTAL" x="420.157" y="204.348"/>
   <object id="224" name="CASTLE" type="TELEPORTER" x="419.911" y="204.348"/>
+  <object id="306" name="SKELETON" x="457" y="418.667"/>
+  <object id="307" name="SKELETON" x="536.667" y="470.667"/>
+  <object id="308" name="SKELETON" x="423.333" y="604"/>
+  <object id="309" name="SKELETON" x="449.333" y="785.333"/>
+  <object id="310" name="SKELETON" x="212.667" y="377.333"/>
+  <object id="311" name="SKELETON" x="282" y="482"/>
+  <object id="312" name="SKELETON" x="338.667" y="416"/>
+  <object id="313" name="SKELETON" x="818" y="634"/>
+  <object id="314" name="SKELETON" x="690" y="555"/>
+  <object id="315" name="SKELETON" x="782.5" y="450"/>
+  <object id="316" name="SKELETON" x="686.5" y="353.5"/>
+  <object id="317" name="SKELETON" x="748" y="199.5"/>
+  <object id="318" name="SKELETON" x="737.5" y="637.5"/>
+  <object id="319" name="SKELETON" x="781" y="758.5"/>
+  <object id="320" name="SKELETON" x="824" y="752"/>
  </objectgroup>
  <layer id="13" name="Water" width="64" height="64">
   <data encoding="csv">

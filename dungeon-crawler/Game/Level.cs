@@ -250,6 +250,14 @@ namespace DungeonCrawler
                 {
                     enemy.State = Action.Dead;
                     enemy.Dead = true;
+                    MapObject gold = new MapObject();
+                    AnimatedSprite goldSprite = new AnimatedSprite(Sprites.GetSprite("GOLD"));
+                    gold.SetSprite(goldSprite);
+                    gold.SetPosition(new Vector2(enemy.Position.X + 15, enemy.Position.Y));
+                    gold.CreateBoundingBox();
+                    goldSprite.Position = gold.GetPosition();
+                    gold.SetName("GOLD");
+                    MapObjects.Add(gold);
 
                     switch (enemy.Name)
                     {
@@ -263,13 +271,19 @@ namespace DungeonCrawler
                 }
             }
 
-            foreach (MapObject mapObject in MapObjects)
-            {
-                mapObject.Update(gameTime);
-            }
             // Handle the player destroying objects.
             foreach (MapObject mapObject in MapObjects)
             {
+                mapObject.Update(gameTime);
+                if (mapObject.GetName() == "GOLD" && Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()))
+                {
+                    mapObject.PickUpItem();
+                    Random randomGold = new Random();
+                    int goldLoot = randomGold.Next(1, 6);
+                    Init.Player.Gold += goldLoot;
+                    Init.Message = "You looted " + goldLoot + " gold.";
+                    Init.MessageEnabled = true;
+                }
                 //RectangleF offset = new Rectangle((int)Init.Player.Position.X + 1, (int)Init.Player.Position.Y, 32, 24);
                 //if (Player.PlayerWeapon.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.IsAttacking && mapObject.GetName() == "BARREL")
                 //{
@@ -330,7 +344,10 @@ namespace DungeonCrawler
                     }
                 }
 
-                mapObject.Draw(spriteBatch);
+                if (!mapObject.ItemPickedUp())
+                {
+                    mapObject.Draw(spriteBatch);
+                }
             }
 
             objectsPopulated = true;

@@ -345,7 +345,10 @@ namespace DungeonCrawler.Interface
             itemUsed = false;
 
             frames++;
-            
+            // Player Gold
+            spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 275, Position.Y - 25));
+            spriteBatch.DrawString(inventoryFont, Init.Player.Gold.ToString(), new Vector2(Position.X + 295, Position.Y - 20), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
             if (frames > 20)
             {
                 for (int i = 0; i < itemList.Count; i++)
@@ -370,10 +373,6 @@ namespace DungeonCrawler.Interface
                             // Item price
                             spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 250, Position.Y + 180));
                             spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Price.ToString(), new Vector2(Position.X + 270, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
-
-                            // Player Gold
-                            spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 275, Position.Y - 25));
-                            spriteBatch.DrawString(inventoryFont, Init.Player.Gold.ToString(), new Vector2(Position.X + 295, Position.Y - 20), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
                         }
                     }
                 }

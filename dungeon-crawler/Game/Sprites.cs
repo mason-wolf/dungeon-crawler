@@ -104,10 +104,12 @@ namespace DungeonCrawler
             // Gold Icon
             SpriteLoader goldIcon = new SpriteLoader(content, "GOLD_ICON", @"items\GOLD_ICON", 16, 16);
 
-            // Bed
-            //SpriteLoader bookshelfSprite = new SpriteLoader(content, "BOOKSHELF", @"objects\bookshelf", 24, 24);
-            //bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
-            //SpriteList.Add(bookshelfSprite);
+            // Gold Loot
+            SpriteLoader goldSprite = new SpriteLoader(content, "GOLD", @"items\GOLD", 16, 16);
+            goldSprite.AddAnimation("idle", new[] { 0 }, 0.06f, true);
+            SpriteList.Add(goldSprite);
+
+
             SpriteLoader bedSprite = new SpriteLoader(content, "BED", @"objects\BED", 24, 32);
             bedSprite.AddAnimation("idle", new[] { 0 }, 1f, true);
 
