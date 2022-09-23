@@ -18,6 +18,11 @@ namespace DungeonCrawler
         public string Text { get; set; }
 
         /// <summary>
+        /// Signal to toggle dialog.
+        /// </summary>
+        public bool StartDialog { get; set; }
+
+        /// <summary>
         /// Bool that determines active state of this dialog box
         /// </summary>
         public bool Active { get; private set; }
@@ -301,8 +306,12 @@ namespace DungeonCrawler
                     var indicatorPosition = new Vector2(TextRectangle.X + TextRectangle.Width - (_characterSize.X) - 4,
                         TextRectangle.Y + TextRectangle.Height - (_characterSize.Y));
 
-                    spriteBatch.DrawString(font, ">", indicatorPosition, Color.White);
+                  //  spriteBatch.DrawString(font, "", indicatorPosition, Color.White);
                 }
+            }
+            else
+            {
+                StartDialog = false;
             }
         }
 

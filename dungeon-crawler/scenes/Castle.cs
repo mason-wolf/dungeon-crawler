@@ -24,9 +24,10 @@ namespace DungeonCrawler.Scenes
     {
         Song levelThemeSong;
         List<Entity> NPCList = new List<Entity>();
+
+
         public Castle()
         {
-
         }
         public override List<MapObject> MapObjects { get; set; }
         public override ContentManager ContentManager { get; set;  }
@@ -49,8 +50,18 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-            Entity fireMage = Level.GetNpcByName("FIRE_MAGE");
-            NPCList.Add(fireMage);
+            int[] npcIDs = { 15, 16, 17 };
+
+            foreach(int npcId in npcIDs)
+            {
+                Entity npc = Level.GetNpcByID(npcId.ToString());
+                NPCList.Add(npc);
+            }
+
+            foreach(Entity npc in NPCList)
+            {
+                Console.WriteLine(npc.ID + " " + npc.Name + " " + npc.Position);
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -59,16 +70,31 @@ namespace DungeonCrawler.Scenes
             {
                 if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
                 {
-                    Init.dialogBox.Text =
-                       "\nI am the fire professor." +
-                       "\nWelcome to the academy.";
-                    Init.startDialog = true;
+                    string message = "";
+                    switch (npc.ID)
+                    {
+                        case ("15"):
+                            message = 
+                                "\nI am the warden of flame." +
+                                "\nYou'd be wise to heed my teachings.";
+                            break;
+                        case ("16"):
+                            message =
+                                "\nSome foes are weaker to fire than others." +
+                                "\nConserve your flame powers when facing them.";
+                            break;
+                        case ("17"):
+                            message =
+                                "\nYou can purchase new spells from the bookkeeper." +
+                                 "\nHe's in the library.";
+                            break;
+                    }
+
+                    Init.DialogBox.Text = message;
+                    Init.DialogBox.StartDialog = true;
                     Init.HandleDialog();
                 }
-                else
-                {
-                    Init.startDialog = false;
-                }
+ 
             }
 
         }

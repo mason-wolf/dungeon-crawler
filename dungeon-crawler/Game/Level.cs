@@ -114,6 +114,20 @@ namespace DungeonCrawler
             return enemyList;
         }
 
+        public static Entity GetNpcByID(string npcId)
+        {
+            Entity npcByName = null;
+            foreach (Entity npc in NPCList)
+            {
+                if (npc.ID == npcId)
+                {
+                    npcByName = npc;
+                }
+            }
+
+            return npcByName;
+        }
+
         public static Entity GetNpcByName(string npcName)
         {
             Entity npcByName = null;
@@ -152,7 +166,28 @@ namespace DungeonCrawler
                         fireProfessorEntity.State = Action.IdleSouth1;
                         fireProfessorEntity.Position = mapObject.GetPosition();
                         fireProfessorEntity.Name = "FIRE_MAGE";
+                        IBox fireProfessorCollidable = map.GetWorld().Create(fireProfessorEntity.Position.X, fireProfessorEntity.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(fireProfessorCollidable);
+                        if (mapObject.GetCustomProperties().Count > 0)
+                        {
+                            fireProfessorEntity.ID = mapObject.GetCustomProperties()[0].ToString();
+                        }
                         NPCList.Add(fireProfessorEntity);
+                        break;
+                    case ("NOVICE_MAGE"):
+                        Entity noviceMageEntity = new Entity(Sprites.GetSprite("NOVICE_MAGE"));
+                        noviceMageEntity.LoadContent(content);
+                        noviceMageEntity.State = Action.IdleSouth1;
+                        noviceMageEntity.Position = mapObject.GetPosition();
+                        noviceMageEntity.Name = "NOVICE_MAGE";
+                        IBox noviceMageCollidable = map.GetWorld().Create(noviceMageEntity.Position.X, noviceMageEntity.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(noviceMageCollidable);
+                        if (mapObject.GetCustomProperties().Count > 0)
+                        {
+                            noviceMageEntity.ID = mapObject.GetCustomProperties()[0].ToString();
+                          //  Console.WriteLine(noviceMageEntity.ID);
+                        }
+                        NPCList.Add(noviceMageEntity);
                         break;
                     case ("GREEN_PORTAL"):
                         AnimatedSprite greenPortalSprite = new AnimatedSprite(Sprites.GetSprite("GREEN_PORTAL"));
@@ -171,7 +206,7 @@ namespace DungeonCrawler
                         deskSprite.Play("idle");
                         deskSprite.Position = mapObject.GetPosition();
                         mapObject.SetSprite(deskSprite);
-                        IBox deskCollidable = map.GetWorld().Create(deskSprite.Position.X, deskSprite.Position.Y, 16, 16);
+                        IBox deskCollidable = map.GetWorld().Create(deskSprite.Position.X, deskSprite.Position.Y - 5, 12, 10);
                         mapObject.SetCollisionBox(deskCollidable);
                         break;
                     case ("BED"):

@@ -50,6 +50,12 @@ namespace DungeonCrawler
             fireProfessorSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
             SpriteList.Add(fireProfessorSprite);
 
+            // Novice Mage
+            SpriteLoader noviceMageSprite = new SpriteLoader(content, "NOVICE_MAGE", @"spritesheets\NOVICE_MAGE", 24, 24);
+            noviceMageSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            noviceMageSprite.AddAnimation("idleNorth1", new[] { 7 }, 2f, true);
+            SpriteList.Add(noviceMageSprite);
+
             // Green Portal
             SpriteLoader greenPortalSprite = new SpriteLoader(content, "GREEN_PORTAL", @"spritesheets\green_portal", 32, 32);
             greenPortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);

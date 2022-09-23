@@ -44,6 +44,7 @@ namespace DungeonCrawler.Scenes
         public static Inventory SpellInventory;
         public static Inventory ShopInventory;
 
+        // Stores list of global items.
         public static Items Items { get; set; }
         // Stores a list of teleporters from imported maps.
         public static List<Teleporter> Teleporters;
@@ -51,7 +52,7 @@ namespace DungeonCrawler.Scenes
         private GameWindow window;
         public static Scene SelectedScene { get; set; }
         public static Map SelectedMap { get; set; }
-        public static DialogBox dialogBox;
+        public static DialogBox DialogBox;
         public static bool TransitionState = false;
 
         // Store the player's collision state to pass to different scenes.
@@ -62,9 +63,18 @@ namespace DungeonCrawler.Scenes
         List<Level> levelList;
         Level newLevel;
 
+        /// <summary>
+        /// In-Game message parameters.
+        /// </summary>
         public static string Message = "";
         public static bool MessageEnabled = false;
-        static int messageFrameCount = 0;
+        private static int messageFrameCount = 0;
+
+
+        /// <summary>
+        ///  Flag for disabling other menus if in dialog.
+        /// </summary>
+        public static bool InDialog = false;
 
         public Init(Game game, GameWindow window) : base(game)
         {
@@ -103,6 +113,8 @@ namespace DungeonCrawler.Scenes
             Teleporters = new List<Teleporter>();
             levelList = new List<Level>();
             Items = new Items();
+            Font = Content.Load<SpriteFont>(@"interface\font");
+
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/CASTLE.tmx"));
             newLevel.SetScene(new Castle());
@@ -139,7 +151,6 @@ namespace DungeonCrawler.Scenes
             newLevel.LoadContent(Content);
             levelList.Add(newLevel);
 
-            Font = Content.Load<SpriteFont>(@"interface\font");
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
             Player.State = Action.IdleSouth1;
@@ -193,7 +204,7 @@ namespace DungeonCrawler.Scenes
             ShopInventory.Contents.Add(healthPotion);
             ShopInventory.Contents.Add(manaPotion);
 
-            dialogBox = new DialogBox(game, Font);
+            DialogBox = new DialogBox(game, Font);
 
             SelectedScene = Scene.CASTLE;
             base.LoadContent();
@@ -331,7 +342,7 @@ namespace DungeonCrawler.Scenes
 
             HandleDialog();
 
-            dialogBox.Update();
+            DialogBox.Update();
             ItemInventory.Update(gameTime);
             SpellInventory.Update(gameTime);
             ShopInventory.Update(gameTime);
@@ -343,7 +354,7 @@ namespace DungeonCrawler.Scenes
 
             Camera.Zoom = 3;
 
-            if (!inDialog && !TransitionState && !Player.Dead)
+            if (!InDialog && !TransitionState && !Player.Dead)
             {
                 Player.HandleInput(gameTime, Player, playerCollision, KeyBoardNewState, KeyBoardOldState);
                 Player.CheckPlayerStatus(gameTime);
@@ -402,7 +413,7 @@ namespace DungeonCrawler.Scenes
                 //Vector2 healthStatus = new Vector2(playerHealthPosition.X + 10, playerHealthPosition.Y);
                 //spriteBatch.DrawString(Font, health.ToString() + " / 100", healthStatus, Color.White);
 
-                dialogBox.Draw(spriteBatch);
+                DialogBox.Draw(spriteBatch);
                 ItemInventory.Draw(spriteBatch);
                 SpellInventory.Draw(spriteBatch);
                 ShopInventory.Draw(spriteBatch);
@@ -422,23 +433,22 @@ namespace DungeonCrawler.Scenes
             base.Draw(gameTime);
         }
 
-        static bool inDialog = false;
-        public static bool startDialog = false;
         public static void HandleDialog()
         {
-            if (KeyBoardNewState.IsKeyDown(Keys.E) && KeyBoardOldState.IsKeyUp(Keys.E) && startDialog)
+            if (KeyBoardNewState.IsKeyDown(Keys.E) && KeyBoardOldState.IsKeyUp(Keys.E) && DialogBox.StartDialog)
             {
-                dialogBox.Position = new Vector2(Player.Position.X - 125, Player.Position.Y + 50);
-                dialogBox.Show();
+                DialogBox.Position = new Vector2(Player.Position.X - 125, Player.Position.Y + 50);
+                DialogBox.Show();
             }
 
-            if (dialogBox.IsActive())
+            // Disable other menus if in dialog.
+            if (DialogBox.IsActive())
             {
-                inDialog = true;
+                InDialog = true;
             }
             else
             {
-                inDialog = false;
+                InDialog = false;
             }
         }
         /// <summary>

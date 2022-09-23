@@ -158,15 +158,15 @@ namespace DungeonCrawler
 
             if (containedItem != null && Init.Player.BoundingBox.Intersects(containedItemBoundingBox) && !itemPickedUp)
             {
-                switch (containedItem.Name)
-                {
-                    //case "Chicken":
-                    //    Inventory.TotalChickens = Inventory.TotalChickens + 1;
-                    //    break;
-                    //case "Arrow":
-                    //    Inventory.TotalArrows = Inventory.TotalArrows + 5;
-                    //    break;
-                }
+                //switch (containedItem.Name)
+                //{
+                //    //case "Chicken":
+                //    //    Inventory.TotalChickens = Inventory.TotalChickens + 1;
+                //    //    break;
+                //    //case "Arrow":
+                //    //    Inventory.TotalArrows = Inventory.TotalArrows + 5;
+                //    //    break;
+                //}
 
                 itemPickedUp = true;
             }
