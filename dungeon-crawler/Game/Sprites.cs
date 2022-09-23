@@ -18,23 +18,22 @@ namespace DungeonCrawler
         {
             SpriteList = new List<SpriteLoader>();
             // Skeleton
-            //skeletonTexture = content.Load<Texture2D>(@"spritesheets\Skeleton");
-            //skeletonAtlas = TextureAtlas.Create(skeletonTexture, 24, 24);
-            //skeletonAnimation = new SpriteSheetAnimationFactory(skeletonAtlas);
-            //float skeletonAnimationSpeed = .3f;
-            //skeletonAnimation.Add("idleSouth1", new SpriteSheetAnimationData(new[] { 1 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("walkSouthPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("attackSouthPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("walkWestPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("attackWestPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("idleWest1", new SpriteSheetAnimationData(new[] { 1 }));
-            //skeletonAnimation.Add("walkEastPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("attackEastPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("idleEast1", new SpriteSheetAnimationData(new[] { 1 }));
-            //skeletonAnimation.Add("walkNorthPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("attackNorthPattern1", new SpriteSheetAnimationData(new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, isLooping: true));
-            //skeletonAnimation.Add("idleNorth1", new SpriteSheetAnimationData(new[] { 1 }));
-            //skeletonAnimation.Add("dead", new SpriteSheetAnimationData(new[] { 4 }, .2f, isLooping: false));
+            SpriteLoader skeletonSprite = new SpriteLoader(content, "SKELETON", @"spritesheets\Skeleton", 24, 24);
+            float skeletonAnimationSpeed = .3f;
+            skeletonSprite.AddAnimation("idleSouth1", new[] { 1 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("walkSouthPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("attackSouthPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("walkWestPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("attackWestPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("idleWest1", new[] { 1 }, skeletonAnimationSpeed, false);
+            skeletonSprite.AddAnimation("walkEastPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("attackEastPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("idleEast1", new[] { 1 }, skeletonAnimationSpeed, false);
+            skeletonSprite.AddAnimation("walkNorthPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("attackNorthPattern1", new[] { 1, 2, 3, 2 }, skeletonAnimationSpeed, true);
+            skeletonSprite.AddAnimation("idleNorth1", new[] { 1 }, skeletonAnimationSpeed, false);
+            skeletonSprite.AddAnimation("dead", new[] { 4 }, .2f, isLooping: false);
+            SpriteList.Add(skeletonSprite);
 
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);

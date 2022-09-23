@@ -107,22 +107,22 @@ namespace DungeonCrawler
                 // Create a bounce effect when the player hits an enemy.
                 foreach (Entity enemy in EnemyList)
                 {
-                    if (PlayerWeapon.BoundingBox.Intersects(enemy.BoundingBox) && enemy.State != Action.Dead)
-                    {
-                        enemy.CurrentHealth -= AttackDamage;
+                    //if (PlayerWeapon.BoundingBox.Intersects(enemy.BoundingBox) && enemy.State != Action.Dead)
+                    //{
+                    //    enemy.CurrentHealth -= AttackDamage;
 
-                        Vector2 oppositeDirection = Position - enemy.Position;
-                        oppositeDirection.Normalize();
+                    //    Vector2 oppositeDirection = Position - enemy.Position;
+                    //    oppositeDirection.Normalize();
 
-                        //if(IntersectsCollidable(enemy))
-                        //{
-                        //    enemy.Position -= CorrectIntersection(enemy) * (float)(0.4f);
-                        //}
-                        //else
-                        //{
-                        //    enemy.Position -= oppositeDirection * (float)(0.01f * 1500);
-                        //}
-                    }
+                    //    if (IntersectsCollidable(enemy))
+                    //    {
+                    //        enemy.Position -= CorrectIntersection(enemy) * (float)(0.4f);
+                    //    }
+                    //    else
+                    //    {
+                    //        enemy.Position -= oppositeDirection * (float)(0.01f * 1500);
+                    //    }
+                    //}
                 }
             }
         }

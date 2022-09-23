@@ -115,8 +115,8 @@ namespace DungeonCrawler
             {
                 switch (mapObject.GetName())
                 {
-                    case ("Skeleton"):
-                        Entity skeletonEntity = new Entity(Sprites.GetSprite("SELETON"));
+                    case ("SKELETON"):
+                        Entity skeletonEntity = new Entity(Sprites.GetSprite("SKELETON"));
                         skeletonEntity.LoadContent(content);
                         skeletonEntity.State = Action.IdleEast1;
                         skeletonEntity.MaxHealth = 15;

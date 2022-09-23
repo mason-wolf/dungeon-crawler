@@ -209,9 +209,9 @@ namespace DungeonCrawler.Scenes
                             }
                         }
 
-                        FadeInMap(teleporter.GetDestinationMap());
                         TransitionState = true;
                         LoadContent();
+                        FadeInMap(teleporter.GetDestinationMap());
                         SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
                         Player.Position = teleporter.GetTargetPosition();
                     }
