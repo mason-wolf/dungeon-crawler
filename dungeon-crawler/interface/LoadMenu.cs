@@ -1,4 +1,5 @@
-﻿using DungeonCrawler.Engine;
+﻿using Demo.Game;
+using DungeonCrawler.Engine;
 using DungeonCrawler.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -183,7 +184,8 @@ namespace DungeonCrawler.Scenes
             using (StreamReader streamReader = new StreamReader("Save_" + saveSlot + ".txt"))
             {
                 string line;
-
+                Init.ItemInventory.Contents.Clear();
+                Init.SpellInventory.Contents.Clear();
                 while ((line = streamReader.ReadLine()) != null)
                 {
                     string value = line.Split('=').First();
@@ -200,20 +202,31 @@ namespace DungeonCrawler.Scenes
                         case ("INVENTORY_ITEM"):
                             value = line.Split('=').Last();
                             string[] tempItem = value.Split(',');
-                            Item item = new Item();
-                            item.Name = tempItem[0];
-                            item.Quantity = Int32.Parse(tempItem[1]);
-                            Init.itemInventory.Contents.Add(item);
+                            int quantity = Int32.Parse(tempItem[1]);
+                            int itemId = Int32.Parse(tempItem[2]);
+                            Item item = Items.GetItemById(itemId);
+                            quantity += 1;
+                            for (var i = 0; i < quantity; i++)
+                            {
+                                Init.ItemInventory.AddItem(item);
+                            }
                             break;
                         case ("SPELL"):
                             value = line.Split('=').Last();
                             string[] tempSpell = value.Split(',');
-                            Item spell = new Item();
+                            int spellId = Int32.Parse(tempSpell[1]);
+                            Item spell = Items.GetItemById(spellId);
+                            Console.WriteLine(spellId);
                             spell.Name = tempSpell[0];
-                            Init.itemInventory.Contents.Add(spell);
+                            Init.SpellInventory.Contents.Add(spell);
                             break;
                     }
                 }
+            }
+
+            foreach(Item item in Init.ItemInventory.Contents)
+            {
+                Console.WriteLine(item.Name);
             }
         }
     }

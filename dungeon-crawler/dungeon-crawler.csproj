@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Game\Items.cs" />
     <Compile Include="Game\SpriteLoader.cs" />
     <Compile Include="Game\EnemyAI.cs" />
     <Compile Include="Game\SceneLogic.cs" />

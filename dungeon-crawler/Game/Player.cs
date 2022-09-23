@@ -204,28 +204,28 @@ namespace DungeonCrawler
             }
 
             // Handle item inventory
-            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.spellInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.SpellInventory.InventoryOpen)
             {
-                if (Init.itemInventory.InventoryOpen)
+                if (Init.ItemInventory.InventoryOpen)
                 {
-                    Init.itemInventory.InventoryOpen = false;
+                    Init.ItemInventory.InventoryOpen = false;
                 }
                 else
                 {
-                    Init.itemInventory.InventoryOpen = true;
+                    Init.ItemInventory.InventoryOpen = true;
                 }
             }
 
             // Handle spell inventory
-            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.itemInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.ItemInventory.InventoryOpen)
             {
-                if (Init.shopInventory.InventoryOpen)
+                if (Init.SpellInventory.InventoryOpen)
                 {
-                    Init.shopInventory.InventoryOpen = false;
+                    Init.SpellInventory.InventoryOpen = false;
                 }
                 else
                 {
-                    Init.shopInventory.InventoryOpen = true;
+                    Init.SpellInventory.InventoryOpen = true;
                 }
             }
 
@@ -258,7 +258,7 @@ namespace DungeonCrawler
             //    PlayerWeapon = bowWeapon;
             //}
 
-            if (!InMenu && !Init.itemInventory.InventoryOpen && !Init.spellInventory.InventoryOpen && !Init.shopInventory.InventoryOpen)
+            if (!InMenu && !Init.ItemInventory.InventoryOpen && !Init.SpellInventory.InventoryOpen && !Init.ShopInventory.InventoryOpen)
             {
                 // Attacking south
                 if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern1 ||

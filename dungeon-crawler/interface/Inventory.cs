@@ -267,29 +267,14 @@ namespace DungeonCrawler.Interface
                     else
                     {
                         Init.Player.Gold -= itemList[SelectedItem].Price;
-                        bool exists = false;
-
-                        foreach (Item item in Init.itemInventory.Contents)
-                        {
-                            if (item.ID == itemList[SelectedItem].ID)
-                            {
-                                item.Quantity += 1;
-                                AssignItem(item);
-                                exists = true;
-                            }
-                        }
-
-                        if (!exists)
-                        {
-                            Init.itemInventory.Contents.Add(itemList[SelectedItem]);
-                        } 
+                        AddItem(itemList[SelectedItem]);
                     }
                 }
                 else if (InventoryType == "inventory")
                 {
                     Item foundItem = null;
 
-                    foreach (Item item in Init.itemInventory.Contents)
+                    foreach (Item item in Init.ItemInventory.Contents)
                     {
                         if (item.ID == itemList[SelectedItem].ID)
                         {
@@ -303,9 +288,9 @@ namespace DungeonCrawler.Interface
                         }
                     }
 
-                    if (foundItem != null && foundItem.Quantity == -1)
+                    if (foundItem != null && foundItem.Quantity == 0)
                     {
-                        Init.itemInventory.Contents.Remove(foundItem);
+                        Init.ItemInventory.Contents.Remove(foundItem);
                     }
                 }
                 else if (InventoryType == "spells")
@@ -317,6 +302,25 @@ namespace DungeonCrawler.Interface
             }
         }
 
+        public void AddItem(Item newItem)
+        {
+            bool exists = false;
+
+            foreach (Item item in Init.ItemInventory.Contents)
+            {
+                if (item.ID == newItem.ID)
+                {
+                    item.Quantity += 1;
+                    AssignItem(item);
+                    exists = true;
+                }
+            }
+
+            if (!exists)
+            {
+                Init.ItemInventory.Contents.Add(newItem);
+            }
+        }
         /// <summary>
         /// Assigns an item to a slot on the inventory screen.
         /// </summary>

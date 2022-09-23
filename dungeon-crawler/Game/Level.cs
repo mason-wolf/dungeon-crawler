@@ -297,6 +297,7 @@ namespace DungeonCrawler
                         mapObject.SetContainedItem(item);
                     }
                 }
+
                 mapObject.Draw(spriteBatch);
             }
 

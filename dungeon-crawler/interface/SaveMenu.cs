@@ -148,19 +148,26 @@ namespace DungeonCrawler.Scenes
                 streamWriter.WriteLine("PLAYER_HEALTH="+Init.Player.CurrentHealth);
                 streamWriter.WriteLine("PLAYER_GOLD=" + Init.Player.Gold);
                 // Save inventory
-                foreach(Item item in Init.itemInventory.Contents)
+                foreach(Item item in Init.ItemInventory.Contents)
                 {
                     if (item.Name != "")
                     {
-                        streamWriter.WriteLine("INVENTORY_ITEM=" + item.Name + "," + item.Quantity);
+                        if (item.Quantity == 0)
+                        {
+                            item.Quantity++;
+                        }
+                        streamWriter.WriteLine("INVENTORY_ITEM=" + item.Name + "," + item.Quantity + "," + item.ID);
                     }
                 }
+
+                Console.WriteLine(Init.SpellInventory.Contents.Count);
                 // Save spells
-                foreach (Item item in Init.spellInventory.Contents)
+                foreach (Item item in Init.SpellInventory.Contents)
                 {
+                    Console.WriteLine(item.Name);
                     if (item.Name != "")
                     {
-                        streamWriter.WriteLine("SPELL=" + item.Name);
+                        streamWriter.WriteLine("SPELL=" + item.Name + "," + item.ID);
                     }
                 }
             }

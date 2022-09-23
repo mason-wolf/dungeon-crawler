@@ -1,6 +1,4 @@
-player_health=1
-arrows=30
-location=Level_1B
-player_position=628.2021,129.2008
-inventory_item=Chicken,3
-inventory_item=Dynamite,10
+PLAYER_HEALTH=100
+PLAYER_GOLD=50
+SPELL=FIREBALL
+SPELL=ICEBOLT

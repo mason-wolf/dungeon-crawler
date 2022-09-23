@@ -62,7 +62,7 @@ namespace DungeonCrawler
                     }
                     Teleporter teleporter = new Teleporter(teleporterRect, mapObject.GetName(), mapName, new Vector2(x, y));
                     teleporter.Enabled = true;
-                    Init.teleporterList.Add(teleporter);
+                    Init.Teleporters.Add(teleporter);
                 }
             }
         }

@@ -22,6 +22,7 @@ using Microsoft.Xna.Framework.Content;
 using DungeonCrawler.Interface;
 using Demo.Interface;
 using System.Diagnostics;
+using Demo.Game;
 
 namespace DungeonCrawler.Scenes
 {
@@ -40,12 +41,13 @@ namespace DungeonCrawler.Scenes
         public static SaveMenu saveMenu;
         public static LoadMenu loadMenu;
 
-        public static Inventory itemInventory;
-        public static Inventory spellInventory;
-        public static Inventory shopInventory;
+        public static Inventory ItemInventory;
+        public static Inventory SpellInventory;
+        public static Inventory ShopInventory;
 
+        public static Items Items { get; set; }
         // Stores a list of teleporters from imported maps.
-        public static List<Teleporter> teleporterList;
+        public static List<Teleporter> Teleporters;
 
         private GameWindow window;
         public static Scene SelectedScene { get; set; }
@@ -58,7 +60,7 @@ namespace DungeonCrawler.Scenes
 
         public static bool Reloaded = false;
 
-        List<Level> levelList = new List<Level>();
+        List<Level> levelList;
         Level newLevel;
 
         public static string Message = "";
@@ -96,8 +98,9 @@ namespace DungeonCrawler.Scenes
 
         protected override void LoadContent()
         {
-            teleporterList = new List<Teleporter>();
- 
+            Teleporters = new List<Teleporter>();
+            levelList = new List<Level>();
+            Items = new Items();
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/castle.tmx"));
             newLevel.SetScene(new Level_1());
@@ -125,17 +128,17 @@ namespace DungeonCrawler.Scenes
             string[] items = { "Continue", "Save", "Load", "Quit" };
             escapeMenu.SetMenuItems(items);
 
-            itemInventory = new Inventory(Content);
-            itemInventory.MenuTitle = "Items";
-            itemInventory.InventoryType = "inventory";
+            ItemInventory = new Inventory(Content);
+            ItemInventory.MenuTitle = "Items";
+            ItemInventory.InventoryType = "inventory";
 
-            spellInventory = new Inventory(Content);
-            spellInventory.MenuTitle = "Spells";
-            spellInventory.InventoryType = "spells";
+            SpellInventory = new Inventory(Content);
+            SpellInventory.MenuTitle = "Spells";
+            SpellInventory.InventoryType = "spells";
 
-            shopInventory = new Inventory(Content);
-            shopInventory.InventoryType = "shop";
-            shopInventory.MenuTitle = "Shop";
+            ShopInventory = new Inventory(Content);
+            ShopInventory.InventoryType = "shop";
+            ShopInventory.MenuTitle = "Shop";
 
             Item fireballSpell = new Item();
             fireballSpell.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
@@ -162,10 +165,10 @@ namespace DungeonCrawler.Scenes
             manaPotion.Description = "Restores some mana.";
             manaPotion.Price = 5;
 
-            spellInventory.Contents.Add(fireballSpell);
-            spellInventory.Contents.Add(iceBoltSpell);
-            shopInventory.Contents.Add(healthPotion);
-            shopInventory.Contents.Add(manaPotion);
+            SpellInventory.Contents.Add(fireballSpell);
+            SpellInventory.Contents.Add(iceBoltSpell);
+            ShopInventory.Contents.Add(healthPotion);
+            ShopInventory.Contents.Add(manaPotion);
 
             dialogBox = new DialogBox(game, Font);
 
@@ -190,7 +193,7 @@ namespace DungeonCrawler.Scenes
                 Reloaded = false;
             }
             // Handle Teleportation
-            foreach (Teleporter teleporter in teleporterList)
+            foreach (Teleporter teleporter in Teleporters)
             {
                 if (teleporter.Enabled)
                 {
@@ -206,11 +209,9 @@ namespace DungeonCrawler.Scenes
                             }
                         }
 
-                        levelList.Clear();
-                        TransitionState = true;
-                        Content.Unload();
-                        LoadContent();
                         FadeInMap(teleporter.GetDestinationMap());
+                        TransitionState = true;
+                        LoadContent();
                         SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
                         Player.Position = teleporter.GetTargetPosition();
                     }
@@ -299,9 +300,9 @@ namespace DungeonCrawler.Scenes
             HandleDialog();
 
             dialogBox.Update();
-            itemInventory.Update(gameTime);
-            spellInventory.Update(gameTime);
-            shopInventory.Update(gameTime);
+            ItemInventory.Update(gameTime);
+            SpellInventory.Update(gameTime);
+            ShopInventory.Update(gameTime);
 
             Player.Update(gameTime);
 
@@ -363,7 +364,6 @@ namespace DungeonCrawler.Scenes
                 Vector2 playerHealthPosition = new Vector2(Player.Position.X - 170, Player.Position.Y - 110);
 
                 Player.Draw(spriteBatch);
-             //   Player.PlayerWeapon.Draw(spriteBatch);
                 Player.DrawHUD(spriteBatch, playerHealthPosition, true);
 
                 //int health = (int)Player.CurrentHealth;
@@ -371,9 +371,9 @@ namespace DungeonCrawler.Scenes
                 //spriteBatch.DrawString(Font, health.ToString() + " / 100", healthStatus, Color.White);
 
                 dialogBox.Draw(spriteBatch);
-                itemInventory.Draw(spriteBatch);
-                spellInventory.Draw(spriteBatch);
-                shopInventory.Draw(spriteBatch);
+                ItemInventory.Draw(spriteBatch);
+                SpellInventory.Draw(spriteBatch);
+                ShopInventory.Draw(spriteBatch);
 
             }
 
@@ -454,7 +454,7 @@ namespace DungeonCrawler.Scenes
         /// <param name="selectedScene">Which scene to enable teleporters</param>
         public void ToggleTeleporters(string selectedMap)
         {
-            foreach (Teleporter teleporter in teleporterList)
+            foreach (Teleporter teleporter in Teleporters)
             {
                 if (teleporter.GetSourceMap() == selectedMap)
                 {
@@ -466,26 +466,7 @@ namespace DungeonCrawler.Scenes
                 }
             }
         }
-        /// <summary>
-        /// Offsets weapon position relative to player, handy
-        /// when creating different weapons with varying sizes and
-        /// hand placement.
-        /// </summary>
-        public void OffsetWeaponPosition()
-        {
-            if (Player.PlayerWeapon.State == Action.AttackWestPattern1)
-            {
-                Player.PlayerWeapon.Position = new Vector2(Player.Position.X - 3, Player.Position.Y);
-            }
-            else if (Player.PlayerWeapon.State == Action.AttackEastPattern1)
-            {
-                Player.PlayerWeapon.Position = new Vector2(Player.Position.X + 2, Player.Position.Y);
-            }
-            else
-            {
-                Player.PlayerWeapon.Position = Player.Position;
-            }
-        }
+
         public static void ShowMessage(string message, SpriteBatch spriteBatch)
         {
             if (messageFrameCount < 120)
