@@ -40,6 +40,7 @@ namespace DungeonCrawler
             this.objectBoundingBox = new Rectangle((int)position.X - 5, (int)position.Y - 5, 10, 10);
         }
 
+        public MapObject() { }
         public int GetId()
         {
             return id;

@@ -60,6 +60,11 @@ namespace DungeonCrawler
             bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
             SpriteList.Add(bookshelfSprite);
 
+            // Water
+            SpriteLoader waterSprite = new SpriteLoader(content, "WATER", @"objects\WATER", 16, 16);
+            waterSprite.AddAnimation("idle", new[] { 0, 1, 2, 3 }, .5f, true);
+            SpriteList.Add(waterSprite);
+
             // Fireball 1
             SpriteLoader fireball1Sprite = new SpriteLoader(content, "FIREBALL_1", @"spritesheets\FIREBALL_1", 16, 16);
             fireball1Sprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2, 3 }, 0.06f, true);

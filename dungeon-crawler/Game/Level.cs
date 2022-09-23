@@ -62,6 +62,11 @@ namespace DungeonCrawler
             scene = levelScene;
         }
 
+        public SceneLogic GetScene()
+        {
+            return scene;
+        }
+
         public Level SetLevelName(string levelName)
         {
             this.levelName = levelName;
@@ -108,6 +113,21 @@ namespace DungeonCrawler
         {
             return enemyList;
         }
+
+        public static Entity GetNpcByName(string npcName)
+        {
+            Entity npcByName = null;
+            foreach (Entity npc in NPCList)
+            {
+                if (npc.Name == npcName)
+                {
+                    npcByName = npc;
+                }
+            }
+
+            return npcByName;
+        }
+
         public override void LoadContent(ContentManager content)
         {
 
@@ -123,7 +143,7 @@ namespace DungeonCrawler
                         skeletonEntity.CurrentHealth = 15;
                         skeletonEntity.AttackDamage = 0.05;
                         skeletonEntity.Position = mapObject.GetPosition();
-                        skeletonEntity.Name = "Skeleton";
+                        skeletonEntity.Name = "SKELETON";
                         enemyList.Add(skeletonEntity);
                         break;
                     case ("FIRE_MAGE"):
@@ -131,6 +151,7 @@ namespace DungeonCrawler
                         fireProfessorEntity.LoadContent(content);
                         fireProfessorEntity.State = Action.IdleSouth1;
                         fireProfessorEntity.Position = mapObject.GetPosition();
+                        fireProfessorEntity.Name = "FIRE_MAGE";
                         NPCList.Add(fireProfessorEntity);
                         break;
                     case ("GREEN_PORTAL"):
@@ -174,7 +195,6 @@ namespace DungeonCrawler
                         startingPosition = mapObject.GetPosition();
                         break;
                 }
-
                 scene.Map = map;
                 scene.MapObjects = MapObjects;
                 scene.ContentManager = content;
@@ -185,6 +205,25 @@ namespace DungeonCrawler
                 soundEffects.Add(content.Load<SoundEffect>(@"sounds\dead-bat"));
                 soundEffects.Add(content.Load<SoundEffect>(@"sounds\dead-skeleton"));
                // arrowsSprite = content.Load<Texture2D>(@"objects\arrows");
+            }
+
+            // Add water tiles
+            if (map.GetWaterTiles().Count > 0)
+            {
+                foreach (Tile waterTile in map.GetWaterTiles())
+                {
+                    if (waterTile.TileID != 0)
+                    {
+                        AnimatedSprite waterSprite = new AnimatedSprite(Sprites.GetSprite("WATER"));
+                        waterSprite.Play("idle");
+                        waterSprite.Position = new Vector2(waterTile.Position.X + 8, waterTile.Position.Y + 8);
+                        IBox waterCollidable = map.GetWorld().Create(waterSprite.Position.X, waterSprite.Position.Y - 10, 16, 24);
+                        MapObject water = new MapObject();
+                        water.SetCollisionBox(waterCollidable);
+                        water.SetSprite(waterSprite);
+                        MapObjects.Add(water);
+                    }
+                }
             }
         }
 
@@ -228,7 +267,6 @@ namespace DungeonCrawler
             {
                 mapObject.Update(gameTime);
             }
-
             // Handle the player destroying objects.
             foreach (MapObject mapObject in MapObjects)
             {
@@ -259,12 +297,6 @@ namespace DungeonCrawler
                 Vector2 AIHealthPosition = new Vector2(enemy.Position.X - 8, enemy.Position.Y - 20);
                 enemy.DrawHUD(spriteBatch, AIHealthPosition, false);
             }
-            
-            foreach (Entity npc in NPCList)
-            {
-                npc.Draw(spriteBatch);
-            }
-
             // Randomly place loot in some objects.
             Random random = new Random();
 

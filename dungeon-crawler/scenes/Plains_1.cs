@@ -20,48 +20,41 @@ using Microsoft.Xna.Framework.Media;
 
 namespace DungeonCrawler.Scenes
 {
-    public class Level_1 : SceneLogic
+    public class Plains_1 : SceneLogic
     {
-        Song levelThemeSong;
-        public Level_1()
-        {
-
-        }
-
         public override List<MapObject> MapObjects { get; set; }
-        public override ContentManager ContentManager { get; set;  }
+        public override ContentManager ContentManager { get; set; }
         public override Map Map { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-        //    throw new NotImplementedException();
         }
 
         public override void LoadContent(ContentManager content)
         {
-            levelThemeSong = content.Load<Song>(@"music\level_1");
-       //     MediaPlayer.IsRepeating = true;
-        //    MediaPlayer.Play(levelThemeSong);
+        }
+
+        public override void LoadScene()
+        {
+            throw new NotImplementedException();
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (Entity npc in Level.NPCList)
+            foreach (MapObject mapObject in MapObjects)
             {
-                if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
+                if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "Chest")
                 {
-                    Init.dialogBox.Text =
-                       "\nI am the fire professor." +
-                       "\nWelcome to the academy.";
-                    Init.startDialog = true;
-                    Init.HandleDialog();
-                }
-                else
-                {
-                    Init.startDialog = false;
+                    if (!mapObject.ItemPickedUp())
+                    {
+                        mapObject.GetSprite().Play("Opened");
+                        Init.Message = "You obtained a key";
+                        Init.MessageEnabled = true;
+                        mapObject.PickUpItem();
+                        Inventory.TotalKeys = Inventory.TotalKeys += 1;
+                    }
                 }
             }
-
         }
     }
 }

@@ -4,6 +4,7 @@ using Humper;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Shapes;
 using MonoGame.Extended.TextureAtlases;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace DungeonCrawler.Engine
         List<Layer> layers;
         List<Tile> firstLayer;
         List<Tile> secondLayer;
+        List<Tile> waterLayer;
+
         List<MapObject> mapObjects = new List<MapObject>();
 
         World world;
@@ -51,6 +54,11 @@ namespace DungeonCrawler.Engine
         public List<Tile> GetCollisionLayer()
         {
             return secondLayer;
+        }
+
+        public List<Tile> GetWaterLayer()
+        {
+            return waterLayer;
         }
 
         public List<MapObject> GetMapObjects()
@@ -130,6 +138,7 @@ namespace DungeonCrawler.Engine
 
             firstLayer = new List<Tile>();
             secondLayer = new List<Tile>();
+            waterLayer = new List<Tile>();
 
             int tileRowCount = mapWidth;
             int tileColumnCount = mapHeight;
@@ -141,10 +150,10 @@ namespace DungeonCrawler.Engine
                 {
                     firstLayer.Add(new Tile(new Vector2(columnIndex * tileWidth, rowIndex * tileHeight)));
                     secondLayer.Add(new Tile(new Vector2(columnIndex * tileWidth, rowIndex * tileHeight)));
+                    waterLayer.Add(new Tile(new Vector2(columnIndex * tileWidth, rowIndex * tileHeight)));
                 }
             }
 
- 
             int count = 0;
 
             // Assign tile ID for each tile in first layer (walkable).
@@ -161,7 +170,18 @@ namespace DungeonCrawler.Engine
             {
                 tile.TileID = layers[1].Tiles[secondCount];
                 secondCount++;
-            }        
+            }
+
+            if (layers.Count > 2)
+            {
+                int waterCount = 0;
+                // Get the second layer (collidable).
+                foreach (Tile tile in waterLayer)
+                {
+                    tile.TileID = layers[2].Tiles[waterCount];
+                    waterCount++;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -185,7 +205,8 @@ namespace DungeonCrawler.Engine
                 {
                     TextureRegion2D region = mapAtlas.GetRegion(tile.TileID - 1);
                     Rectangle sourceRectangle = region.Bounds;
-                    Rectangle destinationRectangle = new Rectangle((int)tile.Position.X, (int)tile.Position.Y, region.Width, region.Height);
+                    Vector2 position = new Vector2((int)Math.Round(tile.Position.X), (int)Math.Round(tile.Position.Y));
+                    Rectangle destinationRectangle = new Rectangle((int)position.X, (int)position.Y, region.Width, region.Height);
                     spriteBatch.Draw(region.Texture, destinationRectangle, sourceRectangle, Color.White);
                 }
             }

@@ -12,5 +12,6 @@ namespace DungeonCrawler.Engine
         public abstract Map Map { get; set; }
         public abstract ContentManager ContentManager { get; set; }
         public abstract List<MapObject> MapObjects { get; set; }
+        public abstract void LoadScene();
     }
 }

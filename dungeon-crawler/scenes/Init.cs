@@ -20,7 +20,6 @@ using RoyT.AStar;
 using MonoGame.Extended.Sprites;
 using Microsoft.Xna.Framework.Content;
 using DungeonCrawler.Interface;
-using Demo.Interface;
 using System.Diagnostics;
 using Demo.Game;
 
@@ -88,12 +87,15 @@ namespace DungeonCrawler.Scenes
         // Store a list of scenes to switch to.
         public enum Scene
         {
-            EscapeMenu,
-            SaveMenu,
-            LoadMenu,
-            Inventory,
-            Level_1,
-            Castle
+            ESCAPE_MENU,
+            SAVE_MENU,
+            LOAD_MENU,
+            INVENTORY,
+            PLAINS_1,
+            PLAINS_2,
+            PLAINS_3,
+            PLAINS_4,
+            CASTLE
         }
 
         protected override void LoadContent()
@@ -102,19 +104,40 @@ namespace DungeonCrawler.Scenes
             levelList = new List<Level>();
             Items = new Items();
             newLevel = new Level();
-            newLevel.SetMap(new Map(Content, "Content/maps/castle.tmx"));
-            newLevel.SetScene(new Level_1());
-            newLevel.SetLevelName("Castle");
+            newLevel.SetMap(new Map(Content, "Content/maps/CASTLE.tmx"));
+            newLevel.SetScene(new Castle());
+            newLevel.SetLevelName("CASTLE");
+            newLevel.LoadContent(Content);
+            newLevel.GetScene().LoadScene();
+            levelList.Add(newLevel);
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_1.tmx"));
+            newLevel.SetScene(new Plains_1());
+            newLevel.SetLevelName("PLAINS_1");
             newLevel.LoadContent(Content);
             levelList.Add(newLevel);
 
             newLevel = new Level();
-            newLevel.SetMap(new Map(Content, "Content/maps/level_1.tmx"));
-            newLevel.SetScene(new Level_1A());
-            newLevel.SetLevelName("Level_1");
+            newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_2.tmx"));
+            newLevel.SetScene(new Plains_1());
+            newLevel.SetLevelName("PLAINS_2");
             newLevel.LoadContent(Content);
             levelList.Add(newLevel);
 
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_3.tmx"));
+            newLevel.SetScene(new Plains_1());
+            newLevel.SetLevelName("PLAINS_3");
+            newLevel.LoadContent(Content);
+            levelList.Add(newLevel);
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_4.tmx"));
+            newLevel.SetScene(new Plains_1());
+            newLevel.SetLevelName("PLAINS_4");
+            newLevel.LoadContent(Content);
+            levelList.Add(newLevel);
 
             Font = Content.Load<SpriteFont>(@"interface\font");
             Player.LoadContent(Content);
@@ -172,7 +195,7 @@ namespace DungeonCrawler.Scenes
 
             dialogBox = new DialogBox(game, Font);
 
-            SelectedScene = Scene.Castle;
+            SelectedScene = Scene.CASTLE;
             base.LoadContent();
         }
 
@@ -184,12 +207,12 @@ namespace DungeonCrawler.Scenes
             if (Reloaded)
             {
                 TransitionState = true;
-                SelectedScene = Scene.Castle;
-                SelectedMap = levelList.Find(map => map.GetLevelName() == "Castle").GetMap();
-                FadeInMap("Castle");
+                SelectedScene = Scene.CASTLE;
+                SelectedMap = levelList.Find(map => map.GetLevelName() == "CASTLE").GetMap();
+                FadeInMap("CASTLE");
                 Player.State = Action.IdleSouth1;
                 Player.InMenu = false;
-                Player.Position = levelList.Find(level => level.GetLevelName() == Scene.Castle.ToString()).GetStartingPosition();
+                Player.Position = levelList.Find(level => level.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
                 Reloaded = false;
             }
             // Handle Teleportation
@@ -211,8 +234,17 @@ namespace DungeonCrawler.Scenes
 
                         TransitionState = true;
                         LoadContent();
-                        FadeInMap(teleporter.GetDestinationMap());
-                        SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
+                        if (teleporter.GetDestinationMap() == "RANDOM_PLAIN")
+                        {
+                            Random randomLevel = new Random();
+                            int levelNum = randomLevel.Next(1, 5);
+                            string levelName = "PLAINS_" + levelNum;
+                            SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), levelName);
+                        }
+                        else
+                        {
+                            SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
+                        }
                         Player.Position = teleporter.GetTargetPosition();
                     }
                 }
@@ -220,22 +252,22 @@ namespace DungeonCrawler.Scenes
 
             switch (SelectedScene)
             {
-                case Scene.EscapeMenu:
+                case Scene.ESCAPE_MENU:
                     escapeMenu.Update(gameTime);
                     break;
-                case Scene.SaveMenu:
+                case Scene.SAVE_MENU:
                     saveMenu.Update(gameTime);
                     break;
-                case Scene.LoadMenu:
+                case Scene.LOAD_MENU:
                     loadMenu.Update(gameTime);
                     break;
             }
 
             // Scene switching.
-            if (SelectedScene == Scene.LoadMenu)
+            if (SelectedScene == Scene.LOAD_MENU)
             {
-                Player.Position = levelList.Find(map => map.GetLevelName() == Scene.Castle.ToString()).GetStartingPosition();
-                playerCollision = levelList.Find(level => level.GetLevelName() == "Castle").GetMap().GetCollisionWorld();
+                Player.Position = levelList.Find(map => map.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
+                playerCollision = levelList.Find(level => level.GetLevelName() == "CASTLE").GetMap().GetCollisionWorld();
             }
             else
             {
@@ -277,8 +309,8 @@ namespace DungeonCrawler.Scenes
                 Content.Unload();
                 LoadContent();
 
-                FadeInMap("Castle");
-                SelectedScene = Scene.Castle;
+                FadeInMap("CASTLE");
+                SelectedScene = Scene.CASTLE;
                 Player.Position = new Vector2(335f, 150f);
                 pauseAfterDeathFrames = 0;
                 Player.Dead = false;
@@ -342,17 +374,17 @@ namespace DungeonCrawler.Scenes
             }
 
             // Escape menu.
-            if (SelectedScene == Scene.EscapeMenu)
+            if (SelectedScene == Scene.ESCAPE_MENU)
             {
                 escapeMenu.Draw(spriteBatch);
             }
             // Save menu.
-            else if (SelectedScene == Scene.SaveMenu)
+            else if (SelectedScene == Scene.SAVE_MENU)
             {
                 saveMenu.Draw(spriteBatch);
             }
             // Load menu.
-            else if (SelectedScene == Scene.LoadMenu)
+            else if (SelectedScene == Scene.LOAD_MENU)
             {
                 if (!Reloaded)
                 {

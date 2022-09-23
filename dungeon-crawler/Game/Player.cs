@@ -145,8 +145,7 @@ namespace DungeonCrawler
         private Vector2 oldPosition;
         public void HandleInput(GameTime gameTime, Entity player, IBox playerCollisionBox, KeyboardState newState, KeyboardState oldState)
         {
-            MotionVector = new Vector2((playerCollisionBox.X), playerCollisionBox.Y);
-
+            MotionVector = new Vector2(playerCollisionBox.X, playerCollisionBox.Y);
             float speed = 0;
             ActionButtonPressed = false;
 
@@ -156,7 +155,7 @@ namespace DungeonCrawler
                 ActionButtonPressed = true;
             }
 
-            speed = 1.4f;
+            speed = 1.2f;
             //// If run button 'Shift' is held down.
             //if (newState.IsKeyDown(Keys.LeftShift) && CurrentStamina >= 0)
             //{
@@ -196,7 +195,7 @@ namespace DungeonCrawler
                     currentScene = Init.SelectedScene;
                     // Store the current level to save progress later.
                     CurrentLevel = currentScene.ToString();
-                    Init.SelectedScene = Init.Scene.EscapeMenu;
+                    Init.SelectedScene = Init.Scene.ESCAPE_MENU;
 
                     InMenu = true;
                     SaveMenu.GameSaved = false;

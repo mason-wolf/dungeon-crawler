@@ -46,7 +46,7 @@ namespace DungeonCrawler
 
             foreach (MapObject mapObject in mapObjects)
             {
-                if (mapObject.GetObjectType() == "teleporter")
+                if (mapObject.GetObjectType() == "TELEPORTER")
                 {
                     Rectangle teleporterRect = new Rectangle((int)mapObject.GetPosition().X, (int)mapObject.GetPosition().Y, 8, 1);
                     List<string> targetPosition = mapObject.GetCustomProperties();
@@ -108,6 +108,11 @@ namespace DungeonCrawler
         public List<Tile> GetCollisionTiles()
         {
             return map.GetCollisionLayer();
+        }
+
+        public List<Tile> GetWaterTiles()
+        {
+            return map.GetWaterLayer();
         }
 
         /// <summary>

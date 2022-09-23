@@ -160,11 +160,9 @@ namespace DungeonCrawler.Scenes
                     }
                 }
 
-                Console.WriteLine(Init.SpellInventory.Contents.Count);
                 // Save spells
                 foreach (Item item in Init.SpellInventory.Contents)
                 {
-                    Console.WriteLine(item.Name);
                     if (item.Name != "")
                     {
                         streamWriter.WriteLine("SPELL=" + item.Name + "," + item.ID);

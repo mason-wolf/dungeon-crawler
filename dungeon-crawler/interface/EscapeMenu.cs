@@ -104,14 +104,14 @@ namespace DungeonCrawler.Interface
             if (SelectedIndex == 1 && newState.IsKeyDown(Keys.E))
             {
                 Init.OpenSaveMenu(game, window, content);
-                Init.SelectedScene = Init.Scene.SaveMenu;
+                Init.SelectedScene = Init.Scene.SAVE_MENU;
             }
 
             // Load Menu
             if (SelectedIndex == 2 && newState.IsKeyDown(Keys.E))
             {
                 Init.OpenLoadMenu(game, window, content);
-                Init.SelectedScene = Init.Scene.LoadMenu;
+                Init.SelectedScene = Init.Scene.LOAD_MENU;
             }
 
             if (SelectedIndex == 3 && newState.IsKeyDown(Keys.E))

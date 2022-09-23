@@ -58,18 +58,6 @@
 /processorParam:TextureFormat=Color
 /build:interface/statusbar.png
 
-#begin tilesets/tileset_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tilesets/tileset_1.png
-
 #begin interface/titlescreen.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -105,18 +93,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:interface/healthbar.png
-
-#begin tilesets/tileset_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tilesets/tileset_2.png
 
 #begin interface/escapeMenu.png
 /importer:TextureImporter
@@ -166,18 +142,6 @@
 /processorParam:TextureFormat=Color
 /build:objects/Torch.png
 
-#begin spritesheets/Player.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:spritesheets/Player.png
-
 #begin objects/Campfire.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -201,30 +165,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:objects/Barrel.png
-
-#begin objects/Arrow.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:objects/Arrow.png
-
-#begin objects/Arrows.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:objects/Arrows.png
 
 #begin interface/menuItemSelected.png
 /importer:TextureImporter
@@ -334,18 +274,6 @@
 /processorParam:TextureFormat=Color
 /build:spritesheets/Skeleton.png
 
-#begin spritesheets/ChainedGate.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:spritesheets/ChainedGate.png
-
 #begin music\level_1.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
@@ -381,18 +309,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:spritesheets/sword.png
-
-#begin tilesets/dungeon-1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tilesets/dungeon-1.png
 
 #begin spritesheets/bow.png
 /importer:TextureImporter
@@ -585,4 +501,40 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:objects/BED.png
+
+#begin tilesets/PLAINS.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tilesets/PLAINS.png
+
+#begin objects\ARROW.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:objects\ARROW.png
+
+#begin objects/WATER.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:objects/WATER.png
 

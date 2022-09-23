@@ -216,17 +216,11 @@ namespace DungeonCrawler.Scenes
                             string[] tempSpell = value.Split(',');
                             int spellId = Int32.Parse(tempSpell[1]);
                             Item spell = Items.GetItemById(spellId);
-                            Console.WriteLine(spellId);
                             spell.Name = tempSpell[0];
                             Init.SpellInventory.Contents.Add(spell);
                             break;
                     }
                 }
-            }
-
-            foreach(Item item in Init.ItemInventory.Contents)
-            {
-                Console.WriteLine(item.Name);
             }
         }
     }

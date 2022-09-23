@@ -15,6 +15,7 @@ using Humper.Responses;
 using DungeonCrawler.Engine;
 using Microsoft.Xna.Framework.Audio;
 using DungeonCrawler.Interface;
+using Demo.Game;
 
 namespace DungeonCrawler
 {
@@ -81,16 +82,12 @@ namespace DungeonCrawler
         public bool Aggroed { get; set; } = false;
         public string Name { get; set; }
         public PathFinder PathFinder { get; set; }
+
         public int WayPointIndex;
+
         public bool ReachedDestination;
 
-        Entity projectile;
-        Vector2 projectilePosition;
-        Vector2 projectileStartingPosition;
-        bool targetHit = false;
-        string projectileDirection = "";
-        RectangleF projectileBoundingBox;
-
+        public List<Projectile> Projectiles = new List<Projectile>();
         public void LoadContent(ContentManager content)
         {
             StatusBarTexture = content.Load<Texture2D>(@"interface\statusbar");
@@ -307,15 +304,18 @@ namespace DungeonCrawler
         /// <param name="direction">Direction (North, South, East, West)</param>
         public void ShootProjectile(AnimatedSprite sprite, string direction)
         {
-            projectile = new Entity();
+            Projectile projectile = new Projectile();
             projectile.Sprite = sprite;
-            projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y);
+            Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y);
             projectile.Position = projectilePosition;
-            projectileStartingPosition = projectilePosition;
-            projectile.MaxHealth = 10;
-            projectile.CurrentHealth = 10;
-            projectileDirection = direction;
-            targetHit = false;
+            projectile.Direction = direction;
+            projectile.TargetHit = false;
+            Projectiles.Add(projectile);
+
+            if (Projectiles.Count > 10)
+            {
+                Projectiles.Clear();
+            }
         }
 
         /// <summary>
@@ -323,18 +323,18 @@ namespace DungeonCrawler
         /// </summary>
         /// <param name="projectile"></param>
         /// <returns></returns>
-        bool ProjectileCollision(Entity projectile)
+        bool ProjectileCollision(Projectile projectile)
         {
             bool collided = false;
-            Vector2 offsetPosition = new Vector2(projectilePosition.X + 5, projectilePosition.Y + 5);
-            projectileBoundingBox = new RectangleF(offsetPosition, new SizeF(2, 2));
+            Vector2 offsetPosition = new Vector2(projectile.Position.X + 5, projectile.Position.Y + 5);
+            projectile.HitBox = new RectangleF(offsetPosition, new SizeF(2, 2));
             foreach (Tile tile in Init.SelectedMap.GetCollisionTiles())
             {
-                if (projectileBoundingBox.Intersects(tile.Rectangle))
+                if (projectile.HitBox.Intersects(tile.Rectangle))
                 {
                     collided = true;
                     // Toggle false to show when projectile hits obstacle.
-                    targetHit = true;
+                    projectile.TargetHit = true;
                 }
             }
             return collided;
@@ -342,55 +342,64 @@ namespace DungeonCrawler
 
         public void Update(GameTime gameTime)
         {
-            if (projectile != null && !ProjectileCollision(projectile))
+            foreach (Projectile projectile in Projectiles)
             {
-                int speed = 4;
-
-                if (projectileDirection == "north")
+                if (projectile != null && !ProjectileCollision(projectile))
                 {
-                    projectile.State = Action.IdleNorth1;
-                    projectilePosition.Y -= speed;
-                    projectile.Position = projectilePosition;
-                }
+                    int speed = 4;
 
-                if (projectileDirection == "south")
-                {
-                    projectile.State = Action.AttackSouthPattern1;
-                    projectilePosition.Y += speed;
-                    projectile.Position = projectilePosition;
-                }
-
-                if (projectileDirection == "east")
-                {
-                    ProjectileCollision(projectile);
-                    projectile.State = Action.AttackEastPattern1;
-                    projectilePosition.X += speed;
-                    projectile.Position = projectilePosition;
-                }
-
-                if (projectileDirection == "west")
-                {
-                    projectile.State = Action.IdleWest1;
-                    projectilePosition.X -= speed;
-                    projectile.Position = projectilePosition;
-                }
-
-                if (Init.Player.EnemyList != null)
-                {
-                    foreach (Entity entity in Init.Player.EnemyList)
+                    if (projectile.Direction == "north")
                     {
-                        if (projectile.BoundingBox.Intersects(entity.BoundingBox) && targetHit == false && entity.state != Action.Dead)
-                        {
-                            entity.CurrentHealth -= 4;
-                            entity.Aggroed = true;
-                            targetHit = true;
-                        }
+                        projectile.State = Action.IdleNorth1;
+                        float y = projectile.Position.Y;
+                        y -= speed;
+                        Vector2 newPosition = new Vector2(projectile.Position.X, y);
+                        projectile.Position = newPosition;
                     }
 
-                    projectile.Update(gameTime);
+                    if (projectile.Direction == "south")
+                    {
+                        projectile.State = Action.AttackSouthPattern1;
+                        float y = projectile.Position.Y;
+                        y += speed;
+                        Vector2 newPosition = new Vector2(projectile.Position.X, y);
+                        projectile.Position = newPosition;
+                    }
+
+                    if (projectile.Direction == "east")
+                    {
+                        ProjectileCollision(projectile);
+                        projectile.State = Action.AttackEastPattern1;
+                        float x = projectile.Position.X;
+                        x += speed;
+                        Vector2 newPosition = new Vector2(x, projectile.Position.Y);
+                        projectile.Position = newPosition;
+                    }
+
+                    if (projectile.Direction == "west")
+                    {
+                        projectile.State = Action.IdleWest1;
+                        float x = projectile.Position.X;
+                        x -= speed;
+                        Vector2 newPosition = new Vector2(x, projectile.Position.Y);
+                        projectile.Position = newPosition;
+                    }
+
+                    if (Init.Player.EnemyList != null)
+                    {
+                        foreach (Entity entity in Init.Player.EnemyList)
+                        {
+                            if (projectile.BoundingBox.Intersects(entity.BoundingBox) && projectile.TargetHit == false && entity.state != Action.Dead)
+                            {
+                                entity.CurrentHealth -= 4;
+                                entity.Aggroed = true;
+                                projectile.TargetHit = true;
+                            }
+                        }
+                        projectile.Update(gameTime);
+                    }
                 }
             }
-
             Sprite.Update(gameTime);
         }
 
@@ -398,9 +407,12 @@ namespace DungeonCrawler
         {
             spriteBatch.Draw(Sprite);
 
-            if (projectile != null && targetHit == false)
+            foreach (Projectile projectile in Projectiles)
             {
-                spriteBatch.Draw(projectile.Sprite);
+                if (projectile != null && projectile.TargetHit == false)
+                {
+                    spriteBatch.Draw(projectile.Sprite);
+                }
             }
         }
 

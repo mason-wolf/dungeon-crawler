@@ -78,7 +78,7 @@ namespace DungeonCrawler
                     init.Show();
                     // Pause player movement because they're in the menu.
                     Init.Player.InMenu = true;
-                    Init.SelectedScene = Init.Scene.LoadMenu;
+                    Init.SelectedScene = Init.Scene.LOAD_MENU;
                 }
             }
 
