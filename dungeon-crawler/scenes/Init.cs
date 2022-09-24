@@ -250,11 +250,11 @@ namespace DungeonCrawler.Scenes
                             Random randomLevel = new Random();
                             int levelNum = randomLevel.Next(1, 5);
                             string levelName = "PLAINS_" + levelNum;
-                            SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), levelName);
+                            SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
                         }
                         else
                         {
-                            SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), teleporter.GetDestinationMap());
+                            SelectedScene = (Scene)Enum.Parse(typeof(Scene), teleporter.GetDestinationMap());
                         }
                         Player.Position = teleporter.GetTargetPosition();
                     }
@@ -340,6 +340,7 @@ namespace DungeonCrawler.Scenes
 
             KeyBoardNewState = Keyboard.GetState();
 
+            OpenShop();
             HandleDialog();
 
             DialogBox.Update();
@@ -433,6 +434,23 @@ namespace DungeonCrawler.Scenes
             base.Draw(gameTime);
         }
 
+        public static bool ShopOpen = false;
+        public static void OpenShop()
+        {
+            if (KeyBoardNewState.IsKeyDown(Keys.F) && KeyBoardOldState.IsKeyUp(Keys.F) && ShopOpen && !ItemInventory.InventoryOpen && !SpellInventory.InventoryOpen)
+            {
+                if (ShopInventory.InventoryOpen)
+                {
+                    ShopInventory.InventoryOpen = false;
+                    ShopOpen = false;
+                }
+                else
+                {
+                    ShopInventory.InventoryOpen = true;
+                }
+            }
+
+        }
         public static void HandleDialog()
         {
             if (KeyBoardNewState.IsKeyDown(Keys.E) && KeyBoardOldState.IsKeyUp(Keys.E) && DialogBox.StartDialog)

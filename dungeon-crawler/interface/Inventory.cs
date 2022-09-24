@@ -278,6 +278,7 @@ namespace DungeonCrawler.Interface
                     {
                         if (item.ID == itemList[SelectedItem].ID)
                         {
+                            // Health Potion
                             if (item.ID == 3)
                             {
                                 Init.Player.CurrentHealth += 25;

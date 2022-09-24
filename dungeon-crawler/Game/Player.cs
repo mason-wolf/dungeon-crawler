@@ -48,6 +48,8 @@ namespace DungeonCrawler
         Random random = new Random();
         List<SoundEffect> soundEffects;
 
+        float MovementSpeed = 1.2f;
+
         public new void LoadContent(ContentManager content)
         {
             playerTexture = content.Load<Texture2D>(@"spritesheets\mage");
@@ -146,8 +148,7 @@ namespace DungeonCrawler
         public void HandleInput(GameTime gameTime, Entity player, IBox playerCollisionBox, KeyboardState newState, KeyboardState oldState)
         {
             MotionVector = new Vector2(playerCollisionBox.X, playerCollisionBox.Y);
-            float speed = 0;
-            ActionButtonPressed = false;
+            //  ActionButtonPressed = false;
 
             // If action button 'E' is pressed.
             if (newState.IsKeyDown(Keys.E) && oldState.IsKeyUp(Keys.E))
@@ -155,7 +156,6 @@ namespace DungeonCrawler
                 ActionButtonPressed = true;
             }
 
-            speed = 1.2f;
             //// If run button 'Shift' is held down.
             //if (newState.IsKeyDown(Keys.LeftShift) && CurrentStamina >= 0)
             //{
@@ -203,7 +203,7 @@ namespace DungeonCrawler
             }
 
             // Handle item inventory
-            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.SpellInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.SpellInventory.InventoryOpen && !Init.ShopInventory.InventoryOpen)
             {
                 if (Init.ItemInventory.InventoryOpen)
                 {
@@ -216,7 +216,7 @@ namespace DungeonCrawler
             }
 
             // Handle spell inventory
-            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.ItemInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.ItemInventory.InventoryOpen & !Init.ShopInventory.InventoryOpen)
             {
                 if (Init.SpellInventory.InventoryOpen)
                 {
@@ -308,21 +308,21 @@ namespace DungeonCrawler
                         // Walk east if W and D are pressed
                         if (newState.IsKeyDown(Keys.W) && newState.IsKeyDown(Keys.D))
                         {
-                            MotionVector.Y -= speed;
+                            MotionVector.Y -= MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkEastPattern1;
                         }
                         // Walk west if W and A are pressed.
                         else if (newState.IsKeyDown(Keys.W) && newState.IsKeyDown(Keys.A))
                         {
-                            MotionVector.Y -= speed;
+                            MotionVector.Y -= MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkWestPattern1;
                         }
                         else
                         {
                             // Walk north.
-                            MotionVector.Y -= speed;
+                            MotionVector.Y -= MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkNorthPattern1;
                         }
@@ -333,7 +333,7 @@ namespace DungeonCrawler
                         // Walk east if S and D are pressed.
                         if (newState.IsKeyDown(Keys.S) && newState.IsKeyDown(Keys.D))
                         {
-                            MotionVector.Y += speed;
+                            MotionVector.Y += MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkEastPattern1;
                         }
@@ -341,14 +341,14 @@ namespace DungeonCrawler
                         // Walk west if S and A are pressed.
                         else if (newState.IsKeyDown(Keys.S) && newState.IsKeyDown(Keys.A))
                         {
-                            MotionVector.Y += speed;
+                            MotionVector.Y += MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkWestPattern1;
                         }
                         else
                         {
                             // Walk south
-                            MotionVector.Y += speed;
+                            MotionVector.Y += MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkSouthPattern1;
                         }
@@ -357,7 +357,7 @@ namespace DungeonCrawler
                     // Walk east
                     if (newState.IsKeyDown(Keys.D))
                     {
-                        MotionVector.X += speed;
+                        MotionVector.X += MovementSpeed;
                         player.Position = MotionVector;
                         player.State = Action.WalkEastPattern1;
                     }
@@ -365,7 +365,7 @@ namespace DungeonCrawler
                     // Walk west
                     if (newState.IsKeyDown(Keys.A))
                     {
-                        MotionVector.X -= speed;
+                        MotionVector.X -= MovementSpeed;
                         player.Position = MotionVector;
                         player.State = Action.WalkWestPattern1;
                     }

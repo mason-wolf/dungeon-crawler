@@ -35,6 +35,60 @@ namespace DungeonCrawler
             skeletonSprite.AddAnimation("dead", new[] { 4 }, .2f, isLooping: false);
             SpriteList.Add(skeletonSprite);
 
+            // Bat
+            SpriteLoader batSprite = new SpriteLoader(content, "BAT", @"spritesheets\Bat", 32, 32);
+            float batAnimationSpeed = .3f;
+            batSprite.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2}, batAnimationSpeed, true);
+            batSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
+            batSprite.AddAnimation("dead", new[] { 3 }, batAnimationSpeed, true);
+            SpriteList.Add(batSprite);
+
+            // Zombie
+            SpriteLoader zombieSprite = new SpriteLoader(content, "ZOMBIE", @"spritesheets\ZOMBIE", 32, 32);
+            float zombieAnimationSpeed = .3f;
+            zombieSprite.AddAnimation("idleSouth1", new[] { 0 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("dead", new[] { 3 }, zombieAnimationSpeed, true);
+            SpriteList.Add(zombieSprite);
+
+            // Blue Slime
+            SpriteLoader blueSlimeSprite = new SpriteLoader(content, "BLUE_SLIME", @"spritesheets\BLUE_SLIME", 32, 32);
+            float blueSlimeSpeed = .3f;
+            blueSlimeSprite.AddAnimation("idleSouth1", new[] { 0 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
+            blueSlimeSprite.AddAnimation("dead", new[] { 3 }, blueSlimeSpeed, true);
+            SpriteList.Add(blueSlimeSprite);
+
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
             torchSprite.AddAnimation("BURNING", new[] { 0, 1, 2 }, 0.09f, true);
@@ -50,11 +104,21 @@ namespace DungeonCrawler
             fireProfessorSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
             SpriteList.Add(fireProfessorSprite);
 
+            // Item Merchant
+            SpriteLoader itemMerchantSprite = new SpriteLoader(content, "ITEM_MERCHANT", @"spritesheets\ITEM_MERCHANT", 24, 24);
+            itemMerchantSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            SpriteList.Add(itemMerchantSprite);
+
             // Novice Mage
             SpriteLoader noviceMageSprite = new SpriteLoader(content, "NOVICE_MAGE", @"spritesheets\NOVICE_MAGE", 24, 24);
             noviceMageSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
             noviceMageSprite.AddAnimation("idleNorth1", new[] { 7 }, 2f, true);
             SpriteList.Add(noviceMageSprite);
+
+            // Guard
+            SpriteLoader guardSprite = new SpriteLoader(content, "GUARD", @"spritesheets\knight", 24, 24);
+            guardSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            SpriteList.Add(guardSprite);
 
             // Green Portal
             SpriteLoader greenPortalSprite = new SpriteLoader(content, "GREEN_PORTAL", @"spritesheets\green_portal", 32, 32);
@@ -66,10 +130,20 @@ namespace DungeonCrawler
             bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
             SpriteList.Add(bookshelfSprite);
 
+            // Shopshelf
+            SpriteLoader shopShelfSprite = new SpriteLoader(content, "SHOPSHELF_1", @"objects\SHOP_SHELF_1", 24, 24);
+            shopShelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
+            SpriteList.Add(shopShelfSprite);
+
             // Water
             SpriteLoader waterSprite = new SpriteLoader(content, "WATER", @"objects\WATER", 16, 16);
             waterSprite.AddAnimation("idle", new[] { 0, 1, 2, 3 }, .5f, true);
             SpriteList.Add(waterSprite);
+
+            // Pot
+            SpriteLoader potSprite = new SpriteLoader(content, "POT", @"objects\POT", 16, 16);
+            potSprite.AddAnimation("idle", new[] { 0 }, .5f, true);
+            SpriteList.Add(potSprite);
 
             // Fireball 1
             SpriteLoader fireball1Sprite = new SpriteLoader(content, "FIREBALL_1", @"spritesheets\FIREBALL_1", 16, 16);

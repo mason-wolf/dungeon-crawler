@@ -431,8 +431,8 @@ namespace DungeonCrawler
                 {
                     // Draw health bar
                     Vector2 healthPosition = new Vector2(position.X + 1, Position.Y - 108);
-                    spriteBatch.Draw(StatusBarTexture, position, new Rectangle(0, 0, Convert.ToInt32(MaxHealth), 10), Color.White);
-                    spriteBatch.Draw(HealthBarTexture, healthPosition, new Rectangle(0, 100, Convert.ToInt32(CurrentHealth) - 2, 6), Color.White);
+                    spriteBatch.Draw(StatusBarTexture, position, new Rectangle(0, 0, Convert.ToInt32(MaxHealth), 6), Color.White);
+                    spriteBatch.Draw(HealthBarTexture, healthPosition, new Rectangle(0, 100, Convert.ToInt32(CurrentHealth) - 2, 4), Color.White);
                     // Draw stamina bar
                     //Vector2 staminaPosition = new Vector2(position.X, position.Y + 6);
                     //spriteBatch.Draw(StatusBarTexture, staminaPosition, new Rectangle(0, 0, Convert.ToInt32(MaxStamina), 4), Color.Black);

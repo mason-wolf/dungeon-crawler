@@ -50,17 +50,12 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-            int[] npcIDs = { 15, 16, 17 };
+            int[] npcIDs = { 15, 16, 17, 18, 19, 20, 21 };
 
             foreach(int npcId in npcIDs)
             {
                 Entity npc = Level.GetNpcByID(npcId.ToString());
                 NPCList.Add(npc);
-            }
-
-            foreach(Entity npc in NPCList)
-            {
-                Console.WriteLine(npc.ID + " " + npc.Name + " " + npc.Position);
             }
         }
 
@@ -77,22 +72,46 @@ namespace DungeonCrawler.Scenes
                             message = 
                                 "\nI am the warden of flame." +
                                 "\nYou'd be wise to heed my teachings.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
                             break;
                         case ("16"):
                             message =
                                 "\nSome foes are weaker to fire than others." +
                                 "\nConserve your flame powers when facing them.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
                             break;
                         case ("17"):
                             message =
                                 "\nYou can purchase new spells from the bookkeeper." +
                                  "\nHe's in the library.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
                             break;
+                        case ("18"):
+                            Init.ShopOpen = true;
+                            Console.WriteLine(Init.ShopOpen);
+                            break;
+                        //case ("19"):
+                        //    message =
+                        //        "\nLooking for the exit?" +
+                        //         "\nIt's been magically sealed off.";
+                        //    Init.DialogBox.Text = message;
+                        //    Init.DialogBox.StartDialog = true;
+                        //    break;
+                        //case ("21"):
+                        //    message =
+                        //        "\nThe portal room is ahead." +
+                        //         "\nThe archmage will tell you more about them.";
+                        //    Init.DialogBox.Text = message;
+                        //    Init.DialogBox.StartDialog = true;
+                        //    break;
                     }
-
-                    Init.DialogBox.Text = message;
-                    Init.DialogBox.StartDialog = true;
-                    Init.HandleDialog();
+                }
+                else
+                {
+                    Init.ShopOpen = false;
                 }
  
             }

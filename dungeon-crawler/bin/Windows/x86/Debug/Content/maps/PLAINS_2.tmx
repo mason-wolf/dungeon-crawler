@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="321">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="347">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Walkable" width="64" height="64">
   <data encoding="csv">
@@ -156,6 +156,32 @@
   <object id="318" name="SKELETON" x="737.5" y="637.5"/>
   <object id="319" name="SKELETON" x="781" y="758.5"/>
   <object id="320" name="SKELETON" x="824" y="752"/>
+  <object id="321" name="BAT" x="535.75" y="162"/>
+  <object id="322" name="BAT" x="488.75" y="150.25"/>
+  <object id="323" name="BAT" x="581.75" y="188.5"/>
+  <object id="324" name="BAT" x="395.333" y="585.333"/>
+  <object id="325" name="BAT" x="566.333" y="495.667"/>
+  <object id="326" name="BAT" x="489.667" y="759"/>
+  <object id="327" name="ZOMBIE" x="472.5" y="570.5"/>
+  <object id="328" name="ZOMBIE" x="660.667" y="590"/>
+  <object id="329" name="ZOMBIE" x="665.333" y="192"/>
+  <object id="330" name="ZOMBIE" x="223.333" y="233.333"/>
+  <object id="331" name="ZOMBIE" x="224" y="276"/>
+  <object id="332" name="ZOMBIE" x="264" y="208"/>
+  <object id="333" name="ZOMBIE" x="388.667" y="788.667"/>
+  <object id="334" name="ZOMBIE" x="464.667" y="648"/>
+  <object id="335" name="BLUE_SLIME" x="446.5" y="533.5"/>
+  <object id="336" name="BLUE_SLIME" x="284.667" y="177.333"/>
+  <object id="337" name="BLUE_SLIME" x="351.333" y="142.667"/>
+  <object id="338" name="BLUE_SLIME" x="572" y="405.333"/>
+  <object id="339" name="BLUE_SLIME" x="538" y="359.333"/>
+  <object id="340" name="BLUE_SLIME" x="578" y="555.333"/>
+  <object id="341" name="BLUE_SLIME" x="328" y="717.333"/>
+  <object id="342" name="BLUE_SLIME" x="204" y="645.333"/>
+  <object id="343" name="BLUE_SLIME" x="200.667" y="551.333"/>
+  <object id="344" name="BLUE_SLIME" x="745" y="574"/>
+  <object id="345" name="BLUE_SLIME" x="681" y="317"/>
+  <object id="346" name="BLUE_SLIME" x="631" y="208"/>
  </objectgroup>
  <layer id="13" name="Water" width="64" height="64">
   <data encoding="csv">

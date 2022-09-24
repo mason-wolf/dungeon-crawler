@@ -160,6 +160,39 @@ namespace DungeonCrawler
                         skeletonEntity.Name = "SKELETON";
                         enemyList.Add(skeletonEntity);
                         break;
+                    case ("BAT"):
+                        Entity batEntity = new Entity(Sprites.GetSprite("BAT"));
+                        batEntity.LoadContent(content);
+                        batEntity.State = Action.IdleEast1;
+                        batEntity.MaxHealth = 15;
+                        batEntity.CurrentHealth = 15;
+                        batEntity.AttackDamage = 0.03;
+                        batEntity.Position = mapObject.GetPosition();
+                        batEntity.Name = "BAT";
+                        enemyList.Add(batEntity);
+                        break;
+                    case ("ZOMBIE"):
+                        Entity zombieEntity = new Entity(Sprites.GetSprite("ZOMBIE"));
+                        zombieEntity.LoadContent(content);
+                        zombieEntity.State = Action.IdleEast1;
+                        zombieEntity.MaxHealth = 15;
+                        zombieEntity.CurrentHealth = 15;
+                        zombieEntity.AttackDamage = 0.03;
+                        zombieEntity.Position = mapObject.GetPosition();
+                        zombieEntity.Name = "ZOMBIE";
+                        enemyList.Add(zombieEntity);
+                        break;
+                    case ("BLUE_SLIME"):
+                        Entity blueSlimeEntity = new Entity(Sprites.GetSprite("BLUE_SLIME"));
+                        blueSlimeEntity.LoadContent(content);
+                        blueSlimeEntity.State = Action.IdleEast1;
+                        blueSlimeEntity.MaxHealth = 15;
+                        blueSlimeEntity.CurrentHealth = 15;
+                        blueSlimeEntity.AttackDamage = 0.03;
+                        blueSlimeEntity.Position = mapObject.GetPosition();
+                        blueSlimeEntity.Name = "BLUE_SLIME";
+                        enemyList.Add(blueSlimeEntity);
+                        break;
                     case ("FIRE_MAGE"):
                         Entity fireProfessorEntity = new Entity(Sprites.GetSprite("FIRE_MAGE"));
                         fireProfessorEntity.LoadContent(content);
@@ -174,6 +207,33 @@ namespace DungeonCrawler
                         }
                         NPCList.Add(fireProfessorEntity);
                         break;
+                    case ("GUARD"):
+                        Entity guardEntity = new Entity(Sprites.GetSprite("GUARD"));
+                        guardEntity.LoadContent(content);
+                        guardEntity.State = Action.IdleSouth1;
+                        guardEntity.Position = mapObject.GetPosition();
+                        guardEntity.Name = "GUARD";
+                        IBox guardEntityCollidable = map.GetWorld().Create(guardEntity.Position.X, guardEntity.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(guardEntityCollidable);
+                        if (mapObject.GetCustomProperties().Count > 0)
+                        {
+                            guardEntity.ID = mapObject.GetCustomProperties()[0].ToString();
+                        }
+                        NPCList.Add(guardEntity);
+                        break;
+                    case ("ITEM_MERCHANT"):
+                        Entity itemMerchantEntity = new Entity(Sprites.GetSprite("ITEM_MERCHANT"));
+                        itemMerchantEntity.LoadContent(content);
+                        itemMerchantEntity.State = Action.IdleSouth1;
+                        itemMerchantEntity.Position = mapObject.GetPosition();
+                        IBox itemMerchantCollidable = map.GetWorld().Create(itemMerchantEntity.Position.X, itemMerchantEntity.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(itemMerchantCollidable);
+                        if (mapObject.GetCustomProperties().Count > 0)
+                        {
+                            itemMerchantEntity.ID = mapObject.GetCustomProperties()[0].ToString();
+                        }
+                        NPCList.Add(itemMerchantEntity);
+                        break;
                     case ("NOVICE_MAGE"):
                         Entity noviceMageEntity = new Entity(Sprites.GetSprite("NOVICE_MAGE"));
                         noviceMageEntity.LoadContent(content);
@@ -185,7 +245,6 @@ namespace DungeonCrawler
                         if (mapObject.GetCustomProperties().Count > 0)
                         {
                             noviceMageEntity.ID = mapObject.GetCustomProperties()[0].ToString();
-                          //  Console.WriteLine(noviceMageEntity.ID);
                         }
                         NPCList.Add(noviceMageEntity);
                         break;
@@ -224,6 +283,22 @@ namespace DungeonCrawler
                         mapObject.SetSprite(bookshelfSprite);
                         IBox bookshelfCollidable = map.GetWorld().Create(bookshelfSprite.Position.X, bookshelfSprite.Position.Y, 16, 16);
                         mapObject.SetCollisionBox(bookshelfCollidable);
+                        break;
+                    case ("POT"):
+                        AnimatedSprite potSprite = new AnimatedSprite(Sprites.GetSprite("POT"));
+                        potSprite.Play("idle");
+                        potSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(potSprite);
+                        IBox potSpriteCollidable = map.GetWorld().Create(potSprite.Position.X, potSprite.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(potSpriteCollidable);
+                        break;
+                    case ("SHOPSHELF_1"):
+                        AnimatedSprite shopShelfSprite = new AnimatedSprite(Sprites.GetSprite("SHOPSHELF_1"));
+                        shopShelfSprite.Play("idle");
+                        shopShelfSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(shopShelfSprite);
+                        IBox shopShelfCollidable = map.GetWorld().Create(shopShelfSprite.Position.X, shopShelfSprite.Position.Y, 16, 16);
+                        mapObject.SetCollisionBox(shopShelfCollidable);
                         break;
                     case ("START"):
                         // Map object with the name "start", specifies the starting position.
