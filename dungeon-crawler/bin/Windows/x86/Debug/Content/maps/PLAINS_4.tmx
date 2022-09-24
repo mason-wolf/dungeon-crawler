@@ -141,49 +141,22 @@
   <object id="208" name="START" x="785.25" y="311.758"/>
   <object id="210" name="GREEN_PORTAL" x="792.407" y="269.348"/>
   <object id="224" name="CASTLE" type="TELEPORTER" x="792.161" y="269.348"/>
-  <object id="225" name="SKELETON" x="448" y="258.5"/>
   <object id="226" name="SKELETON" x="320" y="652"/>
-  <object id="227" name="SKELETON" x="310" y="559.333"/>
-  <object id="228" name="SKELETON" x="464.667" y="600"/>
-  <object id="229" name="SKELETON" x="210" y="727.333"/>
-  <object id="230" name="SKELETON" x="434.667" y="823.333"/>
   <object id="231" name="SKELETON" x="697" y="615"/>
-  <object id="232" name="SKELETON" x="768" y="640"/>
   <object id="233" name="SKELETON" x="680.5" y="480"/>
-  <object id="234" name="SKELETON" x="237.333" y="252"/>
-  <object id="235" name="SKELETON" x="534.667" y="156"/>
   <object id="236" name="SKELETON" x="538.667" y="834.667"/>
   <object id="237" name="BAT" x="539" y="292.333"/>
-  <object id="238" name="BAT" x="489.667" y="418.667"/>
   <object id="239" name="BAT" x="608.333" y="471.333"/>
   <object id="240" name="BAT" x="458.667" y="624.667"/>
   <object id="241" name="BAT" x="371.333" y="610"/>
-  <object id="242" name="BAT" x="690.667" y="655.333"/>
   <object id="243" name="BAT" x="547.333" y="861.333"/>
   <object id="245" name="BAT" x="325" y="262.5"/>
   <object id="246" name="ZOMBIE" x="379.5" y="251"/>
   <object id="247" name="BAT" x="670" y="179"/>
-  <object id="248" name="BAT" x="515" y="248.5"/>
   <object id="249" name="BAT" x="486.5" y="169.5"/>
   <object id="250" name="BAT" x="797.5" y="486"/>
-  <object id="251" name="BAT" x="483" y="494"/>
   <object id="252" name="BAT" x="655" y="624.5"/>
   <object id="253" name="BAT" x="692" y="805.5"/>
   <object id="254" name="BAT" x="236" y="551.333"/>
-  <object id="255" name="BAT" x="399.333" y="530.667"/>
-  <object id="256" name="BAT" x="218.667" y="285.333"/>
-  <object id="257" name="BLUE_SLIME" x="761.5" y="177.5"/>
-  <object id="258" name="BLUE_SLIME" x="583.5" y="163.5"/>
-  <object id="259" name="BLUE_SLIME" x="537" y="325.5"/>
-  <object id="260" name="BLUE_SLIME" x="568" y="482"/>
-  <object id="261" name="BLUE_SLIME" x="811.333" y="627.333"/>
-  <object id="262" name="BLUE_SLIME" x="200" y="369"/>
-  <object id="263" name="BLUE_SLIME" x="181" y="563"/>
-  <object id="264" name="BLUE_SLIME" x="198" y="533"/>
-  <object id="265" name="BLUE_SLIME" x="270.5" y="661.5"/>
-  <object id="266" name="BLUE_SLIME" x="198" y="691.5"/>
-  <object id="267" name="BLUE_SLIME" x="280" y="793.5"/>
-  <object id="268" name="BLUE_SLIME" x="370.5" y="835"/>
-  <object id="269" name="BLUE_SLIME" x="317.5" y="687.5"/>
  </objectgroup>
 </map>

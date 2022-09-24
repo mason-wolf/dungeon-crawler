@@ -21,7 +21,7 @@ namespace DungeonCrawler.Interface
         public Texture2D menuItem;
         public Texture2D menuItemSelected;
         public SpriteBatch spriteBatch;
-        Color normalColor = Color.Yellow;
+        Color normalColor = Color.LightGreen;
         Color selectedColor = Color.White;
         int selectedIndex = 0;
         Game game;

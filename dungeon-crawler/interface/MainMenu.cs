@@ -23,7 +23,7 @@ namespace DungeonCrawler.Interface
         Texture2D buttonImage;
         Texture2D background;
 
-        Color normalColor = Color.Yellow;
+        Color normalColor = Color.LightGreen;
         Color hiliteColor = Color.White;
 
         Vector2 position = new Vector2();
@@ -37,7 +37,7 @@ namespace DungeonCrawler.Interface
         public MainMenu(Game game, GameWindow window, SpriteFont spriteFont, Texture2D buttonImage, Texture2D background)
             : base(game)
         {
-            viewPortAdapter = new BoxingViewportAdapter(window, GraphicsDevice, 1080, 720);
+            viewPortAdapter = new BoxingViewportAdapter(window, GraphicsDevice, 1920, 1080);
             camera = new Camera2D(viewPortAdapter);
             this.spriteFont = spriteFont;
             this.buttonImage = buttonImage;

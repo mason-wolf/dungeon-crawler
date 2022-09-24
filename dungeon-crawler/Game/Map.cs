@@ -174,6 +174,29 @@ namespace DungeonCrawler
                 }
             }
 
+            // Block cells in the collision layer for path finding.
+            foreach (Tile tile in map.GetWaterLayer())
+            {
+                if (tile.TileID != 0)
+                {
+                    int x = (int)tile.Position.X;
+                    int y = (int)tile.Position.Y;
+
+                    for (int i = 0; i < 16; i++)
+                    {
+                        for (int j = 0; j < 16; j++)
+                        {
+                            grid.BlockCell(new RoyT.AStar.Position(x, y));
+                            x++;
+                        }
+
+                        x = (int)tile.Position.X;
+                        grid.BlockCell(new RoyT.AStar.Position(x, y));
+                        y++;
+                    }
+                }
+            }
+
             return grid;
         }
 

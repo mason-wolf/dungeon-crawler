@@ -87,7 +87,7 @@ namespace DungeonCrawler
 
         public override void Show()
         {
-            buttonMenu.Position = new Vector2((Game.Window.ClientBounds.Width - buttonMenu.Width) / 2, 450);
+            buttonMenu.Position = new Vector2(((Game.Window.ClientBounds.Width - buttonMenu.Width) / 2), 450);
             base.Show();
         }
 

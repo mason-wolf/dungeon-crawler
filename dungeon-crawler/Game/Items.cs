@@ -18,7 +18,7 @@ namespace Demo.Game
             item.Name = "HEALTH POTION";
             item.Description = "Restores some health.";
             item.ID = 3;
-            item.Price = 5;
+            item.Price = 100;
             ItemList.Add(item);
 
             item = new Item();

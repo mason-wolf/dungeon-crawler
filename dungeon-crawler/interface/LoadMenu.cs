@@ -195,6 +195,10 @@ namespace DungeonCrawler.Scenes
                             value = line.Split('=').Last();
                             Init.Player.CurrentHealth = (int)Math.Round(Double.Parse(value));
                             break;
+                        case ("ENEMIES_KILLED"):
+                            value = line.Split('=').Last();
+                            Init.Player.EnemiesKilled = Int32.Parse(value);
+                            break;
                         case ("PLAYER_GOLD"):
                             value = line.Split('=').Last();
                             Init.Player.Gold = Int32.Parse(value);
@@ -218,6 +222,7 @@ namespace DungeonCrawler.Scenes
                             Item spell = Items.GetItemById(spellId);
                             spell.Name = tempSpell[0];
                             Init.SpellInventory.Contents.Add(spell);
+                            Player.SelectedItem = Items.GetItemById(1);
                             break;
                     }
                 }

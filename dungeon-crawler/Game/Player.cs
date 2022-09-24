@@ -40,6 +40,7 @@ namespace DungeonCrawler
         public static string CurrentLevel { get; set; }
 
         public static Item SelectedItem { get; set; }
+        public int EnemiesKilled { get; set; }
         public int Gold { get; set; }
         public static Entity PlayerWeapon;
         public bool InMenu = false;

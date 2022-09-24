@@ -50,7 +50,7 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-            int[] npcIDs = { 15, 16, 17, 18, 19, 20, 21 };
+            int[] npcIDs = { 15, 16, 17, 18, 19, 20, 21, 22 };
 
             foreach(int npcId in npcIDs)
             {
@@ -91,31 +91,38 @@ namespace DungeonCrawler.Scenes
                             break;
                         case ("18"):
                             Init.ShopOpen = true;
-                            Console.WriteLine(Init.ShopOpen);
                             break;
-                        //case ("19"):
-                        //    message =
-                        //        "\nLooking for the exit?" +
-                        //         "\nIt's been magically sealed off.";
-                        //    Init.DialogBox.Text = message;
-                        //    Init.DialogBox.StartDialog = true;
-                        //    break;
-                        //case ("21"):
-                        //    message =
-                        //        "\nThe portal room is ahead." +
-                        //         "\nThe archmage will tell you more about them.";
-                        //    Init.DialogBox.Text = message;
-                        //    Init.DialogBox.StartDialog = true;
-                        //    break;
+                        case ("19"):
+                            message =
+                                "\nLooking for the exit?" +
+                                 "\nIt's been magically sealed off.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("21"):
+                            message =
+                                "\nThe portal room is ahead." +
+                                 "\nThe archmage will tell you more about them.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("22"):
+                            message =
+                                "\nYou've killed " + Init.Player.EnemiesKilled + " foes." +
+                                 "\nHow do I know? I eavesdrop many things.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
                     }
                 }
                 else
                 {
-                    Init.ShopOpen = false;
+                    if (npc.ID == "18" && !Init.Player.BoundingBox.Intersects(npc.BoundingBox))
+                    {
+                        Init.ShopOpen = false;
+                    }
                 }
- 
             }
-
         }
     }
 }

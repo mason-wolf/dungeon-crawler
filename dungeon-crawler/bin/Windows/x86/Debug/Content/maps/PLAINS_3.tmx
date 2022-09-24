@@ -173,7 +173,6 @@
   <object id="254" name="ZOMBIE" x="406" y="238.667"/>
   <object id="255" name="ZOMBIE" x="566.667" y="200.667"/>
   <object id="256" name="ZOMBIE" x="710" y="236"/>
-  <object id="257" name="BLUE_SLIME" x="298" y="183.333"/>
   <object id="258" name="ZOMBIE" x="765" y="198"/>
   <object id="259" name="ZOMBIE" x="519" y="149"/>
   <object id="260" name="ZOMBIE" x="811" y="598"/>

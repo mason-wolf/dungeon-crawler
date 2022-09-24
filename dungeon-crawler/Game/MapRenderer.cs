@@ -175,7 +175,7 @@ namespace DungeonCrawler.Engine
             if (layers.Count > 2)
             {
                 int waterCount = 0;
-                // Get the second layer (collidable).
+                // Get the third layer (collidable).
                 foreach (Tile tile in waterLayer)
                 {
                     tile.TileID = layers[2].Tiles[waterCount];

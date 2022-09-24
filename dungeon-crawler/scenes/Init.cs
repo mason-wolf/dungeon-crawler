@@ -191,13 +191,13 @@ namespace DungeonCrawler.Scenes
             healthPotion.Name = "HEALTH POTION";
             healthPotion.Description = "Restores some health.";
             healthPotion.ID = 3;
-            healthPotion.Price = 5;
+            healthPotion.Price = 100;
 
             Item manaPotion = new Item();
             manaPotion.ItemTexture = Sprites.GetTexture("MANA_POTION_ICON");
             manaPotion.Name = "MANA POTION";
             manaPotion.Description = "Restores some mana.";
-            manaPotion.Price = 5;
+            manaPotion.Price = 100;
 
             SpellInventory.Contents.Add(fireballSpell);
             SpellInventory.Contents.Add(iceBoltSpell);
@@ -442,14 +442,12 @@ namespace DungeonCrawler.Scenes
                 if (ShopInventory.InventoryOpen)
                 {
                     ShopInventory.InventoryOpen = false;
-                    ShopOpen = false;
                 }
                 else
                 {
                     ShopInventory.InventoryOpen = true;
                 }
             }
-
         }
         public static void HandleDialog()
         {

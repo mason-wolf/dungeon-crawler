@@ -147,8 +147,9 @@ namespace DungeonCrawler.Scenes
             {
                 streamWriter.WriteLine("PLAYER_HEALTH="+Init.Player.CurrentHealth);
                 streamWriter.WriteLine("PLAYER_GOLD=" + Init.Player.Gold);
+                streamWriter.WriteLine("ENEMIES_KILLED=" + Init.Player.EnemiesKilled);
                 // Save inventory
-                foreach(Item item in Init.ItemInventory.Contents)
+                foreach (Item item in Init.ItemInventory.Contents)
                 {
                     if (item.Name != "")
                     {

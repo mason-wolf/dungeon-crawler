@@ -358,6 +358,7 @@ namespace DungeonCrawler
                 // If enemy dies
                 if (enemy.CurrentHealth <= 0 && enemy.Dead == false)
                 {
+                    Init.Player.EnemiesKilled += 1;
                     enemy.State = Action.Dead;
                     enemy.Dead = true;
                     MapObject gold = new MapObject();
