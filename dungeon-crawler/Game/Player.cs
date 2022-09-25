@@ -21,6 +21,8 @@ using DungeonCrawler.Interface;
 using DungeonCrawler.Engine;
 using Humper.Responses;
 using Demo.Interface;
+using Demo.Game;
+using static Demo.Game.Spell;
 
 namespace DungeonCrawler
 {
@@ -102,33 +104,6 @@ namespace DungeonCrawler
             soundEffects = new List<SoundEffect>();
             soundEffects.Add(content.Load<SoundEffect>(@"sounds\sword-swing"));
             soundEffects.Add(content.Load<SoundEffect>(@"sounds\bow-shoot"));
-        }
-
-        public void Attack()
-        {
-            if (EnemyList != null)
-            {
-                // Create a bounce effect when the player hits an enemy.
-                foreach (Entity enemy in EnemyList)
-                {
-                    //if (PlayerWeapon.BoundingBox.Intersects(enemy.BoundingBox) && enemy.State != Action.Dead)
-                    //{
-                    //    enemy.CurrentHealth -= AttackDamage;
-
-                    //    Vector2 oppositeDirection = Position - enemy.Position;
-                    //    oppositeDirection.Normalize();
-
-                    //    if (IntersectsCollidable(enemy))
-                    //    {
-                    //        enemy.Position -= CorrectIntersection(enemy) * (float)(0.4f);
-                    //    }
-                    //    else
-                    //    {
-                    //        enemy.Position -= oppositeDirection * (float)(0.01f * 1500);
-                    //    }
-                    //}
-                }
-            }
         }
 
 
@@ -268,7 +243,7 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern2)
                 {
                     player.State = Action.IdleSouth1;
-                    CastSpell("south");
+                    CastSpell(SpellDirection.SOUTH, SelectedItem.ID);
                 }
 
                 // Attacking West
@@ -278,7 +253,7 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkWestPattern2)
                 {
                     player.State = Action.IdleWest1;
-                    CastSpell("west");
+                    CastSpell(SpellDirection.WEST, SelectedItem.ID);
                 }
 
 
@@ -290,7 +265,7 @@ namespace DungeonCrawler
                 {
                  //   PlayerWeapon.State = Action.AttackEastPattern1;
                     player.State = Action.IdleEast1;
-                    CastSpell("east");
+                    CastSpell(Spell.SpellDirection.EAST, SelectedItem.ID);
                 }
 
                 // Attacking North
@@ -301,7 +276,7 @@ namespace DungeonCrawler
                 {
                   //  PlayerWeapon.State = Action.AttackNorthPattern1;
                     player.State = Action.IdleNorth1;
-                    CastSpell("north");
+                    CastSpell(SpellDirection.NORTH, SelectedItem.ID);
                 }
                 else
                 {
@@ -407,27 +382,6 @@ namespace DungeonCrawler
             oldMouseState = newMouseState;
         }
 
-        public void CastSpell(string direction)
-        {
-            AnimatedSprite spell = null;
-            if (SelectedItem != null)
-            {
-                switch (SelectedItem.ID)
-                {
-                    case (1):
-                        spell = new AnimatedSprite(Sprites.GetSprite("FIREBALL_1"));
-                        break;
-                    case (2):
-                        spell = new AnimatedSprite(Sprites.GetSprite("ICEBOLT_1"));
-                        break;
-                }
-                if (spell != null)
-                {
-                    ShootProjectile(spell, direction);
-                    Attack();
-                }
-            }
-        }
         /// <summary>
         /// Detects if an entity has intersected an object on the collision layer.
         /// </summary>

@@ -197,6 +197,10 @@ namespace DungeonCrawler.Scenes
                             value = line.Split('=').Last();
                             Init.Player.CurrentHealth = (int)Math.Round(Double.Parse(value));
                             break;
+                        case ("PLAYER_MANA"):
+                            value = line.Split('=').Last();
+                            Init.Player.CurrentMana = (int)Math.Round(Double.Parse(value));
+                            break;
                         case ("ENEMIES_KILLED"):
                             value = line.Split('=').Last();
                             Init.Player.EnemiesKilled = Int32.Parse(value);

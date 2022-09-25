@@ -29,7 +29,6 @@ namespace DungeonCrawler
         Map map;
         string levelName;
         List<SoundEffect> soundEffects;
-        bool objectsPopulated = false;
         SceneLogic scene;
         public List<MapObject> MapObjects { get; set; }
         private Vector2 startingPosition { get; set; }
@@ -235,6 +234,9 @@ namespace DungeonCrawler
                         break;
                     case ("THUNDER_MAGE"):
                         AddNpc(content, mapObject, "THUNDER_MAGE");
+                        break;
+                    case ("WHITE_MAGE"):
+                        AddNpc(content, mapObject, "WHITE_MAGE");
                         break;
                     case ("GREEN_PORTAL"):
                         AnimatedSprite greenPortalSprite = new AnimatedSprite(Sprites.GetSprite("GREEN_PORTAL"));
@@ -456,8 +458,6 @@ namespace DungeonCrawler
                     mapObject.Draw(spriteBatch);
                 }
             }
-
-            objectsPopulated = true;
         }
     }
 }

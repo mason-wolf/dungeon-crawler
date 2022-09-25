@@ -79,12 +79,18 @@ namespace Demo.Interface
                 {
                     Init.Player.InMenu = false;
                     selectedShop.InventoryOpen = false;
+                    ShopOpen = false;
                 }
                 else
                 {
                     Init.Player.InMenu = true;
                     selectedShop.InventoryOpen = true;
                 }
+            }
+
+            if (ShopOpen)
+            {
+                ShopOpen = false;
             }
         }
     }

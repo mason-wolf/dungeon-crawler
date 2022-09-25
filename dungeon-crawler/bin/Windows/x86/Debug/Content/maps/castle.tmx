@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="348">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="367">
  <tileset firstgid="1" source="castle.tsx"/>
  <layer id="2" name="Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -139,7 +139,7 @@
  </layer>
  <objectgroup id="4" name="Object Layer 1">
   <object id="201" name="DESK" x="87" y="865.5" width="15.6667" height="15.3333"/>
-  <object id="202" name="START" x="373.083" y="293.125" width="15.6667" height="15.3333"/>
+  <object id="202" name="START" x="749.455" y="889.943" width="15.6667" height="15.3333"/>
   <object id="203" name="DESK" x="173" y="866.75" width="15.6667" height="15.3333"/>
   <object id="204" name="DESK" x="129" y="867.5" width="15.6667" height="15.3333"/>
   <object id="205" name="DESK" x="87" y="907.5" width="15.6667" height="15.3333"/>
@@ -183,13 +183,13 @@
     <property name="id" type="float" value="17"/>
    </properties>
   </object>
-  <object id="266" name="ITEM_MERCHANT" x="868.917" y="357.583" width="15.6667" height="15.3333">
+  <object id="266" name="ITEM_MERCHANT" x="935.281" y="354.31" width="15.6667" height="15.3333">
    <properties>
     <property name="id" type="float" value="18"/>
    </properties>
   </object>
-  <object id="268" name="SHOPSHELF_1" x="880.917" y="309.833" width="15.6667" height="15.3333"/>
-  <object id="273" name="BOOKSHELF" x="905.917" y="310.083" width="15.6667" height="15.3333"/>
+  <object id="268" name="SHOPSHELF_1" x="880" y="310" width="15.6667" height="15.3333"/>
+  <object id="273" name="BOOKSHELF" x="904" y="310" width="15.6667" height="15.3333"/>
   <object id="280" name="GUARD" x="465.25" y="873.833" width="15.6667" height="15.3333">
    <properties>
     <property name="ID" type="float" value="19"/>
@@ -245,28 +245,28 @@
     <property name="id" type="float" value="26"/>
    </properties>
   </object>
-  <object id="312" name="DESK" x="846" y="89.0909" width="15.6667" height="15.3333"/>
-  <object id="313" name="DESK" x="932.545" y="89.2727" width="15.6667" height="15.3333"/>
-  <object id="314" name="DESK" x="885.636" y="90.1818" width="15.6667" height="15.3333"/>
-  <object id="315" name="DESK" x="846" y="128" width="15.6667" height="15.3333"/>
-  <object id="316" name="DESK" x="886" y="128" width="15.6667" height="15.3333"/>
-  <object id="317" name="DESK" x="932" y="128" width="15.6667" height="15.3333"/>
-  <object id="318" name="DESK" x="846" y="164" width="15.6667" height="15.3333"/>
-  <object id="319" name="DESK" x="886" y="164" width="15.6667" height="15.3333"/>
-  <object id="320" name="DESK" x="932" y="164" width="15.6667" height="15.3333"/>
-  <object id="321" name="TORCH" x="827.167" y="27.3335"/>
-  <object id="322" name="TORCH" x="951.167" y="27.3335"/>
-  <object id="328" name="THUNDER_MAGE" x="884.364" y="49.4545" width="15.6667" height="15.3333">
+  <object id="312" name="DESK" x="546.667" y="321.758" width="15.6667" height="15.3333"/>
+  <object id="313" name="DESK" x="633.212" y="321.939" width="15.6667" height="15.3333"/>
+  <object id="314" name="DESK" x="586.303" y="322.848" width="15.6667" height="15.3333"/>
+  <object id="315" name="DESK" x="546.667" y="360.667" width="15.6667" height="15.3333"/>
+  <object id="316" name="DESK" x="586.667" y="360.667" width="15.6667" height="15.3333"/>
+  <object id="317" name="DESK" x="632.667" y="360.667" width="15.6667" height="15.3333"/>
+  <object id="318" name="DESK" x="546.667" y="396.667" width="15.6667" height="15.3333"/>
+  <object id="319" name="DESK" x="586.667" y="396.667" width="15.6667" height="15.3333"/>
+  <object id="320" name="DESK" x="632.667" y="396.667" width="15.6667" height="15.3333"/>
+  <object id="321" name="TORCH" x="527.833" y="260"/>
+  <object id="322" name="TORCH" x="651.833" y="260"/>
+  <object id="328" name="THUNDER_MAGE" x="585.03" y="282.121" width="15.6667" height="15.3333">
    <properties>
     <property name="ID" type="float" value="27"/>
    </properties>
   </object>
-  <object id="329" name="NOVICE_MAGE" x="847.455" y="107.091">
+  <object id="329" name="NOVICE_MAGE" x="548.121" y="339.758">
    <properties>
     <property name="id" type="float" value="28"/>
    </properties>
   </object>
-  <object id="330" name="NOVICE_MAGE" x="932.545" y="107.273">
+  <object id="330" name="NOVICE_MAGE" x="633.212" y="339.939">
    <properties>
     <property name="id" type="float" value="29"/>
    </properties>
@@ -289,6 +289,47 @@
   <object id="347" name="GREEN_MAGE" x="824.167" y="658.083" width="15.6667" height="15.3333">
    <properties>
     <property name="id" type="float" value="30"/>
+   </properties>
+  </object>
+  <object id="348" name="DESK" x="842.47" y="872.303" width="15.6667" height="15.3333"/>
+  <object id="349" name="DESK" x="928.106" y="873.212" width="15.6667" height="15.3333"/>
+  <object id="350" name="DESK" x="881.197" y="874.121" width="15.6667" height="15.3333"/>
+  <object id="351" name="DESK" x="841.561" y="911.939" width="15.6667" height="15.3333"/>
+  <object id="352" name="DESK" x="881.561" y="911.939" width="15.6667" height="15.3333"/>
+  <object id="353" name="DESK" x="927.561" y="911.939" width="15.6667" height="15.3333"/>
+  <object id="354" name="DESK" x="841.561" y="947.939" width="15.6667" height="15.3333"/>
+  <object id="355" name="DESK" x="881.561" y="947.939" width="15.6667" height="15.3333"/>
+  <object id="356" name="DESK" x="927.561" y="947.939" width="15.6667" height="15.3333"/>
+  <object id="357" name="TORCH" x="822.728" y="811.273"/>
+  <object id="358" name="TORCH" x="946.728" y="811.273"/>
+  <object id="359" name="WHITE_MAGE" x="879.925" y="833.394" width="15.6667" height="15.3333">
+   <properties>
+    <property name="ID" type="float" value="31"/>
+   </properties>
+  </object>
+  <object id="362" name="NOVICE_MAGE" x="879.803" y="578.697" width="15.6667" height="15.3333">
+   <properties>
+    <property name="ID" type="float" value="32"/>
+   </properties>
+  </object>
+  <object id="363" name="NOVICE_MAGE" x="901.985" y="695.242" width="15.6667" height="15.3333">
+   <properties>
+    <property name="ID" type="float" value="33"/>
+   </properties>
+  </object>
+  <object id="364" name="NOVICE_MAGE" x="840.292" y="891.117" width="15.6667" height="15.3333">
+   <properties>
+    <property name="ID" type="float" value="34"/>
+   </properties>
+  </object>
+  <object id="365" name="NOVICE_MAGE" x="927.167" y="926.833" width="15.6667" height="15.3333">
+   <properties>
+    <property name="ID" type="float" value="35"/>
+   </properties>
+  </object>
+  <object id="366" name="NOVICE_MAGE" x="881.167" y="959.583" width="15.6667" height="15.3333">
+   <properties>
+    <property name="ID" type="float" value="36"/>
    </properties>
   </object>
  </objectgroup>

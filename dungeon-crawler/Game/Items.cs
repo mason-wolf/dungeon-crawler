@@ -42,6 +42,20 @@ namespace Demo.Game
             icebolt1.ID = 2;
             icebolt1.Description = "Casts a bolt of ice.";
             ItemList.Add(icebolt1);
+
+            Item thunderBolt1 = new Item();
+            thunderBolt1.ItemTexture = Sprites.GetTexture("THUNDERBOLT_1_ICON");
+            thunderBolt1.Name = "THUNDERBOLT";
+            thunderBolt1.ID = 5;
+            thunderBolt1.Description = "Shoots a thunder bolt.";
+            ItemList.Add(thunderBolt1);
+
+            Item heal1 = new Item();
+            heal1.ItemTexture = Sprites.GetTexture("HEAL_1_ICON");
+            heal1.Name = "HEAL";
+            heal1.ID = 6;
+            heal1.Description = "Restores some health.";
+            ItemList.Add(heal1);
         }
 
         public static Item GetItemById(int id)

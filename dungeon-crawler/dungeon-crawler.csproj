@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Game\Items.cs" />
     <Compile Include="Game\Projectile.cs" />
+    <Compile Include="Game\Spell.cs" />
     <Compile Include="Game\SpriteLoader.cs" />
     <Compile Include="Game\EnemyAI.cs" />
     <Compile Include="Game\SceneLogic.cs" />

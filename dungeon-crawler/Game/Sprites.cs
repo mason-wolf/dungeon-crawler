@@ -119,14 +119,21 @@ namespace DungeonCrawler
             librarianSprite.AddAnimation("idleSouth1", new[] { 3 }, 0.9f, true);
             SpriteList.Add(librarianSprite);
 
+            // White Mage
+            SpriteLoader whiteMageSprite = new SpriteLoader(content, "WHITE_MAGE", @"spritesheets\WHITE_MAGE", 24, 24);
+            whiteMageSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, true);
+            SpriteList.Add(whiteMageSprite);
+
             // Item Merchant
             SpriteLoader itemMerchantSprite = new SpriteLoader(content, "ITEM_MERCHANT", @"spritesheets\ITEM_MERCHANT", 24, 24);
             itemMerchantSprite.AddAnimation("idleSouth1", new[] { 3 }, 0.9f, false);
+            itemMerchantSprite.AddAnimation("idleWest1", new[] { 5 }, 0.9f, false);
             SpriteList.Add(itemMerchantSprite);
 
             // Novice Mage
             SpriteLoader noviceMageSprite = new SpriteLoader(content, "NOVICE_MAGE", @"spritesheets\NOVICE_MAGE", 24, 24);
             noviceMageSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
+            noviceMageSprite.AddAnimation("idleEast1", new[] { 3 }, 2f, true);
             noviceMageSprite.AddAnimation("idleNorth1", new[] { 7 }, 2f, true);
             SpriteList.Add(noviceMageSprite);
 
@@ -184,6 +191,26 @@ namespace DungeonCrawler
             icebolt1Sprite.AddAnimation("idleNorth1", new[] { 12, 13, 14, 15 }, 0.06f, true);
             SpriteList.Add(icebolt1Sprite);
 
+            // Thunderbolt 1 East/West
+            SpriteLoader thunderBolt1EastWestSprite = new SpriteLoader(content, "THUNDERBOLT_1", @"spritesheets\THUNDERBOLT_1_EAST_WEST", 64, 16);
+            thunderBolt1EastWestSprite.AddAnimation("attackEastPattern1", new[] { 0, 1 }, 0.06f, true);
+            thunderBolt1EastWestSprite.AddAnimation("idleEast1", new[] { 0, 1 }, 0.06f, true);
+            thunderBolt1EastWestSprite.AddAnimation("idleWest1", new[] { 0, 1 }, 0.06f, true);
+            SpriteList.Add(thunderBolt1EastWestSprite);
+
+            // Thunderbolt 1 North/South
+            SpriteLoader thunderBolt1NorthSouthSprite = new SpriteLoader(content, "THUNDERBOLT_1_NORTH_SOUTH", @"spritesheets\THUNDERBOLT_1_NORTH_SOUTH", 16, 64);
+            thunderBolt1NorthSouthSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1 }, 0.06f, true);
+            thunderBolt1NorthSouthSprite.AddAnimation("idleNorth1", new[] { 0, 1 }, 0.06f, true);
+            thunderBolt1NorthSouthSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1 }, 0.06f, true);
+            thunderBolt1NorthSouthSprite.AddAnimation("idleSouth1", new[] { 0, 1 }, 0.06f, true);
+            SpriteList.Add(thunderBolt1NorthSouthSprite);
+
+            // Heal 1
+            SpriteLoader heal1Sprite = new SpriteLoader(content, "HEAL_1", @"spritesheets\HEAL_1", 16, 16);
+            heal1Sprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 2, 1, 0, 1, 2 }, .09f, false);
+            SpriteList.Add(heal1Sprite);
+
             // Chest
             SpriteLoader chestSprite = new SpriteLoader(content, "CHEST", @"objects\CHEST", 32, 32);
             chestSprite.AddAnimation("Unopened", new[] { 0 }, 1f, false);
@@ -196,6 +223,12 @@ namespace DungeonCrawler
 
             // Icebolt 1 Icon
             SpriteLoader icebolt1Icon = new SpriteLoader(content, "ICEBOLT_1_ICON", @"items\ICEBOLT_1_ICON", 16, 16);
+
+            // Thunderbolt 1 Icon
+            SpriteLoader thunderbolt1Icon = new SpriteLoader(content, "THUNDERBOLT_1_ICON", @"items\THUNDERBOLT_1_ICON", 16, 16);
+
+            // Heal 1 Icon
+            SpriteLoader heal1Icon = new SpriteLoader(content, "HEAL_1_ICON", @"items\HEAL_1_ICON", 16, 16);
 
             // Health Potion Icon
             SpriteLoader healthPotionIcon = new SpriteLoader(content, "HEALTH_POTION_ICON", @"items\HEALTH_POTION_ICON", 16, 16);
@@ -217,10 +250,12 @@ namespace DungeonCrawler
 
             SpriteList.Add(fireBall1Icon);
             SpriteList.Add(icebolt1Icon);
+            SpriteList.Add(thunderbolt1Icon);
             SpriteList.Add(healthPotionIcon);
             SpriteList.Add(goldIcon);
             SpriteList.Add(manaPotionIcon);
             SpriteList.Add(bedSprite);
+            SpriteList.Add(heal1Icon);
 
         }
 

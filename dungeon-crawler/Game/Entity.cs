@@ -16,6 +16,8 @@ using DungeonCrawler.Engine;
 using Microsoft.Xna.Framework.Audio;
 using DungeonCrawler.Interface;
 using Demo.Game;
+using static Demo.Game.Spell;
+using System.Diagnostics;
 
 namespace DungeonCrawler
 {
@@ -75,13 +77,17 @@ namespace DungeonCrawler
         public double CurrentHealth { get; set; } = 0;
 
         public double MaxStamina { get; set; } = 0;
-
         public double CurrentStamina { get; set; } = 0;
+
+        public double MaxMana { get; set; } = 0;
+        public double CurrentMana { get; set; } = 0;
+
         public double AttackDamage { get; set; } = 0;
         public bool Dead { get; set; } = false;
         public bool Aggroed { get; set; } = false;
         public string Name { get; set; }
         public PathFinder PathFinder { get; set; }
+        public Spell Buff { get; set; }
 
         public int WayPointIndex;
 
@@ -296,23 +302,68 @@ namespace DungeonCrawler
                 }
             }
         }
-
+        Stopwatch stopWatch = new Stopwatch();
+        public void CastSpell(SpellDirection direction, int spellId)
+        {
+            Spell spell = new Spell();
+            spell.Sprite = null;
+            spell.ID = spellId;
+            spell.Direction = direction;
+            if (spell.ID != 0)
+            {
+                switch (spell.ID)
+                {
+                    case (1):
+                        spell.Sprite = new AnimatedSprite(Sprites.GetSprite("FIREBALL_1"));
+                        ShootProjectile(spell);
+                        break;
+                    case (2):
+                        spell.Sprite = new AnimatedSprite(Sprites.GetSprite("ICEBOLT_1"));
+                        ShootProjectile(spell);
+                        break;
+                    case (5):
+                        spell.Sprite = new AnimatedSprite(Sprites.GetSprite("THUNDERBOLT_1"));
+                        ShootProjectile(spell);
+                        break;
+                    case (6):
+                        stopWatch.Restart();
+                        Buff = new Spell();
+                        Buff.Sprite = new AnimatedSprite(Sprites.GetSprite("HEAL_1"));
+                        Buff.Sprite.Position = Position;
+                        Buff.Sprite.Play("idle");
+                        Heal(15);
+                        break;
+                }
+            }
+        }
         /// <summary>
         /// Shoots a projectile.
         /// </summary>
         /// <param name="sprite">AnimatedSprite of the projectile.</param>
         /// <param name="direction">Direction (North, South, East, West)</param>
-        public void ShootProjectile(AnimatedSprite sprite, string direction)
+        public void ShootProjectile(Spell spell)
         {
             Projectile projectile = new Projectile();
-            projectile.Sprite = sprite;
+            projectile.ID = spell.ID;
+            // Thunderbolt spell requires two separate spritesheets. 
+            // Spell ID is 5 so change sprite depending on direction.
+            // TODO: Decouple custom spell logic in ShootProjectile() method on Entity class.
+            if (projectile.ID == 5 && spell.Direction == SpellDirection.NORTH || projectile.ID == 5 && spell.Direction == SpellDirection.SOUTH)
+            {
+                projectile.Sprite = new AnimatedSprite(Sprites.GetSprite("THUNDERBOLT_1_NORTH_SOUTH"));
+            }
+            else
+            {
+                projectile.Sprite = spell.Sprite;
+            }
+
             Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y);
             projectile.Position = projectilePosition;
-            projectile.Direction = direction;
+            projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;
             Projectiles.Add(projectile);
 
-            if (Projectiles.Count > 10)
+            if (Projectiles.Count > 25)
             {
                 Projectiles.Clear();
             }
@@ -340,15 +391,43 @@ namespace DungeonCrawler
             return collided;
         }
 
+        public void Heal(double healAmount)
+        {
+            double healthToHeal = MaxHealth - CurrentHealth;
+            if (healthToHeal >= healAmount)
+            {
+                CurrentHealth += healAmount;
+            }
+            else
+            {
+                CurrentHealth = MaxHealth;
+            }
+        }
+    
         public void Update(GameTime gameTime)
         {
+            if (Buff != null)
+            {
+                Console.WriteLine(stopWatch.ElapsedMilliseconds);
+                if (stopWatch.ElapsedMilliseconds < 800)
+                {
+                    Buff.Sprite.Position = Position;
+                    Buff.Sprite.Update(gameTime);
+                }
+                else
+                {
+                    Buff = null;
+                    stopWatch.Stop();
+                }
+            }
+
             foreach (Projectile projectile in Projectiles)
             {
                 if (projectile != null && !ProjectileCollision(projectile))
                 {
                     int speed = 4;
 
-                    if (projectile.Direction == "north")
+                    if (projectile.Direction == "NORTH")
                     {
                         projectile.State = Action.IdleNorth1;
                         float y = projectile.Position.Y;
@@ -357,7 +436,7 @@ namespace DungeonCrawler
                         projectile.Position = newPosition;
                     }
 
-                    if (projectile.Direction == "south")
+                    if (projectile.Direction == "SOUTH")
                     {
                         projectile.State = Action.AttackSouthPattern1;
                         float y = projectile.Position.Y;
@@ -366,7 +445,7 @@ namespace DungeonCrawler
                         projectile.Position = newPosition;
                     }
 
-                    if (projectile.Direction == "east")
+                    if (projectile.Direction == "EAST")
                     {
                         ProjectileCollision(projectile);
                         projectile.State = Action.AttackEastPattern1;
@@ -376,7 +455,7 @@ namespace DungeonCrawler
                         projectile.Position = newPosition;
                     }
 
-                    if (projectile.Direction == "west")
+                    if (projectile.Direction == "WEST")
                     {
                         projectile.State = Action.IdleWest1;
                         float x = projectile.Position.X;
@@ -406,6 +485,11 @@ namespace DungeonCrawler
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Sprite);
+
+            if (Buff != null)
+            {
+                Buff.Sprite.Draw(spriteBatch);
+            }
 
             foreach (Projectile projectile in Projectiles)
             {

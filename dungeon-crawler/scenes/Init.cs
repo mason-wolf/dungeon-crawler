@@ -89,6 +89,8 @@ namespace DungeonCrawler.Scenes
             Player.State = Action.IdleSouth1;
             Player.MaxHealth = 100;
             Player.CurrentHealth = 100;
+            Player.MaxMana = 100;
+            Player.CurrentMana = 100;
             Player.MaxStamina = 75;
             Player.CurrentStamina = 75;
             Player.AttackDamage = 3.5;

@@ -53,12 +53,28 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-            int[] npcIDs = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
+            int[] npcIDs = { 
+                15, 16, 17, 18, 19, 20, 21, 22, 
+                23, 24, 25, 26, 27, 28, 29, 30, 
+                31, 32, 33, 34, 35, 36
+            };
 
             foreach(int npcId in npcIDs)
             {
                 Entity npc = Level.GetNpcByID(npcId.ToString());
-                npc.Sprite.Play("idleSouth1");
+
+                switch(npc.ID)
+                {
+                    case ("18"):
+                        npc.Sprite.Play("idleWest1");
+                        break;
+                    case ("33"):
+                        npc.Sprite.Play("idleEast1");
+                        break;
+                    default:
+                        npc.Sprite.Play("idleSouth1");
+                        break;
+                }
                 NPCList.Add(npc);
             }
         }
@@ -201,13 +217,33 @@ namespace DungeonCrawler.Scenes
                         case ("30"):
                             Init.shops.Open(Shop.ShopType.SPELL_SHOP);
                             break;
-                    }
-                }
-                else
-                {
-                    if (npc.ID == "18" && !Init.Player.BoundingBox.Intersects(npc.BoundingBox) && npc.ID == "30" && !Init.Player.BoundingBox.Intersects(npc.BoundingBox))
-                    {
-                        Shop.ShopOpen = false;
+                        case ("31"):
+                            message =
+                                "\nI am the warden of life." +
+                                "\nLet my wisdom replenish you in a time of need.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("32"):
+                            message =
+                                "\nSpells aren't taught to you for free." +
+                                "\nThe academy wishes us to earn them through practice." +
+                                "\nAnd of course, with tuition.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("33"):
+                            message =
+                                "\nThese books seem quite expensive.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("34"):
+                            message =
+                                "\nInvesting in some life magic will save you from using healing potions.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
                     }
                 }
             }

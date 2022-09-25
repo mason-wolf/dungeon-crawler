@@ -281,15 +281,7 @@ namespace DungeonCrawler.Interface
                             // Health Potion
                             if (item.ID == 3)
                             {
-                                double healthToHeal = Init.Player.MaxHealth - Init.Player.CurrentHealth;
-                                if (healthToHeal >= 50)
-                                {
-                                    Init.Player.CurrentHealth += 50;
-                                }
-                                else
-                                {
-                                    Init.Player.CurrentHealth = Init.Player.MaxHealth;
-                                }
+                                Init.Player.Heal(50);
                             }
                             item.Quantity -= 1;
                             AssignItem(item);
@@ -370,7 +362,7 @@ namespace DungeonCrawler.Interface
                         // Draw the item name and description.
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
 
-                        if (itemList[i].Quantity != 0 && InventoryType != "shop" && itemList[i].Quantity != -1)
+                        if (itemList[i].Quantity != 0 && InventoryType != "ITEM_SHOP" && InventoryType != "SPELL_SHOP" && itemList[i].Quantity != -1)
                         {
                             spriteBatch.DrawString(inventoryFont, itemList[i].Quantity.ToString(), new Vector2(itemList[i].ItemRectangle.X + 25, itemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
                         }
