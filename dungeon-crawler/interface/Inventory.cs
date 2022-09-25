@@ -282,9 +282,9 @@ namespace DungeonCrawler.Interface
                             if (item.ID == 3)
                             {
                                 double healthToHeal = Init.Player.MaxHealth - Init.Player.CurrentHealth;
-                                if (healthToHeal >= 25)
+                                if (healthToHeal >= 50)
                                 {
-                                    Init.Player.CurrentHealth += 25;
+                                    Init.Player.CurrentHealth += 50;
                                 }
                                 else
                                 {

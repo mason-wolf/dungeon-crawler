@@ -27,6 +27,7 @@ namespace DungeonCrawler
         Rectangle containedItemBoundingBox;
         bool destroyed = false;
         bool itemPickedUp = false;
+        bool interacted = false;
         List<string> customProperties;
 
         IBox collisionBox;
@@ -127,6 +128,16 @@ namespace DungeonCrawler
             return destroyed;
         }
 
+        public void Interact()
+        {
+            interacted = true;
+        }
+
+        public bool Interacted()
+        {
+            return interacted;
+        }
+
         public void PickUpItem()
         {
             objectBoundingBox = new Rectangle();
@@ -183,7 +194,7 @@ namespace DungeonCrawler
             }
 
             // If the object is destroyed, drop an item. (Draw and create a bounding box).
-            if (destroyed && !itemPickedUp)
+            if (destroyed)
             {
                 itemDrawn = true;
 

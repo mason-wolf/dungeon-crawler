@@ -91,6 +91,8 @@ namespace DungeonCrawler.Scenes
             Player.CurrentStamina = 75;
             Player.AttackDamage = 3.5;
             Player.Gold = 50;
+            ItemInventory = new Inventory(Content);
+            SpellInventory = new Inventory(Content);
             base.Initialize();
         }
 
@@ -105,6 +107,7 @@ namespace DungeonCrawler.Scenes
             PLAINS_2,
             PLAINS_3,
             PLAINS_4,
+            PLAINS_5,
             CASTLE
         }
 
@@ -151,6 +154,13 @@ namespace DungeonCrawler.Scenes
             newLevel.LoadContent(Content);
             levelList.Add(newLevel);
 
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_5.tmx"));
+            newLevel.SetScene(new Plains_1());
+            newLevel.SetLevelName("PLAINS_5");
+            newLevel.LoadContent(Content);
+            levelList.Add(newLevel);
+
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
             Player.State = Action.IdleSouth1;
@@ -162,11 +172,9 @@ namespace DungeonCrawler.Scenes
             string[] items = { "Continue", "Save", "Load", "Quit" };
             escapeMenu.SetMenuItems(items);
 
-            ItemInventory = new Inventory(Content);
             ItemInventory.MenuTitle = "Items";
             ItemInventory.InventoryType = "inventory";
 
-            SpellInventory = new Inventory(Content);
             SpellInventory.MenuTitle = "Spells";
             SpellInventory.InventoryType = "spells";
 
@@ -180,7 +188,6 @@ namespace DungeonCrawler.Scenes
             // Mana potion
             ShopInventory.Contents.Add(Items.GetItemById(4));
 
-            SpellInventory.Contents.Add(Items.GetItemById((1)));
 
             DialogBox = new DialogBox(game, Font);
 
@@ -223,10 +230,11 @@ namespace DungeonCrawler.Scenes
 
                         TransitionState = true;
                         LoadContent();
+                        
                         if (teleporter.GetDestinationMap() == "RANDOM_PLAIN")
                         {
                             Random randomLevel = new Random();
-                            int levelNum = randomLevel.Next(1, 5);
+                            int levelNum = randomLevel.Next(1, 6);
                             string levelName = "PLAINS_" + levelNum;
                             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
                         }

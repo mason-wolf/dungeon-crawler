@@ -153,8 +153,8 @@ namespace DungeonCrawler
                         Entity skeletonEntity = new Entity(Sprites.GetSprite("SKELETON"));
                         skeletonEntity.LoadContent(content);
                         skeletonEntity.State = Action.IdleEast1;
-                        skeletonEntity.MaxHealth = 100;
-                        skeletonEntity.CurrentHealth = 100;
+                        skeletonEntity.MaxHealth = 30;
+                        skeletonEntity.CurrentHealth = 30;
                         skeletonEntity.AttackDamage = 0.05;
                         skeletonEntity.Position = mapObject.GetPosition();
                         skeletonEntity.Name = "SKELETON";
@@ -164,8 +164,8 @@ namespace DungeonCrawler
                         Entity batEntity = new Entity(Sprites.GetSprite("BAT"));
                         batEntity.LoadContent(content);
                         batEntity.State = Action.IdleEast1;
-                        batEntity.MaxHealth = 15;
-                        batEntity.CurrentHealth = 15;
+                        batEntity.MaxHealth = 30;
+                        batEntity.CurrentHealth = 30;
                         batEntity.AttackDamage = 0.03;
                         batEntity.Position = mapObject.GetPosition();
                         batEntity.Name = "BAT";
@@ -175,8 +175,8 @@ namespace DungeonCrawler
                         Entity zombieEntity = new Entity(Sprites.GetSprite("ZOMBIE"));
                         zombieEntity.LoadContent(content);
                         zombieEntity.State = Action.IdleEast1;
-                        zombieEntity.MaxHealth = 15;
-                        zombieEntity.CurrentHealth = 15;
+                        zombieEntity.MaxHealth = 30;
+                        zombieEntity.CurrentHealth = 30;
                         zombieEntity.AttackDamage = 0.03;
                         zombieEntity.Position = mapObject.GetPosition();
                         zombieEntity.Name = "ZOMBIE";
@@ -186,9 +186,9 @@ namespace DungeonCrawler
                         Entity blueSlimeEntity = new Entity(Sprites.GetSprite("BLUE_SLIME"));
                         blueSlimeEntity.LoadContent(content);
                         blueSlimeEntity.State = Action.IdleEast1;
-                        blueSlimeEntity.MaxHealth = 15;
-                        blueSlimeEntity.CurrentHealth = 15;
-                        blueSlimeEntity.AttackDamage = 0.03;
+                        blueSlimeEntity.MaxHealth = 25;
+                        blueSlimeEntity.CurrentHealth = 25;
+                        blueSlimeEntity.AttackDamage = 0.06;
                         blueSlimeEntity.Position = mapObject.GetPosition();
                         blueSlimeEntity.Name = "BLUE_SLIME";
                         enemyList.Add(blueSlimeEntity);
@@ -275,6 +275,14 @@ namespace DungeonCrawler
                         IBox bedCollidable = map.GetWorld().Create(bedSprite.Position.X, bedSprite.Position.Y - 10, 16, 24);
                         mapObject.SetCollisionBox(bedCollidable);
                         mapObject.SetSprite(bedSprite);
+                        break;
+                    case ("CHEST"):
+                        AnimatedSprite chestSprite = new AnimatedSprite(Sprites.GetSprite("CHEST"));
+                        chestSprite.Play("Unopened");
+                        chestSprite.Position = mapObject.GetPosition();
+                        IBox chestCollidable = map.GetWorld().Create(chestSprite.Position.X, chestSprite.Position.Y - 10, 16, 24);
+                        mapObject.SetCollisionBox(chestCollidable);
+                        mapObject.SetSprite(chestSprite);
                         break;
                     case ("BOOKSHELF"):
                         AnimatedSprite bookshelfSprite = new AnimatedSprite(Sprites.GetSprite("BOOKSHELF"));
@@ -427,33 +435,33 @@ namespace DungeonCrawler
 
             foreach (MapObject mapObject in MapObjects)
             {
-                Item item = new Item();
+                //Item item = new Item();
 
-                if (objectsPopulated == false)
-                {
-                    int lootChance = random.Next(1, 4);
+                //if (objectsPopulated == false)
+                //{
+                //    int lootChance = random.Next(1, 4);
 
-                    switch (lootChance)
-                    {
-                        case (1):
-                         //   item.ItemTexture = Sprites.chickenTexture;
-                            item.Name = "Chicken";
-                            item.Width = 16;
-                            item.Height = 16;
-                            break;
-                        case (2):
-                          //  item.ItemTexture = arrowsSprite;
-                            item.Name = "Arrow";
-                            item.Width = 13;
-                            item.Height = 19;
-                            break;
-                    }
+                //    switch (lootChance)
+                //    {
+                //        case (1):
+                //         //   item.ItemTexture = Sprites.chickenTexture;
+                //            item.Name = "Chicken";
+                //            item.Width = 16;
+                //            item.Height = 16;
+                //            break;
+                //        case (2):
+                //          //  item.ItemTexture = arrowsSprite;
+                //            item.Name = "Arrow";
+                //            item.Width = 13;
+                //            item.Height = 19;
+                //            break;
+                //    }
 
-                    if (item != null)
-                    {
-                        mapObject.SetContainedItem(item);
-                    }
-                }
+                //    if (item != null)
+                //    {
+                //        mapObject.SetContainedItem(item);
+                //    }
+                //}
 
                 if (!mapObject.ItemPickedUp())
                 {

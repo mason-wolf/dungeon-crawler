@@ -12,7 +12,6 @@ namespace DungeonCrawler
     {
         public int ID { get; set; }
         public Texture2D ItemTexture { get; set; }
-        public int HealthAmount { get; set; }
         public Rectangle ItemRectangle { get; set; }
         public int Column { get; set; }
         public int Row { get; set; }
@@ -22,7 +21,6 @@ namespace DungeonCrawler
         public int Quantity { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-
         public int Price { get; set; }
     }
 }

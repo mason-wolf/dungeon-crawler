@@ -169,6 +169,13 @@ namespace DungeonCrawler
             icebolt1Sprite.AddAnimation("idleNorth1", new[] { 12, 13, 14, 15 }, 0.06f, true);
             SpriteList.Add(icebolt1Sprite);
 
+            // Chest
+            SpriteLoader chestSprite = new SpriteLoader(content, "CHEST", @"objects\CHEST", 32, 32);
+            chestSprite.AddAnimation("Unopened", new[] { 0 }, 1f, false);
+            chestSprite.AddAnimation("Opened", new[] { 1 }, 1f, false);
+            SpriteList.Add(chestSprite);
+            
+
             // Fireball 1 Icon
             SpriteLoader fireBall1Icon = new SpriteLoader(content, "FIREBALL_1_ICON", @"items\FIREBALL_1_ICON", 16, 16);
 
@@ -227,6 +234,10 @@ namespace DungeonCrawler
                 }
             }
 
+            if (foundSprite == null)
+            {
+                Console.WriteLine("Sprite " + spriteName + " was not found.");
+            }
             return foundSprite;
         }
     }

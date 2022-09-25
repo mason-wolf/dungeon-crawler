@@ -18,7 +18,7 @@ namespace Demo.Game
             healthPotion.Name = "HEALTH POTION";
             healthPotion.Description = "Restores some health.";
             healthPotion.ID = 3;
-            healthPotion.Price = 100;
+            healthPotion.Price = 50;
             ItemList.Add(healthPotion);
 
             Item manaPotion = new Item();
@@ -26,7 +26,7 @@ namespace Demo.Game
             manaPotion.Name = "MANA POTION";
             manaPotion.Description = "Restores some mana.";
             manaPotion.ID = 4;
-            manaPotion.Price = 100;
+            manaPotion.Price = 50;
             ItemList.Add(manaPotion);
 
             Item fireball1 = new Item();

@@ -36,25 +36,25 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-            throw new NotImplementedException();
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (MapObject mapObject in MapObjects)
-            {
-                if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "Chest")
-                {
-                    if (!mapObject.ItemPickedUp())
-                    {
-                        mapObject.GetSprite().Play("Opened");
-                        Init.Message = "You obtained a key";
-                        Init.MessageEnabled = true;
-                        mapObject.PickUpItem();
-                        Inventory.TotalKeys = Inventory.TotalKeys += 1;
-                    }
-                }
-            }
+            //foreach (MapObject mapObject in MapObjects)
+            //{
+            //    if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "Chest")
+            //    {
+            //        if (!mapObject.ItemPickedUp())
+            //        {
+            //            mapObject.GetSprite().Play("Opened");
+            //            Init.Message = "You obtained a key";
+            //            Init.MessageEnabled = true;
+            //            mapObject.PickUpItem();
+            //            Inventory.TotalKeys = Inventory.TotalKeys += 1;
+            //        }
+            //    }
+            //}
         }
     }
 }

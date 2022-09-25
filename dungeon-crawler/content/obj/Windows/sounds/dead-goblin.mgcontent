@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/dead-goblin.mp3</SourceFile>
   <SourceTime>2021-02-18T11:19:39.7099066-06:00</SourceTime>
   <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/sounds/dead-goblin.xnb</DestFile>
-  <DestTime>2022-09-23T23:20:32.0906416-05:00</DestTime>
+  <DestTime>2022-09-24T22:20:46.02127-05:00</DestTime>
   <Importer>Mp3Importer</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

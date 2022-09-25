@@ -151,8 +151,8 @@ namespace DungeonCrawler
             MotionVector = new Vector2(playerCollisionBox.X, playerCollisionBox.Y);
             //  ActionButtonPressed = false;
 
-            // If action button 'E' is pressed.
-            if (newState.IsKeyDown(Keys.E) && oldState.IsKeyUp(Keys.E))
+            // If action button 'F' is pressed.
+            if (newState.IsKeyDown(Keys.F) && oldState.IsKeyUp(Keys.F))
             {
                 ActionButtonPressed = true;
             }
