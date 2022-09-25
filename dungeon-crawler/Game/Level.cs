@@ -114,6 +114,28 @@ namespace DungeonCrawler
             return enemyList;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content">ContentManager instance</param>
+        /// <param name="mapObject">Map object to assign sprite, position and ID to.</param>
+        /// <param name="spriteName">Name of sprite</param>
+        public void AddNpc(ContentManager content, MapObject mapObject, string spriteName)
+        {
+            Entity entity = new Entity(Sprites.GetSprite(spriteName));
+            entity.LoadContent(content);
+            entity.State = Action.IdleSouth1;
+            entity.Position = mapObject.GetPosition();
+            entity.Name = spriteName;
+            IBox entityCollidable = map.GetWorld().Create(entity.Position.X, entity.Position.Y, 16, 16);
+            mapObject.SetCollisionBox(entityCollidable);
+            if (mapObject.GetCustomProperties().Count > 0)
+            {
+                entity.ID = mapObject.GetCustomProperties()[0].ToString();
+            }
+            NPCList.Add(entity);
+        }
+
         public static Entity GetNpcByID(string npcId)
         {
             Entity npcByName = null;
@@ -194,59 +216,25 @@ namespace DungeonCrawler
                         enemyList.Add(blueSlimeEntity);
                         break;
                     case ("FIRE_MAGE"):
-                        Entity fireProfessorEntity = new Entity(Sprites.GetSprite("FIRE_MAGE"));
-                        fireProfessorEntity.LoadContent(content);
-                        fireProfessorEntity.State = Action.IdleSouth1;
-                        fireProfessorEntity.Position = mapObject.GetPosition();
-                        fireProfessorEntity.Name = "FIRE_MAGE";
-                        IBox fireProfessorCollidable = map.GetWorld().Create(fireProfessorEntity.Position.X, fireProfessorEntity.Position.Y, 16, 16);
-                        mapObject.SetCollisionBox(fireProfessorCollidable);
-                        if (mapObject.GetCustomProperties().Count > 0)
-                        {
-                            fireProfessorEntity.ID = mapObject.GetCustomProperties()[0].ToString();
-                        }
-                        NPCList.Add(fireProfessorEntity);
+                        AddNpc(content, mapObject, "FIRE_MAGE");
+                        break;
+                    case ("FROST_MAGE"):
+                        AddNpc(content, mapObject, "FROST_MAGE");
+                        break;
+                    case ("GREEN_MAGE"):
+                        AddNpc(content, mapObject, "GREEN_MAGE");
                         break;
                     case ("GUARD"):
-                        Entity guardEntity = new Entity(Sprites.GetSprite("GUARD"));
-                        guardEntity.LoadContent(content);
-                        guardEntity.State = Action.IdleSouth1;
-                        guardEntity.Position = mapObject.GetPosition();
-                        guardEntity.Name = "GUARD";
-                        IBox guardEntityCollidable = map.GetWorld().Create(guardEntity.Position.X, guardEntity.Position.Y, 16, 16);
-                        mapObject.SetCollisionBox(guardEntityCollidable);
-                        if (mapObject.GetCustomProperties().Count > 0)
-                        {
-                            guardEntity.ID = mapObject.GetCustomProperties()[0].ToString();
-                        }
-                        NPCList.Add(guardEntity);
+                        AddNpc(content, mapObject, "GUARD");
                         break;
                     case ("ITEM_MERCHANT"):
-                        Entity itemMerchantEntity = new Entity(Sprites.GetSprite("ITEM_MERCHANT"));
-                        itemMerchantEntity.LoadContent(content);
-                        itemMerchantEntity.State = Action.IdleSouth1;
-                        itemMerchantEntity.Position = mapObject.GetPosition();
-                        IBox itemMerchantCollidable = map.GetWorld().Create(itemMerchantEntity.Position.X, itemMerchantEntity.Position.Y, 16, 16);
-                        mapObject.SetCollisionBox(itemMerchantCollidable);
-                        if (mapObject.GetCustomProperties().Count > 0)
-                        {
-                            itemMerchantEntity.ID = mapObject.GetCustomProperties()[0].ToString();
-                        }
-                        NPCList.Add(itemMerchantEntity);
+                        AddNpc(content, mapObject, "ITEM_MERCHANT");
                         break;
                     case ("NOVICE_MAGE"):
-                        Entity noviceMageEntity = new Entity(Sprites.GetSprite("NOVICE_MAGE"));
-                        noviceMageEntity.LoadContent(content);
-                        noviceMageEntity.State = Action.IdleSouth1;
-                        noviceMageEntity.Position = mapObject.GetPosition();
-                        noviceMageEntity.Name = "NOVICE_MAGE";
-                        IBox noviceMageCollidable = map.GetWorld().Create(noviceMageEntity.Position.X, noviceMageEntity.Position.Y, 16, 16);
-                        mapObject.SetCollisionBox(noviceMageCollidable);
-                        if (mapObject.GetCustomProperties().Count > 0)
-                        {
-                            noviceMageEntity.ID = mapObject.GetCustomProperties()[0].ToString();
-                        }
-                        NPCList.Add(noviceMageEntity);
+                        AddNpc(content, mapObject, "NOVICE_MAGE");
+                        break;
+                    case ("THUNDER_MAGE"):
+                        AddNpc(content, mapObject, "THUNDER_MAGE");
                         break;
                     case ("GREEN_PORTAL"):
                         AnimatedSprite greenPortalSprite = new AnimatedSprite(Sprites.GetSprite("GREEN_PORTAL"));

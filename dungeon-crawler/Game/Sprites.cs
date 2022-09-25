@@ -39,7 +39,7 @@ namespace DungeonCrawler
             SpriteLoader batSprite = new SpriteLoader(content, "BAT", @"spritesheets\Bat", 32, 32);
             float batAnimationSpeed = .3f;
             batSprite.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
-            batSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2}, batAnimationSpeed, true);
+            batSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
             batSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
             batSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
             batSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, batAnimationSpeed, true);
@@ -101,23 +101,38 @@ namespace DungeonCrawler
 
             // Fire Mage
             SpriteLoader fireProfessorSprite = new SpriteLoader(content, "FIRE_MAGE", @"spritesheets\fire_mage", 24, 24);
-            fireProfessorSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            fireProfessorSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
             SpriteList.Add(fireProfessorSprite);
+
+            // Frost Mage
+            SpriteLoader frostProfessorSprite = new SpriteLoader(content, "FROST_MAGE", @"spritesheets\FROST_MAGE", 24, 24);
+            frostProfessorSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
+            SpriteList.Add(frostProfessorSprite);
+
+            // Thunder Mage
+            SpriteLoader thunderProfessorSprite = new SpriteLoader(content, "THUNDER_MAGE", @"spritesheets\THUNDER_MAGE", 24, 24);
+            thunderProfessorSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
+            SpriteList.Add(thunderProfessorSprite);
+
+            // Green Mage
+            SpriteLoader librarianSprite = new SpriteLoader(content, "GREEN_MAGE", @"spritesheets\GREEN_MAGE", 24, 24);
+            librarianSprite.AddAnimation("idleSouth1", new[] { 3 }, 0.9f, true);
+            SpriteList.Add(librarianSprite);
 
             // Item Merchant
             SpriteLoader itemMerchantSprite = new SpriteLoader(content, "ITEM_MERCHANT", @"spritesheets\ITEM_MERCHANT", 24, 24);
-            itemMerchantSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            itemMerchantSprite.AddAnimation("idleSouth1", new[] { 3 }, 0.9f, false);
             SpriteList.Add(itemMerchantSprite);
 
             // Novice Mage
             SpriteLoader noviceMageSprite = new SpriteLoader(content, "NOVICE_MAGE", @"spritesheets\NOVICE_MAGE", 24, 24);
-            noviceMageSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            noviceMageSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
             noviceMageSprite.AddAnimation("idleNorth1", new[] { 7 }, 2f, true);
             SpriteList.Add(noviceMageSprite);
 
             // Guard
             SpriteLoader guardSprite = new SpriteLoader(content, "GUARD", @"spritesheets\knight", 24, 24);
-            guardSprite.AddAnimation("idle", new[] { 0 }, 0.9f, false);
+            guardSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
             SpriteList.Add(guardSprite);
 
             // Green Portal

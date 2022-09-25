@@ -20,6 +20,7 @@ using Humper;
 using DungeonCrawler.Interface;
 using DungeonCrawler.Engine;
 using Humper.Responses;
+using Demo.Interface;
 
 namespace DungeonCrawler
 {
@@ -93,7 +94,7 @@ namespace DungeonCrawler
             playerAnimation.Add("attackNorthPattern2", new SpriteSheetAnimationData(new[] { 93, 94, 95}, .1f, isLooping: true));
             playerAnimation.Add("idleNorth1", new SpriteSheetAnimationData(new[] { 7 }));
             playerAnimation.Add("idleNorth2", new SpriteSheetAnimationData(new[] { 82 }));
-            playerAnimation.Add("dead", new SpriteSheetAnimationData(new[] { 48, 49, 50 }, 0.08f, isLooping: false));
+            playerAnimation.Add("dead", new SpriteSheetAnimationData(new[] { 10 }, 0.08f, isLooping: false));
             StatusBarTexture = content.Load<Texture2D>(@"interface\statusbar");
             HealthBarTexture = content.Load<Texture2D>(@"interface\healthbar");
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
@@ -204,7 +205,7 @@ namespace DungeonCrawler
             }
 
             // Handle item inventory
-            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.SpellInventory.InventoryOpen && !Init.ShopInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.SpellInventory.InventoryOpen && !Init.ItemShopInventory.InventoryOpen)
             {
                 if (Init.ItemInventory.InventoryOpen)
                 {
@@ -217,7 +218,7 @@ namespace DungeonCrawler
             }
 
             // Handle spell inventory
-            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.ItemInventory.InventoryOpen & !Init.ShopInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.ItemInventory.InventoryOpen & !Init.ItemShopInventory.InventoryOpen)
             {
                 if (Init.SpellInventory.InventoryOpen)
                 {
@@ -258,7 +259,7 @@ namespace DungeonCrawler
             //    PlayerWeapon = bowWeapon;
             //}
 
-            if (!InMenu && !Init.ItemInventory.InventoryOpen && !Init.SpellInventory.InventoryOpen && !Init.ShopInventory.InventoryOpen)
+            if (!InMenu && !Init.ItemInventory.InventoryOpen && !Init.SpellInventory.InventoryOpen && !Init.ItemShopInventory.InventoryOpen)
             {
                 // Attacking south
                 if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern1 ||

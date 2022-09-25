@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 using Demo.Game;
 using System.Diagnostics;
+using Demo.Interface;
 
 namespace DungeonCrawler.Scenes
 {
@@ -52,11 +53,12 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-            int[] npcIDs = { 15, 16, 17, 18, 19, 20, 21, 22 };
+            int[] npcIDs = { 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30 };
 
             foreach(int npcId in npcIDs)
             {
                 Entity npc = Level.GetNpcByID(npcId.ToString());
+                npc.Sprite.Play("idleSouth1");
                 NPCList.Add(npc);
             }
         }
@@ -75,11 +77,11 @@ namespace DungeonCrawler.Scenes
                         int gold = randomGold.Next(1, 50);
                         Init.Message = "You obtained " + gold + " gold.";
                         Init.MessageEnabled = true;
-                        mapObject.Interact();
+                       // mapObject.Interact();
                         //stopWatch.Start();
 
-                        //if (stopWatch.ElapsedMilliseconds < 500)
-                        //{
+                        ////if (stopWatch.ElapsedMilliseconds < 500)
+                        ////{
                         //    float time = stopWatch.ElapsedMilliseconds / 75;
                         //    float speed = MathHelper.PiOver4;
                         //    float radius = 50.0f;
@@ -88,7 +90,7 @@ namespace DungeonCrawler.Scenes
                         //        new Vector2((float)Math.Cos(time * speed) * radius + origin.X,
                         //        (float)Math.Sin(time * speed) * radius + origin.Y
                         //        );
-                        //}
+                        ////}
 
                     }
                 }
@@ -96,6 +98,11 @@ namespace DungeonCrawler.Scenes
 
             foreach (Entity npc in NPCList)
             {
+                npc.Update(gameTime);
+                if (npc == null)
+                {
+                    Console.WriteLine("NPC not found. Are you missing an NPC Name or ID?");
+                }
                 if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
                 {
                     string message = "";
@@ -123,7 +130,7 @@ namespace DungeonCrawler.Scenes
                             Init.DialogBox.StartDialog = true;
                             break;
                         case ("18"):
-                            Init.ShopOpen = true;
+                            Init.shops.Open(Shop.ShopType.ITEM_SHOP);
                             break;
                         case ("19"):
                             message =
@@ -145,13 +152,62 @@ namespace DungeonCrawler.Scenes
                             Init.DialogBox.Text = message;
                             Init.DialogBox.StartDialog = true;
                             break;
+                        case ("23"):
+                            message =
+                                "\nI am the warden of frost." +
+                                "\nFoes and environment alike may be manipulated with ice.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("24"):
+                            message =
+                                "\nShh..I'm trying to study.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("25"):
+                            message =
+                                "\nIf your frost powers are strong enough.." +
+                                "\nYou could freeze bodies of water.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("26"):
+                            message =
+                                "\nSome foes react differently to ice magic." +
+                                "\nI've learned it's just trial and error.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("27"):
+                            message =
+                                "\nI am the warden of thunder." +
+                                "\nBehold the power of the mighty bolt.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("28"):
+                            message =
+                                "\nThunder is my favorite element.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("29"):
+                            message =
+                                "\nI can't seem to stay awake.";
+                            Init.DialogBox.Text = message;
+                            Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("30"):
+                            Init.shops.Open(Shop.ShopType.SPELL_SHOP);
+                            break;
                     }
                 }
                 else
                 {
-                    if (npc.ID == "18" && !Init.Player.BoundingBox.Intersects(npc.BoundingBox))
+                    if (npc.ID == "18" && !Init.Player.BoundingBox.Intersects(npc.BoundingBox) && npc.ID == "30" && !Init.Player.BoundingBox.Intersects(npc.BoundingBox))
                     {
-                        Init.ShopOpen = false;
+                        Shop.ShopOpen = false;
                     }
                 }
             }

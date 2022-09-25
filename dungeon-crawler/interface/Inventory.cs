@@ -12,7 +12,7 @@ using MonoGame.Extended.Sprites;
 
 namespace DungeonCrawler.Interface
 {
-    class Inventory : Scene
+    public class Inventory : Scene
     {
         Texture2D inventoryTexture;
         Texture2D selectedItemTexture;
@@ -257,7 +257,7 @@ namespace DungeonCrawler.Interface
 
             if (itemUsed)
             {
-                if (InventoryType == "shop")
+                if (InventoryType == "SPELL_SHOP" || InventoryType == "ITEM_SHOP")
                 {
                     if (itemList[SelectedItem].Price > Init.Player.Gold)
                     {
@@ -270,7 +270,7 @@ namespace DungeonCrawler.Interface
                         AddItem(itemList[SelectedItem]);
                     }
                 }
-                else if (InventoryType == "inventory")
+                else if (InventoryType == "PLAYER_INVENTORY")
                 {
                     Item foundItem = null;
 

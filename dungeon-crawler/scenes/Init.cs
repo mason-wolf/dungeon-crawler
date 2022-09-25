@@ -22,6 +22,7 @@ using Microsoft.Xna.Framework.Content;
 using DungeonCrawler.Interface;
 using System.Diagnostics;
 using Demo.Game;
+using Demo.Interface;
 
 namespace DungeonCrawler.Scenes
 {
@@ -42,8 +43,9 @@ namespace DungeonCrawler.Scenes
 
         public static Inventory ItemInventory;
         public static Inventory SpellInventory;
-        public static Inventory ShopInventory;
-
+        public static Inventory ItemShopInventory;
+        public static Inventory SpellShopInventory;
+        public static Shop shops;
         // Stores list of global items.
         public static Items Items { get; set; }
         // Stores a list of teleporters from imported maps.
@@ -173,21 +175,26 @@ namespace DungeonCrawler.Scenes
             escapeMenu.SetMenuItems(items);
 
             ItemInventory.MenuTitle = "Items";
-            ItemInventory.InventoryType = "inventory";
+            ItemInventory.InventoryType = "PLAYER_INVENTORY";
 
             SpellInventory.MenuTitle = "Spells";
             SpellInventory.InventoryType = "spells";
 
-            ShopInventory = new Inventory(Content);
-            ShopInventory.InventoryType = "shop";
-            ShopInventory.MenuTitle = "Shop";
+            ItemShopInventory = new Inventory(Content);
+            ItemShopInventory.InventoryType = "ITEM_SHOP";
+            ItemShopInventory.MenuTitle = "Item Shop";
             
-            // Add items to shop
             // Health potion
-            ShopInventory.Contents.Add(Items.GetItemById(3));
+            ItemShopInventory.Contents.Add(Items.GetItemById(3));
             // Mana potion
-            ShopInventory.Contents.Add(Items.GetItemById(4));
+            ItemShopInventory.Contents.Add(Items.GetItemById(4));
+            SpellShopInventory = new Inventory(Content);
+            SpellShopInventory.InventoryType = "SPELL_SHOP";
+            SpellShopInventory.MenuTitle = "Spell Shop";
 
+            shops = new Shop();
+            shops.Add(ItemShopInventory);
+            shops.Add(SpellShopInventory);
 
             DialogBox = new DialogBox(game, Font);
 
@@ -290,7 +297,7 @@ namespace DungeonCrawler.Scenes
             }
 
             // If the player dies, reload and restart from beginning.
-            if (pauseAfterDeathFrames > 200)
+            if (pauseAfterDeathFrames > 100)
             {
                 if (Player.EnemyList.Count > 0)
                 {
@@ -301,13 +308,10 @@ namespace DungeonCrawler.Scenes
                     }
                 }
 
-                levelList.Clear();
                 TransitionState = true;
-                Content.Unload();
-                LoadContent();
 
                 FadeInMap("CASTLE");
-                SelectedScene = Scene.CASTLE;
+                SelectedScene = Scene.LOAD_MENU;
                 Player.Position = new Vector2(335f, 150f);
                 pauseAfterDeathFrames = 0;
                 Player.Dead = false;
@@ -326,13 +330,14 @@ namespace DungeonCrawler.Scenes
 
             KeyBoardNewState = Keyboard.GetState();
 
-            OpenShop();
             HandleDialog();
 
             DialogBox.Update();
             ItemInventory.Update(gameTime);
             SpellInventory.Update(gameTime);
-            ShopInventory.Update(gameTime);
+
+            shops.ListenForInput(KeyBoardNewState, KeyBoardOldState);
+            shops.Update(gameTime);
 
             Player.Update(gameTime);
 
@@ -403,8 +408,7 @@ namespace DungeonCrawler.Scenes
                 DialogBox.Draw(spriteBatch);
                 ItemInventory.Draw(spriteBatch);
                 SpellInventory.Draw(spriteBatch);
-                ShopInventory.Draw(spriteBatch);
-
+                shops.Draw(spriteBatch);
             }
 
             if (Player.Dead)
@@ -416,25 +420,12 @@ namespace DungeonCrawler.Scenes
             {
                 ShowMessage(Message, spriteBatch);
             }
+
+            shops.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        public static bool ShopOpen = false;
-        public static void OpenShop()
-        {
-            if (KeyBoardNewState.IsKeyDown(Keys.F) && KeyBoardOldState.IsKeyUp(Keys.F) && ShopOpen && !ItemInventory.InventoryOpen && !SpellInventory.InventoryOpen)
-            {
-                if (ShopInventory.InventoryOpen)
-                {
-                    ShopInventory.InventoryOpen = false;
-                }
-                else
-                {
-                    ShopInventory.InventoryOpen = true;
-                }
-            }
-        }
         public static void HandleDialog()
         {
             if (KeyBoardNewState.IsKeyDown(Keys.E) && KeyBoardOldState.IsKeyUp(Keys.E) && DialogBox.StartDialog)
