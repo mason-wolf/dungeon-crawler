@@ -281,7 +281,15 @@ namespace DungeonCrawler.Interface
                             // Health Potion
                             if (item.ID == 3)
                             {
-                                Init.Player.CurrentHealth += 25;
+                                double healthToHeal = Init.Player.MaxHealth - Init.Player.CurrentHealth;
+                                if (healthToHeal >= 25)
+                                {
+                                    Init.Player.CurrentHealth += 25;
+                                }
+                                else
+                                {
+                                    Init.Player.CurrentHealth = Init.Player.MaxHealth;
+                                }
                             }
                             item.Quantity -= 1;
                             AssignItem(item);

@@ -13,27 +13,35 @@ namespace Demo.Game
 
         public Items()
         {
-            Item item = new Item();
-            item.ItemTexture = Sprites.GetTexture("HEALTH_POTION_ICON");
-            item.Name = "HEALTH POTION";
-            item.Description = "Restores some health.";
-            item.ID = 3;
-            item.Price = 100;
-            ItemList.Add(item);
+            Item healthPotion = new Item();
+            healthPotion.ItemTexture = Sprites.GetTexture("HEALTH_POTION_ICON");
+            healthPotion.Name = "HEALTH POTION";
+            healthPotion.Description = "Restores some health.";
+            healthPotion.ID = 3;
+            healthPotion.Price = 100;
+            ItemList.Add(healthPotion);
 
-            item = new Item();
-            item.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
-            item.Name = "FIREBALL";
-            item.ID = 1;
-            item.Description = "Shoots a flame.";
-            ItemList.Add(item);
+            Item manaPotion = new Item();
+            manaPotion.ItemTexture = Sprites.GetTexture("MANA_POTION_ICON");
+            manaPotion.Name = "MANA POTION";
+            manaPotion.Description = "Restores some mana.";
+            manaPotion.ID = 4;
+            manaPotion.Price = 100;
+            ItemList.Add(manaPotion);
 
-            item = new Item();
-            item.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
-            item.Name = "ICEBOLT";
-            item.ID = 2;
-            item.Description = "Casts a bolt of ice.";
-            ItemList.Add(item);
+            Item fireball1 = new Item();
+            fireball1.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
+            fireball1.Name = "FIREBALL";
+            fireball1.ID = 1;
+            fireball1.Description = "Shoots a flame.";
+            ItemList.Add(fireball1);
+
+            Item icebolt1 = new Item();
+            icebolt1.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
+            icebolt1.Name = "ICEBOLT";
+            icebolt1.ID = 2;
+            icebolt1.Description = "Casts a bolt of ice.";
+            ItemList.Add(icebolt1);
         }
 
         public static Item GetItemById(int id)

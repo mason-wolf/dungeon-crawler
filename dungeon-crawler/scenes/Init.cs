@@ -173,36 +173,14 @@ namespace DungeonCrawler.Scenes
             ShopInventory = new Inventory(Content);
             ShopInventory.InventoryType = "shop";
             ShopInventory.MenuTitle = "Shop";
+            
+            // Add items to shop
+            // Health potion
+            ShopInventory.Contents.Add(Items.GetItemById(3));
+            // Mana potion
+            ShopInventory.Contents.Add(Items.GetItemById(4));
 
-            Item fireballSpell = new Item();
-            fireballSpell.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
-            fireballSpell.Name = "FIREBALL";
-            fireballSpell.ID = 1;
-            fireballSpell.Description = "Shoots a flame.";
-
-            Item iceBoltSpell = new Item();
-            iceBoltSpell.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
-            iceBoltSpell.Name = "ICEBOLT";
-            iceBoltSpell.ID = 2;
-            iceBoltSpell.Description = "Casts a bolt of ice.";
-
-            Item healthPotion = new Item();
-            healthPotion.ItemTexture = Sprites.GetTexture("HEALTH_POTION_ICON");
-            healthPotion.Name = "HEALTH POTION";
-            healthPotion.Description = "Restores some health.";
-            healthPotion.ID = 3;
-            healthPotion.Price = 100;
-
-            Item manaPotion = new Item();
-            manaPotion.ItemTexture = Sprites.GetTexture("MANA_POTION_ICON");
-            manaPotion.Name = "MANA POTION";
-            manaPotion.Description = "Restores some mana.";
-            manaPotion.Price = 100;
-
-            SpellInventory.Contents.Add(fireballSpell);
-            SpellInventory.Contents.Add(iceBoltSpell);
-            ShopInventory.Contents.Add(healthPotion);
-            ShopInventory.Contents.Add(manaPotion);
+            SpellInventory.Contents.Add(Items.GetItemById((1)));
 
             DialogBox = new DialogBox(game, Font);
 

@@ -181,6 +181,7 @@ namespace DungeonCrawler.Scenes
         /// <param name="saveSlot"></param>
         void LoadGame(int saveSlot)
         {
+            int lineCount = 0;
             using (StreamReader streamReader = new StreamReader("Save_" + saveSlot + ".txt"))
             {
                 string line;
@@ -188,6 +189,7 @@ namespace DungeonCrawler.Scenes
                 Init.SpellInventory.Contents.Clear();
                 while ((line = streamReader.ReadLine()) != null)
                 {
+                    lineCount++;
                     string value = line.Split('=').First();
                     switch(value)
                     {
@@ -226,6 +228,17 @@ namespace DungeonCrawler.Scenes
                             break;
                     }
                 }
+            }
+            
+            // If save is empty, reset player's stats.
+            if (lineCount == 0)
+            {
+                Init.Player.MaxHealth = 100;
+                Init.Player.CurrentHealth = 100;
+                Init.Player.Gold = 0;
+                Init.Player.EnemiesKilled = 0;
+                Init.SpellInventory.Contents.Clear();
+                Init.ItemInventory.Contents.Clear();
             }
         }
     }

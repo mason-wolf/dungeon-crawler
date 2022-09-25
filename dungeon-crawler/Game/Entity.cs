@@ -391,7 +391,7 @@ namespace DungeonCrawler
                         {
                             if (projectile.BoundingBox.Intersects(entity.BoundingBox) && projectile.TargetHit == false && entity.state != Action.Dead)
                             {
-                                entity.CurrentHealth -= 4;
+                                entity.CurrentHealth -= 5;
                                 entity.Aggroed = true;
                                 projectile.TargetHit = true;
                             }
@@ -444,8 +444,8 @@ namespace DungeonCrawler
                 // Draw NPC Status and Health Bars
                 if (CurrentHealth > 0)
                 {
-                    spriteBatch.Draw(NPCStatusBarTexture, position, new Rectangle(0, 0, Convert.ToInt32(MaxHealth), 2), Color.Black);
-                    spriteBatch.Draw(StaminaBarTexture, position, new Rectangle(0, 0, Convert.ToInt32(CurrentHealth), 2), Color.White);
+                    spriteBatch.Draw(NPCStatusBarTexture, position, new Rectangle(0, 0, 15, 2), Color.Black);
+                    spriteBatch.Draw(StaminaBarTexture, position, new Rectangle(0, 0, (int)((CurrentHealth / MaxHealth) * 15), 2), Color.White);
                 }
             }
         }

@@ -153,8 +153,8 @@ namespace DungeonCrawler
                         Entity skeletonEntity = new Entity(Sprites.GetSprite("SKELETON"));
                         skeletonEntity.LoadContent(content);
                         skeletonEntity.State = Action.IdleEast1;
-                        skeletonEntity.MaxHealth = 15;
-                        skeletonEntity.CurrentHealth = 15;
+                        skeletonEntity.MaxHealth = 100;
+                        skeletonEntity.CurrentHealth = 100;
                         skeletonEntity.AttackDamage = 0.05;
                         skeletonEntity.Position = mapObject.GetPosition();
                         skeletonEntity.Name = "SKELETON";

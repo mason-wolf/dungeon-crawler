@@ -152,7 +152,7 @@
   <object id="323" name="BAT" x="581.75" y="188.5"/>
   <object id="324" name="BAT" x="395.333" y="585.333"/>
   <object id="325" name="BAT" x="566.333" y="495.667"/>
-  <object id="326" name="BAT" x="489.667" y="759"/>
+  <object id="326" name="BAT" x="273.667" y="706.5"/>
   <object id="327" name="ZOMBIE" x="472.5" y="570.5"/>
   <object id="328" name="ZOMBIE" x="767.667" y="599.5"/>
   <object id="329" name="ZOMBIE" x="665.333" y="192"/>
