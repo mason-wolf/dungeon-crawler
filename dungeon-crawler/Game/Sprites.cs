@@ -147,6 +147,11 @@ namespace DungeonCrawler
             greenPortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
             SpriteList.Add(greenPortalSprite);
 
+            // Red Portal
+            SpriteLoader redPortalSprite = new SpriteLoader(content, "RED_PORTAL", @"spritesheets\RED_PORTAL", 32, 32);
+            redPortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
+            SpriteList.Add(redPortalSprite);
+
             // Bookshelf
             SpriteLoader bookshelfSprite = new SpriteLoader(content, "BOOKSHELF", @"objects\bookshelf", 24, 24);
             bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
@@ -248,10 +253,17 @@ namespace DungeonCrawler
             SpriteLoader bookSprite = new SpriteLoader(content, "BOOK", @"items\BOOK", 16, 16);
             bookSprite.AddAnimation("idle", new[] { 0 }, 0.5f, false);
             SpriteList.Add(bookSprite);
-
+            
+            // Bed
             SpriteLoader bedSprite = new SpriteLoader(content, "BED", @"objects\BED", 24, 32);
             bedSprite.AddAnimation("idle", new[] { 0 }, 1f, true);
 
+            // Homing Crystal
+            SpriteLoader homingCrystalSprite = new SpriteLoader(content, "HOMING_CRYSTAL", @"items\HOMING_CRYSTAL", 16, 16);
+            homingCrystalSprite.AddAnimation("idle", new[] { 0 }, 1f, true);
+
+
+            SpriteList.Add(homingCrystalSprite);
             SpriteList.Add(fireBall1Icon);
             SpriteList.Add(icebolt1Icon);
             SpriteList.Add(thunderbolt1Icon);

@@ -197,6 +197,18 @@ namespace DungeonCrawler.Scenes
                             value = line.Split('=').Last();
                             Init.Player.CurrentHealth = (int)Math.Round(Double.Parse(value));
                             break;
+                        case ("PLAYER_LEVEL"):
+                            value = line.Split('=').Last();
+                            Init.Player.Level = Int32.Parse(value);
+                            break;
+                        case ("PLAYER_XP"):
+                            value = line.Split('=').Last();
+                            Init.Player.XP = (int)Math.Round(Double.Parse(value));
+                            break;
+                        case ("PLAYER_XP_REMAINING"):
+                            value = line.Split('=').Last();
+                            Init.Player.XPRemaining = (int)Math.Round(Double.Parse(value));
+                            break;
                         case ("PLAYER_MANA"):
                             value = line.Split('=').Last();
                             Init.Player.CurrentMana = (int)Math.Round(Double.Parse(value));

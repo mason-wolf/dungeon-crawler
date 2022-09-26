@@ -14,6 +14,7 @@ using MonoGame.Extended.Sprites;
 using RoyT.AStar;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,8 @@ namespace DungeonCrawler
         SceneLogic scene;
         public List<MapObject> MapObjects { get; set; }
         private Vector2 startingPosition { get; set; }
+
+        private bool LeveledUp { get; set; } = false;
         public Vector2 GetStartingPosition()
         {
             return startingPosition;
@@ -179,6 +182,7 @@ namespace DungeonCrawler
                         skeletonEntity.AttackDamage = 0.05;
                         skeletonEntity.Position = mapObject.GetPosition();
                         skeletonEntity.Name = "SKELETON";
+                        skeletonEntity.XP = 10;
                         enemyList.Add(skeletonEntity);
                         break;
                     case ("BAT"):
@@ -190,6 +194,7 @@ namespace DungeonCrawler
                         batEntity.AttackDamage = 0.03;
                         batEntity.Position = mapObject.GetPosition();
                         batEntity.Name = "BAT";
+                        batEntity.XP = 10;
                         enemyList.Add(batEntity);
                         break;
                     case ("ZOMBIE"):
@@ -201,6 +206,7 @@ namespace DungeonCrawler
                         zombieEntity.AttackDamage = 0.03;
                         zombieEntity.Position = mapObject.GetPosition();
                         zombieEntity.Name = "ZOMBIE";
+                        zombieEntity.XP = 10;
                         enemyList.Add(zombieEntity);
                         break;
                     case ("BLUE_SLIME"):
@@ -212,6 +218,7 @@ namespace DungeonCrawler
                         blueSlimeEntity.AttackDamage = 0.06;
                         blueSlimeEntity.Position = mapObject.GetPosition();
                         blueSlimeEntity.Name = "BLUE_SLIME";
+                        blueSlimeEntity.XP = 10;
                         enemyList.Add(blueSlimeEntity);
                         break;
                     case ("FIRE_MAGE"):
@@ -244,6 +251,12 @@ namespace DungeonCrawler
                         greenPortalSprite.Position = mapObject.GetPosition();
                         mapObject.SetSprite(greenPortalSprite);
                         break;
+                    case ("RED_PORTAL"):
+                        AnimatedSprite redPortalSprite = new AnimatedSprite(Sprites.GetSprite("RED_PORTAL"));
+                        redPortalSprite.Play("idle");
+                        redPortalSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(redPortalSprite);
+                        break;
                     case ("TORCH"):
                         AnimatedSprite torchSprite = new AnimatedSprite(Sprites.GetSprite("TORCH"));
                         torchSprite.Play("BURNING");
@@ -267,12 +280,18 @@ namespace DungeonCrawler
                         mapObject.SetSprite(bedSprite);
                         break;
                     case ("CHEST"):
-                        AnimatedSprite chestSprite = new AnimatedSprite(Sprites.GetSprite("CHEST"));
-                        chestSprite.Play("Unopened");
-                        chestSprite.Position = mapObject.GetPosition();
-                        IBox chestCollidable = map.GetWorld().Create(chestSprite.Position.X, chestSprite.Position.Y - 10, 16, 24);
-                        mapObject.SetCollisionBox(chestCollidable);
-                        mapObject.SetSprite(chestSprite);
+                        // Randomly populate a chest.
+                        Random randomChest = new Random();
+                        int chance = randomChest.Next(1, 4);
+                        if (chance == 2)
+                        {
+                            AnimatedSprite chestSprite = new AnimatedSprite(Sprites.GetSprite("CHEST"));
+                            chestSprite.Play("Unopened");
+                            chestSprite.Position = mapObject.GetPosition();
+                            IBox chestCollidable = map.GetWorld().Create(chestSprite.Position.X, chestSprite.Position.Y - 10, 16, 24);
+                            mapObject.SetCollisionBox(chestCollidable);
+                            mapObject.SetSprite(chestSprite);
+                        }
                         break;
                     case ("BOOKSHELF"):
                         AnimatedSprite bookshelfSprite = new AnimatedSprite(Sprites.GetSprite("BOOKSHELF"));
@@ -357,6 +376,18 @@ namespace DungeonCrawler
                 if (enemy.CurrentHealth <= 0 && enemy.Dead == false)
                 {
                     Init.Player.EnemiesKilled += 1;
+                    Init.Player.XP += enemy.XP;
+
+                    if (Init.Player.XP >= Init.Player.XPRemaining)
+                    {
+                        Init.Player.Level += 1;
+                        Init.Message = "You reached Level " + Init.Player.Level + "!";
+                        Init.Player.MaxHealth += 5;
+                        Init.Player.MaxMana += 2;
+                        Init.Player.XPRemaining = Init.Player.XPRemaining + (Init.Player.XPRemaining * .50);
+                        Init.Player.XP = 0;
+                        LeveledUp = true;
+                    }
                     enemy.State = Action.Dead;
                     enemy.Dead = true;
                     MapObject gold = new MapObject();
@@ -412,8 +443,24 @@ namespace DungeonCrawler
             }
         }
 
+        private Stopwatch stopWatch = new Stopwatch();
         public override void Draw(SpriteBatch spriteBatch)
         {
+
+            if (LeveledUp)
+            {
+                stopWatch.Start();
+
+                if (stopWatch.ElapsedMilliseconds <= 4000)
+                {
+                    spriteBatch.DrawString(Init.Font, "You reached level " + Init.Player.Level + "!", new Vector2(Init.Player.Position.X, Init.Player.Position.Y + 25), Color.Yellow);
+                }
+                else
+                {
+                    stopWatch.Stop();
+                    LeveledUp = false;
+                }
+            }
             foreach (Entity enemy in enemyList)
             {
                 enemy.Draw(spriteBatch);

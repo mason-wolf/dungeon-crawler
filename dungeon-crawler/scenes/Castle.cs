@@ -78,40 +78,9 @@ namespace DungeonCrawler.Scenes
                 NPCList.Add(npc);
             }
         }
-        private Stopwatch stopWatch = new Stopwatch();
+
         public override void Update(GameTime gameTime)
         {
-
-            foreach (MapObject mapObject in MapObjects)
-            {
-                if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "CHEST")
-                {
-                    if (!mapObject.Interacted())
-                    {
-                        mapObject.GetSprite().Play("Opened");
-                        Random randomGold = new Random();
-                        int gold = randomGold.Next(1, 50);
-                        Init.Message = "You obtained " + gold + " gold.";
-                        Init.MessageEnabled = true;
-                       // mapObject.Interact();
-                        //stopWatch.Start();
-
-                        ////if (stopWatch.ElapsedMilliseconds < 500)
-                        ////{
-                        //    float time = stopWatch.ElapsedMilliseconds / 75;
-                        //    float speed = MathHelper.PiOver4;
-                        //    float radius = 50.0f;
-                        //    Vector2 origin = Init.Player.Position;
-                        //    mapObject.GetSprite().Position =
-                        //        new Vector2((float)Math.Cos(time * speed) * radius + origin.X,
-                        //        (float)Math.Sin(time * speed) * radius + origin.Y
-                        //        );
-                        ////}
-
-                    }
-                }
-            }
-
             foreach (Entity npc in NPCList)
             {
                 npc.Update(gameTime);

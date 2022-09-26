@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/staminabar.png</SourceFile>
-  <SourceTime>2021-02-20T16:01:16.2967469-06:00</SourceTime>
-  <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/interface/staminabar.xnb</DestFile>
-  <DestTime>2022-09-25T23:12:20.4277539-05:00</DestTime>
+  <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/HOMING_CRYSTAL.png</SourceFile>
+  <SourceTime>2022-09-25T22:37:11.3509484-05:00</SourceTime>
+  <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/items/HOMING_CRYSTAL.xnb</DestFile>
+  <DestTime>2022-09-25T23:12:21.7511678-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

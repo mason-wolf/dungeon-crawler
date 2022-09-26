@@ -289,6 +289,11 @@ namespace DungeonCrawler.Interface
                                 case (4):
                                     Init.Player.RestoreMana(50);
                                     break;
+                                case (11):
+                                    Init.ItemInventory.InventoryOpen = false;
+                                    Init.TransitionState = true;
+                                    Init.SelectedScene = Init.Scene.CASTLE;
+                                    break;
                                 default:
                                     Item spell = Items.GetItemById(item.ID);
                                     Init.Player.LearnSpell(spell);

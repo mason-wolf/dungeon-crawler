@@ -148,6 +148,9 @@ namespace DungeonCrawler.Scenes
                 streamWriter.WriteLine("PLAYER_HEALTH=" + Init.Player.CurrentHealth);
                 streamWriter.WriteLine("PLAYER_MANA=" + Init.Player.CurrentMana);
                 streamWriter.WriteLine("PLAYER_GOLD=" + Init.Player.Gold);
+                streamWriter.WriteLine("PLAYER_LEVEL=" + Init.Player.Level);
+                streamWriter.WriteLine("PLAYER_XP=" + Init.Player.XP);
+                streamWriter.WriteLine("PLAYER_XP_REMAINING=" + Init.Player.XPRemaining);
                 streamWriter.WriteLine("ENEMIES_KILLED=" + Init.Player.EnemiesKilled);
                 // Save inventory
                 foreach (Item item in Init.ItemInventory.Contents)

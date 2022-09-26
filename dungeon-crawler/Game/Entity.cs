@@ -87,6 +87,9 @@ namespace DungeonCrawler
         public bool Dead { get; set; } = false;
         public bool Aggroed { get; set; } = false;
         public string Name { get; set; }
+        public double XP { get; set;  }
+        public int Level { get; set; }
+        public double XPRemaining { get; set; }
         public PathFinder PathFinder { get; set; }
         public Spell Buff { get; set; }
 
@@ -337,6 +340,20 @@ namespace DungeonCrawler
                         Buff.Sprite.Play("idle");
                         RestoreHealth(15);
                         break;
+                        // TODO Add shield that rotates around the player.
+                        //stopWatch.Start();
+
+                        ////if (stopWatch.ElapsedMilliseconds < 500)
+                        ////{
+                        //    float time = stopWatch.ElapsedMilliseconds / 75;
+                        //    float speed = MathHelper.PiOver4;
+                        //    float radius = 50.0f;
+                        //    Vector2 origin = Init.Player.Position;
+                        //    mapObject.GetSprite().Position =
+                        //        new Vector2((float)Math.Cos(time * speed) * radius + origin.X,
+                        //        (float)Math.Sin(time * speed) * radius + origin.Y
+                        //        );
+                        ////}
                 }
 
                 CurrentMana -= spell.ManaCost;
@@ -364,7 +381,7 @@ namespace DungeonCrawler
             }
 
             // TODO: Better position projectile launch relative to player position.
-            Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y + 15);
+            Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y);
             projectile.Position = projectilePosition;
             projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;

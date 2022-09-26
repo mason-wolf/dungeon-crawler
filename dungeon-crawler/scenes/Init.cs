@@ -45,7 +45,10 @@ namespace DungeonCrawler.Scenes
         public static Inventory SpellInventory;
         public static Inventory ItemShopInventory;
         public static Inventory SpellShopInventory;
+
         public static Shop shops;
+        PlayerStatus PlayerStatus;
+
         // Stores list of global items.
         public static Items Items { get; set; }
         // Stores a list of teleporters from imported maps.
@@ -95,6 +98,9 @@ namespace DungeonCrawler.Scenes
             Player.CurrentStamina = 75;
             Player.AttackDamage = 3.5;
             Player.Gold = 200;
+            Player.Level = 1;
+            Player.XP = 0;
+            Player.XPRemaining = 250;
             ItemInventory = new Inventory(Content);
             SpellInventory = new Inventory(Content);
             base.Initialize();
@@ -190,7 +196,9 @@ namespace DungeonCrawler.Scenes
             ItemShopInventory.Contents.Add(Items.GetItemById(3));
             // Mana potion
             ItemShopInventory.Contents.Add(Items.GetItemById(4));
-
+            // Homing Crystal
+            ItemShopInventory.Contents.Add(Items.GetItemById(11));
+           
             SpellShopInventory = new Inventory(Content);
             SpellShopInventory.InventoryType = "SPELL_SHOP";
             SpellShopInventory.MenuTitle = "Spell Shop";
@@ -209,6 +217,7 @@ namespace DungeonCrawler.Scenes
             shops.Add(ItemShopInventory);
             shops.Add(SpellShopInventory);
 
+            PlayerStatus = new PlayerStatus(Content);
             DialogBox = new DialogBox(game, Font);
 
             SelectedScene = Scene.CASTLE;
@@ -353,6 +362,7 @@ namespace DungeonCrawler.Scenes
             shops.Update(gameTime);
 
             Player.Update(gameTime);
+            PlayerStatus.Update(gameTime);
 
             // Handle player's collision.
             playerCollision.Move(Player.Position.X, Player.Position.Y, (collision) => CollisionResponses.Slide);
@@ -422,6 +432,7 @@ namespace DungeonCrawler.Scenes
                 ItemInventory.Draw(spriteBatch);
                 SpellInventory.Draw(spriteBatch);
                 shops.Draw(spriteBatch);
+                PlayerStatus.Draw(spriteBatch);
             }
 
             if (Player.Dead)

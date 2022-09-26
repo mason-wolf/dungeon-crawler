@@ -95,6 +95,14 @@ namespace Demo.Game
             heal1.ManaCost = 5;
             heal1.Description = "Restores some health.";
             ItemList.Add(heal1);
+
+            Item homingCrystal = new Item();
+            homingCrystal.ItemTexture = Sprites.GetTexture("HOMING_CRYSTAL");
+            homingCrystal.Name = "HOMING CRYSTAL";
+            homingCrystal.ID = 11;
+            homingCrystal.Description = "Sends the user home when rubbed. It's shiny.";
+            homingCrystal.Price = 50;
+            ItemList.Add(homingCrystal);
         }
 
         public static Item GetItemById(int id)

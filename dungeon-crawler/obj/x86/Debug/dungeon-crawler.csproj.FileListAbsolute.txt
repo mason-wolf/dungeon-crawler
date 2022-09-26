@@ -196,3 +196,5 @@ C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\HEAL_1.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\interface\MANA_BAR.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\items\BOOK.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\items\HOMING_CRYSTAL.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\RED_PORTAL.xnb

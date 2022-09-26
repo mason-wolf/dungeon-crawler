@@ -155,7 +155,7 @@ namespace DungeonCrawler
             newMouseState = Mouse.GetState();
 
             // Handle escape menu.
-            if (newState.IsKeyDown(Keys.Escape) && oldState.IsKeyUp(Keys.Escape) || PressedContinue == true)
+            if (newState.IsKeyDown(Keys.Escape) && oldState.IsKeyUp(Keys.Escape) || PressedContinue == true && !Shop.ShopOpen && !PlayerStatus.StatusOpen)
             {
                 // Exit the menu if Escape is pressed or if player pressed continue.
                 if (InMenu)
@@ -202,6 +202,21 @@ namespace DungeonCrawler
                 else
                 {
                     Init.SpellInventory.InventoryOpen = true;
+                }
+            }
+
+            // Handle status screen
+            if (newState.IsKeyDown(Keys.P) && oldState.IsKeyUp(Keys.P) && !Shop.InventoriesOpen() && !Init.ItemInventory.InventoryOpen && !Init.SpellInventory.InventoryOpen)
+            {
+                if (PlayerStatus.StatusOpen)
+                {
+                    PlayerStatus.StatusOpen = false;
+                    InMenu = false;
+                }
+                else
+                {
+                    PlayerStatus.StatusOpen = true;
+                    InMenu = true;
                 }
             }
 
