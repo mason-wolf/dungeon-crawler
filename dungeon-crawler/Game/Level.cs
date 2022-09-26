@@ -453,7 +453,7 @@ namespace DungeonCrawler
 
                 if (stopWatch.ElapsedMilliseconds <= 4000)
                 {
-                    spriteBatch.DrawString(Init.Font, "You reached level " + Init.Player.Level + "!", new Vector2(Init.Player.Position.X, Init.Player.Position.Y + 25), Color.Yellow);
+                    spriteBatch.DrawString(Init.Font, "You reached level " + Init.Player.Level + "!", new Vector2(Init.Player.Position.X - 50, Init.Player.Position.Y - 50), Color.Yellow);
                 }
                 else
                 {

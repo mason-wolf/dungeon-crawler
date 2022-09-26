@@ -70,6 +70,14 @@ namespace Demo.Game
             healBook.Description = "";
             ItemList.Add(healBook);
 
+            Item flameShieldBook = new Item();
+            flameShieldBook.ItemTexture = Sprites.GetTexture("BOOK");
+            flameShieldBook.Name = "FLAME SHIELD";
+            flameShieldBook.ID = 13;
+            flameShieldBook.Price = 400;
+            flameShieldBook.Description = "";
+            ItemList.Add(flameShieldBook);
+
             Spell icebolt1 = new Spell();
             icebolt1.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
             icebolt1.Name = "ICEBOLT";
@@ -103,6 +111,16 @@ namespace Demo.Game
             homingCrystal.Description = "Sends the user home when rubbed. It's shiny.";
             homingCrystal.Price = 50;
             ItemList.Add(homingCrystal);
+
+            Spell flameShield = new Spell();
+            flameShield.ItemTexture = Sprites.GetTexture("FLAME_SHIELD_ICON");
+            flameShield.Name = "FLAME SHIELD";
+            flameShield.ID = 12;
+            flameShield.Description = "Casts a shield of flame for 10 seconds.";
+            flameShield.ManaCost = 15;
+            flameShield.Damage = 2;
+            flameShield.Duration = 10000; 
+            ItemList.Add(flameShield);
         }
 
         public static Item GetItemById(int id)

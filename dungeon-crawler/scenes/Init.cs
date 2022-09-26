@@ -212,6 +212,8 @@ namespace DungeonCrawler.Scenes
             SpellShopInventory.Contents.Add(Items.GetItemById(9));
             // Heal spell
             SpellShopInventory.Contents.Add(Items.GetItemById(10));
+            // Flame Shield Spell
+            SpellShopInventory.Contents.Add(Items.GetItemById(13));
 
             shops = new Shop();
             shops.Add(ItemShopInventory);

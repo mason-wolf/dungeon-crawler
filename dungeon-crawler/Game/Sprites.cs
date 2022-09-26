@@ -221,7 +221,10 @@ namespace DungeonCrawler
             chestSprite.AddAnimation("Unopened", new[] { 0 }, 1f, false);
             chestSprite.AddAnimation("Opened", new[] { 1 }, 1f, false);
             SpriteList.Add(chestSprite);
-            
+
+            // Flame Shield
+            SpriteLoader flameShieldSprite = new SpriteLoader(content, "FLAME_SHIELD", @"spritesheets\FLAME_SHIELD", 16, 16);
+            SpriteList.Add(flameShieldSprite);
 
             // Fireball 1 Icon
             SpriteLoader fireBall1Icon = new SpriteLoader(content, "FIREBALL_1_ICON", @"items\FIREBALL_1_ICON", 16, 16);
@@ -231,6 +234,9 @@ namespace DungeonCrawler
 
             // Thunderbolt 1 Icon
             SpriteLoader thunderbolt1Icon = new SpriteLoader(content, "THUNDERBOLT_1_ICON", @"items\THUNDERBOLT_1_ICON", 16, 16);
+
+            // Flame shield Icon
+            SpriteLoader flameShieldIcon = new SpriteLoader(content, "FLAME_SHIELD_ICON", @"items\FLAME_SHIELD_ICON", 16, 16);
 
             // Heal 1 Icon
             SpriteLoader heal1Icon = new SpriteLoader(content, "HEAL_1_ICON", @"items\HEAL_1_ICON", 16, 16);
@@ -272,6 +278,7 @@ namespace DungeonCrawler
             SpriteList.Add(manaPotionIcon);
             SpriteList.Add(bedSprite);
             SpriteList.Add(heal1Icon);
+            SpriteList.Add(flameShieldIcon);
 
         }
 

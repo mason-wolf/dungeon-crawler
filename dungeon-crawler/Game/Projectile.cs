@@ -14,6 +14,6 @@ namespace Demo.Game
         public string Direction { get; set; }
         public bool TargetHit { get; set; }
         public RectangleF HitBox { get; set; }
-        public int Damage { get; set; }
+        public double Damage { get; set; }
     }
 }

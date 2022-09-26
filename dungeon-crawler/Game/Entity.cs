@@ -334,26 +334,18 @@ namespace DungeonCrawler
                         break;
                     case (6):
                         stopWatch.Restart();
-                        Buff = new Spell();
+                        Buff = spell;
                         Buff.Sprite = new AnimatedSprite(Sprites.GetSprite("HEAL_1"));
                         Buff.Sprite.Position = Position;
+                        Buff.Duration = 800;
                         Buff.Sprite.Play("idle");
                         RestoreHealth(15);
                         break;
-                        // TODO Add shield that rotates around the player.
-                        //stopWatch.Start();
-
-                        ////if (stopWatch.ElapsedMilliseconds < 500)
-                        ////{
-                        //    float time = stopWatch.ElapsedMilliseconds / 75;
-                        //    float speed = MathHelper.PiOver4;
-                        //    float radius = 50.0f;
-                        //    Vector2 origin = Init.Player.Position;
-                        //    mapObject.GetSprite().Position =
-                        //        new Vector2((float)Math.Cos(time * speed) * radius + origin.X,
-                        //        (float)Math.Sin(time * speed) * radius + origin.Y
-                        //        );
-                        ////}
+                    case (12):
+                        stopWatch.Restart();
+                        Buff = spell;
+                        Buff.Sprite = new AnimatedSprite(Sprites.GetSprite("FLAME_SHIELD"));
+                       break;
                 }
 
                 CurrentMana -= spell.ManaCost;
@@ -447,15 +439,43 @@ namespace DungeonCrawler
         {
             if (Buff != null)
             {
-                if (stopWatch.ElapsedMilliseconds < 800)
+                if (stopWatch.ElapsedMilliseconds < Buff.Duration)
                 {
-                    Buff.Sprite.Position = Position;
-                    Buff.Sprite.Update(gameTime);
+                    // Flame shield
+                    if (Buff.ID == 12)
+                    {
+                        float time = stopWatch.ElapsedMilliseconds / 75;
+                        float speed = MathHelper.PiOver4;
+                        float radius = 50.0f;
+                        Buff.BoundingBox = new RectangleF(Buff.Sprite.Position.X, Buff.Sprite.Position.Y, 16, 16);
+                        Vector2 origin = Init.Player.Position;
+                        Buff.Sprite.Position =
+                            new Vector2((float)Math.Cos(time * speed) * radius + origin.X,
+                            (float)Math.Sin(time * speed) * radius + origin.Y
+                            );
+                    }
+                    else
+                    {
+                        Buff.Sprite.Position = Position;
+                        Buff.Sprite.Update(gameTime);
+                    }
                 }
                 else
                 {
                     Buff = null;
                     stopWatch.Stop();
+                }
+            }
+
+            if (Init.Player.EnemyList != null)
+            {
+                foreach (Entity enemy in Init.Player.EnemyList)
+                {
+                    if (Buff != null && Buff.BoundingBox.Intersects(enemy.BoundingBox) && enemy.state != Action.Dead)
+                    {
+                        enemy.CurrentHealth -= Buff.Damage;
+                        enemy.Aggroed = true;
+                    }
                 }
             }
 
