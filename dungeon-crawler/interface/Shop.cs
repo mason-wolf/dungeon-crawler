@@ -15,7 +15,7 @@ namespace Demo.Interface
 {
     public class Shop : Scene
     {
-        private List<Inventory> Inventories = new List<Inventory>();
+        public static List<Inventory> Inventories = new List<Inventory>();
         private KeyboardState newKeyState;
         private KeyboardState oldKeyState;
         public static bool ShopOpen = false;
@@ -92,6 +92,21 @@ namespace Demo.Interface
             {
                 ShopOpen = false;
             }
+        }
+
+        public static bool InventoriesOpen()
+        {
+            bool inventoriesOpen = false;
+
+            foreach (Inventory inventory in Inventories)
+            {
+                if (inventory.InventoryOpen)
+                {
+                    inventoriesOpen = true;
+                }
+            }
+
+            return inventoriesOpen;
         }
     }
 }

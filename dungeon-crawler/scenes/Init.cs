@@ -94,7 +94,7 @@ namespace DungeonCrawler.Scenes
             Player.MaxStamina = 75;
             Player.CurrentStamina = 75;
             Player.AttackDamage = 3.5;
-            Player.Gold = 50;
+            Player.Gold = 200;
             ItemInventory = new Inventory(Content);
             SpellInventory = new Inventory(Content);
             base.Initialize();
@@ -190,9 +190,20 @@ namespace DungeonCrawler.Scenes
             ItemShopInventory.Contents.Add(Items.GetItemById(3));
             // Mana potion
             ItemShopInventory.Contents.Add(Items.GetItemById(4));
+
             SpellShopInventory = new Inventory(Content);
             SpellShopInventory.InventoryType = "SPELL_SHOP";
             SpellShopInventory.MenuTitle = "Spell Shop";
+
+            // TODO: Better organize shop population.
+            // Fireball spell
+            SpellShopInventory.Contents.Add(Items.GetItemById(7));
+            // Frostbolt spell
+            SpellShopInventory.Contents.Add(Items.GetItemById(8));
+            // Thunderbolt spell
+            SpellShopInventory.Contents.Add(Items.GetItemById(9));
+            // Heal spell
+            SpellShopInventory.Contents.Add(Items.GetItemById(10));
 
             shops = new Shop();
             shops.Add(ItemShopInventory);

@@ -71,6 +71,7 @@ namespace DungeonCrawler
         public Texture2D NPCStatusBarTexture;
         public Texture2D HealthBarTexture;
         public Texture2D StaminaBarTexture;
+        public Texture2D ManaBarTexture;
 
         public string ID { get; set; }
         public double MaxHealth { get; set; } = 0;
@@ -100,6 +101,11 @@ namespace DungeonCrawler
             NPCStatusBarTexture = content.Load<Texture2D>(@"interface\npc-statusbar");
             HealthBarTexture = content.Load<Texture2D>(@"interface\healthbar");
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
+            ManaBarTexture = content.Load<Texture2D>(@"interface\MANA_BAR");
+            if (ManaBarTexture == null)
+            {
+                Console.WriteLine("bitch");
+            }
         }
 
         // Create standard animation states for the entity.
@@ -305,12 +311,10 @@ namespace DungeonCrawler
         Stopwatch stopWatch = new Stopwatch();
         public void CastSpell(SpellDirection direction, int spellId)
         {
-            Spell spell = new Spell();
-            spell.Sprite = null;
-            spell.ID = spellId;
-            spell.Direction = direction;
-            if (spell.ID != 0)
+            Spell spell = (Spell)Items.GetItemById(spellId);
+            if (spell != null && spell.ManaCost <= CurrentMana)
             {
+                spell.Direction = direction;
                 switch (spell.ID)
                 {
                     case (1):
@@ -331,9 +335,11 @@ namespace DungeonCrawler
                         Buff.Sprite = new AnimatedSprite(Sprites.GetSprite("HEAL_1"));
                         Buff.Sprite.Position = Position;
                         Buff.Sprite.Play("idle");
-                        Heal(15);
+                        RestoreHealth(15);
                         break;
                 }
+
+                CurrentMana -= spell.ManaCost;
             }
         }
         /// <summary>
@@ -357,10 +363,12 @@ namespace DungeonCrawler
                 projectile.Sprite = spell.Sprite;
             }
 
-            Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y);
+            // TODO: Better position projectile launch relative to player position.
+            Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y + 15);
             projectile.Position = projectilePosition;
             projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;
+            projectile.Damage = spell.Damage;
             Projectiles.Add(projectile);
 
             if (Projectiles.Count > 25)
@@ -391,7 +399,7 @@ namespace DungeonCrawler
             return collided;
         }
 
-        public void Heal(double healAmount)
+        public void RestoreHealth(double healAmount)
         {
             double healthToHeal = MaxHealth - CurrentHealth;
             if (healthToHeal >= healAmount)
@@ -403,12 +411,25 @@ namespace DungeonCrawler
                 CurrentHealth = MaxHealth;
             }
         }
+
+        public void RestoreMana(double manaAmount)
+        {
+            double manaToHeal = MaxMana - CurrentMana;
+
+            if (manaToHeal >= manaAmount)
+            {
+                CurrentMana += manaAmount;
+            }
+            else
+            {
+                CurrentMana = MaxMana;
+            }
+        }
     
         public void Update(GameTime gameTime)
         {
             if (Buff != null)
             {
-                Console.WriteLine(stopWatch.ElapsedMilliseconds);
                 if (stopWatch.ElapsedMilliseconds < 800)
                 {
                     Buff.Sprite.Position = Position;
@@ -470,7 +491,7 @@ namespace DungeonCrawler
                         {
                             if (projectile.BoundingBox.Intersects(entity.BoundingBox) && projectile.TargetHit == false && entity.state != Action.Dead)
                             {
-                                entity.CurrentHealth -= 5;
+                                entity.CurrentHealth -= projectile.Damage;
                                 entity.Aggroed = true;
                                 projectile.TargetHit = true;
                             }
@@ -516,7 +537,10 @@ namespace DungeonCrawler
                     // Draw health bar
                     Vector2 healthPosition = new Vector2(position.X + 1, Position.Y - 108);
                     spriteBatch.Draw(StatusBarTexture, position, new Rectangle(0, 0, Convert.ToInt32(MaxHealth), 6), Color.White);
-                    spriteBatch.Draw(HealthBarTexture, healthPosition, new Rectangle(0, 100, Convert.ToInt32(CurrentHealth) - 2, 4), Color.White);
+                    spriteBatch.Draw(HealthBarTexture, healthPosition, new Rectangle(0, 100, Convert.ToInt32(CurrentHealth), 4), Color.White);
+
+                    spriteBatch.Draw(StatusBarTexture, new Vector2(position.X + 1, Position.Y - 104), new Rectangle(0, 0, Convert.ToInt32(MaxMana), 6), Color.White);
+                    spriteBatch.Draw(ManaBarTexture, new Vector2(healthPosition.X, healthPosition.Y + 6), new Rectangle(0, 100, Convert.ToInt32(CurrentMana), 4), Color.White);
                     // Draw stamina bar
                     //Vector2 staminaPosition = new Vector2(position.X, position.Y + 6);
                     //spriteBatch.Draw(StatusBarTexture, staminaPosition, new Rectangle(0, 0, Convert.ToInt32(MaxStamina), 4), Color.Black);

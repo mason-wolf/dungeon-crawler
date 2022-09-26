@@ -244,6 +244,10 @@ namespace DungeonCrawler
             goldSprite.AddAnimation("idle", new[] { 0 }, 0.06f, true);
             SpriteList.Add(goldSprite);
 
+            // Book Icon
+            SpriteLoader bookSprite = new SpriteLoader(content, "BOOK", @"items\BOOK", 16, 16);
+            bookSprite.AddAnimation("idle", new[] { 0 }, 0.5f, false);
+            SpriteList.Add(bookSprite);
 
             SpriteLoader bedSprite = new SpriteLoader(content, "BED", @"objects\BED", 24, 32);
             bedSprite.AddAnimation("idle", new[] { 0 }, 1f, true);

@@ -100,7 +100,7 @@ namespace DungeonCrawler
             StatusBarTexture = content.Load<Texture2D>(@"interface\statusbar");
             HealthBarTexture = content.Load<Texture2D>(@"interface\healthbar");
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
-
+            ManaBarTexture = content.Load<Texture2D>(@"interface\MANA_BAR");
             soundEffects = new List<SoundEffect>();
             soundEffects.Add(content.Load<SoundEffect>(@"sounds\sword-swing"));
             soundEffects.Add(content.Load<SoundEffect>(@"sounds\bow-shoot"));
@@ -180,7 +180,7 @@ namespace DungeonCrawler
             }
 
             // Handle item inventory
-            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Init.SpellInventory.InventoryOpen && !Init.ItemShopInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Shop.InventoriesOpen() && !Init.SpellInventory.InventoryOpen)
             {
                 if (Init.ItemInventory.InventoryOpen)
                 {
@@ -193,7 +193,7 @@ namespace DungeonCrawler
             }
 
             // Handle spell inventory
-            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Init.ItemInventory.InventoryOpen & !Init.ItemShopInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Shop.InventoriesOpen() && !Init.ItemInventory.InventoryOpen)
             {
                 if (Init.SpellInventory.InventoryOpen)
                 {
@@ -243,7 +243,10 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern2)
                 {
                     player.State = Action.IdleSouth1;
-                    CastSpell(SpellDirection.SOUTH, SelectedItem.ID);
+                    if (SelectedItem != null)
+                    {
+                        CastSpell(SpellDirection.SOUTH, SelectedItem.ID);
+                    }
                 }
 
                 // Attacking West
@@ -253,7 +256,10 @@ namespace DungeonCrawler
                     newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkWestPattern2)
                 {
                     player.State = Action.IdleWest1;
-                    CastSpell(SpellDirection.WEST, SelectedItem.ID);
+                    if (SelectedItem != null)
+                    {
+                        CastSpell(SpellDirection.WEST, SelectedItem.ID);
+                    }
                 }
 
 
@@ -265,7 +271,10 @@ namespace DungeonCrawler
                 {
                  //   PlayerWeapon.State = Action.AttackEastPattern1;
                     player.State = Action.IdleEast1;
-                    CastSpell(Spell.SpellDirection.EAST, SelectedItem.ID);
+                    if (SelectedItem != null)
+                    {
+                        CastSpell(SpellDirection.EAST, SelectedItem.ID);
+                    }
                 }
 
                 // Attacking North
@@ -276,7 +285,10 @@ namespace DungeonCrawler
                 {
                   //  PlayerWeapon.State = Action.AttackNorthPattern1;
                     player.State = Action.IdleNorth1;
-                    CastSpell(SpellDirection.NORTH, SelectedItem.ID);
+                    if (SelectedItem != null)
+                    {
+                        CastSpell(SpellDirection.NORTH, SelectedItem.ID);
+                    }
                 }
                 else
                 {
@@ -441,6 +453,24 @@ namespace DungeonCrawler
             float depthX = distanceX > 0 ? minDistanceX - distanceX : -minDistanceX - distanceX;
             float depthY = distanceY > 0 ? minDistanceY - distanceY : -minDistanceY - distanceY;
             return new Vector2(depthX, depthY);
+        }
+
+        public void LearnSpell(Item spellBook)
+        {
+            if (spellBook != null)
+            {
+                if (Init.SpellInventory.Contents.Find(spell => spell.Name == spellBook.Name && spell.ID != spellBook.ID) != null)
+                {
+                    Init.Message = "You already know this spell.";
+                    Init.MessageEnabled = true;
+                }
+                else
+                {
+                    Init.SpellInventory.Contents.Add(Items.ItemList.Find(spell => spell.Name == spellBook.Name && spell.ID != spellBook.ID));
+                    Init.Message = "You learned the " + spellBook.Name + " spell!";
+                    Init.MessageEnabled = true;
+                }
+            }
         }
     }
 

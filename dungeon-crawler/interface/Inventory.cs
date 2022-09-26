@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Demo.Game;
 using DungeonCrawler.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -125,7 +126,7 @@ namespace DungeonCrawler.Interface
             if (InventoryOpen)
             {
                 spriteBatch.Draw(inventoryTexture, null, inventoryInterface);
-                spriteBatch.DrawString(inventoryFont, MenuTitle, new Vector2(Position.X + 25, Position.Y + 10), Color.White, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 0);
+                spriteBatch.DrawString(inventoryFont, MenuTitle, new Vector2(Position.X + 25, Position.Y), Color.White, 0, new Vector2(0, 0), 1.5f, SpriteEffects.None, 0);
                 DrawItems(spriteBatch);
             }
         }
@@ -201,7 +202,7 @@ namespace DungeonCrawler.Interface
 
             foreach (Item item in itemList)
             {
-                if (itemToAdd.ItemTexture == item.ItemTexture)
+                if (itemToAdd.ID == item.ID)
                 {
                     isDuplicate = true;
                     duplicateItemSlot = item.Index;
@@ -278,10 +279,20 @@ namespace DungeonCrawler.Interface
                     {
                         if (item.ID == itemList[SelectedItem].ID)
                         {
-                            // Health Potion
-                            if (item.ID == 3)
+                            switch(item.ID)
                             {
-                                Init.Player.Heal(50);
+                                // Health Potion
+                                case (3):
+                                    Init.Player.RestoreHealth(50);
+                                    break;
+                                // Mana Potion
+                                case (4):
+                                    Init.Player.RestoreMana(50);
+                                    break;
+                                default:
+                                    Item spell = Items.GetItemById(item.ID);
+                                    Init.Player.LearnSpell(spell);
+                                    break;
                             }
                             item.Quantity -= 1;
                             AssignItem(item);
@@ -289,7 +300,7 @@ namespace DungeonCrawler.Interface
                         }
                     }
 
-                    if (foundItem != null && foundItem.Quantity == 0)
+                    if (foundItem != null && foundItem.Quantity <= -1)
                     {
                         Init.ItemInventory.Contents.Remove(foundItem);
                     }
@@ -362,14 +373,14 @@ namespace DungeonCrawler.Interface
                         // Draw the item name and description.
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
 
-                        if (itemList[i].Quantity != 0 && InventoryType != "ITEM_SHOP" && InventoryType != "SPELL_SHOP" && itemList[i].Quantity != -1)
+                        if (itemList[i].Quantity > 0 && InventoryType != "ITEM_SHOP" && InventoryType != "SPELL_SHOP")
                         {
                             spriteBatch.DrawString(inventoryFont, itemList[i].Quantity.ToString(), new Vector2(itemList[i].ItemRectangle.X + 25, itemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
                         }
        
                         spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
 
-                        if (InventoryType == "shop" && itemList[SelectedItem].Price != 0)
+                        if (InventoryType == "ITEM_SHOP" || InventoryType == "SPELL_SHOP" && itemList[SelectedItem].Price != 0)
                         {
                             // Item price
                             spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 250, Position.Y + 180));

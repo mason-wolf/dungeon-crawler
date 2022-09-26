@@ -29,31 +29,70 @@ namespace Demo.Game
             manaPotion.Price = 50;
             ItemList.Add(manaPotion);
 
-            Item fireball1 = new Item();
+            Spell fireball1 = new Spell();
             fireball1.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
             fireball1.Name = "FIREBALL";
             fireball1.ID = 1;
+            fireball1.Damage = 5;
+            fireball1.ManaCost = .5;
             fireball1.Description = "Shoots a flame.";
             ItemList.Add(fireball1);
 
-            Item icebolt1 = new Item();
+            Item fireballBook = new Item();
+            fireballBook.ItemTexture = Sprites.GetTexture("BOOK");
+            fireballBook.Name = "FIREBALL";
+            fireballBook.ID = 7;
+            fireballBook.Price = 100;
+            fireballBook.Description = "";
+            ItemList.Add(fireballBook);
+
+            Item iceboltBook = new Item();
+            iceboltBook.ItemTexture = Sprites.GetTexture("BOOK");
+            iceboltBook.Name = "ICEBOLT";
+            iceboltBook.ID = 8;
+            iceboltBook.Price = 100;
+            iceboltBook.Description = "";
+            ItemList.Add(iceboltBook);
+
+            Item thunderboltBook = new Item();
+            thunderboltBook.ItemTexture = Sprites.GetTexture("BOOK");
+            thunderboltBook.Name = "THUNDERBOLT";
+            thunderboltBook.ID = 9;
+            thunderboltBook.Price = 200;
+            thunderboltBook.Description = "";
+            ItemList.Add(thunderboltBook);
+
+            Item healBook = new Item();
+            healBook.ItemTexture = Sprites.GetTexture("BOOK");
+            healBook.Name = "HEAL";
+            healBook.ID = 10;
+            healBook.Price = 200;
+            healBook.Description = "";
+            ItemList.Add(healBook);
+
+            Spell icebolt1 = new Spell();
             icebolt1.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
             icebolt1.Name = "ICEBOLT";
             icebolt1.ID = 2;
+            icebolt1.Damage = 5;
+            icebolt1.ManaCost = .5;
             icebolt1.Description = "Casts a bolt of ice.";
             ItemList.Add(icebolt1);
 
-            Item thunderBolt1 = new Item();
+            Spell thunderBolt1 = new Spell();
             thunderBolt1.ItemTexture = Sprites.GetTexture("THUNDERBOLT_1_ICON");
             thunderBolt1.Name = "THUNDERBOLT";
             thunderBolt1.ID = 5;
+            thunderBolt1.Damage = 10;
+            thunderBolt1.ManaCost = 1;
             thunderBolt1.Description = "Shoots a thunder bolt.";
             ItemList.Add(thunderBolt1);
 
-            Item heal1 = new Item();
+            Spell heal1 = new Spell();
             heal1.ItemTexture = Sprites.GetTexture("HEAL_1_ICON");
             heal1.Name = "HEAL";
             heal1.ID = 6;
+            heal1.ManaCost = 5;
             heal1.Description = "Restores some health.";
             ItemList.Add(heal1);
         }

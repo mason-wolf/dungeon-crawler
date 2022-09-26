@@ -238,6 +238,8 @@ namespace DungeonCrawler.Scenes
             if (lineCount == 0)
             {
                 Init.Player.MaxHealth = 100;
+                Init.Player.MaxMana = 100;
+                Init.Player.CurrentMana = 100;
                 Init.Player.CurrentHealth = 100;
                 Init.Player.Gold = 0;
                 Init.Player.EnemiesKilled = 0;
