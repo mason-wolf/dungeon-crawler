@@ -183,6 +183,8 @@ namespace DungeonCrawler
                         skeletonEntity.Position = mapObject.GetPosition();
                         skeletonEntity.Name = "SKELETON";
                         skeletonEntity.XP = 10;
+                        skeletonEntity.SpellCaster = true;
+                        skeletonEntity.CurrentMana = 1000;
                         enemyList.Add(skeletonEntity);
                         break;
                     case ("BAT"):

@@ -16,8 +16,8 @@ namespace DungeonCrawler
         public int Column { get; set; }
         public int Row { get; set; }
         public int Index { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = "";
+        public string Description { get; set; } = "";
         public int Quantity { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }

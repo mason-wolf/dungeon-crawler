@@ -93,8 +93,15 @@ namespace DungeonCrawler
         public PathFinder PathFinder { get; set; }
         public Spell Buff { get; set; }
 
+        public Equipment Equipment { get; set; }
+
+        public double FrostResistance { get; set; }
+        public double FireResistance { get; set; }
+        public double ThunderResistance { get; set; }
+
         public int WayPointIndex;
 
+        public bool SpellCaster { get; set; } = false;
         public bool ReachedDestination;
 
         public List<Projectile> Projectiles = new List<Projectile>();
@@ -270,47 +277,73 @@ namespace DungeonCrawler
             }
         }
 
-
+        Stopwatch attackTimer = new Stopwatch();
         public void Attack(Entity target)
         {
-
-            Vector2 currentPosition = Position;
-
             float distance = Vector2.Distance(Position, target.Position);
 
-            if (distance < 20 && CurrentHealth > 0)
+            Vector2 destination = Position - target.Position;
+            destination.Normalize();
+            Double angle = Math.Atan2(destination.X, destination.Y);
+            double direction = Math.Ceiling(angle);
+            attackTimer.Start();
+
+            // Cast spell at target
+            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 3000)
             {
-
-                Vector2 destination = Position - target.Position;
-                destination.Normalize();
-                Double angle = Math.Atan2(destination.X, destination.Y);
-                double direction = Math.Ceiling(angle);
-
                 if (direction == -3 || direction == 4 || direction == -2)
                 {
-                    State = Action.AttackSouthPattern1;
-                    target.CurrentHealth -= AttackDamage;
+                    CastSpell(SpellDirection.SOUTH, 1);
                 }
 
                 if (direction == -1)
                 {
-                    State = Action.AttackEastPattern1;
-                    target.CurrentHealth -= AttackDamage;
+                    CastSpell(SpellDirection.EAST, 1);
                 }
 
                 if (direction == 0 || direction == 1)
                 {
-                    State = Action.AttackNorthPattern1;
-                    target.CurrentHealth -= AttackDamage;
+                    CastSpell(SpellDirection.NORTH, 1);
                 }
 
                 if (direction == 2 || direction == 3)
                 {
-                    State = Action.AttackWestPattern1;
-                    target.CurrentHealth -= AttackDamage;
+                    CastSpell(SpellDirection.WEST, 1);
+                }
+                attackTimer.Restart();
+            }
+            else
+            {
+                // Attack target physically
+                if (distance < 20 && CurrentHealth > 0)
+                {
+                    if (direction == -3 || direction == 4 || direction == -2)
+                    {
+                        State = Action.AttackSouthPattern1;
+                        target.CurrentHealth -= AttackDamage;
+                    }
+
+                    if (direction == -1)
+                    {
+                        State = Action.AttackEastPattern1;
+                        target.CurrentHealth -= AttackDamage;
+                    }
+
+                    if (direction == 0 || direction == 1)
+                    {
+                        State = Action.AttackNorthPattern1;
+                        target.CurrentHealth -= AttackDamage;
+                    }
+
+                    if (direction == 2 || direction == 3)
+                    {
+                        State = Action.AttackWestPattern1;
+                        target.CurrentHealth -= AttackDamage;
+                    }
                 }
             }
         }
+
         Stopwatch stopWatch = new Stopwatch();
         public void CastSpell(SpellDirection direction, int spellId)
         {
@@ -351,6 +384,17 @@ namespace DungeonCrawler
                 CurrentMana -= spell.ManaCost;
             }
         }
+
+        public void ApplyArmorStats()
+        {
+            Dictionary<string, double> bonuses = Equipment.GetBonuses();
+            FrostResistance += bonuses["FROST_RESISTANCE"];
+            FireResistance += bonuses["FIRE_RESISTANCE"];
+            ThunderResistance += bonuses["THUNDER_RESISTANCE"];
+            MaxHealth += bonuses["HEALTH_BONUS"];
+            MaxMana += bonuses["MANA_BONUS"];
+        }
+
         /// <summary>
         /// Shoots a projectile.
         /// </summary>
@@ -373,7 +417,7 @@ namespace DungeonCrawler
             }
 
             // TODO: Better position projectile launch relative to player position.
-            Vector2 projectilePosition = new Vector2(Init.Player.Position.X, Init.Player.Position.Y);
+            Vector2 projectilePosition = new Vector2(Position.X, Position.Y);
             projectile.Position = projectilePosition;
             projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;
@@ -485,6 +529,11 @@ namespace DungeonCrawler
                 {
                     int speed = 4;
 
+                    if (SpellCaster)
+                    {
+                        speed = 1;
+                    }
+
                     if (projectile.Direction == "NORTH")
                     {
                         projectile.State = Action.IdleNorth1;
@@ -526,12 +575,20 @@ namespace DungeonCrawler
                     {
                         foreach (Entity entity in Init.Player.EnemyList)
                         {
-                            if (projectile.BoundingBox.Intersects(entity.BoundingBox) && projectile.TargetHit == false && entity.state != Action.Dead)
+                            // If player casted projectile, damage enemy.
+                            if (projectile.BoundingBox.Intersects(entity.BoundingBox) && projectile.TargetHit == false && entity.state != Action.Dead && !SpellCaster)
                             {
                                 entity.CurrentHealth -= projectile.Damage;
                                 entity.Aggroed = true;
                                 projectile.TargetHit = true;
                             }
+                        }
+
+                        // If enemy casted projectile, damage player.
+                        if (SpellCaster && projectile.BoundingBox.Intersects(Init.Player.BoundingBox) && !projectile.TargetHit)
+                        {
+                            Init.Player.CurrentHealth -= projectile.Damage;
+                            projectile.TargetHit = true;
                         }
                         projectile.Update(gameTime);
                     }

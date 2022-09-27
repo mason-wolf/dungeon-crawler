@@ -223,6 +223,24 @@ namespace DungeonCrawler.Scenes
             DialogBox = new DialogBox(game, Font);
 
             SelectedScene = Scene.CASTLE;
+
+
+            Armor headPiece = new Armor();
+            headPiece.FireResistance = 10;
+            headPiece.FrostResistance = 20;
+
+            Armor chestPiece = new Armor();
+            chestPiece.FireResistance = 10;
+
+            Armor handPiece = new Armor();
+            handPiece.HealthBonus = 100;
+
+            Player.Equipment = new Equipment();
+            Player.Equipment.Head = headPiece;
+            Player.Equipment.Chest = chestPiece;
+            Player.Equipment.Hands = handPiece;
+            Player.ApplyArmorStats();
+
             base.LoadContent();
         }
 
