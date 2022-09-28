@@ -160,6 +160,7 @@
   <object id="236" name="BOOKSHELF" x="508" y="554" width="15.6667" height="15.3333"/>
   <object id="237" name="RANDOM_PLAIN" type="TELEPORTER" x="384" y="260">
    <properties>
+    <property name="id" type="float" value="500"/>
     <property name="targetX" type="float" value="54"/>
     <property name="targetY" type="float" value="950"/>
    </properties>

@@ -140,7 +140,11 @@
  <objectgroup id="4" name="Object Layer 1">
   <object id="208" name="START" x="524.917" y="499.425"/>
   <object id="210" name="GREEN_PORTAL" x="532.074" y="457.015"/>
-  <object id="224" name="CASTLE" type="TELEPORTER" x="531.828" y="457.015"/>
+  <object id="224" name="CASTLE" type="TELEPORTER" x="531.828" y="457.015">
+   <properties>
+    <property name="ID" type="float" value="79986"/>
+   </properties>
+  </object>
   <object id="270" name="BLUE_SLIME" x="783.333" y="506.667"/>
   <object id="287" name="BLUE_SLIME" x="694" y="663.333"/>
   <object id="288" name="BLUE_SLIME" x="430.667" y="777.333"/>

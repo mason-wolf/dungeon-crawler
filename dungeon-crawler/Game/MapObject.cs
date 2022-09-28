@@ -28,7 +28,7 @@ namespace DungeonCrawler
         bool destroyed = false;
         bool itemPickedUp = false;
         bool interacted = false;
-        List<string> customProperties;
+        Dictionary<string, string> customProperties;
 
         IBox collisionBox;
 
@@ -108,12 +108,12 @@ namespace DungeonCrawler
             this.collisionBox = collisionBox;
         }
 
-        public void SetCustomProperties(List<string> customProperties)
+        public void SetCustomProperties(Dictionary<string, string> customProperties)
         {
             this.customProperties = customProperties;
         }
 
-        public List<string> GetCustomProperties()
+        public Dictionary<string, string> GetCustomProperties()
         {
             return customProperties;
         }

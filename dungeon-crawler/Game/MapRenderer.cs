@@ -119,14 +119,14 @@ namespace DungeonCrawler.Engine
                         mapObjects.Add(newObject);
 
                         // Add custom properties
-                        List<string> customProperties = new List<string>(0);
+                        Dictionary<string, string> customProperties = new Dictionary<string, string>();
 
                         XmlReader subTree = reader.ReadSubtree();
                         while (subTree.Read())
                         {
                             if (subTree.Name == "property" && subTree.GetAttribute("value") != string.Empty)
                             {
-                                customProperties.Add(subTree.GetAttribute("value"));
+                                customProperties.Add(subTree.GetAttribute("name").ToUpper(), subTree.GetAttribute("value"));
                             }
                         }
                         mapObjects.Where(mapObject => mapObject.GetId() == objectId).FirstOrDefault().SetCustomProperties(customProperties);

@@ -118,7 +118,7 @@ namespace DungeonCrawler.Interface
             {
                 Vector2 menuPosition = new Vector2(0, 0);
                 Position = menuPosition;
-                StartMenu.gameRestart = true;
+                StartMenu.GameRestart = true;
             }
 
             oldState = newState;

@@ -131,9 +131,11 @@ namespace DungeonCrawler
             entity.Name = spriteName;
             IBox entityCollidable = map.GetWorld().Create(entity.Position.X, entity.Position.Y, 16, 16);
             mapObject.SetCollisionBox(entityCollidable);
+            Dictionary<string, string> customProperties = mapObject.GetCustomProperties();
+           
             if (mapObject.GetCustomProperties().Count > 0)
             {
-                entity.ID = mapObject.GetCustomProperties()[0].ToString();
+                entity.ID = customProperties["ID"].ToString();
             }
             NPCList.Add(entity);
         }

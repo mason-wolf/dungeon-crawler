@@ -140,7 +140,11 @@
  <objectgroup id="4" name="Objects">
   <object id="208" name="START" x="413" y="246.758"/>
   <object id="210" name="GREEN_PORTAL" x="420.157" y="204.348"/>
-  <object id="224" name="CASTLE" type="TELEPORTER" x="419.911" y="204.348"/>
+  <object id="224" name="CASTLE" type="TELEPORTER" x="419.911" y="204.348">
+   <properties>
+    <property name="ID" type="float" value="1391"/>
+   </properties>
+  </object>
   <object id="306" name="SKELETON" x="457" y="418.667"/>
   <object id="310" name="SKELETON" x="212.667" y="377.333"/>
   <object id="311" name="SKELETON" x="282" y="482"/>

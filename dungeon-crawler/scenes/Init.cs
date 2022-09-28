@@ -57,6 +57,7 @@ namespace DungeonCrawler.Scenes
 
         private GameWindow window;
         public static Scene SelectedScene { get; set; }
+        public static Level SelectedLevel { get; set; }
         public static Map SelectedMap { get; set; }
         public static DialogBox DialogBox;
         public static bool TransitionState = false;
@@ -123,14 +124,24 @@ namespace DungeonCrawler.Scenes
             CASTLE
         }
 
-        //public void LoadLevel(string levelName)
-        //{
-        //    Level newLevel = levelList.Find(level => level.GetLevelName() == levelName);
-        //    newLevel = new Level();
-        //    newLevel.SetMap(new Map(Content, "Content/maps/" + levelName + ".tmx"));
-        //    newLevel.SetScene(new Plains_1());
-        //    newLevel.LoadContent(Content);
-        //}
+        public void LoadLevel(string levelName)
+        {
+            Level newLevel = levelList.Find(level => level.GetLevelName() == levelName);
+            if (Player.EnemyList.Count > 0)
+            {
+                Player.EnemyList.Clear();
+                newLevel.GetEnemyAI().Clear();
+            }
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/" + levelName + ".tmx"));
+            newLevel.SetScene(new Plains_1());
+            newLevel.SetLevelName(levelName);
+            newLevel.LoadContent(Content);
+            newLevel.GetScene().LoadScene();
+            levelList.Remove(levelList.Find(level => level.GetLevelName() == levelName));
+            levelList.Add(newLevel);
+            SelectedLevel = newLevel;
+        }
 
         protected override void LoadContent()
         {
@@ -245,10 +256,11 @@ namespace DungeonCrawler.Scenes
 
         int transitionFrames = 0;
         int pauseAfterDeathFrames = 0;
+        public static bool NewGame = false;
         public override void Update(GameTime gameTime)
         {
             // If save was loaded, create transition effects, assign the player's saved scene and position.
-            if (Reloaded)
+            if (Reloaded || NewGame)
             {
                 UnloadContent();
                 LoadContent();
@@ -260,6 +272,7 @@ namespace DungeonCrawler.Scenes
                 Player.InMenu = false;
                 Player.Position = levelList.Find(level => level.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
                 Reloaded = false;
+                NewGame = false;
             }
             // Handle Teleportation
             foreach (Teleporter teleporter in Teleporters)
@@ -268,33 +281,26 @@ namespace DungeonCrawler.Scenes
                 {
                     if (Player.BoundingBox.Intersects(teleporter.GetRectangle()))
                     {
-                        if (Player.EnemyList.Count > 0)
-                        {
-                            Player.EnemyList.Clear();
-
-                            foreach (Level level in levelList)
-                            {
-                                level.GetEnemyAI().Clear();
-                            }
-                        }
-
                         TransitionState = true;
-                        UnloadContent();
-                        LoadContent();
-                        
+
                         if (teleporter.GetDestinationMap() == "RANDOM_PLAIN")
                         {
+                            FadeInMap("CASTLE");
                             Random randomLevel = new Random();
                             int levelNum = randomLevel.Next(1, 6);
                             string levelName = "PLAINS_" + 2;
-                            //LoadLevel(levelName);
+                            LoadLevel(levelName);
                             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
+                            SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);
+                            Player.Position = SelectedLevel.GetStartingPosition();
+                            FadeInMap(SelectedLevel.GetLevelName());
                         }
                         else
                         {
-                            SelectedScene = (Scene)Enum.Parse(typeof(Scene), teleporter.GetDestinationMap());
+                            SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");
+                            SelectedScene = (Scene)Enum.Parse(typeof(Scene), "CASTLE");
+                            Player.Position = SelectedLevel.GetStartingPosition();
                         }
-                        Player.Position = teleporter.GetTargetPosition();
                     }
                 }
             }
@@ -328,6 +334,7 @@ namespace DungeonCrawler.Scenes
                         playerCollision = level.GetMap().GetCollisionWorld();
                         SelectedMap = level.GetMap();
                         level.SetPlayerStartPosition(Player);
+                        
                         ToggleTeleporters(SelectedMap.GetMapName());
                         Player.EnemyList = level.GetEnemyList();
                         level.Update(gameTime);
@@ -367,7 +374,7 @@ namespace DungeonCrawler.Scenes
             // Create a short pause after transitioning to next level.
             transitionFrames++;
 
-            if (transitionFrames > 70)
+            if (transitionFrames > 100)
             {
                 transitionFrames = 0;
                 TransitionState = false;
@@ -442,8 +449,8 @@ namespace DungeonCrawler.Scenes
             }
             else if (SelectedScene == Scene.LOADING_SCREEN)
             {
-                Vector2 healthStatus = new Vector2(Player.Position.X - 20, Player.Position.Y - 20);
-                spriteBatch.DrawString(Font, "Loading..", healthStatus, Color.White);
+                Vector2 loadingStatus = new Vector2(Player.Position.X - 20, Player.Position.Y - 20);
+                spriteBatch.DrawString(Font, "Loading..", loadingStatus, Color.White);
             }
             else
             {
@@ -570,6 +577,7 @@ namespace DungeonCrawler.Scenes
 
         public static void Reload()
         {
+            TransitionState = true;
             SelectedScene = Scene.LOADING_SCREEN;
             Reloaded = true;
         }

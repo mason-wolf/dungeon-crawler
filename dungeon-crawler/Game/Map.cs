@@ -49,20 +49,35 @@ namespace DungeonCrawler
                 if (mapObject.GetObjectType() == "TELEPORTER")
                 {
                     Rectangle teleporterRect = new Rectangle((int)mapObject.GetPosition().X, (int)mapObject.GetPosition().Y, 8, 1);
-                    List<string> targetPosition = mapObject.GetCustomProperties();
+                    Dictionary<string, string> customProperties = mapObject.GetCustomProperties();
+
                     float x = 0;
                     float y = 0;
-                    foreach (string p in targetPosition)
+
+
+                    if (customProperties.ContainsKey("TARGETX"))
                     {
-                        if (p != string.Empty)
-                        {
-                             x = float.Parse(targetPosition[0]);
-                             y = float.Parse(targetPosition[1]);
-                        }
+                        x = float.Parse(customProperties["TARGETX"]);
                     }
+
+                    if (customProperties.ContainsKey("TARGETY"))
+                    {
+                        y = float.Parse(customProperties["TARGETY"]);
+                    }
+
+
                     Teleporter teleporter = new Teleporter(teleporterRect, mapObject.GetName(), mapName, new Vector2(x, y));
                     teleporter.Enabled = true;
-                    Init.Teleporters.Add(teleporter);
+
+                    if (customProperties.Count > 0)
+                    {
+                        teleporter.ID = customProperties["ID"].ToString();
+                    }
+
+                    if (!Init.Teleporters.Contains(Init.Teleporters.Find(t => t.ID == teleporter.ID)))
+                    {
+                        Init.Teleporters.Add(teleporter);
+                    }
                 }
             }
         }

@@ -249,6 +249,7 @@ namespace DungeonCrawler
             //    PlayerWeapon = bowWeapon;
             //}
 
+            // Handle Movement
             if (!InMenu && !Init.ItemInventory.InventoryOpen && !Init.SpellInventory.InventoryOpen && !Init.ItemShopInventory.InventoryOpen)
             {
                 // Attacking south

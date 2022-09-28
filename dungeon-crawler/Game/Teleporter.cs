@@ -18,6 +18,7 @@ namespace DungeonCrawler
     /// </summary>
     public class Teleporter
     {
+        public string ID { get; set; }
         private Rectangle rectangle;
         private string destinationMap;
         private string sourceMap;

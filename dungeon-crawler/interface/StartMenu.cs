@@ -20,7 +20,8 @@ namespace DungeonCrawler
         KeyboardState newKeyboardState;
         KeyboardState oldKeyboardState;
         Init init;
-
+        bool gameStart = false;
+        public static bool GameRestart = false;
         public StartMenu(Game game, GameWindow window)
             : base(game)
         {
@@ -50,13 +51,11 @@ namespace DungeonCrawler
             base.LoadContent();
         }
 
-        bool gameStart = false;
-        public static bool gameRestart = false;
-
         public override void Update(GameTime gameTime)
         {
             oldKeyboardState = newKeyboardState;
             newKeyboardState = Keyboard.GetState();
+
             if (!gameStart)
             {
                 // New Game
@@ -69,6 +68,9 @@ namespace DungeonCrawler
                     Components.Clear();
                     Components.Add(init);
                     init.Show();
+                    Init.Player.InMenu = true;
+                    Init.NewGame = true;
+                   // Init.SelectedScene = Init.Scene.LOADING_SCREEN;
                 }
 
                 // Load Game
@@ -94,7 +96,7 @@ namespace DungeonCrawler
 
             }
 
-            if (gameRestart)
+            if (GameRestart)
             {
 
                 init.Hide();
@@ -108,7 +110,7 @@ namespace DungeonCrawler
                 Components.Add(mainMenu);
 
                 mainMenu.Show();
-                gameRestart = false;
+                GameRestart = false;
                 gameStart = false;
             }
             base.Update(gameTime);
