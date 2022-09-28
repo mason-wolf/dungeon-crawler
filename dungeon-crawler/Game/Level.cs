@@ -469,49 +469,22 @@ namespace DungeonCrawler
                     LeveledUp = false;
                 }
             }
+
+            Random random = new Random();
+
+            foreach (MapObject mapObject in MapObjects)
+            {
+                if (!mapObject.ItemPickedUp())
+                {
+                    mapObject.Draw(spriteBatch);
+                }
+            }
+
             foreach (Entity enemy in enemyList)
             {
                 enemy.Draw(spriteBatch);
                 Vector2 AIHealthPosition = new Vector2(enemy.Position.X - 8, enemy.Position.Y - 20);
                 enemy.DrawHUD(spriteBatch, AIHealthPosition, false);
-            }
-            // Randomly place loot in some objects.
-            Random random = new Random();
-
-            foreach (MapObject mapObject in MapObjects)
-            {
-                //Item item = new Item();
-
-                //if (objectsPopulated == false)
-                //{
-                //    int lootChance = random.Next(1, 4);
-
-                //    switch (lootChance)
-                //    {
-                //        case (1):
-                //         //   item.ItemTexture = Sprites.chickenTexture;
-                //            item.Name = "Chicken";
-                //            item.Width = 16;
-                //            item.Height = 16;
-                //            break;
-                //        case (2):
-                //          //  item.ItemTexture = arrowsSprite;
-                //            item.Name = "Arrow";
-                //            item.Width = 13;
-                //            item.Height = 19;
-                //            break;
-                //    }
-
-                //    if (item != null)
-                //    {
-                //        mapObject.SetContainedItem(item);
-                //    }
-                //}
-
-                if (!mapObject.ItemPickedUp())
-                {
-                    mapObject.Draw(spriteBatch);
-                }
             }
         }
     }

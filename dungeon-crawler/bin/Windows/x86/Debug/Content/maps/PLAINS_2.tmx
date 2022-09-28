@@ -167,7 +167,6 @@
   <object id="347" name="CHEST" x="329.833" y="390.167"/>
   <object id="348" name="CHEST" x="802" y="793.667"/>
   <object id="349" name="CHEST" x="818" y="214.5"/>
-  <object id="350" name="CHEST" x="453.273" y="280.545"/>
  </objectgroup>
  <layer id="13" name="Water" width="64" height="64">
   <data encoding="csv">

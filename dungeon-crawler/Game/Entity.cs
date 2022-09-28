@@ -432,7 +432,7 @@ namespace DungeonCrawler
             projectile.Damage = spell.Damage;
             Projectiles.Add(projectile);
 
-            if (Projectiles.Count > 25)
+            if (Projectiles.Count > 5)
             {
                 Projectiles.Clear();
             }

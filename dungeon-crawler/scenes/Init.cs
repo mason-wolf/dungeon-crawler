@@ -121,6 +121,7 @@ namespace DungeonCrawler.Scenes
             PLAINS_3,
             PLAINS_4,
             PLAINS_5,
+            FIRELANDS_1,
             CASTLE
         }
 
@@ -160,38 +161,21 @@ namespace DungeonCrawler.Scenes
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_1.tmx"));
-            newLevel.SetScene(new Plains_1());
-            newLevel.SetLevelName("PLAINS_1");
-            newLevel.LoadContent(Content);
-            levelList.Add(newLevel);
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_2.tmx"));
-            newLevel.SetScene(new Plains_1());
-            newLevel.SetLevelName("PLAINS_2");
-            newLevel.LoadContent(Content);
-            levelList.Add(newLevel);
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_3.tmx"));
-            newLevel.SetScene(new Plains_1());
-            newLevel.SetLevelName("PLAINS_3");
-            newLevel.LoadContent(Content);
-            levelList.Add(newLevel);
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_4.tmx"));
-            newLevel.SetScene(new Plains_1());
-            newLevel.SetLevelName("PLAINS_4");
-            newLevel.LoadContent(Content);
-            levelList.Add(newLevel);
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_5.tmx"));
-            newLevel.SetScene(new Plains_1());
-            newLevel.SetLevelName("PLAINS_5");
-            newLevel.LoadContent(Content);
-            levelList.Add(newLevel);
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_1.tmx"));
 
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
@@ -283,23 +267,19 @@ namespace DungeonCrawler.Scenes
                     {
                         TransitionState = true;
 
-                        if (teleporter.GetDestinationMap() == "RANDOM_PLAIN")
+                        switch(teleporter.GetDestinationMap())
                         {
-                            FadeInMap("CASTLE");
-                            Random randomLevel = new Random();
-                            int levelNum = randomLevel.Next(1, 6);
-                            string levelName = "PLAINS_" + 2;
-                            LoadLevel(levelName);
-                            SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
-                            SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);
-                            Player.Position = SelectedLevel.GetStartingPosition();
-                            FadeInMap(SelectedLevel.GetLevelName());
-                        }
-                        else
-                        {
-                            SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");
-                            SelectedScene = (Scene)Enum.Parse(typeof(Scene), "CASTLE");
-                            Player.Position = SelectedLevel.GetStartingPosition();
+                            case ("RANDOM_PLAIN"):
+                                GetRandomLevel("PLAINS");
+                                break;
+                            case ("RANDOM_FIRELANDS"):
+                                GetRandomLevel("FIRELANDS");
+                                break;
+                            default:
+                                SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");
+                                SelectedScene = (Scene)Enum.Parse(typeof(Scene), "CASTLE");
+                                Player.Position = SelectedLevel.GetStartingPosition();
+                                break;
                         }
                     }
                 }
@@ -415,6 +395,18 @@ namespace DungeonCrawler.Scenes
             base.Update(gameTime);
         }
 
+        public void GetRandomLevel(string levelType)
+        {
+            FadeInMap("CASTLE");
+            Random randomLevel = new Random();
+            int levelNum = randomLevel.Next(1, 6);
+            string levelName = levelType + "_" + 1;
+            LoadLevel(levelName);
+            SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
+            SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);
+            Player.Position = SelectedLevel.GetStartingPosition();
+            FadeInMap(SelectedLevel.GetLevelName());
+        }
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
