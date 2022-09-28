@@ -28,6 +28,16 @@ namespace Demo.Game
 
         public void Unequip(Armor armor)
         {
+            armor.Equipped = false;
+
+            foreach(Armor armorInv in Init.ItemInventory.ArmorList)
+            {
+                if (armorInv.Type == armor.Type)
+                {
+                    armorInv.Equipped = false;
+                }
+            }
+
             switch (armor.Type)
             {
                 case (Armor.ArmorType.BOOTS):
@@ -46,7 +56,6 @@ namespace Demo.Game
                     Chest = new Armor();
                     break;
             }
-            armor.Equipped = false;
         }
 
         public Dictionary<string, double> GetBonuses()

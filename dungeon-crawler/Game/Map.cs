@@ -225,11 +225,6 @@ namespace DungeonCrawler
                     hasFaded = true;
                 }
             }
-
-            if (scene != null)
-            {
-             //   scene.Update(gameTime);
-            }
         }
         /// <summary>
         /// Adds an object to the collision world on the map.

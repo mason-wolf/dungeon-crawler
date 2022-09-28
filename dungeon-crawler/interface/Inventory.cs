@@ -219,7 +219,7 @@ namespace DungeonCrawler.Interface
 
         bool itemUsed = false;
 
-        void GenerateGrid()
+        public void GenerateGrid()
         {
             int x = (int)Position.X + 25;
             int y = (int)Position.Y + 30;
@@ -295,7 +295,6 @@ namespace DungeonCrawler.Interface
                             Init.Player.ApplyArmorStats();
                             Init.ItemInventory.ArmorList.Remove(armorToRemove);
                             Init.SpellInventory.ArmorList.Remove(armorToRemove);
-                            Console.WriteLine("removed");
                         }
                         Init.Player.Gold += ItemList[SelectedItem].Price;
                     }
@@ -493,13 +492,10 @@ namespace DungeonCrawler.Interface
                         spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
 
 
-                        // Draw shop inventory
-                        if (InventoryType == "ITEM_SHOP" || InventoryType == "SPELL_SHOP" || InventoryType == "SELL_SHOP" && ItemList[SelectedItem].Price != 0)
-                        {
-                            // Item price
-                            spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 250, Position.Y + 180));
-                            spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Price.ToString(), new Vector2(Position.X + 270, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
-                        }
+                        // Item price
+                        spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 250, Position.Y + 180));
+                        spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Price.ToString(), new Vector2(Position.X + 270, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+
                     }
                 }
                 int itemPositionX = ItemList[SelectedItem].ItemRectangle.X;

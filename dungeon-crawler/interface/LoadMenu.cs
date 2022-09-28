@@ -165,9 +165,6 @@ namespace DungeonCrawler.Scenes
 
             if (hasFaded)
             {
-                fadeIn = false;
-                hasFaded = false;
-                transitionColor = new Color(0, 0, 0, 0);
                 Init.Reload();
                 LoadGame(selectedSave);
             }
@@ -249,6 +246,7 @@ namespace DungeonCrawler.Scenes
                             armor.ManaBonus = Int32.Parse(tempArmor[6]);
                             armor.Type = (Armor.ArmorType)Enum.Parse(typeof(Armor.ArmorType), tempArmor[7]);
                             armor.Equipped = bool.Parse(tempArmor[8]);
+                            armor.Price = Int32.Parse(tempArmor[9]);
                             switch (armor.Type)
                             {
                                 case (Armor.ArmorType.BOOTS):
@@ -267,6 +265,7 @@ namespace DungeonCrawler.Scenes
                                     armor.ItemTexture = Sprites.GetTexture("HAT_1_ICON");
                                     break;
                             }
+
                             Init.ItemInventory.AddArmor(armor);
 
                             if (armor.Equipped)

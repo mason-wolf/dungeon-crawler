@@ -287,7 +287,7 @@ namespace DungeonCrawler
                     case ("CHEST"):
                         // Randomly populate a chest.
                         Random randomChest = new Random();
-                        int chance = randomChest.Next(1, 4);
+                        int chance = 2;//randomChest.Next(1, 4);
  
                         if (chance == 2)
                         {

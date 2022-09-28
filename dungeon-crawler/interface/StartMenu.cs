@@ -12,12 +12,14 @@ namespace DungeonCrawler
 {
     class StartMenu : SceneManager
     {
-        public MainMenu buttonMenu;
+        public MainMenu mainMenu;
         SpriteFont spriteFont;
         Texture2D background;
         Texture2D buttonImage;
         GameWindow window;
-
+        KeyboardState newKeyboardState;
+        KeyboardState oldKeyboardState;
+        Init init;
 
         public StartMenu(Game game, GameWindow window)
             : base(game)
@@ -29,15 +31,15 @@ namespace DungeonCrawler
 
             string[] items = { "New Game", "Load", "Quit" };
 
-            buttonMenu = new MainMenu(game, window, spriteFont, buttonImage, background);
-            buttonMenu.SetMenuItems(items);          
-            Components.Add(buttonMenu);
-            buttonMenu.Show();
+            mainMenu = new MainMenu(game, window, spriteFont, buttonImage, background);
+            mainMenu.SetMenuItems(items);          
+            Components.Add(mainMenu);
+            mainMenu.Show();
         }
 
         public int SelectedIndex
         {
-            get { return buttonMenu.SelectedIndex; }
+            get { return mainMenu.SelectedIndex; }
         }
 
         protected override void LoadContent()
@@ -49,45 +51,72 @@ namespace DungeonCrawler
         }
 
         bool gameStart = false;
+        public static bool gameRestart = false;
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState keyboardState = Keyboard.GetState();
-
+            oldKeyboardState = newKeyboardState;
+            newKeyboardState = Keyboard.GetState();
             if (!gameStart)
             {
                 // New Game
-                if (keyboardState.IsKeyDown(Keys.E) && SelectedIndex == 0)
+                if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E) && SelectedIndex == 0)
                 {
                     gameStart = true;
-                    buttonMenu.Hide();
+                    mainMenu.Hide();
                     UnloadContent();
-                    Init init = new Init(game, window);
+                    init = new Init(game, window);
+                    Components.Clear();
                     Components.Add(init);
                     init.Show();
                 }
 
                 // Load Game
-                if (keyboardState.IsKeyDown(Keys.E) && SelectedIndex == 1)
+                if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E) && SelectedIndex == 1)
                 {
                     gameStart = true;
-                    buttonMenu.Hide();
+                    mainMenu.Hide();
                     UnloadContent();
-                    Init init = new Init(game, window);
+                    init = new Init(game, window);
+                    Components.Clear();
                     Components.Add(init);
                     init.Show();
                     // Pause player movement because they're in the menu.
                     Init.Player.InMenu = true;
                     Init.SelectedScene = Init.Scene.LOAD_MENU;
                 }
+
+                // Quit game
+                if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E) && SelectedIndex == 2)
+                {
+                    game.Exit();
+                }
+
             }
 
+            if (gameRestart)
+            {
+
+                init.Hide();
+                UnloadContent();
+                Components.Clear();
+                LoadContent();
+
+                string[] items = { "New Game", "Load", "Quit" };
+                mainMenu = new MainMenu(game, window, spriteFont, buttonImage, background);
+                mainMenu.SetMenuItems(items);
+                Components.Add(mainMenu);
+
+                mainMenu.Show();
+                gameRestart = false;
+                gameStart = false;
+            }
             base.Update(gameTime);
         }
 
         public override void Show()
         {
-            buttonMenu.Position = new Vector2(((Game.Window.ClientBounds.Width - buttonMenu.Width) / 2), 450);
+        //    mainMenu.Position = new Vector2(mainMenu.Position.X - 200, mainMenu.Position.Y);
             base.Show();
         }
 

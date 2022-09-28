@@ -124,7 +124,7 @@ namespace DungeonCrawler.Interface
             }
 
             camera.Zoom = 4;
-            Vector2 cameraPosition = new Vector2(textPosition.X, textPosition.Y - 50);
+            Vector2 cameraPosition = new Vector2(position.X + 15, position.Y);
             camera.LookAt(cameraPosition);
             oldState = newState;
             base.Update(gameTime);
@@ -144,7 +144,7 @@ namespace DungeonCrawler.Interface
 
             Color myColor;
 
-            spriteBatch.Draw(background, new Vector2(textPosition.X - 121, textPosition.Y - 106), Color.White);
+            spriteBatch.Draw(background, new Vector2(textPosition.X, textPosition.Y), Color.White);
 
             for (int i = 0; i < menuItems.Count; i++)
             {
@@ -161,6 +161,7 @@ namespace DungeonCrawler.Interface
                     buttonRectangle.X + (buttonImage.Width / 2),
                     buttonRectangle.Y + (buttonImage.Height / 2));
 
+
                 Vector2 textSize = spriteFont.MeasureString(menuItems[i]);
                 textPosition.X -= textSize.X / 2;
                 textPosition.Y -= spriteFont.LineSpacing / 3;
@@ -172,6 +173,7 @@ namespace DungeonCrawler.Interface
                 buttonRectangle.Y += buttonImage.Height;
                 buttonRectangle.Y += 5;
             }
+
             base.Draw(gameTime);
             spriteBatch.End();
         }

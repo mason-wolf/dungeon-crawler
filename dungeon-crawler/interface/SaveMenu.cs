@@ -171,7 +171,7 @@ namespace DungeonCrawler.Scenes
                 {
                     streamWriter.WriteLine("ARMOR_ITEM=" + armor.Name + "," + armor.Description + "," + armor.FireResistance +
                         "," + armor.FrostResistance + "," + armor.ThunderResistance + "," + armor.HealthBonus + "," + armor.ManaBonus
-                        + "," + armor.Type + "," + armor.Equipped);
+                        + "," + armor.Type + "," + armor.Equipped + "," + armor.Price);
                 }
 
                 // Save spells

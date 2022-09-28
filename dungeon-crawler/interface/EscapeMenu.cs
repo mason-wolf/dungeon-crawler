@@ -116,7 +116,9 @@ namespace DungeonCrawler.Interface
 
             if (SelectedIndex == 3 && newState.IsKeyDown(Keys.E))
             {
-                game.Exit();
+                Vector2 menuPosition = new Vector2(0, 0);
+                Position = menuPosition;
+                StartMenu.gameRestart = true;
             }
 
             oldState = newState;

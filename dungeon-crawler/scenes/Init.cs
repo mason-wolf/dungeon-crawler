@@ -113,6 +113,7 @@ namespace DungeonCrawler.Scenes
             ESCAPE_MENU,
             SAVE_MENU,
             LOAD_MENU,
+            LOADING_SCREEN,
             INVENTORY,
             PLAINS_1,
             PLAINS_2,
@@ -121,6 +122,15 @@ namespace DungeonCrawler.Scenes
             PLAINS_5,
             CASTLE
         }
+
+        //public void LoadLevel(string levelName)
+        //{
+        //    Level newLevel = levelList.Find(level => level.GetLevelName() == levelName);
+        //    newLevel = new Level();
+        //    newLevel.SetMap(new Map(Content, "Content/maps/" + levelName + ".tmx"));
+        //    newLevel.SetScene(new Plains_1());
+        //    newLevel.LoadContent(Content);
+        //}
 
         protected override void LoadContent()
         {
@@ -240,6 +250,8 @@ namespace DungeonCrawler.Scenes
             // If save was loaded, create transition effects, assign the player's saved scene and position.
             if (Reloaded)
             {
+                UnloadContent();
+                LoadContent();
                 TransitionState = true;
                 SelectedScene = Scene.CASTLE;
                 SelectedMap = levelList.Find(map => map.GetLevelName() == "CASTLE").GetMap();
@@ -267,6 +279,7 @@ namespace DungeonCrawler.Scenes
                         }
 
                         TransitionState = true;
+                        UnloadContent();
                         LoadContent();
                         
                         if (teleporter.GetDestinationMap() == "RANDOM_PLAIN")
@@ -274,6 +287,7 @@ namespace DungeonCrawler.Scenes
                             Random randomLevel = new Random();
                             int levelNum = randomLevel.Next(1, 6);
                             string levelName = "PLAINS_" + 2;
+                            //LoadLevel(levelName);
                             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
                         }
                         else
@@ -426,6 +440,11 @@ namespace DungeonCrawler.Scenes
                     loadMenu.Draw(spriteBatch);
                 }
             }
+            else if (SelectedScene == Scene.LOADING_SCREEN)
+            {
+                Vector2 healthStatus = new Vector2(Player.Position.X - 20, Player.Position.Y - 20);
+                spriteBatch.DrawString(Font, "Loading..", healthStatus, Color.White);
+            }
             else
             {
                 Vector2 playerHealthPosition = new Vector2(Player.Position.X - 170, Player.Position.Y - 110);
@@ -551,6 +570,7 @@ namespace DungeonCrawler.Scenes
 
         public static void Reload()
         {
+            SelectedScene = Scene.LOADING_SCREEN;
             Reloaded = true;
         }
         public override void Hide()

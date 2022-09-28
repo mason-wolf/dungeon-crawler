@@ -79,35 +79,36 @@ namespace DungeonCrawler.Scenes
             }
         }
 
+        bool sellShopPopulated = false;
         public override void Update(GameTime gameTime)
         {
             foreach (MapObject mapObject in MapObjects)
             {
-                //if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "CHEST")
-                //{
-                //    if (!mapObject.Interacted())
-                //    {
-  
-                //        LootGenerator lootGenerator = new LootGenerator();
-                //        Loot loot = lootGenerator.GenerateLoot();
+                if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "CHEST")
+                {
+                    if (!mapObject.Interacted())
+                    {
 
-                //        if (loot.Gold > 0)
-                //        {
-                //            Init.Player.Gold += loot.Gold;
-                //            Init.Message = "You obtained " + loot.Gold + " gold.";
-                //        }
-                //        else
-                //        {
-                //            Init.Message = "You obtained " + loot.Armor.Name + ".";
-                //            Init.ItemInventory.AddArmor(loot.Armor);
-                //        }
+                        LootGenerator lootGenerator = new LootGenerator();
+                        Loot loot = lootGenerator.GenerateLoot();
 
-                //        Init.MessageEnabled = true;
-                //        Player.ActionButtonPressed = false;
-                //        mapObject.Interact();
-                //        mapObject.GetSprite().Play("Opened");
-                //    }
-                //}
+                        if (loot.Gold > 0)
+                        {
+                            Init.Player.Gold += loot.Gold;
+                            Init.Message = "You obtained " + loot.Gold + " gold.";
+                        }
+                        else
+                        {
+                            Init.Message = "You obtained " + loot.Armor.Name + ".";
+                            Init.ItemInventory.AddArmor(loot.Armor);
+                        }
+
+                        Init.MessageEnabled = true;
+                        Player.ActionButtonPressed = false;
+                        mapObject.Interact();
+                        mapObject.GetSprite().Play("Opened");
+                    }
+                }
             }
 
             foreach (Entity npc in NPCList)
@@ -243,9 +244,15 @@ namespace DungeonCrawler.Scenes
                             Init.DialogBox.StartDialog = true;
                             break;
                         case ("37"):
-                            Init.SellShopInventory.ArmorList = Init.ItemInventory.ArmorList;
-                            Init.SellShopInventory.Contents = Init.ItemInventory.Contents;
-                            Init.shops.Open(Shop.ShopType.SELL_SHOP);
+                                foreach (Inventory inventory in Shop.Inventories) { 
+                                    if (inventory.InventoryType == "SELL_SHOP")
+                                    {
+                                        inventory.Contents = Init.ItemInventory.Contents;
+                                        inventory.ArmorList = Init.ItemInventory.ArmorList;
+                                    }
+                                }
+
+                                Init.shops.Open(Shop.ShopType.SELL_SHOP);
                             break;
                     }
                 }
