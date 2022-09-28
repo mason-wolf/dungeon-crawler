@@ -186,7 +186,9 @@ namespace DungeonCrawler.Scenes
             {
                 string line;
                 Init.ItemInventory.Contents.Clear();
+                Init.ItemInventory.ArmorList.Clear();
                 Init.SpellInventory.Contents.Clear();
+                Random randomID = new Random();
                 while ((line = streamReader.ReadLine()) != null)
                 {
                     lineCount++;
@@ -226,12 +228,80 @@ namespace DungeonCrawler.Scenes
                             string[] tempItem = value.Split(',');
                             int quantity = Int32.Parse(tempItem[1]);
                             int itemId = Int32.Parse(tempItem[2]);
-                            Item item = Items.GetItemById(itemId);
+                            Item item = new Item();
                             quantity += 1;
                             for (var i = 0; i < quantity; i++)
                             {
                                 Init.ItemInventory.AddItem(item);
                             }
+                            break;
+                        case ("ARMOR_ITEM"):
+                            value = line.Split('=').Last();
+                            string[] tempArmor = value.Split(',');
+                            Armor armor = new Armor();
+                            armor.ID = randomID.Next(501, 9999);
+                            armor.Name = tempArmor[0];
+                            armor.Description = tempArmor[1];
+                            armor.FireResistance = Int32.Parse(tempArmor[2]);
+                            armor.FrostResistance = Int32.Parse(tempArmor[3]);
+                            armor.ThunderResistance = Int32.Parse(tempArmor[4]);
+                            armor.HealthBonus = Int32.Parse(tempArmor[5]);
+                            armor.ManaBonus = Int32.Parse(tempArmor[6]);
+                            armor.Type = (Armor.ArmorType)Enum.Parse(typeof(Armor.ArmorType), tempArmor[7]);
+                            armor.Equipped = bool.Parse(tempArmor[8]);
+                            switch (armor.Type)
+                            {
+                                case (Armor.ArmorType.BOOTS):
+                                    armor.ItemTexture = Sprites.GetTexture("BOOTS_1_ICON");
+                                    break;
+                                case (Armor.ArmorType.CHEST):
+                                    armor.ItemTexture = Sprites.GetTexture("ROBE_1_ICON");
+                                    break;
+                                case (Armor.ArmorType.HANDS):
+                                    armor.ItemTexture = Sprites.GetTexture("GLOVES_1_ICON");
+                                    break;
+                                case (Armor.ArmorType.RING):
+                                    armor.ItemTexture = Sprites.GetTexture("RING_1_ICON");
+                                    break;
+                                case (Armor.ArmorType.HEAD):
+                                    armor.ItemTexture = Sprites.GetTexture("HAT_1_ICON");
+                                    break;
+                            }
+                            Init.ItemInventory.AddArmor(armor);
+
+                            if (armor.Equipped)
+                            {
+                                switch (armor.Type)
+                                {
+                                    case (Armor.ArmorType.BOOTS):
+                                        Init.Player.Equipment.Unequip(Init.Player.Equipment.Boots);
+                                        Init.Player.Equipment.Boots = armor;
+                                        armor.Equipped = true;
+                                        break;
+                                    case (Armor.ArmorType.HEAD):
+                                        Init.Player.Equipment.Unequip(Init.Player.Equipment.Head);
+                                        Init.Player.Equipment.Head = armor;
+                                        armor.Equipped = true;
+                                        break;
+                                    case (Armor.ArmorType.HANDS):
+                                        Init.Player.Equipment.Unequip(Init.Player.Equipment.Hands);
+                                        Init.Player.Equipment.Hands = armor;
+                                        armor.Equipped = true;
+                                        break;
+                                    case (Armor.ArmorType.RING):
+                                        Init.Player.Equipment.Unequip(Init.Player.Equipment.Ring);
+                                        Init.Player.Equipment.Ring = armor;
+                                        armor.Equipped = true;
+                                        break;
+                                    case (Armor.ArmorType.CHEST):
+                                        Init.Player.Equipment.Unequip(Init.Player.Equipment.Chest);
+                                        Init.Player.Equipment.Chest = armor;
+                                        armor.Equipped = true;
+                                        break;
+                                }
+                            }
+
+                            Init.Player.ApplyArmorStats();
                             break;
                         case ("SPELL"):
                             value = line.Split('=').Last();

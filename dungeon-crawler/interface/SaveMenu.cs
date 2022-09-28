@@ -1,4 +1,5 @@
-﻿using DungeonCrawler.Interface;
+﻿using Demo.Game;
+using DungeonCrawler.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -152,10 +153,11 @@ namespace DungeonCrawler.Scenes
                 streamWriter.WriteLine("PLAYER_XP=" + Init.Player.XP);
                 streamWriter.WriteLine("PLAYER_XP_REMAINING=" + Init.Player.XPRemaining);
                 streamWriter.WriteLine("ENEMIES_KILLED=" + Init.Player.EnemiesKilled);
+
                 // Save inventory
                 foreach (Item item in Init.ItemInventory.Contents)
                 {
-                    if (item.Name != "")
+                    if (item.Name != "" && item.ID < 500)
                     {
                         if (item.Quantity == 0)
                         {
@@ -163,6 +165,13 @@ namespace DungeonCrawler.Scenes
                         }
                         streamWriter.WriteLine("INVENTORY_ITEM=" + item.Name + "," + item.Quantity + "," + item.ID);
                     }
+                }
+
+                foreach (Armor armor in Init.ItemInventory.ArmorList)
+                {
+                    streamWriter.WriteLine("ARMOR_ITEM=" + armor.Name + "," + armor.Description + "," + armor.FireResistance +
+                        "," + armor.FrostResistance + "," + armor.ThunderResistance + "," + armor.HealthBonus + "," + armor.ManaBonus
+                        + "," + armor.Type + "," + armor.Equipped);
                 }
 
                 // Save spells

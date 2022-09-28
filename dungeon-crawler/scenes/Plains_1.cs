@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework.Input;
 using DungeonCrawler.Interface;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using Demo.Game;
 
 namespace DungeonCrawler.Scenes
 {
@@ -47,13 +48,25 @@ namespace DungeonCrawler.Scenes
                 {
                     if (!mapObject.Interacted())
                     {
-                        mapObject.GetSprite().Play("Opened");
-                        Random randomGold = new Random();
-                        int gold = randomGold.Next(1, 50);
-                        Init.Player.Gold += gold;
-                        Init.Message = "You obtained " + gold + " gold.";
+
+                        LootGenerator lootGenerator = new LootGenerator();
+                        Loot loot = lootGenerator.GenerateLoot();
+
+                        if (loot.Gold > 0)
+                        {
+                            Init.Player.Gold += loot.Gold;
+                            Init.Message = "You obtained " + loot.Gold + " gold.";
+                        }
+                        else
+                        {
+                            Init.Message = "You obtained " + loot.Armor.Name + ".";
+                            Init.ItemInventory.AddArmor(loot.Armor);
+                        }
+
                         Init.MessageEnabled = true;
+                        Player.ActionButtonPressed = false;
                         mapObject.Interact();
+                        mapObject.GetSprite().Play("Opened");
                     }
                 }
             }

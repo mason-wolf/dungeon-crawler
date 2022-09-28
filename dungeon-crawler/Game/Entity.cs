@@ -77,6 +77,8 @@ namespace DungeonCrawler
         public double MaxHealth { get; set; } = 0;
         public double CurrentHealth { get; set; } = 0;
 
+        public double HealthBonus { get; set; }
+        public double ManaBonus { get; set; }
         public double MaxStamina { get; set; } = 0;
         public double CurrentStamina { get; set; } = 0;
 
@@ -93,7 +95,7 @@ namespace DungeonCrawler
         public PathFinder PathFinder { get; set; }
         public Spell Buff { get; set; }
 
-        public Equipment Equipment { get; set; }
+        public Equipment Equipment { get; set; } = new Equipment();
 
         public double FrostResistance { get; set; }
         public double FireResistance { get; set; }
@@ -112,10 +114,6 @@ namespace DungeonCrawler
             HealthBarTexture = content.Load<Texture2D>(@"interface\healthbar");
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
             ManaBarTexture = content.Load<Texture2D>(@"interface\MANA_BAR");
-            if (ManaBarTexture == null)
-            {
-                Console.WriteLine("bitch");
-            }
         }
 
         // Create standard animation states for the entity.
@@ -289,7 +287,7 @@ namespace DungeonCrawler
             attackTimer.Start();
 
             // Cast spell at target
-            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 3000)
+            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 2500)
             {
                 if (direction == -3 || direction == 4 || direction == -2)
                 {
@@ -348,6 +346,7 @@ namespace DungeonCrawler
         public void CastSpell(SpellDirection direction, int spellId)
         {
             Spell spell = (Spell)Items.GetItemById(spellId);
+
             if (spell != null && spell.ManaCost <= CurrentMana)
             {
                 spell.Direction = direction;
@@ -388,11 +387,20 @@ namespace DungeonCrawler
         public void ApplyArmorStats()
         {
             Dictionary<string, double> bonuses = Equipment.GetBonuses();
-            FrostResistance += bonuses["FROST_RESISTANCE"];
-            FireResistance += bonuses["FIRE_RESISTANCE"];
-            ThunderResistance += bonuses["THUNDER_RESISTANCE"];
-            MaxHealth += bonuses["HEALTH_BONUS"];
-            MaxMana += bonuses["MANA_BONUS"];
+            FrostResistance = 0;
+            FrostResistance = 0;
+            FireResistance = 0;
+            ThunderResistance = 0;
+
+            FrostResistance = bonuses["FROST_RESISTANCE"];
+            FireResistance = bonuses["FIRE_RESISTANCE"];
+            ThunderResistance = bonuses["THUNDER_RESISTANCE"];
+
+            HealthBonus = 0;
+            HealthBonus += bonuses["HEALTH_BONUS"];
+
+            ManaBonus = 0;
+            ManaBonus += bonuses["MANA_BONUS"];
         }
 
         /// <summary>
@@ -454,20 +462,20 @@ namespace DungeonCrawler
 
         public void RestoreHealth(double healAmount)
         {
-            double healthToHeal = MaxHealth - CurrentHealth;
+            double healthToHeal = (MaxHealth + HealthBonus) - CurrentHealth;
             if (healthToHeal >= healAmount)
             {
                 CurrentHealth += healAmount;
             }
             else
             {
-                CurrentHealth = MaxHealth;
+                CurrentHealth = (MaxHealth + HealthBonus);
             }
         }
 
         public void RestoreMana(double manaAmount)
         {
-            double manaToHeal = MaxMana - CurrentMana;
+            double manaToHeal = (MaxMana + ManaBonus) - CurrentMana;
 
             if (manaToHeal >= manaAmount)
             {
@@ -475,7 +483,7 @@ namespace DungeonCrawler
             }
             else
             {
-                CurrentMana = MaxMana;
+                CurrentMana = (MaxMana + ManaBonus);
             }
         }
     
@@ -629,16 +637,12 @@ namespace DungeonCrawler
                 if (CurrentHealth > 0)
                 {
                     // Draw health bar
-                    Vector2 healthPosition = new Vector2(position.X + 1, Position.Y - 108);
-                    spriteBatch.Draw(StatusBarTexture, position, new Rectangle(0, 0, Convert.ToInt32(MaxHealth), 6), Color.White);
+                    Vector2 healthPosition = new Vector2(position.X, Position.Y - 108);
+                    spriteBatch.Draw(StatusBarTexture, position, new Rectangle(0, 0, (Convert.ToInt32(MaxHealth) + Convert.ToInt32(HealthBonus)), 6), Color.White);
                     spriteBatch.Draw(HealthBarTexture, healthPosition, new Rectangle(0, 100, Convert.ToInt32(CurrentHealth), 4), Color.White);
 
-                    spriteBatch.Draw(StatusBarTexture, new Vector2(position.X + 1, Position.Y - 104), new Rectangle(0, 0, Convert.ToInt32(MaxMana), 6), Color.White);
+                    spriteBatch.Draw(StatusBarTexture, new Vector2(position.X + 1, Position.Y - 104), new Rectangle(0, 0, (Convert.ToInt32(MaxMana) + Convert.ToInt32(ManaBonus)), 6), Color.White);
                     spriteBatch.Draw(ManaBarTexture, new Vector2(healthPosition.X, healthPosition.Y + 6), new Rectangle(0, 100, Convert.ToInt32(CurrentMana), 4), Color.White);
-                    // Draw stamina bar
-                    //Vector2 staminaPosition = new Vector2(position.X, position.Y + 6);
-                    //spriteBatch.Draw(StatusBarTexture, staminaPosition, new Rectangle(0, 0, Convert.ToInt32(MaxStamina), 4), Color.Black);
-                    //spriteBatch.Draw(StaminaBarTexture, staminaPosition, new Rectangle(10, 10, Convert.ToInt32(CurrentStamina), 4), Color.White);
                 }
             }
             else

@@ -45,6 +45,7 @@ namespace DungeonCrawler.Scenes
         public static Inventory SpellInventory;
         public static Inventory ItemShopInventory;
         public static Inventory SpellShopInventory;
+        public static Inventory SellShopInventory;
 
         public static Shop shops;
         PlayerStatus PlayerStatus;
@@ -191,7 +192,12 @@ namespace DungeonCrawler.Scenes
             ItemShopInventory = new Inventory(Content);
             ItemShopInventory.InventoryType = "ITEM_SHOP";
             ItemShopInventory.MenuTitle = "Item Shop";
-            
+
+            SellShopInventory = new Inventory(Content);
+            SellShopInventory.InventoryType = "SELL_SHOP";
+            SellShopInventory.MenuTitle = "Sell";
+
+
             // Health potion
             ItemShopInventory.Contents.Add(Items.GetItemById(3));
             // Mana potion
@@ -218,29 +224,12 @@ namespace DungeonCrawler.Scenes
             shops = new Shop();
             shops.Add(ItemShopInventory);
             shops.Add(SpellShopInventory);
+            shops.Add(SellShopInventory);
 
             PlayerStatus = new PlayerStatus(Content);
             DialogBox = new DialogBox(game, Font);
 
             SelectedScene = Scene.CASTLE;
-
-
-            Armor headPiece = new Armor();
-            headPiece.FireResistance = 10;
-            headPiece.FrostResistance = 20;
-
-            Armor chestPiece = new Armor();
-            chestPiece.FireResistance = 10;
-
-            Armor handPiece = new Armor();
-            handPiece.HealthBonus = 100;
-
-            Player.Equipment = new Equipment();
-            Player.Equipment.Head = headPiece;
-            Player.Equipment.Chest = chestPiece;
-            Player.Equipment.Hands = handPiece;
-            Player.ApplyArmorStats();
-
             base.LoadContent();
         }
 
@@ -284,7 +273,7 @@ namespace DungeonCrawler.Scenes
                         {
                             Random randomLevel = new Random();
                             int levelNum = randomLevel.Next(1, 6);
-                            string levelName = "PLAINS_" + levelNum;
+                            string levelName = "PLAINS_" + 2;
                             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
                         }
                         else

@@ -41,6 +41,7 @@
     <Compile Include="Game\Armor.cs" />
     <Compile Include="Game\Equipment.cs" />
     <Compile Include="Game\Items.cs" />
+    <Compile Include="Game\LootGenerator.cs" />
     <Compile Include="Game\Projectile.cs" />
     <Compile Include="Game\Spell.cs" />
     <Compile Include="Game\SpriteLoader.cs" />

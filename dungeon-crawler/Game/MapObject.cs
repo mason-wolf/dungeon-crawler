@@ -128,6 +128,9 @@ namespace DungeonCrawler
             return destroyed;
         }
 
+        /// <summary>
+        /// Sets MapObject interacted to true so entity cannot interact with it again.
+        /// </summary>
         public void Interact()
         {
             interacted = true;

@@ -23,7 +23,9 @@ namespace DungeonCrawler.Interface
         KeyboardState newKeyboardState;
 
         public int SelectedItem { get; set; }
-        public List<Item> itemList = Player.InventoryList;
+        public List<Item> ItemList = Player.InventoryList;
+        public List<Armor> ArmorList = new List<Armor>();
+
         public bool InventoryOpen { get; set; }
         public string MenuTitle { get; set; }
         public string InventoryType { get; set; }
@@ -33,6 +35,7 @@ namespace DungeonCrawler.Interface
 
         public int itemSlot;
 
+        public bool InventoryFull { get; set; }
 
         public Inventory(ContentManager content)
         {
@@ -69,7 +72,7 @@ namespace DungeonCrawler.Interface
             // Handle item selection in inventory menu: move right.
             if (newKeyboardState.IsKeyDown(Keys.D) && oldKeyboardState.IsKeyUp(Keys.D))
             {
-                if (SelectedItem != itemList.Count)
+                if (SelectedItem != ItemList.Count)
                 {
                     SelectedItem++;
                 }
@@ -162,23 +165,26 @@ namespace DungeonCrawler.Interface
 
 
             // Count number of items in inventory.
-            foreach (Item item in itemList)
+            foreach (Item item in ItemList)
             {
-                if (item.ItemTexture == null)
+                if (emptySlots < 32)
                 {
-                    emptySlots++;
+                    if (item.ItemTexture == null)
+                    {
+                        emptySlots++;
+                    }
                 }
             }
 
             // If inventory is empty, assign the item to the first slot.
-            if (emptySlots == itemList.Count)
+            if (emptySlots == ItemList.Count)
             {
                 slot = 0;
             }
             else
             {
                 // Find the next open slot.
-                foreach (Item item in itemList)
+                foreach (Item item in ItemList)
                 {
                     if (item.ItemTexture != null)
                     {
@@ -200,7 +206,7 @@ namespace DungeonCrawler.Interface
         {
             bool isDuplicate = false;
 
-            foreach (Item item in itemList)
+            foreach (Item item in ItemList)
             {
                 if (itemToAdd.ID == item.ID)
                 {
@@ -235,7 +241,7 @@ namespace DungeonCrawler.Interface
                     newItem.Name = "";
                     newItem.Description = "";
                     // Add the rectangle data to the inventory list.
-                    itemList.Add(newItem);
+                    ItemList.Add(newItem);
                     x += 31;
                 }
 
@@ -244,9 +250,9 @@ namespace DungeonCrawler.Interface
             }
 
             // Assign each item an index.
-            for (int i = 0; i < itemList.Count; i++)
+            for (int i = 0; i < ItemList.Count; i++)
             {
-                itemList[i].Index = i;
+                ItemList[i].Index = i;
             }
 
             TotalItems = 0;
@@ -258,26 +264,102 @@ namespace DungeonCrawler.Interface
 
             if (itemUsed)
             {
-                if (InventoryType == "SPELL_SHOP" || InventoryType == "ITEM_SHOP")
+                if (InventoryType == "SELL_SHOP")
                 {
-                    if (itemList[SelectedItem].Price > Init.Player.Gold)
+                    Item itemToSell = null;
+                    foreach(Item item in Init.ItemInventory.Contents)
+                    {
+                        if (item.ID == ItemList[SelectedItem].ID)
+                        {
+                            itemToSell = item;
+                        }
+                    }
+
+                    if (itemToSell != null)
+                    {
+                        Init.ItemInventory.Contents.Remove(itemToSell);
+                        Init.SpellInventory.Contents.Remove(itemToSell);
+
+                        Armor armorToRemove = null;
+                        foreach(Armor armor in Init.ItemInventory.ArmorList)
+                        {
+                            if (armor.ID == itemToSell.ID)
+                            {
+                                armorToRemove = armor;
+                            }
+                        }
+
+                        if (armorToRemove != null)
+                        {
+                            Init.Player.Equipment.Unequip(armorToRemove);
+                            Init.Player.ApplyArmorStats();
+                            Init.ItemInventory.ArmorList.Remove(armorToRemove);
+                            Init.SpellInventory.ArmorList.Remove(armorToRemove);
+                            Console.WriteLine("removed");
+                        }
+                        Init.Player.Gold += ItemList[SelectedItem].Price;
+                    }
+                }
+                else if (InventoryType == "SPELL_SHOP" || InventoryType == "ITEM_SHOP")
+                {
+                    if (ItemList[SelectedItem].Price > Init.Player.Gold)
                     {
                         Init.Message = "You don't have enough gold.";
                         Init.MessageEnabled = true;
                     }
                     else
                     {
-                        Init.Player.Gold -= itemList[SelectedItem].Price;
-                        AddItem(itemList[SelectedItem]);
+                        Init.Player.Gold -= ItemList[SelectedItem].Price;
+                        AddItem(ItemList[SelectedItem]);
                     }
                 }
                 else if (InventoryType == "PLAYER_INVENTORY")
                 {
                     Item foundItem = null;
 
+                    // Equipping armor.
+                    foreach(Armor armor in ArmorList)
+                    {
+                        if (armor.ID == ItemList[SelectedItem].ID)
+                        {
+                            switch(armor.Type)
+                            {
+                                case (Armor.ArmorType.BOOTS):
+                                    Init.Player.Equipment.Unequip(Init.Player.Equipment.Boots);
+                                    Init.Player.Equipment.Boots = armor;
+                                    armor.Equipped = true;
+                                    break;
+                                case (Armor.ArmorType.HEAD):
+                                    Init.Player.Equipment.Unequip(Init.Player.Equipment.Head);
+                                    Init.Player.Equipment.Head = armor;
+                                    armor.Equipped = true;
+                                    break;
+                                case (Armor.ArmorType.HANDS):
+                                    Init.Player.Equipment.Unequip(Init.Player.Equipment.Hands);
+                                    Init.Player.Equipment.Hands = armor;
+                                    armor.Equipped = true;
+                                    break;
+                                case (Armor.ArmorType.RING):
+                                    Init.Player.Equipment.Unequip(Init.Player.Equipment.Ring);
+                                    Init.Player.Equipment.Ring = armor;
+                                    armor.Equipped = true;
+                                    break;
+                                case (Armor.ArmorType.CHEST):
+                                    Init.Player.Equipment.Unequip(Init.Player.Equipment.Chest);
+                                    Init.Player.Equipment.Chest = armor;
+                                    armor.Equipped = true;
+                                    break;
+                            }
+                            Init.Player.ApplyArmorStats();
+                            Init.Message = armor.Name + " equipped.";
+                            Init.MessageEnabled = true;
+                        }
+                    }
+
+                    // Using an item.
                     foreach (Item item in Init.ItemInventory.Contents)
                     {
-                        if (item.ID == itemList[SelectedItem].ID)
+                        if (item.ID == ItemList[SelectedItem].ID && item.ID < 500)
                         {
                             switch(item.ID)
                             {
@@ -312,30 +394,46 @@ namespace DungeonCrawler.Interface
                 }
                 else if (InventoryType == "spells")
                 {
-                    Init.Message = itemList[SelectedItem].Name;
+                    Init.Message = ItemList[SelectedItem].Name;
                     Init.MessageEnabled = true;
-                    Player.SelectedItem = itemList[SelectedItem];
+                    Player.SelectedItem = ItemList[SelectedItem];
                 }
             }
         }
 
+        public void AddArmor(Armor newArmor)
+        {
+            ArmorList.Add(newArmor);
+            AddItem(newArmor);
+        }
+
         public void AddItem(Item newItem)
         {
-            bool exists = false;
-
-            foreach (Item item in Init.ItemInventory.Contents)
+            if (TotalItems < 34)
             {
-                if (item.ID == newItem.ID)
+                bool exists = false;
+                InventoryFull = false;
+                TotalItems++;
+                foreach (Item item in Init.ItemInventory.Contents)
                 {
-                    item.Quantity += 1;
-                    AssignItem(item);
-                    exists = true;
+                    if (item.ID == newItem.ID)
+                    {
+                        item.Quantity += 1;
+                        AssignItem(item);
+                        exists = true;
+                    }
+                }
+
+                if (!exists)
+                {
+                    Init.ItemInventory.Contents.Add(newItem);
                 }
             }
-
-            if (!exists)
+            else
             {
-                Init.ItemInventory.Contents.Add(newItem);
+                Init.Message = "Inventory full";
+                Init.MessageEnabled = true;
+                InventoryFull = true;
             }
         }
         /// <summary>
@@ -344,14 +442,16 @@ namespace DungeonCrawler.Interface
         /// <param name="item">Item Name</param>
         public void AssignItem(Item item)
         {
-            TotalItems++;
             itemSlot = AssignSlot(item);
-            itemList[itemSlot].ItemTexture = item.ItemTexture;
-            itemList[itemSlot].Name = item.Name;
-            itemList[itemSlot].Description = item.Description;
-            itemList[itemSlot].ID = item.ID;
-            itemList[itemSlot].Price = item.Price;
-            itemList[itemSlot].Quantity = item.Quantity;
+            if (itemSlot <= 31)
+            {
+                ItemList[itemSlot].ItemTexture = item.ItemTexture;
+                ItemList[itemSlot].Name = item.Name;
+                ItemList[itemSlot].Description = item.Description;
+                ItemList[itemSlot].ID = item.ID;
+                ItemList[itemSlot].Price = item.Price;
+                ItemList[itemSlot].Quantity = item.Quantity;
+            }
         }
 
         // Create a delay before drawing to allow time for positioning to update correctly.
@@ -368,35 +468,44 @@ namespace DungeonCrawler.Interface
 
             if (frames > 20)
             {
-                for (int i = 0; i < itemList.Count; i++)
+                for (int i = 0; i < ItemList.Count; i++)
                 {
-                    if (itemList[i].ItemTexture != null)
+                    if (ItemList[i].ItemTexture != null)
                     {
                         // Draw the item texture on the inventory slot.
-                        spriteBatch.Draw(itemList[i].ItemTexture, new Rectangle(itemList[i].ItemRectangle.X, itemList[i].ItemRectangle.Y, 32, 32), Color.White);
+                        spriteBatch.Draw(ItemList[i].ItemTexture, new Rectangle(ItemList[i].ItemRectangle.X, ItemList[i].ItemRectangle.Y, 32, 32), Color.White);
 
-                        // Draw the item name and description.
-                        spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
-
-                        if (itemList[i].Quantity > 0 && InventoryType != "ITEM_SHOP" && InventoryType != "SPELL_SHOP")
+                        Armor equippedArmor = ArmorList.Find(armor => armor.ID == ItemList[i].ID);
+                        if (equippedArmor != null && equippedArmor.Equipped)
                         {
-                            spriteBatch.DrawString(inventoryFont, itemList[i].Quantity.ToString(), new Vector2(itemList[i].ItemRectangle.X + 25, itemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+
+                            spriteBatch.DrawString(inventoryFont, "E", new Vector2(ItemList[i].ItemRectangle.X, ItemList[i].ItemRectangle.Y), Color.LightGreen);
+                        }
+                        // Draw the item name and description.
+                        spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+
+                        // Draw player's inventory
+                        if (ItemList[i].Quantity > 0 && InventoryType != "ITEM_SHOP" && InventoryType != "SPELL_SHOP")
+                        {
+                            spriteBatch.DrawString(inventoryFont, ItemList[i].Quantity.ToString(), new Vector2(ItemList[i].ItemRectangle.X + 25, ItemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
                         }
        
-                        spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+                        spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
 
-                        if (InventoryType == "ITEM_SHOP" || InventoryType == "SPELL_SHOP" && itemList[SelectedItem].Price != 0)
+
+                        // Draw shop inventory
+                        if (InventoryType == "ITEM_SHOP" || InventoryType == "SPELL_SHOP" || InventoryType == "SELL_SHOP" && ItemList[SelectedItem].Price != 0)
                         {
                             // Item price
                             spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 250, Position.Y + 180));
-                            spriteBatch.DrawString(inventoryFont, itemList[SelectedItem].Price.ToString(), new Vector2(Position.X + 270, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
+                            spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Price.ToString(), new Vector2(Position.X + 270, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
                         }
                     }
                 }
-                int itemPositionX = itemList[SelectedItem].ItemRectangle.X;
-                int itemPositionY = itemList[SelectedItem].ItemRectangle.Y;
-                int itemWidth = itemList[SelectedItem].ItemRectangle.Width;
-                int itemHeight = itemList[SelectedItem].ItemRectangle.Height;
+                int itemPositionX = ItemList[SelectedItem].ItemRectangle.X;
+                int itemPositionY = ItemList[SelectedItem].ItemRectangle.Y;
+                int itemWidth = ItemList[SelectedItem].ItemRectangle.Width;
+                int itemHeight = ItemList[SelectedItem].ItemRectangle.Height;
 
                 spriteBatch.Draw(selectedItemTexture, new Rectangle(itemPositionX, itemPositionY, 1, itemHeight + 1), Color.White);
                 spriteBatch.Draw(selectedItemTexture, new Rectangle(itemPositionX, itemPositionY, itemWidth + 1, 1), Color.White);
@@ -404,9 +513,9 @@ namespace DungeonCrawler.Interface
                 spriteBatch.Draw(selectedItemTexture, new Rectangle(itemPositionX, itemPositionY + itemHeight, itemWidth + 1, 1), Color.White);
             }
 
-            if (itemList.Count > 200)
+            if (ItemList.Count > 200)
             {
-                itemList.Clear();
+                ItemList.Clear();
             }
         }
 
@@ -417,15 +526,15 @@ namespace DungeonCrawler.Interface
         {
             bool found = false;
 
-            foreach (Item item in itemList)
+            foreach (Item item in ItemList)
             {
-                if (item.Column == itemList[SelectedItem].Column + 1
-                    && item.Row == itemList[SelectedItem].Row
+                if (item.Column == ItemList[SelectedItem].Column + 1
+                    && item.Row == ItemList[SelectedItem].Row
                     && found == false)
                 {
                     found = true;
 
-                    if (item.Index <= itemList.Count)
+                    if (item.Index <= ItemList.Count)
                     {
                         SelectedItem = item.Index;
                     }
@@ -440,15 +549,15 @@ namespace DungeonCrawler.Interface
         {
             bool found = false;
 
-            foreach (Item item in itemList)
+            foreach (Item item in ItemList)
             {
-                if (item.Column == itemList[SelectedItem].Column - 1
-                     && item.Row == itemList[SelectedItem].Row
+                if (item.Column == ItemList[SelectedItem].Column - 1
+                     && item.Row == ItemList[SelectedItem].Row
                      && found == false)
                 {
                     found = true;
 
-                    if (item.Index <= itemList.Count)
+                    if (item.Index <= ItemList.Count)
                     {
                         SelectedItem = item.Index;
                     }

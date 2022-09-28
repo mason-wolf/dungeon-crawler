@@ -24,7 +24,8 @@ namespace Demo.Interface
         public enum ShopType
         {
             ITEM_SHOP,
-            SPELL_SHOP
+            SPELL_SHOP,
+            SELL_SHOP
         }
 
         public void Add(Inventory inventory)
@@ -42,6 +43,9 @@ namespace Demo.Interface
                     break;
                 case (ShopType.SPELL_SHOP):
                     selectedShop = Inventories.Find(inventory => inventory.InventoryType == ShopType.SPELL_SHOP.ToString());
+                    break;
+                case (ShopType.SELL_SHOP):
+                    selectedShop = Inventories.Find(Inventory => Inventory.InventoryType == ShopType.SELL_SHOP.ToString());
                     break;
             }
         }

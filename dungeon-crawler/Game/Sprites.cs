@@ -268,6 +268,25 @@ namespace DungeonCrawler
             SpriteLoader homingCrystalSprite = new SpriteLoader(content, "HOMING_CRYSTAL", @"items\HOMING_CRYSTAL", 16, 16);
             homingCrystalSprite.AddAnimation("idle", new[] { 0 }, 1f, true);
 
+            // Hat 1 Icon
+            SpriteLoader hat1Icon = new SpriteLoader(content, "HAT_1_ICON", @"items\HAT_1_ICON", 16, 16);
+            SpriteList.Add(hat1Icon);
+
+            // Robe 1 Icon
+            SpriteLoader robe1Icon = new SpriteLoader(content, "ROBE_1_ICON", @"items\ROBE_1_ICON", 16, 16);
+            SpriteList.Add(robe1Icon);
+
+            // Gloves 1 ICON
+            SpriteLoader gloves1Icon = new SpriteLoader(content, "GLOVES_1_ICON", @"items\GLOVES_1_ICON", 16, 16);
+            SpriteList.Add(gloves1Icon);
+
+            // Boots 1 Icon
+            SpriteLoader boots1Icon = new SpriteLoader(content, "BOOTS_1_ICON", @"items\BOOTS_1_ICON", 16, 16);
+            SpriteList.Add(boots1Icon);
+
+            // Ring 1 Icon
+            SpriteLoader ring1Icon = new SpriteLoader(content, "RING_1_ICON", @"items\RING_1_ICON", 16, 16);
+            SpriteList.Add(ring1Icon);
 
             SpriteList.Add(homingCrystalSprite);
             SpriteList.Add(fireBall1Icon);

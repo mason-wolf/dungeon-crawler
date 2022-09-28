@@ -1,4 +1,5 @@
 ﻿using DungeonCrawler;
+using DungeonCrawler.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,10 +25,35 @@ namespace Demo.Game
             Boots = new Armor();
             Ring = new Armor();
         }
+
+        public void Unequip(Armor armor)
+        {
+            switch (armor.Type)
+            {
+                case (Armor.ArmorType.BOOTS):
+                    Boots = new Armor();
+                    break;
+                case (Armor.ArmorType.HEAD):
+                    Head = new Armor();
+                    break;
+                case (Armor.ArmorType.HANDS):
+                    Hands = new Armor();
+                    break;
+                case (Armor.ArmorType.RING):
+                    Ring = new Armor();
+                    break;
+                case (Armor.ArmorType.CHEST):
+                    Chest = new Armor();
+                    break;
+            }
+            armor.Equipped = false;
+        }
+
         public Dictionary<string, double> GetBonuses()
         {
             Dictionary<string, double> bonuses = new Dictionary<string, double>();
 
+            armorList.Clear();
             armorList.Add(Head);
             armorList.Add(Chest);
             armorList.Add(Hands);
@@ -42,14 +68,11 @@ namespace Demo.Game
 
             foreach (Armor armor in armorList)
             {
-                if (armor != null)
-                {
-                    frostResistance += armor.FrostResistance;
-                    fireResistance += armor.FireResistance;
-                    thunderResistance += armor.ThunderResistance;
-                    healthBonus += armor.HealthBonus;
-                    manaBonus += armor.HealthBonus;
-                }
+                frostResistance += armor.FrostResistance;
+                fireResistance += armor.FireResistance;
+                thunderResistance += armor.ThunderResistance;
+                healthBonus += armor.HealthBonus;
+                manaBonus += armor.ManaBonus;
             }
 
             bonuses.Add("FROST_RESISTANCE", frostResistance);

@@ -155,7 +155,7 @@ namespace DungeonCrawler
             newMouseState = Mouse.GetState();
 
             // Handle escape menu.
-            if (newState.IsKeyDown(Keys.Escape) && oldState.IsKeyUp(Keys.Escape) || PressedContinue == true && !Shop.ShopOpen && !PlayerStatus.StatusOpen)
+            if (newState.IsKeyDown(Keys.Escape) && oldState.IsKeyUp(Keys.Escape) || PressedContinue == true)
             {
                 // Exit the menu if Escape is pressed or if player pressed continue.
                 if (InMenu)
@@ -180,7 +180,7 @@ namespace DungeonCrawler
             }
 
             // Handle item inventory
-            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Shop.InventoriesOpen() && !Init.SpellInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.I) && oldState.IsKeyUp(Keys.I) && !Shop.InventoriesOpen() && !Init.SpellInventory.InventoryOpen && !PlayerStatus.StatusOpen)
             {
                 if (Init.ItemInventory.InventoryOpen)
                 {
@@ -193,7 +193,7 @@ namespace DungeonCrawler
             }
 
             // Handle spell inventory
-            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Shop.InventoriesOpen() && !Init.ItemInventory.InventoryOpen)
+            if (newState.IsKeyDown(Keys.Tab) && oldState.IsKeyUp(Keys.Tab) && !Shop.InventoriesOpen() && !Init.ItemInventory.InventoryOpen && !PlayerStatus.StatusOpen)
             {
                 if (Init.SpellInventory.InventoryOpen)
                 {

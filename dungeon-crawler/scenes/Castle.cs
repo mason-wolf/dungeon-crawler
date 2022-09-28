@@ -56,7 +56,7 @@ namespace DungeonCrawler.Scenes
             int[] npcIDs = { 
                 15, 16, 17, 18, 19, 20, 21, 22, 
                 23, 24, 25, 26, 27, 28, 29, 30, 
-                31, 32, 33, 34, 35, 36
+                31, 32, 33, 34, 35, 36, 37
             };
 
             foreach(int npcId in npcIDs)
@@ -81,6 +81,35 @@ namespace DungeonCrawler.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            foreach (MapObject mapObject in MapObjects)
+            {
+                //if (Init.Player.BoundingBox.Intersects(mapObject.GetBoundingBox()) && Player.ActionButtonPressed && mapObject.GetName() == "CHEST")
+                //{
+                //    if (!mapObject.Interacted())
+                //    {
+  
+                //        LootGenerator lootGenerator = new LootGenerator();
+                //        Loot loot = lootGenerator.GenerateLoot();
+
+                //        if (loot.Gold > 0)
+                //        {
+                //            Init.Player.Gold += loot.Gold;
+                //            Init.Message = "You obtained " + loot.Gold + " gold.";
+                //        }
+                //        else
+                //        {
+                //            Init.Message = "You obtained " + loot.Armor.Name + ".";
+                //            Init.ItemInventory.AddArmor(loot.Armor);
+                //        }
+
+                //        Init.MessageEnabled = true;
+                //        Player.ActionButtonPressed = false;
+                //        mapObject.Interact();
+                //        mapObject.GetSprite().Play("Opened");
+                //    }
+                //}
+            }
+
             foreach (Entity npc in NPCList)
             {
                 npc.Update(gameTime);
@@ -212,6 +241,11 @@ namespace DungeonCrawler.Scenes
                                 "\nInvesting in some life magic will save you from using healing potions.";
                             Init.DialogBox.Text = message;
                             Init.DialogBox.StartDialog = true;
+                            break;
+                        case ("37"):
+                            Init.SellShopInventory.ArmorList = Init.ItemInventory.ArmorList;
+                            Init.SellShopInventory.Contents = Init.ItemInventory.Contents;
+                            Init.shops.Open(Shop.ShopType.SELL_SHOP);
                             break;
                     }
                 }

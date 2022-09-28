@@ -115,7 +115,7 @@ namespace DungeonCrawler.Engine
                         float objectPositionX = float.Parse(reader.GetAttribute("x"));
                         float objectPositionY = float.Parse(reader.GetAttribute("y"));
 
-                        MapObject newObject = new MapObject(objectId, objectName, objectType, new Vector2(objectPositionX, objectPositionY));
+                        MapObject newObject = new MapObject(objectId, objectName, objectType, new Vector2((float)Math.Round(objectPositionX), (float)Math.Round(objectPositionY)));
                         mapObjects.Add(newObject);
 
                         // Add custom properties

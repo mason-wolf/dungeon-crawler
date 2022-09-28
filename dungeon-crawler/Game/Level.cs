@@ -238,6 +238,9 @@ namespace DungeonCrawler
                     case ("ITEM_MERCHANT"):
                         AddNpc(content, mapObject, "ITEM_MERCHANT");
                         break;
+                    case ("SELL_MERCHANT"):
+                        AddNpc(content, mapObject, "FROST_MAGE");
+                        break;
                     case ("NOVICE_MAGE"):
                         AddNpc(content, mapObject, "NOVICE_MAGE");
                         break;
@@ -285,6 +288,7 @@ namespace DungeonCrawler
                         // Randomly populate a chest.
                         Random randomChest = new Random();
                         int chance = randomChest.Next(1, 4);
+ 
                         if (chance == 2)
                         {
                             AnimatedSprite chestSprite = new AnimatedSprite(Sprites.GetSprite("CHEST"));
@@ -421,7 +425,7 @@ namespace DungeonCrawler
                 {
                     mapObject.PickUpItem();
                     Random randomGold = new Random();
-                    int goldLoot = randomGold.Next(1, 6);
+                    int goldLoot = randomGold.Next(1, 26);
                     Init.Player.Gold += goldLoot;
                     Init.Message = "You looted " + goldLoot + " gold.";
                     Init.MessageEnabled = true;
