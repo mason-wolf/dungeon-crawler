@@ -426,13 +426,29 @@ namespace DungeonCrawler
 
             // TODO: Better position projectile launch relative to player position.
             Vector2 projectilePosition = new Vector2(Position.X, Position.Y);
+
+            switch (State)
+            {
+                case (Action.AttackEastPattern1):
+                    projectilePosition = new Vector2(Position.X + 15, Position.Y + 5);
+                    break;
+                case (Action.AttackWestPattern1):
+                    projectilePosition = new Vector2(Position.X - 15, Position.Y + 5);
+                    break;
+                case (Action.AttackNorthPattern1):
+                    projectilePosition = new Vector2(Position.X, Position.Y - 15);
+                    break;
+                case (Action.AttackSouthPattern1):
+                    projectilePosition = new Vector2(Position.X, Position.Y + 15);
+                    break;
+            }
             projectile.Position = projectilePosition;
             projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;
             projectile.Damage = spell.Damage;
             Projectiles.Add(projectile);
 
-            if (Projectiles.Count > 5)
+            if (Projectiles.Count > 25)
             {
                 Projectiles.Clear();
             }
@@ -498,7 +514,7 @@ namespace DungeonCrawler
                     {
                         float time = stopWatch.ElapsedMilliseconds / 75;
                         float speed = MathHelper.PiOver4;
-                        float radius = 50.0f;
+                        float radius = 25.0f;
                         Buff.BoundingBox = new RectangleF(Buff.Sprite.Position.X, Buff.Sprite.Position.Y, 16, 16);
                         Vector2 origin = Init.Player.Position;
                         Buff.Sprite.Position =

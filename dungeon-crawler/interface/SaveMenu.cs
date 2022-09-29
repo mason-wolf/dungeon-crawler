@@ -147,6 +147,7 @@ namespace DungeonCrawler.Scenes
             using (StreamWriter streamWriter = new StreamWriter("Save_" + saveSlot + ".txt", false))
             {
                 streamWriter.WriteLine("PLAYER_HEALTH=" + Init.Player.CurrentHealth);
+                streamWriter.WriteLine("PLAYER_MAX_HEALTH=" + Init.Player.MaxHealth);
                 streamWriter.WriteLine("PLAYER_MANA=" + Init.Player.CurrentMana);
                 streamWriter.WriteLine("PLAYER_GOLD=" + Init.Player.Gold);
                 streamWriter.WriteLine("PLAYER_LEVEL=" + Init.Player.Level);

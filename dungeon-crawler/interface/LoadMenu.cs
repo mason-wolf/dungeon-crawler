@@ -196,6 +196,10 @@ namespace DungeonCrawler.Scenes
                             value = line.Split('=').Last();
                             Init.Player.CurrentHealth = (int)Math.Round(Double.Parse(value));
                             break;
+                        case ("PLAYER_MAX_HEALTH"):
+                            value = line.Split('=').Last();
+                            Init.Player.MaxHealth = (int)Math.Round(Double.Parse(value));
+                            break;
                         case ("PLAYER_LEVEL"):
                             value = line.Split('=').Last();
                             Init.Player.Level = Int32.Parse(value);
@@ -227,8 +231,11 @@ namespace DungeonCrawler.Scenes
                             int itemId = Int32.Parse(tempItem[2]);
                             Item item = new Item();
                             quantity += 1;
+                            item.ID = itemId;
+                            item = Items.GetItemById(item.ID);
                             for (var i = 0; i < quantity; i++)
                             {
+                                Console.WriteLine(item.Description);
                                 Init.ItemInventory.AddItem(item);
                             }
                             break;

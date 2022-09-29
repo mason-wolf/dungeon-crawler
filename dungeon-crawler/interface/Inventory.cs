@@ -371,9 +371,12 @@ namespace DungeonCrawler.Interface
                                     Init.Player.RestoreMana(50);
                                     break;
                                 case (11):
+                                    Init.SelectedMap.FadeIn();
                                     Init.ItemInventory.InventoryOpen = false;
                                     Init.TransitionState = true;
-                                    Init.SelectedScene = Init.Scene.CASTLE;
+                                    Init.SelectedLevel = Init.levelList.Find(l => l.GetLevelName() == "CASTLE");
+                                    Init.SelectedScene = (Init.Scene)Enum.Parse(typeof(Init.Scene), "CASTLE");
+                                    Init.Player.Position = Init.SelectedLevel.GetStartingPosition();
                                     break;
                                 default:
                                     Item spell = Items.GetItemById(item.ID);
