@@ -212,6 +212,7 @@ namespace DungeonCrawler
                         fireBatEntity.AttackDamage = 0.03;
                         fireBatEntity.Position = mapObject.GetPosition();
                         fireBatEntity.Name = "FIRE_BAT";
+                        fireBatEntity.FireResistance = 90;
                         fireBatEntity.XP = 10;
                         enemyList.Add(fireBatEntity);
                         break;
@@ -243,12 +244,14 @@ namespace DungeonCrawler
                         Entity greenGhostEntity = new Entity(Sprites.GetSprite("GREEN_GHOST"));
                         greenGhostEntity.LoadContent(content);
                         greenGhostEntity.State = Action.IdleEast1;
-                        greenGhostEntity.MaxHealth = 40;
-                        greenGhostEntity.CurrentHealth = 40;
+                        greenGhostEntity.MaxHealth = 30;
+                        greenGhostEntity.CurrentHealth = 30;
                         greenGhostEntity.AttackDamage = 0.09;
                         greenGhostEntity.Position = mapObject.GetPosition();
                         greenGhostEntity.Name = "GREEN_GHOST";
                         greenGhostEntity.XP = 20;
+                        greenGhostEntity.FireResistance = 90;
+                        greenGhostEntity.FrostResistance = 0;
                         greenGhostEntity.SpellCaster = true;
                         greenGhostEntity.SpellID = 1;
                         greenGhostEntity.CurrentMana = 1000;
@@ -261,6 +264,8 @@ namespace DungeonCrawler
                         greenSnakeEntity.MaxHealth = 40;
                         greenSnakeEntity.CurrentHealth = 40;
                         greenSnakeEntity.AttackDamage = 0.09;
+                        greenSnakeEntity.FireResistance = 50;
+                        greenSnakeEntity.FrostResistance = 0;
                         greenSnakeEntity.Position = mapObject.GetPosition();
                         greenSnakeEntity.Name = "GREEN_SNAKE";
                         greenSnakeEntity.XP = 20;
@@ -330,7 +335,7 @@ namespace DungeonCrawler
                     case ("CHEST"):
                         // Randomly populate a chest.
                         Random randomChest = new Random();
-                        int chance = 2;//randomChest.Next(1, 4);
+                        int chance = randomChest.Next(1, 4);
  
                         if (chance == 2)
                         {

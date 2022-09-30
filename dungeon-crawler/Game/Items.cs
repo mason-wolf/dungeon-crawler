@@ -36,6 +36,7 @@ namespace Demo.Game
             fireball1.Damage = 5;
             fireball1.ManaCost = .5;
             fireball1.Description = "Shoots a flame.";
+            fireball1.Element = Spell.SpellElement.FIRE;
             ItemList.Add(fireball1);
 
             Item fireballBook = new Item();
@@ -84,6 +85,7 @@ namespace Demo.Game
             icebolt1.ID = 2;
             icebolt1.Damage = 5;
             icebolt1.ManaCost = .5;
+            icebolt1.Element = Spell.SpellElement.FROST;
             icebolt1.Description = "Casts a bolt of ice.";
             ItemList.Add(icebolt1);
 
@@ -93,6 +95,7 @@ namespace Demo.Game
             thunderBolt1.ID = 5;
             thunderBolt1.Damage = 10;
             thunderBolt1.ManaCost = 1;
+            icebolt1.Element = Spell.SpellElement.THUNDER;
             thunderBolt1.Description = "Shoots a thunder bolt.";
             ItemList.Add(thunderBolt1);
 
@@ -101,6 +104,7 @@ namespace Demo.Game
             heal1.Name = "HEAL";
             heal1.ID = 6;
             heal1.ManaCost = 5;
+            heal1.Element = Spell.SpellElement.HOLY;
             heal1.Description = "Restores some health.";
             ItemList.Add(heal1);
 
@@ -119,6 +123,7 @@ namespace Demo.Game
             flameShield.Description = "Casts a shield of flame for 10 seconds.";
             flameShield.ManaCost = 15;
             flameShield.Damage = 2;
+            flameShield.Element = Spell.SpellElement.FIRE;
             flameShield.Duration = 10000; 
             ItemList.Add(flameShield);
         }

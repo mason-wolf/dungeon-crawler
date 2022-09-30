@@ -35,7 +35,8 @@ namespace Demo.Game
         {
             FIRE,
             FROST,
-            THUNDER
+            THUNDER,
+            HOLY
         }
 
         public double DamageResistance(Entity entity)

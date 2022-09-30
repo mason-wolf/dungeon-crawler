@@ -122,6 +122,9 @@ namespace DungeonCrawler.Scenes
             PLAINS_4,
             PLAINS_5,
             FIRELANDS_1,
+            FIRELANDS_2,
+            FIRELANDS_3,
+            FIRELANDS_4,
             CASTLE
         }
 
@@ -176,6 +179,15 @@ namespace DungeonCrawler.Scenes
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_1.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_2.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_3.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_4.tmx"));
 
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
@@ -395,12 +407,16 @@ namespace DungeonCrawler.Scenes
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// Generate random level based on level type.
+        /// </summary>
+        /// <param name="levelType">PLAINS, FIRELANDS, FROSTLANDS, THUNDERLANDS</param>
         public void GetRandomLevel(string levelType)
         {
             FadeInMap("CASTLE");
             Random randomLevel = new Random();
             int levelNum = randomLevel.Next(1, 6);
-            string levelName = levelType + "_" + 1;
+            string levelName = levelType + "_" + 4;
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
             SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);

@@ -79,7 +79,6 @@ namespace DungeonCrawler.Scenes
             }
         }
 
-        bool sellShopPopulated = false;
         public override void Update(GameTime gameTime)
         {
             foreach (MapObject mapObject in MapObjects)

@@ -289,7 +289,7 @@ namespace DungeonCrawler
             attackTimer.Start();
 
             // Cast spell at target
-            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 2500)
+            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 1500)
             {
                 if (direction == -3 || direction == 4 || direction == -2)
                 {
@@ -378,7 +378,6 @@ namespace DungeonCrawler
                     case (12):
                         stopWatch.Restart();
                         Buff = spell;
-                        Console.WriteLine(SpellCaster);
                         Buff.Sprite = new AnimatedSprite(Sprites.GetSprite("FLAME_SHIELD"));
                        break;
                 }
