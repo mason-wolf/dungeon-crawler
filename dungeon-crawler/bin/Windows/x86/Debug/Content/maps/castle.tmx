@@ -139,7 +139,7 @@
  </layer>
  <objectgroup id="4" name="Object Layer 1">
   <object id="201" name="DESK" x="87" y="865.5" width="15.6667" height="15.3333"/>
-  <object id="202" name="START" x="479.788" y="334.442" width="15.6667" height="15.3333"/>
+  <object id="202" name="START" x="640.788" y="299.109" width="15.6667" height="15.3333"/>
   <object id="203" name="DESK" x="173" y="866.75" width="15.6667" height="15.3333"/>
   <object id="204" name="DESK" x="129" y="867.5" width="15.6667" height="15.3333"/>
   <object id="205" name="DESK" x="87" y="907.5" width="15.6667" height="15.3333"/>
@@ -184,7 +184,7 @@
     <property name="id" type="float" value="17"/>
    </properties>
   </object>
-  <object id="266" name="ITEM_MERCHANT" x="932.948" y="359.977" width="15.6667" height="15.3333">
+  <object id="266" name="ITEM_MERCHANT" x="932" y="360" width="15.6667" height="15.3333">
    <properties>
     <property name="id" type="float" value="18"/>
    </properties>
@@ -333,13 +333,13 @@
     <property name="ID" type="float" value="36"/>
    </properties>
   </object>
-  <object id="372" name="RED_PORTAL" x="641.348" y="253.91" width="15.6667" height="15.3333"/>
-  <object id="378" name="SELL_MERCHANT" x="845.5" y="331" width="15.6667" height="15.3333">
+  <object id="372" name="RED_PORTAL" x="640" y="254" width="15.6667" height="15.3333"/>
+  <object id="378" name="SELL_MERCHANT" x="846" y="332" width="15.6667" height="15.3333">
    <properties>
     <property name="id" type="float" value="37"/>
    </properties>
   </object>
-  <object id="387" name="RANDOM_FIRELANDS" type="TELEPORTER" x="640.545" y="257.091">
+  <object id="387" name="RANDOM_FIRELANDS" type="TELEPORTER" x="640" y="258">
    <properties>
     <property name="id" type="float" value="1002"/>
    </properties>

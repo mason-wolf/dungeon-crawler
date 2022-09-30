@@ -53,10 +53,28 @@ namespace DungeonCrawler
             batSprite.AddAnimation("dead", new[] { 3 }, batAnimationSpeed, true);
             SpriteList.Add(batSprite);
 
+            // Fire Bat
+            SpriteLoader fireBatSprite = new SpriteLoader(content, "FIRE_BAT", @"spritesheets\FIRE_BAT", 32, 32);
+            float fireBatAnimationSpeed = .3f;
+            fireBatSprite.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, fireBatAnimationSpeed, true);
+            fireBatSprite.AddAnimation("dead", new[] { 3 }, fireBatAnimationSpeed, true);
+            SpriteList.Add(fireBatSprite);
+
             // Zombie
             SpriteLoader zombieSprite = new SpriteLoader(content, "ZOMBIE", @"spritesheets\ZOMBIE", 32, 32);
             float zombieAnimationSpeed = .3f;
-            zombieSprite.AddAnimation("idleSouth1", new[] { 0 }, zombieAnimationSpeed, true);
+            zombieSprite.AddAnimation("idleSouth1", new[] { 0 }, zombieAnimationSpeed, false);
             zombieSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
             zombieSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
             zombieSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, zombieAnimationSpeed, true);
@@ -88,6 +106,43 @@ namespace DungeonCrawler
             blueSlimeSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, blueSlimeSpeed, true);
             blueSlimeSprite.AddAnimation("dead", new[] { 3 }, blueSlimeSpeed, true);
             SpriteList.Add(blueSlimeSprite);
+
+            // Green Ghost
+            SpriteLoader greenGhostSprite = new SpriteLoader(content, "GREEN_GHOST", @"spritesheets\GREEN_GHOST", 24, 24);
+            float greenGhostSpeed = .6f;
+            greenGhostSprite.AddAnimation("idleSouth1", new[] { 0 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, greenGhostSpeed, true);
+            greenGhostSprite.AddAnimation("dead", new[] { 3 }, greenGhostSpeed, true);
+            SpriteList.Add(greenGhostSprite);
+
+            // Green Snake
+            SpriteLoader greenSnakeSprite = new SpriteLoader(content, "GREEN_SNAKE", @"spritesheets\GREEN_SNAKE", 24, 24);
+            float greenSnakeSpeed = .6f;
+            greenSnakeSprite.AddAnimation("idleSouth1", new[] { 0 }, greenGhostSpeed, false);
+            greenSnakeSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, greenSnakeSpeed, true);
+            greenSnakeSprite.AddAnimation("dead", new[] { 3 }, greenSnakeSpeed, true);
+            SpriteList.Add(greenSnakeSprite);
+
 
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);

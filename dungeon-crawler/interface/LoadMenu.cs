@@ -235,7 +235,6 @@ namespace DungeonCrawler.Scenes
                             item = Items.GetItemById(item.ID);
                             for (var i = 0; i < quantity; i++)
                             {
-                                Console.WriteLine(item.Description);
                                 Init.ItemInventory.AddItem(item);
                             }
                             break;

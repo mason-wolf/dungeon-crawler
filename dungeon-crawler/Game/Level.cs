@@ -186,7 +186,9 @@ namespace DungeonCrawler
                         skeletonEntity.Name = "SKELETON";
                         skeletonEntity.XP = 10;
                         skeletonEntity.SpellCaster = true;
+                        skeletonEntity.SpellID = 1;
                         skeletonEntity.CurrentMana = 1000;
+                        skeletonEntity.FireResistance = 50;
                         enemyList.Add(skeletonEntity);
                         break;
                     case ("BAT"):
@@ -201,10 +203,22 @@ namespace DungeonCrawler
                         batEntity.XP = 10;
                         enemyList.Add(batEntity);
                         break;
+                    case ("FIRE_BAT"):
+                        Entity fireBatEntity = new Entity(Sprites.GetSprite("FIRE_BAT"));
+                        fireBatEntity.LoadContent(content);
+                        fireBatEntity.State = Action.IdleEast1;
+                        fireBatEntity.MaxHealth = 30;
+                        fireBatEntity.CurrentHealth = 30;
+                        fireBatEntity.AttackDamage = 0.03;
+                        fireBatEntity.Position = mapObject.GetPosition();
+                        fireBatEntity.Name = "FIRE_BAT";
+                        fireBatEntity.XP = 10;
+                        enemyList.Add(fireBatEntity);
+                        break;
                     case ("ZOMBIE"):
                         Entity zombieEntity = new Entity(Sprites.GetSprite("ZOMBIE"));
                         zombieEntity.LoadContent(content);
-                        zombieEntity.State = Action.IdleEast1;
+                        zombieEntity.State = Action.IdleSouth1;
                         zombieEntity.MaxHealth = 30;
                         zombieEntity.CurrentHealth = 30;
                         zombieEntity.AttackDamage = 0.03;
@@ -224,6 +238,33 @@ namespace DungeonCrawler
                         blueSlimeEntity.Name = "BLUE_SLIME";
                         blueSlimeEntity.XP = 10;
                         enemyList.Add(blueSlimeEntity);
+                        break;
+                    case ("GREEN_GHOST"):
+                        Entity greenGhostEntity = new Entity(Sprites.GetSprite("GREEN_GHOST"));
+                        greenGhostEntity.LoadContent(content);
+                        greenGhostEntity.State = Action.IdleEast1;
+                        greenGhostEntity.MaxHealth = 40;
+                        greenGhostEntity.CurrentHealth = 40;
+                        greenGhostEntity.AttackDamage = 0.09;
+                        greenGhostEntity.Position = mapObject.GetPosition();
+                        greenGhostEntity.Name = "GREEN_GHOST";
+                        greenGhostEntity.XP = 20;
+                        greenGhostEntity.SpellCaster = true;
+                        greenGhostEntity.SpellID = 1;
+                        greenGhostEntity.CurrentMana = 1000;
+                        enemyList.Add(greenGhostEntity);
+                        break;
+                    case ("GREEN_SNAKE"):
+                        Entity greenSnakeEntity = new Entity(Sprites.GetSprite("GREEN_SNAKE"));
+                        greenSnakeEntity.LoadContent(content);
+                        greenSnakeEntity.State = Action.IdleSouth1;
+                        greenSnakeEntity.MaxHealth = 40;
+                        greenSnakeEntity.CurrentHealth = 40;
+                        greenSnakeEntity.AttackDamage = 0.09;
+                        greenSnakeEntity.Position = mapObject.GetPosition();
+                        greenSnakeEntity.Name = "GREEN_SNAKE";
+                        greenSnakeEntity.XP = 20;
+                        enemyList.Add(greenSnakeEntity);
                         break;
                     case ("FIRE_MAGE"):
                         AddNpc(content, mapObject, "FIRE_MAGE");
@@ -461,7 +502,7 @@ namespace DungeonCrawler
 
                 if (stopWatch.ElapsedMilliseconds <= 4000)
                 {
-                    spriteBatch.DrawString(Init.Font, "You reached level " + Init.Player.Level + "!", new Vector2(Init.Player.Position.X - 100, Init.Player.Position.Y - 50), Color.Yellow);
+                    spriteBatch.DrawString(Init.Font, "You reached level " + Init.Player.Level + "!", new Vector2(Init.Player.Position.X - 65, Init.Player.Position.Y - 50), Color.Yellow);
                 }
                 else
                 {

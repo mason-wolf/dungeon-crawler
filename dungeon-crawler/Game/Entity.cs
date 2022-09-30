@@ -104,6 +104,8 @@ namespace DungeonCrawler
         public int WayPointIndex;
 
         public bool SpellCaster { get; set; } = false;
+        public int SpellID { get; set; } = 0;
+
         public bool ReachedDestination;
 
         public List<Projectile> Projectiles = new List<Projectile>();
@@ -291,22 +293,22 @@ namespace DungeonCrawler
             {
                 if (direction == -3 || direction == 4 || direction == -2)
                 {
-                    CastSpell(SpellDirection.SOUTH, 1);
+                    CastSpell(SpellDirection.SOUTH, SpellID);
                 }
 
                 if (direction == -1)
                 {
-                    CastSpell(SpellDirection.EAST, 1);
+                    CastSpell(SpellDirection.EAST, SpellID);
                 }
 
                 if (direction == 0 || direction == 1)
                 {
-                    CastSpell(SpellDirection.NORTH, 1);
+                    CastSpell(SpellDirection.NORTH, SpellID);
                 }
 
-                if (direction == 2 || direction == 3)
+                if (direction == 2 || direction == SpellID)
                 {
-                    CastSpell(SpellDirection.WEST, 1);
+                    CastSpell(SpellDirection.WEST, SpellID);
                 }
                 attackTimer.Restart();
             }
@@ -376,6 +378,7 @@ namespace DungeonCrawler
                     case (12):
                         stopWatch.Restart();
                         Buff = spell;
+                        Console.WriteLine(SpellCaster);
                         Buff.Sprite = new AnimatedSprite(Sprites.GetSprite("FLAME_SHIELD"));
                        break;
                 }
@@ -412,6 +415,7 @@ namespace DungeonCrawler
         {
             Projectile projectile = new Projectile();
             projectile.ID = spell.ID;
+            projectile.Spell = spell;
             // Thunderbolt spell requires two separate spritesheets. 
             // Spell ID is 5 so change sprite depending on direction.
             // TODO: Decouple custom spell logic in ShootProjectile() method on Entity class.
@@ -510,13 +514,13 @@ namespace DungeonCrawler
                 if (stopWatch.ElapsedMilliseconds < Buff.Duration)
                 {
                     // Flame shield
-                    if (Buff.ID == 12)
+                    if (Buff.ID == 12 && State != Action.Dead)
                     {
                         float time = stopWatch.ElapsedMilliseconds / 75;
                         float speed = MathHelper.PiOver4;
                         float radius = 25.0f;
                         Buff.BoundingBox = new RectangleF(Buff.Sprite.Position.X, Buff.Sprite.Position.Y, 16, 16);
-                        Vector2 origin = Init.Player.Position;
+                        Vector2 origin = Position;
                         Buff.Sprite.Position =
                             new Vector2((float)Math.Cos(time * speed) * radius + origin.X,
                             (float)Math.Sin(time * speed) * radius + origin.Y
@@ -602,7 +606,7 @@ namespace DungeonCrawler
                             // If player casted projectile, damage enemy.
                             if (projectile.BoundingBox.Intersects(entity.BoundingBox) && projectile.TargetHit == false && entity.state != Action.Dead && !SpellCaster)
                             {
-                                entity.CurrentHealth -= projectile.Damage;
+                                entity.CurrentHealth -= projectile.Spell.DamageResistance(entity);
                                 entity.Aggroed = true;
                                 projectile.TargetHit = true;
                             }
@@ -611,7 +615,7 @@ namespace DungeonCrawler
                         // If enemy casted projectile, damage player.
                         if (SpellCaster && projectile.BoundingBox.Intersects(Init.Player.BoundingBox) && !projectile.TargetHit)
                         {
-                            Init.Player.CurrentHealth -= projectile.Damage;
+                            Init.Player.CurrentHealth -= projectile.Spell.DamageResistance(Init.Player);
                             projectile.TargetHit = true;
                         }
                         projectile.Update(gameTime);

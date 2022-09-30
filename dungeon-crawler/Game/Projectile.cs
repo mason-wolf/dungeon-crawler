@@ -15,5 +15,6 @@ namespace Demo.Game
         public bool TargetHit { get; set; }
         public RectangleF HitBox { get; set; }
         public double Damage { get; set; }
+        public Spell Spell { get; set; }
     }
 }

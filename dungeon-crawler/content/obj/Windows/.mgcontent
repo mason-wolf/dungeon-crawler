@@ -13,7 +13,6 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/healthbar.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/escapeMenu.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Bat.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FireBat.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/menuItemSelected.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/floppy.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/sword-swing.mp3</File>
@@ -77,5 +76,8 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/RING_1_ICON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/ROBE_1_ICON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/tilesets/FIRELANDS.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/GREEN_GHOST.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/GREEN_SNAKE.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FIRE_BAT.png</File>
   </SourceFiles>
 </SourceFileCollection>
