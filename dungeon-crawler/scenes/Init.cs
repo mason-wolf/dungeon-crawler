@@ -400,7 +400,7 @@ namespace DungeonCrawler.Scenes
             FadeInMap("CASTLE");
             Random randomLevel = new Random();
             int levelNum = randomLevel.Next(1, 6);
-            string levelName = levelType + "_" + levelNum;
+            string levelName = levelType + "_" + 1;
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
             SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);

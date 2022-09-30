@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="83">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="86">
  <tileset firstgid="1" source="FIRELANDS.tsx"/>
  <layer id="1" name="Tile Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -145,5 +145,8 @@
     <property name="ID" type="int" value="1001"/>
    </properties>
   </object>
+  <object id="83" name="SKELETON" x="401.333" y="405.292" width="26" height="24.75"/>
+  <object id="84" name="SKELETON" x="485" y="500.625" width="26" height="24.75"/>
+  <object id="85" name="SKELETON" x="445" y="578.625" width="26" height="24.75"/>
  </objectgroup>
 </map>

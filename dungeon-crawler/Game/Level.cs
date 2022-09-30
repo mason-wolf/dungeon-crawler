@@ -178,7 +178,7 @@ namespace DungeonCrawler
                     case ("SKELETON"):
                         Entity skeletonEntity = new Entity(Sprites.GetSprite("SKELETON"));
                         skeletonEntity.LoadContent(content);
-                        skeletonEntity.State = Action.IdleEast1;
+                        skeletonEntity.State = Action.IdleSouth1;
                         skeletonEntity.MaxHealth = 30;
                         skeletonEntity.CurrentHealth = 30;
                         skeletonEntity.AttackDamage = 0.05;
