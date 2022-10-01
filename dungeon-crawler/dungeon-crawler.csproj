@@ -71,13 +71,14 @@
     <Compile Include="Scenes\Castle.cs" />
     <Compile Include="Interface\LoadMenu.cs" />
     <Compile Include="Interface\SaveMenu.cs" />
+    <Compile Include="Scenes\Firelands.cs" />
     <Compile Include="Scenes\Init.cs" />
     <Compile Include="Interface\MainMenu.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\SceneManager.cs" />
     <Compile Include="Interface\StartMenu.cs" />
-    <Compile Include="Scenes\Plains_1.cs" />
+    <Compile Include="Scenes\Plains.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Humper, Version=1.0.6093.38709, Culture=neutral, processorArchitecture=MSIL">

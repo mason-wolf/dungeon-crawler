@@ -23,6 +23,7 @@ using DungeonCrawler.Interface;
 using System.Diagnostics;
 using Demo.Game;
 using Demo.Interface;
+using Demo.Scenes;
 
 namespace DungeonCrawler.Scenes
 {
@@ -125,6 +126,7 @@ namespace DungeonCrawler.Scenes
             FIRELANDS_2,
             FIRELANDS_3,
             FIRELANDS_4,
+            FIRELANDS_5,
             CASTLE
         }
 
@@ -138,7 +140,15 @@ namespace DungeonCrawler.Scenes
             }
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/" + levelName + ".tmx"));
-            newLevel.SetScene(new Plains_1());
+            switch(levelName.Split('_')[0])
+            {
+                case ("FIRELANDS"):
+                    newLevel.SetScene(new Firelands());
+                    break;
+                case ("PLAINS"):
+                    newLevel.SetScene(new Plains());
+                    break;
+            }
             newLevel.SetLevelName(levelName);
             newLevel.LoadContent(Content);
             newLevel.GetScene().LoadScene();
@@ -188,6 +198,9 @@ namespace DungeonCrawler.Scenes
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_4.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_5.tmx"));
 
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
@@ -416,7 +429,7 @@ namespace DungeonCrawler.Scenes
             FadeInMap("CASTLE");
             Random randomLevel = new Random();
             int levelNum = randomLevel.Next(1, 6);
-            string levelName = levelType + "_" + 4;
+            string levelName = levelType + "_" + levelNum;
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
             SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);

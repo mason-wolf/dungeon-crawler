@@ -310,6 +310,18 @@ namespace DungeonCrawler
             goldSprite.AddAnimation("idle", new[] { 0 }, 0.06f, true);
             SpriteList.Add(goldSprite);
 
+            // Fire Shard Icon
+            SpriteLoader fireShardSprite = new SpriteLoader(content, "FIRE_SHARD", @"items\FIRE_SHARD_ICON", 16, 16);
+            SpriteList.Add(fireShardSprite);
+
+            // Frost Shard Icon
+            SpriteLoader frostShardSprite = new SpriteLoader(content, "FROST_SHARD", @"items\FROST_SHARD_ICON", 16, 16);
+            SpriteList.Add(frostShardSprite);
+
+            // Thunder Shard Icon 
+            SpriteLoader thunderShardSprite = new SpriteLoader(content, "THUNDER_SHARD", @"items\THUNDER_SHARD_ICON", 16, 16);
+            SpriteList.Add(thunderShardSprite);
+
             // Book Icon
             SpriteLoader bookSprite = new SpriteLoader(content, "BOOK", @"items\BOOK", 16, 16);
             bookSprite.AddAnimation("idle", new[] { 0 }, 0.5f, false);

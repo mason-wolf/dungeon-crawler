@@ -11,15 +11,24 @@ namespace Demo.Game
     {
         public int Gold { get; set; } = 0;
         public Armor Armor { get; set; }
+        public Item Item { get; set; }
     }
 
     public class LootGenerator
     {
+        public LevelType Level { get; set; }
+        public enum LevelType
+        {
+            FIRELANDS,
+            FROSTLANDS,
+            THUNDERLANDS
+        }
+
         public Loot GenerateLoot()
         {
             int goldOrArmor = 0;
             Random random = new Random();
-            goldOrArmor = random.Next(1, 3);
+            goldOrArmor = random.Next(1, 4);
 
             Loot loot = new Loot();
 
@@ -30,6 +39,12 @@ namespace Demo.Game
                     break;
                 case (2):
                     loot.Armor = GenerateArmor();
+                    break;
+                case (3):
+                    if (Level == LevelType.FIRELANDS)
+                    {
+                        loot.Item = Items.GetItemById(14);
+                    }
                     break;
             }
 

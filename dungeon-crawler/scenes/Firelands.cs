@@ -1,7 +1,7 @@
-﻿
-using DungeonCrawler.Engine;
+﻿using Demo.Game;
 using DungeonCrawler;
-using Humper;
+using DungeonCrawler.Engine;
+using DungeonCrawler.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,22 +10,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MonoGame.Extended.Sprites;
-using MonoGame.Extended;
-using MonoGame.Extended.Collisions;
-using Microsoft.Xna.Framework.Input;
-using DungeonCrawler.Interface;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
-using Demo.Game;
 
-namespace DungeonCrawler.Scenes
+namespace Demo.Scenes
 {
-    public class Plains_1 : SceneLogic
+    public class Firelands : SceneLogic
     {
-        public override List<MapObject> MapObjects { get; set; }
-        public override ContentManager ContentManager { get; set; }
         public override Map Map { get; set; }
+        public override ContentManager ContentManager { get; set; }
+        public override List<MapObject> MapObjects { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -37,7 +29,6 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadScene()
         {
-
         }
 
         public override void Update(GameTime gameTime)
@@ -48,14 +39,20 @@ namespace DungeonCrawler.Scenes
                 {
                     if (!mapObject.Interacted())
                     {
-
+                        Console.WriteLine("YOURE ON THE FIRE LEVEL");
                         LootGenerator lootGenerator = new LootGenerator();
+
                         Loot loot = lootGenerator.GenerateLoot();
 
                         if (loot.Gold > 0)
                         {
                             Init.Player.Gold += loot.Gold;
                             Init.Message = "You obtained " + loot.Gold + " gold.";
+                        }
+                        else if (loot.Item != null)
+                        {
+                            Init.ItemInventory.AddItem(loot.Item);
+                            Init.Message = "You obtained a " + loot.Item.Name;
                         }
                         else
                         {
@@ -70,7 +67,6 @@ namespace DungeonCrawler.Scenes
                     }
                 }
             }
-
         }
     }
 }

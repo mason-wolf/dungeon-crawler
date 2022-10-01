@@ -146,8 +146,6 @@
    </properties>
   </object>
   <object id="149" name="CHEST" x="826" y="111.636" width="3.33333" height="4"/>
-  <object id="158" name="FIRE_BAT" x="1380.33" y="400.667"/>
-  <object id="159" name="SKELETON" x="1384.73" y="265.364"/>
   <object id="170" name="CHEST" x="820.833" y="878.5" width="3.33333" height="4"/>
   <object id="171" name="CHEST" x="199.333" y="871" width="3.33333" height="4"/>
   <object id="172" name="CHEST" x="197.333" y="115.333" width="3.33333" height="4"/>

@@ -126,6 +126,30 @@ namespace Demo.Game
             flameShield.Element = Spell.SpellElement.FIRE;
             flameShield.Duration = 10000; 
             ItemList.Add(flameShield);
+
+            Item fireShard = new Item();
+            fireShard.ItemTexture = Sprites.GetTexture("FIRE_SHARD");
+            fireShard.Name = "FIRE SHARD";
+            fireShard.ID = 14;
+            fireShard.Description = "Contains the power of flame.";
+            fireShard.Price = 100;
+            ItemList.Add(fireShard);
+
+            Item frostShard = new Item();
+            frostShard.ItemTexture = Sprites.GetTexture("FROST_SHARD");
+            frostShard.Name = "FROST SHARD";
+            frostShard.ID = 15;
+            frostShard.Description = "Contains the power of frost.";
+            frostShard.Price = 100;
+            ItemList.Add(frostShard);
+
+            Item thunderShard = new Item();
+            thunderShard.ItemTexture = Sprites.GetTexture("THUNDER_SHARD");
+            thunderShard.Name = "THUNDER SHARD";
+            thunderShard.ID = 16;
+            thunderShard.Description = "Contains the power of thunder.";
+            thunderShard.Price = 100;
+            ItemList.Add(thunderShard);
         }
 
         public static Item GetItemById(int id)
