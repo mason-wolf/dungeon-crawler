@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Skeleton.png</SourceFile>
+  <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/SKELETON.png</SourceFile>
   <SourceTime>2022-09-29T21:46:18.0780765-05:00</SourceTime>
-  <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/spritesheets/Skeleton.xnb</DestFile>
-  <DestTime>2022-09-30T19:34:21.535473-05:00</DestTime>
+  <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/spritesheets/SKELETON.xnb</DestFile>
+  <DestTime>2022-10-04T11:45:15.6494332-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

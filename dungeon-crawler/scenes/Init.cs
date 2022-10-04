@@ -127,6 +127,11 @@ namespace DungeonCrawler.Scenes
             FIRELANDS_3,
             FIRELANDS_4,
             FIRELANDS_5,
+            FROSTLANDS_1,
+            FROSTLANDS_2,
+            FROSTLANDS_3,
+            FROSTLANDS_4,
+            FROSTLANDS_5,
             CASTLE
         }
 
@@ -147,6 +152,9 @@ namespace DungeonCrawler.Scenes
                     break;
                 case ("PLAINS"):
                     newLevel.SetScene(new Plains());
+                    break;
+                case ("FROSTLANDS"):
+                    newLevel.SetScene(new Frostlands());
                     break;
             }
             newLevel.SetLevelName(levelName);
@@ -201,6 +209,21 @@ namespace DungeonCrawler.Scenes
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/FIRELANDS_5.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FROSTLANDS_1.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FROSTLANDS_2.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FROSTLANDS_3.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FROSTLANDS_4.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/FROSTLANDS_5.tmx"));
 
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
@@ -299,6 +322,9 @@ namespace DungeonCrawler.Scenes
                                 break;
                             case ("RANDOM_FIRELANDS"):
                                 GetRandomLevel("FIRELANDS");
+                                break;
+                            case ("RANDOM_FROSTLANDS"):
+                                GetRandomLevel("FROSTLANDS");
                                 break;
                             default:
                                 SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");

@@ -39,9 +39,8 @@ namespace Demo.Scenes
                 {
                     if (!mapObject.Interacted())
                     {
-                        Console.WriteLine("YOURE ON THE FIRE LEVEL");
                         LootGenerator lootGenerator = new LootGenerator();
-
+                        lootGenerator.Level = LootGenerator.LevelType.FIRELANDS;
                         Loot loot = lootGenerator.GenerateLoot();
 
                         if (loot.Gold > 0)

@@ -19,6 +19,7 @@ namespace Demo.Game
         public LevelType Level { get; set; }
         public enum LevelType
         {
+            PLAINS,
             FIRELANDS,
             FROSTLANDS,
             THUNDERLANDS
@@ -43,7 +44,17 @@ namespace Demo.Game
                 case (3):
                     if (Level == LevelType.FIRELANDS)
                     {
+                        // Fire shard
                         loot.Item = Items.GetItemById(14);
+                    }
+                    if (Level == LevelType.PLAINS)
+                    {
+                        loot.Gold = random.Next(1, 25);
+                    }
+                    if (Level == LevelType.FROSTLANDS)
+                    {
+                        // Frost shard
+                        loot.Item = Items.GetItemById(15);
                     }
                     break;
             }

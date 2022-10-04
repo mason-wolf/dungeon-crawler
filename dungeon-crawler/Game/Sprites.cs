@@ -35,6 +35,24 @@ namespace DungeonCrawler
             skeletonSprite.AddAnimation("dead", new[] { 3 }, .2f, isLooping: false);
             SpriteList.Add(skeletonSprite);
 
+            // Frost Skeleton
+            SpriteLoader frostSkeletonSprite = new SpriteLoader(content, "FROST_SKELETON", @"spritesheets\FROST_SKELETON", 24, 24);
+            float frostSkeletonAnimationSpeed = .5f;
+            frostSkeletonSprite.AddAnimation("idleSouth1", new[] { 0 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("idleWest1", new[] { 1 }, frostSkeletonAnimationSpeed, false);
+            frostSkeletonSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("idleEast1", new[] { 1 }, frostSkeletonAnimationSpeed, false);
+            frostSkeletonSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, frostSkeletonAnimationSpeed, true);
+            frostSkeletonSprite.AddAnimation("idleNorth1", new[] { 1 }, frostSkeletonAnimationSpeed, false);
+            frostSkeletonSprite.AddAnimation("dead", new[] { 3 }, .2f, isLooping: false);
+            SpriteList.Add(frostSkeletonSprite);
+
             // Bat
             SpriteLoader batSprite = new SpriteLoader(content, "BAT", @"spritesheets\Bat", 32, 32);
             float batAnimationSpeed = .3f;
@@ -143,6 +161,41 @@ namespace DungeonCrawler
             greenSnakeSprite.AddAnimation("dead", new[] { 3 }, greenSnakeSpeed, true);
             SpriteList.Add(greenSnakeSprite);
 
+            // Troll
+            SpriteLoader trollSprite = new SpriteLoader(content, "TROLL", @"spritesheets\TROLL", 16, 16);
+            float trollSpeed = .6f;
+            trollSprite.AddAnimation("idleSouth1", new[] { 0 }, trollSpeed, false);
+            trollSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, trollSpeed, true);
+            trollSprite.AddAnimation("dead", new[] { 3 }, trollSpeed, true);
+            SpriteList.Add(trollSprite);
+
+            // Frost Elemental
+            SpriteLoader frostElementalSprite = new SpriteLoader(content, "FROST_ELEMENTAL", @"spritesheets\FROST_ELEMENTAL", 16, 16);
+            float frostElementalSpeed = 0.6f;
+            frostElementalSprite.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, frostElementalSpeed, true);
+            frostElementalSprite.AddAnimation("dead", new[] { 3 }, frostElementalSpeed, true);
+            SpriteList.Add(frostElementalSprite);
 
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
@@ -206,6 +259,11 @@ namespace DungeonCrawler
             SpriteLoader redPortalSprite = new SpriteLoader(content, "RED_PORTAL", @"spritesheets\RED_PORTAL", 32, 32);
             redPortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
             SpriteList.Add(redPortalSprite);
+
+            // Blue Portal
+            SpriteLoader bluePortalSprite = new SpriteLoader(content, "BLUE_PORTAL", @"spritesheets\BLUE_PORTAL", 32, 32);
+            bluePortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
+            SpriteList.Add(bluePortalSprite);
 
             // Bookshelf
             SpriteLoader bookshelfSprite = new SpriteLoader(content, "BOOKSHELF", @"objects\bookshelf", 24, 24);

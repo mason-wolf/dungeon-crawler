@@ -181,7 +181,7 @@ namespace DungeonCrawler
                         skeletonEntity.State = Action.IdleSouth1;
                         skeletonEntity.MaxHealth = 30;
                         skeletonEntity.CurrentHealth = 30;
-                        skeletonEntity.AttackDamage = 0.05;
+                        skeletonEntity.AttackDamage = 0.08;
                         skeletonEntity.Position = mapObject.GetPosition();
                         skeletonEntity.Name = "SKELETON";
                         skeletonEntity.XP = 10;
@@ -191,13 +191,30 @@ namespace DungeonCrawler
                         skeletonEntity.FireResistance = 50;
                         enemyList.Add(skeletonEntity);
                         break;
+                    case ("FROST_SKELETON"):
+                        Entity frostSkeletonEntity = new Entity(Sprites.GetSprite("FROST_SKELETON"));
+                        frostSkeletonEntity.LoadContent(content);
+                        frostSkeletonEntity.State = Action.IdleSouth1;
+                        frostSkeletonEntity.MaxHealth = 30;
+                        frostSkeletonEntity.CurrentHealth = 30;
+                        frostSkeletonEntity.AttackDamage = 0.08;
+                        frostSkeletonEntity.Position = mapObject.GetPosition();
+                        frostSkeletonEntity.Name = "FROST_SKELETON";
+                        frostSkeletonEntity.XP = 10;
+                        frostSkeletonEntity.SpellCaster = true;
+                        frostSkeletonEntity.SpellID = 2;
+                        frostSkeletonEntity.CurrentMana = 1000;
+                        frostSkeletonEntity.FrostResistance = 99;
+                        frostSkeletonEntity.FireResistance = 0;
+                        enemyList.Add(frostSkeletonEntity);
+                        break;
                     case ("BAT"):
                         Entity batEntity = new Entity(Sprites.GetSprite("BAT"));
                         batEntity.LoadContent(content);
                         batEntity.State = Action.IdleEast1;
                         batEntity.MaxHealth = 30;
                         batEntity.CurrentHealth = 30;
-                        batEntity.AttackDamage = 0.03;
+                        batEntity.AttackDamage = 0.06;
                         batEntity.Position = mapObject.GetPosition();
                         batEntity.Name = "BAT";
                         batEntity.XP = 10;
@@ -207,9 +224,9 @@ namespace DungeonCrawler
                         Entity fireBatEntity = new Entity(Sprites.GetSprite("FIRE_BAT"));
                         fireBatEntity.LoadContent(content);
                         fireBatEntity.State = Action.IdleEast1;
-                        fireBatEntity.MaxHealth = 30;
-                        fireBatEntity.CurrentHealth = 30;
-                        fireBatEntity.AttackDamage = 0.03;
+                        fireBatEntity.MaxHealth = 50;
+                        fireBatEntity.CurrentHealth = 50;
+                        fireBatEntity.AttackDamage = 0.12;
                         fireBatEntity.Position = mapObject.GetPosition();
                         fireBatEntity.Name = "FIRE_BAT";
                         fireBatEntity.FireResistance = 90;
@@ -222,7 +239,7 @@ namespace DungeonCrawler
                         zombieEntity.State = Action.IdleSouth1;
                         zombieEntity.MaxHealth = 30;
                         zombieEntity.CurrentHealth = 30;
-                        zombieEntity.AttackDamage = 0.03;
+                        zombieEntity.AttackDamage = 0.08;
                         zombieEntity.Position = mapObject.GetPosition();
                         zombieEntity.Name = "ZOMBIE";
                         zombieEntity.XP = 10;
@@ -234,7 +251,7 @@ namespace DungeonCrawler
                         blueSlimeEntity.State = Action.IdleEast1;
                         blueSlimeEntity.MaxHealth = 25;
                         blueSlimeEntity.CurrentHealth = 25;
-                        blueSlimeEntity.AttackDamage = 0.06;
+                        blueSlimeEntity.AttackDamage = 0.08;
                         blueSlimeEntity.Position = mapObject.GetPosition();
                         blueSlimeEntity.Name = "BLUE_SLIME";
                         blueSlimeEntity.XP = 10;
@@ -244,9 +261,9 @@ namespace DungeonCrawler
                         Entity greenGhostEntity = new Entity(Sprites.GetSprite("GREEN_GHOST"));
                         greenGhostEntity.LoadContent(content);
                         greenGhostEntity.State = Action.IdleEast1;
-                        greenGhostEntity.MaxHealth = 30;
-                        greenGhostEntity.CurrentHealth = 30;
-                        greenGhostEntity.AttackDamage = 0.09;
+                        greenGhostEntity.MaxHealth = 50;
+                        greenGhostEntity.CurrentHealth = 50;
+                        greenGhostEntity.AttackDamage = 0.12;
                         greenGhostEntity.Position = mapObject.GetPosition();
                         greenGhostEntity.Name = "GREEN_GHOST";
                         greenGhostEntity.XP = 20;
@@ -261,15 +278,49 @@ namespace DungeonCrawler
                         Entity greenSnakeEntity = new Entity(Sprites.GetSprite("GREEN_SNAKE"));
                         greenSnakeEntity.LoadContent(content);
                         greenSnakeEntity.State = Action.IdleSouth1;
-                        greenSnakeEntity.MaxHealth = 40;
-                        greenSnakeEntity.CurrentHealth = 40;
-                        greenSnakeEntity.AttackDamage = 0.09;
+                        greenSnakeEntity.MaxHealth = 50;
+                        greenSnakeEntity.CurrentHealth = 50;
+                        greenSnakeEntity.AttackDamage = 0.12;
                         greenSnakeEntity.FireResistance = 50;
                         greenSnakeEntity.FrostResistance = 0;
                         greenSnakeEntity.Position = mapObject.GetPosition();
                         greenSnakeEntity.Name = "GREEN_SNAKE";
                         greenSnakeEntity.XP = 20;
                         enemyList.Add(greenSnakeEntity);
+                        break;
+                    case ("TROLL"):
+                        Entity trollEntity = new Entity(Sprites.GetSprite("TROLL"));
+                        trollEntity.LoadContent(content);
+                        trollEntity.State = Action.IdleSouth1;
+                        trollEntity.MaxHealth = 50;
+                        trollEntity.CurrentHealth = 50;
+                        trollEntity.AttackDamage = .15;
+                        trollEntity.FireResistance = 0;
+                        trollEntity.FrostResistance = 99;
+                        trollEntity.ThunderResistance = 80;
+                        trollEntity.Position = mapObject.GetPosition();
+                        trollEntity.Name = "TROLL";
+                        trollEntity.XP = 25;
+                        enemyList.Add(trollEntity);
+                        break;
+                    case ("FROST_ELEMENTAL"):
+                        Entity frostElementalEntity = new Entity(Sprites.GetSprite("FROST_ELEMENTAL"));
+                        frostElementalEntity.LoadContent(content);
+                        frostElementalEntity.State = Action.IdleWest1;
+                        frostElementalEntity.MaxHealth = 50;
+                        frostElementalEntity.CurrentHealth = 50;
+                        frostElementalEntity.AttackDamage = .15;
+                        frostElementalEntity.FireResistance = 0;
+                        frostElementalEntity.FrostResistance = 99;
+                        frostElementalEntity.ThunderResistance = 99;
+                        frostElementalEntity.Position = mapObject.GetPosition();
+                        frostElementalEntity.Name = "FROST_ELEMENTAL";
+                        frostElementalEntity.XP = 25;
+                        frostElementalEntity.SpellCaster = true;
+                        frostElementalEntity.SpellID = 2;
+                        frostElementalEntity.MaxMana = 100;
+                        frostElementalEntity.CurrentMana = 100;
+                        enemyList.Add(frostElementalEntity);
                         break;
                     case ("FIRE_MAGE"):
                         AddNpc(content, mapObject, "FIRE_MAGE");
@@ -309,6 +360,12 @@ namespace DungeonCrawler
                         redPortalSprite.Play("idle");
                         redPortalSprite.Position = mapObject.GetPosition();
                         mapObject.SetSprite(redPortalSprite);
+                        break;
+                    case ("BLUE_PORTAL"):
+                        AnimatedSprite bluePortalSprite = new AnimatedSprite(Sprites.GetSprite("BLUE_PORTAL"));
+                        bluePortalSprite.Play("idle");
+                        bluePortalSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(bluePortalSprite);
                         break;
                     case ("TORCH"):
                         AnimatedSprite torchSprite = new AnimatedSprite(Sprites.GetSprite("TORCH"));

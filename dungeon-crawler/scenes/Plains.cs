@@ -51,12 +51,18 @@ namespace DungeonCrawler.Scenes
 
                         LootGenerator lootGenerator = new LootGenerator();
 
-                        Loot loot = lootGenerator.GenerateLoot();
+                        lootGenerator.Level = LootGenerator.LevelType.PLAINS;
 
+                        Loot loot = lootGenerator.GenerateLoot();
                         if (loot.Gold > 0)
                         {
                             Init.Player.Gold += loot.Gold;
                             Init.Message = "You obtained " + loot.Gold + " gold.";
+                        }
+                        else if (loot.Item != null)
+                        {
+                            Init.Message = "You obtained " + loot.Item.Name + ".";
+                            Init.ItemInventory.AddItem(loot.Item);
                         }
                         else
                         {

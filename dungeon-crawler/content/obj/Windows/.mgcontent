@@ -12,7 +12,6 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/staminabar.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/healthbar.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/escapeMenu.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Bat.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/menuItemSelected.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/floppy.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/sword-swing.mp3</File>
@@ -21,15 +20,9 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/bow-shoot.mp3</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/dead-skeleton.mp3</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/dead-goblin.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/Skeleton.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/music/level_1.mp3</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/music/boss_fight.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/knight.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/npc-statusbar.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/mage.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/tilesets/castle.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/fire_mage.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/green_portal.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FIREBALL_1.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/FIREBALL_1_ICON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/ICEBOLT_1.png</File>
@@ -82,5 +75,17 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/FIRE_SHARD_ICON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/FROST_SHARD_ICON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/THUNDER_SHARD_ICON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/BLUE_PORTAL.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/tilesets/FROSTLANDS.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/TROLL.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/BAT.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FROST_ELEMENTAL.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FIRE_MAGE.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/GREEN_PORTAL.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/KNIGHT.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/MAGE.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/SKELETON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/tilesets/CASTLE.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FROST_SKELETON.png</File>
   </SourceFiles>
 </SourceFileCollection>

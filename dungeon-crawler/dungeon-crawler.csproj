@@ -72,6 +72,7 @@
     <Compile Include="Interface\LoadMenu.cs" />
     <Compile Include="Interface\SaveMenu.cs" />
     <Compile Include="Scenes\Firelands.cs" />
+    <Compile Include="Scenes\Frostlands.cs" />
     <Compile Include="Scenes\Init.cs" />
     <Compile Include="Interface\MainMenu.cs" />
     <Compile Include="Program.cs" />

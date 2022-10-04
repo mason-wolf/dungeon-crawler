@@ -133,6 +133,7 @@ namespace Demo.Game
             fireShard.ID = 14;
             fireShard.Description = "Contains the power of flame.";
             fireShard.Price = 100;
+            fireShard.Useable = false;
             ItemList.Add(fireShard);
 
             Item frostShard = new Item();
@@ -141,6 +142,7 @@ namespace Demo.Game
             frostShard.ID = 15;
             frostShard.Description = "Contains the power of frost.";
             frostShard.Price = 100;
+            frostShard.Useable = false;
             ItemList.Add(frostShard);
 
             Item thunderShard = new Item();
@@ -149,6 +151,7 @@ namespace Demo.Game
             thunderShard.ID = 16;
             thunderShard.Description = "Contains the power of thunder.";
             thunderShard.Price = 100;
+            thunderShard.Useable = false;
             ItemList.Add(thunderShard);
         }
 

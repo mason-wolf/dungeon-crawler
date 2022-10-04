@@ -211,3 +211,8 @@ C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\items\FIRE_SHARD_ICON.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\items\FROST_SHARD_ICON.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\items\THUNDER_SHARD_ICON.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\BLUE_PORTAL.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\tilesets\FROSTLANDS.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\TROLL.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\FROST_ELEMENTAL.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\FROST_SKELETON.xnb

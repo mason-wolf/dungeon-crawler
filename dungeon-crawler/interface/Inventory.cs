@@ -379,8 +379,11 @@ namespace DungeonCrawler.Interface
                                     Init.Player.Position = Init.SelectedLevel.GetStartingPosition();
                                     break;
                                 default:
-                                    Item spell = Items.GetItemById(item.ID);
-                                    Init.Player.LearnSpell(spell);
+                                    if (item.Useable)
+                                    {
+                                        Item spell = Items.GetItemById(item.ID);
+                                        Init.Player.LearnSpell(spell);
+                                    }
                                     break;
                             }
                             item.Quantity -= 1;

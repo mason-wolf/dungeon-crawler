@@ -66,6 +66,16 @@ namespace DungeonCrawler.Engine
             return mapObjects;
         }
 
+        /// <summary>
+        /// Reads layers from Tiled Map.
+        /// Must have 2 layers.
+        /// Layer 1 Walkable
+        /// Layer 2 Collidable
+        /// Layer 3 Object Layer
+        /// Optional -- Layer 4 (water)
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="filePath"></param>
         public void LoadMap(ContentManager content, string filePath)
         {
 
