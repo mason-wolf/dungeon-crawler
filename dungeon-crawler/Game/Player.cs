@@ -116,7 +116,7 @@ namespace DungeonCrawler
             //  ActionButtonPressed = false;
 
             // If action button 'F' is pressed.
-            if (newState.IsKeyDown(Keys.F) && oldState.IsKeyUp(Keys.F))
+            if (newState.IsKeyDown(Keys.E) && oldState.IsKeyUp(Keys.E))
             {
                 ActionButtonPressed = true;
             }

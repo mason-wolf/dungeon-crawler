@@ -29,7 +29,7 @@ namespace Demo.Game
         {
             int goldOrArmor = 0;
             Random random = new Random();
-            goldOrArmor = 2;// random.Next(1, 4);
+            goldOrArmor = random.Next(1, 4);
 
             Loot loot = new Loot();
 

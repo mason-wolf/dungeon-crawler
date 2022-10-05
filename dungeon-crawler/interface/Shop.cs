@@ -77,18 +77,19 @@ namespace Demo.Interface
                 inventory.Update(gameTime);
             }
 
-            if (newKeyState.IsKeyDown(Keys.F) && oldKeyState.IsKeyUp(Keys.F) && ShopOpen)
+            if (newKeyState.IsKeyDown(Keys.E) && oldKeyState.IsKeyUp(Keys.E) && ShopOpen)
+            {
+                Init.Player.InMenu = true;
+                selectedShop.InventoryOpen = true;
+            }
+
+            if (newKeyState.IsKeyDown(Keys.Q) && oldKeyState.IsKeyUp(Keys.Q) && ShopOpen)
             {
                 if (selectedShop.InventoryOpen)
                 {
                     Init.Player.InMenu = false;
                     selectedShop.InventoryOpen = false;
                     ShopOpen = false;
-                }
-                else
-                {
-                    Init.Player.InMenu = true;
-                    selectedShop.InventoryOpen = true;
                 }
             }
 
