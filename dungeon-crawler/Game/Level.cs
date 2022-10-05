@@ -220,6 +220,18 @@ namespace DungeonCrawler
                         batEntity.XP = 10;
                         enemyList.Add(batEntity);
                         break;
+                    case ("CRAB"):
+                        Entity crabEntity = new Entity(Sprites.GetSprite("CRAB"));
+                        crabEntity.LoadContent(content);
+                        crabEntity.State = Action.IdleSouth1;
+                        crabEntity.MaxHealth = 60;
+                        crabEntity.CurrentHealth = 60;
+                        crabEntity.AttackDamage = 0.09;
+                        crabEntity.Position = mapObject.GetPosition();
+                        crabEntity.Name = "CRAB";
+                        crabEntity.XP = 15;
+                        enemyList.Add(crabEntity);
+                        break;
                     case ("FIRE_BAT"):
                         Entity fireBatEntity = new Entity(Sprites.GetSprite("FIRE_BAT"));
                         fireBatEntity.LoadContent(content);
@@ -256,6 +268,22 @@ namespace DungeonCrawler
                         blueSlimeEntity.Name = "BLUE_SLIME";
                         blueSlimeEntity.XP = 10;
                         enemyList.Add(blueSlimeEntity);
+                        break;
+                    case ("YELLOW_SLIME"):
+                        Entity yellowSlimeEntity = new Entity(Sprites.GetSprite("YELLOW_SLIME"));
+                        yellowSlimeEntity.LoadContent(content);
+                        yellowSlimeEntity.State = Action.IdleSouth1;
+                        yellowSlimeEntity.MaxHealth = 40;
+                        yellowSlimeEntity.CurrentHealth = 40;
+                        yellowSlimeEntity.SpellCaster = true;
+                        yellowSlimeEntity.SpellID = 5;
+                        yellowSlimeEntity.MaxMana = 100;
+                        yellowSlimeEntity.CurrentMana = 100;
+                        yellowSlimeEntity.ThunderResistance = 100;
+                        yellowSlimeEntity.Position = mapObject.GetPosition();
+                        yellowSlimeEntity.Name = "YELLOW_SLIME";
+                        yellowSlimeEntity.XP = 20;
+                        enemyList.Add(yellowSlimeEntity);
                         break;
                     case ("GREEN_GHOST"):
                         Entity greenGhostEntity = new Entity(Sprites.GetSprite("GREEN_GHOST"));
@@ -367,6 +395,12 @@ namespace DungeonCrawler
                         bluePortalSprite.Position = mapObject.GetPosition();
                         mapObject.SetSprite(bluePortalSprite);
                         break;
+                    case ("YELLOW_PORTAL"):
+                        AnimatedSprite yellowPortalSprite = new AnimatedSprite(Sprites.GetSprite("YELLOW_PORTAL"));
+                        yellowPortalSprite.Play("idle");
+                        yellowPortalSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(yellowPortalSprite);
+                        break;
                     case ("TORCH"):
                         AnimatedSprite torchSprite = new AnimatedSprite(Sprites.GetSprite("TORCH"));
                         torchSprite.Play("BURNING");
@@ -439,9 +473,9 @@ namespace DungeonCrawler
                 collisionGrid = map.GenerateAStarGrid();
                 enemyAI = new EnemyAI(collisionGrid, enemyList, Init.Player);
                 soundEffects = new List<SoundEffect>();
-                soundEffects.Add(content.Load<SoundEffect>(@"sounds\destroyed-barrel"));
-                soundEffects.Add(content.Load<SoundEffect>(@"sounds\dead-bat"));
-                soundEffects.Add(content.Load<SoundEffect>(@"sounds\dead-skeleton"));
+                //soundEffects.Add(content.Load<SoundEffect>(@"sounds\destroyed-barrel"));
+                //soundEffects.Add(content.Load<SoundEffect>(@"sounds\dead-bat"));
+                //soundEffects.Add(content.Load<SoundEffect>(@"sounds\dead-skeleton"));
                // arrowsSprite = content.Load<Texture2D>(@"objects\arrows");
             }
 

@@ -29,7 +29,7 @@ namespace Demo.Game
         {
             int goldOrArmor = 0;
             Random random = new Random();
-            goldOrArmor = random.Next(1, 4);
+            goldOrArmor = 2;//random.Next(1, 4);
 
             Loot loot = new Loot();
 
@@ -55,6 +55,11 @@ namespace Demo.Game
                     {
                         // Frost shard
                         loot.Item = Items.GetItemById(15);
+                    }
+                    if (Level == LevelType.THUNDERLANDS)
+                    {
+                        // Thunder shard
+                        loot.Item = Items.GetItemById(16);
                     }
                     break;
             }

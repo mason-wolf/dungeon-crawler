@@ -80,6 +80,7 @@
     <Compile Include="Game\SceneManager.cs" />
     <Compile Include="Interface\StartMenu.cs" />
     <Compile Include="Scenes\Plains.cs" />
+    <Compile Include="Scenes\Thunderlands.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Humper, Version=1.0.6093.38709, Culture=neutral, processorArchitecture=MSIL">

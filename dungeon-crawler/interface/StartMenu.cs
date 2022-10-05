@@ -118,7 +118,6 @@ namespace DungeonCrawler
 
         public override void Show()
         {
-        //    mainMenu.Position = new Vector2(mainMenu.Position.X - 200, mainMenu.Position.Y);
             base.Show();
         }
 

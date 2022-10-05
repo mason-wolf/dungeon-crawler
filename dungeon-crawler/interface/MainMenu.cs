@@ -146,6 +146,9 @@ namespace DungeonCrawler.Interface
 
             spriteBatch.Draw(background, new Vector2(textPosition.X, textPosition.Y), Color.White);
 
+            Vector2 titlePosition = new Vector2(textPosition.X - 80, textPosition.Y - 75);
+            spriteBatch.DrawString(spriteFont, "MANA KEEP", titlePosition, Color.White, 0f, new Vector2(0, 0), 3f, SpriteEffects.None, 0);
+
             for (int i = 0; i < menuItems.Count; i++)
             {
                 if (i == SelectedIndex)

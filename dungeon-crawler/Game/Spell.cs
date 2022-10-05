@@ -53,6 +53,7 @@ namespace Demo.Game
                     break;
                 case (SpellElement.THUNDER):
                     damage = damage - (damage * (entity.ThunderResistance / 100));
+                    Console.WriteLine(damage);
                     break;
             }
 

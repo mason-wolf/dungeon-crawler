@@ -95,7 +95,7 @@ namespace Demo.Game
             thunderBolt1.ID = 5;
             thunderBolt1.Damage = 10;
             thunderBolt1.ManaCost = 1;
-            icebolt1.Element = Spell.SpellElement.THUNDER;
+            thunderBolt1.Element = Spell.SpellElement.THUNDER;
             thunderBolt1.Description = "Shoots a thunder bolt.";
             ItemList.Add(thunderBolt1);
 

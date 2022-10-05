@@ -125,6 +125,24 @@ namespace DungeonCrawler
             blueSlimeSprite.AddAnimation("dead", new[] { 3 }, blueSlimeSpeed, true);
             SpriteList.Add(blueSlimeSprite);
 
+            // Yellow Slime
+            SpriteLoader yellowSlimeSprite = new SpriteLoader(content, "YELLOW_SLIME", @"spritesheets\YELLOW_SLIME", 32, 32);
+            float yellowSlimeSpeed = .3f;
+            yellowSlimeSprite.AddAnimation("idleSouth1", new[] { 0 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, yellowSlimeSpeed, true);
+            yellowSlimeSprite.AddAnimation("dead", new[] { 3 }, yellowSlimeSpeed, true);
+            SpriteList.Add(yellowSlimeSprite);
+
             // Green Ghost
             SpriteLoader greenGhostSprite = new SpriteLoader(content, "GREEN_GHOST", @"spritesheets\GREEN_GHOST", 24, 24);
             float greenGhostSpeed = .6f;
@@ -197,6 +215,24 @@ namespace DungeonCrawler
             frostElementalSprite.AddAnimation("dead", new[] { 3 }, frostElementalSpeed, true);
             SpriteList.Add(frostElementalSprite);
 
+            // Crab
+            SpriteLoader crabSprite = new SpriteLoader(content, "CRAB", @"spritesheets\CRAB", 32, 32);
+            float crabSpeed = 0.6f;
+            crabSprite.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, crabSpeed, false);
+            crabSprite.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("walkWestPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("attackWestPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("idleWest1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("idleEast1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, crabSpeed, true);
+            crabSprite.AddAnimation("dead", new[] { 3 }, crabSpeed, true);
+            SpriteList.Add(crabSprite);
+
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
             torchSprite.AddAnimation("BURNING", new[] { 0, 1, 2 }, 0.09f, true);
@@ -265,7 +301,12 @@ namespace DungeonCrawler
             bluePortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
             SpriteList.Add(bluePortalSprite);
 
-            // Bookshelf
+            // Yellow Portal
+            SpriteLoader yellowPortalSprite = new SpriteLoader(content, "YELLOW_PORTAL", @"spritesheets\YELLOW_PORTAL", 32, 32);
+            yellowPortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
+            SpriteList.Add(yellowPortalSprite);
+
+;            // Bookshelf
             SpriteLoader bookshelfSprite = new SpriteLoader(content, "BOOKSHELF", @"objects\bookshelf", 24, 24);
             bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
             SpriteList.Add(bookshelfSprite);

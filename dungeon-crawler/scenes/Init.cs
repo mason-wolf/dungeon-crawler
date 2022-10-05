@@ -132,6 +132,9 @@ namespace DungeonCrawler.Scenes
             FROSTLANDS_3,
             FROSTLANDS_4,
             FROSTLANDS_5,
+            THUNDERLANDS_1,
+            THUNDERLANDS_2,
+            THUNDERLANDS_3,
             CASTLE
         }
 
@@ -155,6 +158,9 @@ namespace DungeonCrawler.Scenes
                     break;
                 case ("FROSTLANDS"):
                     newLevel.SetScene(new Frostlands());
+                    break;
+                case ("THUNDERLANDS"):
+                    newLevel.SetScene(new Thunderlands());
                     break;
             }
             newLevel.SetLevelName(levelName);
@@ -224,6 +230,15 @@ namespace DungeonCrawler.Scenes
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/FROSTLANDS_5.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/THUNDERLANDS_1.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/THUNDERLANDS_2.tmx"));
+
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/THUNDERLANDS_3.tmx"));
 
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
@@ -325,6 +340,9 @@ namespace DungeonCrawler.Scenes
                                 break;
                             case ("RANDOM_FROSTLANDS"):
                                 GetRandomLevel("FROSTLANDS");
+                                break;
+                            case ("RANDOM_THUNDERLANDS"):
+                                GetRandomLevel("THUNDERLANDS");
                                 break;
                             default:
                                 SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");
@@ -455,7 +473,7 @@ namespace DungeonCrawler.Scenes
             FadeInMap("CASTLE");
             Random randomLevel = new Random();
             int levelNum = randomLevel.Next(1, 6);
-            string levelName = levelType + "_" + levelNum;
+            string levelName = levelType + "_" + 3;
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
             SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);

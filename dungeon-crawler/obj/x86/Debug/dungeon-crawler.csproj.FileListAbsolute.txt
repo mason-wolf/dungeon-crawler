@@ -99,10 +99,6 @@ C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\Dynamite.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\knight.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\Skeleton.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\music\boss_fight.wma
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\music\boss_fight.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\music\level_1.wma
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\music\level_1.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\objects\Arrow.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\objects\Barrel.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\objects\Campfire.xnb
@@ -120,12 +116,6 @@ C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\interface\staminabar.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\interface\statusbar.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\interface\titlescreen.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\sounds\bow-shoot.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\sounds\dead-bat.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\sounds\dead-goblin.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\sounds\dead-skeleton.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\sounds\destroyed-barrel.xnb
-C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\sounds\sword-swing.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Demo.exe
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Demo.pdb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Humper.dll
@@ -216,3 +206,7 @@ C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\TROLL.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\FROST_ELEMENTAL.xnb
 C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\FROST_SKELETON.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\YELLOW_PORTAL.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\tilesets\THUNDERLANDS.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\CRAB.xnb
+C:\Users\Mason\Documents\GitHub\dungeon-crawler\dungeon-crawler\bin\Windows\x86\Debug\Content\spritesheets\YELLOW_SLIME.xnb

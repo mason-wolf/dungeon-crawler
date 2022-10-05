@@ -90,8 +90,8 @@ namespace DungeonCrawler
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
             ManaBarTexture = content.Load<Texture2D>(@"interface\MANA_BAR");
             soundEffects = new List<SoundEffect>();
-            soundEffects.Add(content.Load<SoundEffect>(@"sounds\sword-swing"));
-            soundEffects.Add(content.Load<SoundEffect>(@"sounds\bow-shoot"));
+         //   soundEffects.Add(content.Load<SoundEffect>(@"sounds\sword-swing"));
+         //   soundEffects.Add(content.Load<SoundEffect>(@"sounds\bow-shoot"));
         }
 
 

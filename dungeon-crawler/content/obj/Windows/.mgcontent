@@ -4,7 +4,6 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/button.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/font.spritefont</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/menu.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/statusbar.png</File>
@@ -14,14 +13,6 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/escapeMenu.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/menuItemSelected.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/floppy.png</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/sword-swing.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/dead-bat.wav</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/destroyed-barrel.wav</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/bow-shoot.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/dead-skeleton.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/sounds/dead-goblin.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/music/level_1.mp3</File>
-    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/music/boss_fight.mp3</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/npc-statusbar.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FIREBALL_1.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/items/FIREBALL_1_ICON.png</File>
@@ -87,5 +78,10 @@
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/SKELETON.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/tilesets/CASTLE.png</File>
     <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/FROST_SKELETON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/YELLOW_PORTAL.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/interface/BUTTON.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/tilesets/THUNDERLANDS.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/CRAB.png</File>
+    <File>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/spritesheets/YELLOW_SLIME.png</File>
   </SourceFiles>
 </SourceFileCollection>

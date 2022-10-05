@@ -46,7 +46,7 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadContent(ContentManager content)
         {
-            levelThemeSong = content.Load<Song>(@"music\level_1");
+          //  levelThemeSong = content.Load<Song>(@"music\level_1");
             //     MediaPlayer.IsRepeating = true;
             //    MediaPlayer.Play(levelThemeSong);
         }
