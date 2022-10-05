@@ -105,7 +105,10 @@ namespace DungeonCrawler.Scenes
                         Init.MessageEnabled = true;
                         Player.ActionButtonPressed = false;
                         mapObject.Interact();
-                        mapObject.GetSprite().Play("Opened");
+                        if (mapObject.GetSprite() != null)
+                        {
+                            mapObject.GetSprite().Play("Opened");
+                        }
                     }
                 }
             }

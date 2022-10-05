@@ -182,6 +182,7 @@ namespace DungeonCrawler.Scenes
             using (StreamReader streamReader = new StreamReader("Save_" + saveSlot + ".txt"))
             {
                 string line;
+                Init.ItemInventory.ItemCount = 0;
                 Init.ItemInventory.Contents.Clear();
                 Init.ItemInventory.ArmorList.Clear();
                 Init.SpellInventory.Contents.Clear();
@@ -320,7 +321,8 @@ namespace DungeonCrawler.Scenes
                     }
                 }
             }
-            
+
+            Init.ItemInventory.ItemList.Clear();
             // If save is empty, reset player's stats.
             if (lineCount == 0)
             {

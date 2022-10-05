@@ -249,6 +249,7 @@ namespace DungeonCrawler.Interface
                 y += 31;
             }
 
+
             // Assign each item an index.
             for (int i = 0; i < ItemList.Count; i++)
             {
@@ -278,6 +279,7 @@ namespace DungeonCrawler.Interface
                     if (itemToSell != null)
                     {
                         Init.ItemInventory.Contents.Remove(itemToSell);
+                        Init.ItemInventory.ItemCount--;
                         Init.SpellInventory.Contents.Remove(itemToSell);
 
                         Armor armorToRemove = null;
@@ -379,11 +381,8 @@ namespace DungeonCrawler.Interface
                                     Init.Player.Position = Init.SelectedLevel.GetStartingPosition();
                                     break;
                                 default:
-                                    if (item.Useable)
-                                    {
-                                        Item spell = Items.GetItemById(item.ID);
-                                        Init.Player.LearnSpell(spell);
-                                    }
+                                    Item spell = Items.GetItemById(item.ID);
+                                    Init.Player.LearnSpell(spell);
                                     break;
                             }
                             item.Quantity -= 1;
@@ -394,6 +393,7 @@ namespace DungeonCrawler.Interface
 
                     if (foundItem != null && foundItem.Quantity <= -1)
                     {
+                        Init.ItemInventory.ItemCount--;
                         Init.ItemInventory.Contents.Remove(foundItem);
                     }
                 }
@@ -412,34 +412,36 @@ namespace DungeonCrawler.Interface
             AddItem(newArmor);
         }
 
+        public int ItemCount = 0;
         public void AddItem(Item newItem)
         {
-            if (TotalItems < 34)
-            {
-                bool exists = false;
-                InventoryFull = false;
-                TotalItems++;
-                foreach (Item item in Init.ItemInventory.Contents)
-                {
-                    if (item.ID == newItem.ID)
-                    {
-                        item.Quantity += 1;
-                        AssignItem(item);
-                        exists = true;
-                    }
-                }
+            bool exists = false;
+            TotalItems++;
 
-                if (!exists)
+            foreach (Item item in Init.ItemInventory.Contents)
+            {
+                if (item.ID == newItem.ID)
                 {
+                    item.Quantity += 1;
+                    AssignItem(item);
+                    exists = true;
+                }
+            }
+
+            if (!exists)
+            {
+                if (ItemCount > 31)
+                {
+                    Init.Message = "Inventory full.";
+                    Init.MessageEnabled = true;
+                }
+                else
+                {
+                    ItemCount++;
                     Init.ItemInventory.Contents.Add(newItem);
                 }
             }
-            else
-            {
-                Init.Message = "Inventory full";
-                Init.MessageEnabled = true;
-                InventoryFull = true;
-            }
+
         }
         /// <summary>
         /// Assigns an item to a slot on the inventory screen.
@@ -448,7 +450,7 @@ namespace DungeonCrawler.Interface
         public void AssignItem(Item item)
         {
             itemSlot = AssignSlot(item);
-            if (itemSlot <= 31)
+            if (itemSlot < 32)
             {
                 ItemList[itemSlot].ItemTexture = item.ItemTexture;
                 ItemList[itemSlot].Name = item.Name;
