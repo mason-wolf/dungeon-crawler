@@ -136,6 +136,7 @@ namespace DungeonCrawler.Scenes
             THUNDERLANDS_2,
             THUNDERLANDS_3,
             THUNDERLANDS_4,
+            THUNDERLANDS_5,
             CASTLE
         }
 
@@ -244,6 +245,9 @@ namespace DungeonCrawler.Scenes
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/THUNDERLANDS_4.tmx"));
 
+            newLevel = new Level();
+            newLevel.SetMap(new Map(Content, "Content/maps/THUNDERLANDS_5.tmx"));
+
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
             Player.State = Action.IdleSouth1;
@@ -347,6 +351,28 @@ namespace DungeonCrawler.Scenes
                                 break;
                             case ("RANDOM_THUNDERLANDS"):
                                 GetRandomLevel("THUNDERLANDS");
+                                break;
+                            case ("RANDOM_ALL"):
+                                Random randomLevel = new Random();
+                                int levelType = randomLevel.Next(1, 5);
+                                string level = "";
+                                switch(levelType)
+                                {
+                                    case (1):
+                                        level = "PLAINS";
+                                        break;
+                                    case (2):
+                                        level = "FIRELANDS";
+                                        break;
+                                    case (3):
+                                        level = "FROSTLANDS";
+                                        break;
+                                    case (4):
+                                        level = "THUNDERLANDS";
+                                        break;
+                                }
+
+                                GetRandomLevel(level);
                                 break;
                             default:
                                 SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");
@@ -477,7 +503,7 @@ namespace DungeonCrawler.Scenes
             FadeInMap("CASTLE");
             Random randomLevel = new Random();
             int levelNum = randomLevel.Next(1, 6);
-            string levelName = levelType + "_" + 4;
+            string levelName = levelType + "_" + levelNum;
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
             SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);

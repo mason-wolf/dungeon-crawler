@@ -306,7 +306,12 @@ namespace DungeonCrawler
             yellowPortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
             SpriteList.Add(yellowPortalSprite);
 
-;            // Bookshelf
+            // Yellow Portal
+            SpriteLoader purplePortalSprite = new SpriteLoader(content, "PURPLE_PORTAL", @"spritesheets\PURPLE_PORTAL", 32, 32);
+            purplePortalSprite.AddAnimation("idle", new[] { 0, 1, 2, 3, 4 }, 0.09f, true);
+            SpriteList.Add(purplePortalSprite);
+
+            // Bookshelf
             SpriteLoader bookshelfSprite = new SpriteLoader(content, "BOOKSHELF", @"objects\bookshelf", 24, 24);
             bookshelfSprite.AddAnimation("idle", new[] { 0 }, 0.09f, true);
             SpriteList.Add(bookshelfSprite);

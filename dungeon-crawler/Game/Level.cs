@@ -401,6 +401,12 @@ namespace DungeonCrawler
                         yellowPortalSprite.Position = mapObject.GetPosition();
                         mapObject.SetSprite(yellowPortalSprite);
                         break;
+                    case ("PURPLE_PORTAL"):
+                        AnimatedSprite purplePortalSprite = new AnimatedSprite(Sprites.GetSprite("PURPLE_PORTAL"));
+                        purplePortalSprite.Play("idle");
+                        purplePortalSprite.Position = mapObject.GetPosition();
+                        mapObject.SetSprite(purplePortalSprite);
+                        break;
                     case ("TORCH"):
                         AnimatedSprite torchSprite = new AnimatedSprite(Sprites.GetSprite("TORCH"));
                         torchSprite.Play("BURNING");
