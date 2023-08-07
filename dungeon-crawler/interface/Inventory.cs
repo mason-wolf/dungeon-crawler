@@ -291,10 +291,18 @@ namespace DungeonCrawler.Interface
 
                     if (itemToSell != null)
                     {
-                        Init.ItemInventory.Contents.Remove(itemToSell);
                         Init.ItemInventory.ItemCount--;
-                        Init.SpellInventory.Contents.Remove(itemToSell);
+                        if (itemToSell.Quantity > 1)
+                        {
+                            itemToSell.Quantity -= 1;
+                        }
+                        else
+                        {
+                            Init.ItemInventory.Contents.Remove(itemToSell);
+                            Init.SpellInventory.Contents.Remove(itemToSell);
+                        }
 
+                        // Unequip armor if it's sold.
                         Armor armorToRemove = null;
                         foreach (Armor armor in Init.ItemInventory.ArmorList)
                         {
