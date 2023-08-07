@@ -5,6 +5,7 @@ using DungeonCrawler.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.Sprites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,8 +62,11 @@ namespace Demo.Scenes
 
                         Init.MessageEnabled = true;
                         Player.ActionButtonPressed = false;
-                        mapObject.Interact();
-                        mapObject.GetSprite().Play("Opened");
+                        if (mapObject.GetSprite() != null)
+                        {
+                            mapObject.Interact();
+                            mapObject.GetSprite().Play("Opened");
+                        }
                     }
                 }
             }

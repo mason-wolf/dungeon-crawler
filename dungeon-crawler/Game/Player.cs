@@ -51,7 +51,6 @@ namespace DungeonCrawler
         Init.Scene currentScene = Init.SelectedScene;
         Random random = new Random();
         List<SoundEffect> soundEffects;
-
         float MovementSpeed = 1.2f;
 
         public new void LoadContent(ContentManager content)

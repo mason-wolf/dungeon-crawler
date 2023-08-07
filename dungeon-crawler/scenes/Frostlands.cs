@@ -62,7 +62,15 @@ namespace Demo.Scenes
                         Init.MessageEnabled = true;
                         Player.ActionButtonPressed = false;
                         mapObject.Interact();
-                        mapObject.GetSprite().Play("Opened");
+                        try
+                        {
+                            mapObject.GetSprite().Play("Opened");
+                        }
+                        catch(Exception e)
+                        {
+                            Console.WriteLine("Something went wrong. Object doesn't exist.");
+                            Console.WriteLine(e.ToString());
+                        }
                     }
                 }
             }

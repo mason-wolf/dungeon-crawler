@@ -473,6 +473,8 @@ namespace DungeonCrawler.Interface
             spriteBatch.Draw(Sprites.GetTexture("GOLD_ICON"), new Vector2(Position.X + 275, Position.Y - 25));
             spriteBatch.DrawString(inventoryFont, Init.Player.Gold.ToString(), new Vector2(Position.X + 295, Position.Y - 20), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
 
+            // Quit button
+            spriteBatch.DrawString(inventoryFont, "Q - quit", new Vector2(Position.X + 295, Position.Y + 200), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
             if (frames > 20)
             {
                 for (int i = 0; i < ItemList.Count; i++)
