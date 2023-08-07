@@ -93,10 +93,6 @@ namespace Demo.Interface
                 }
             }
 
-            if (ShopOpen)
-            {
-                ShopOpen = false;
-            }
         }
 
         public static bool InventoriesOpen()
