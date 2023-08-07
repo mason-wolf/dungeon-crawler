@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Demo.Game;
+using Demo.Interface;
 using DungeonCrawler.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -107,9 +108,16 @@ namespace DungeonCrawler.Interface
             // Use Item
             if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E) && InventoryOpen)
             {
-                if (actionCount == 0)
+                if (Shop.InventoriesOpen())
                 {
-                    actionCount++;
+                    if (actionCount == 0)
+                    {
+                        actionCount++;
+                    }
+                    else
+                    {
+                        itemUsed = true;
+                    }
                 }
                 else
                 {
@@ -381,7 +389,7 @@ namespace DungeonCrawler.Interface
                     // Using an item.
                     foreach (Item item in Init.ItemInventory.Contents)
                     {
-                        if (item.ID == ItemList[SelectedItem].ID && item.ID < 500)
+                        if (item.ID == ItemList[SelectedItem].ID && item.ID < 500 && item.Useable)
                         {
                             switch (item.ID)
                             {

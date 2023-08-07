@@ -19,6 +19,7 @@ namespace Demo.Game
             healthPotion.Description = "Restores some health.";
             healthPotion.ID = 3;
             healthPotion.Price = 50;
+            healthPotion.Useable = true;
             ItemList.Add(healthPotion);
 
             Item manaPotion = new Item();
@@ -27,6 +28,7 @@ namespace Demo.Game
             manaPotion.Description = "Restores some mana.";
             manaPotion.ID = 4;
             manaPotion.Price = 50;
+            manaPotion.Useable = true;
             ItemList.Add(manaPotion);
 
             Spell fireball1 = new Spell();
@@ -45,6 +47,7 @@ namespace Demo.Game
             fireballBook.ID = 7;
             fireballBook.Price = 100;
             fireballBook.Description = "";
+            fireballBook.Useable = true;
             ItemList.Add(fireballBook);
 
             Item iceboltBook = new Item();
@@ -53,6 +56,7 @@ namespace Demo.Game
             iceboltBook.ID = 8;
             iceboltBook.Price = 100;
             iceboltBook.Description = "";
+            iceboltBook.Useable = true;
             ItemList.Add(iceboltBook);
 
             Item thunderboltBook = new Item();
@@ -61,6 +65,7 @@ namespace Demo.Game
             thunderboltBook.ID = 9;
             thunderboltBook.Price = 200;
             thunderboltBook.Description = "";
+            thunderboltBook.Useable = true;
             ItemList.Add(thunderboltBook);
 
             Item healBook = new Item();
@@ -69,6 +74,7 @@ namespace Demo.Game
             healBook.ID = 10;
             healBook.Price = 200;
             healBook.Description = "";
+            healBook.Useable = true;
             ItemList.Add(healBook);
 
             Item flameShieldBook = new Item();
@@ -77,6 +83,7 @@ namespace Demo.Game
             flameShieldBook.ID = 13;
             flameShieldBook.Price = 400;
             flameShieldBook.Description = "";
+            flameShieldBook.Useable = true;
             ItemList.Add(flameShieldBook);
 
             Spell icebolt1 = new Spell();

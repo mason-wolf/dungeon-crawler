@@ -261,7 +261,7 @@ namespace DungeonCrawler.Scenes
 
             ItemInventory.MenuTitle = "Items";
             ItemInventory.InventoryType = "PLAYER_INVENTORY";
-
+            ItemInventory.Contents.Add(Items.GetItemById(14));
             SpellInventory.MenuTitle = "Spells";
             SpellInventory.InventoryType = "spells";
 
@@ -476,7 +476,7 @@ namespace DungeonCrawler.Scenes
             // Handle player's collision.
             playerCollision.Move(Player.Position.X, Player.Position.Y, (collision) => CollisionResponses.Slide);
 
-            Camera.Zoom = 2.8f;
+            Camera.Zoom = 3f;
 
             if (!InDialog && !TransitionState && !Player.Dead)
             {
