@@ -20,20 +20,20 @@ using Microsoft.Xna.Framework.Media;
 using Demo.Game;
 using System.Diagnostics;
 using Demo.Interface;
+using MonoGame.Extended.Shapes;
 
 namespace DungeonCrawler.Scenes
 {
     public class Castle : SceneLogic
     {
-        Song levelThemeSong;
+        //Song levelThemeSong;
         List<Entity> NPCList = new List<Entity>();
-
 
         public Castle()
         {
         }
         public override List<MapObject> MapObjects { get; set; }
-        public override ContentManager ContentManager { get; set;  }
+        public override ContentManager ContentManager { get; set; }
         public override Map Map { get; set; }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -46,24 +46,24 @@ namespace DungeonCrawler.Scenes
 
         public override void LoadContent(ContentManager content)
         {
-          //  levelThemeSong = content.Load<Song>(@"music\level_1");
+            //  levelThemeSong = content.Load<Song>(@"music\level_1");
             //     MediaPlayer.IsRepeating = true;
             //    MediaPlayer.Play(levelThemeSong);
         }
 
         public override void LoadScene()
         {
-            int[] npcIDs = { 
-                15, 16, 17, 18, 19, 20, 21, 22, 
-                23, 24, 25, 26, 27, 28, 29, 30, 
+            int[] npcIDs = {
+                15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30,
                 31, 32, 33, 34, 35, 36, 37
             };
 
-            foreach(int npcId in npcIDs)
+            foreach (int npcId in npcIDs)
             {
                 Entity npc = Level.GetNpcByID(npcId.ToString());
 
-                switch(npc.ID)
+                switch (npc.ID)
                 {
                     case ("18"):
                         npc.Sprite.Play("idleWest1");
@@ -116,17 +116,15 @@ namespace DungeonCrawler.Scenes
             foreach (Entity npc in NPCList)
             {
                 npc.Update(gameTime);
-                if (npc == null)
-                {
-                    Console.WriteLine("NPC not found. Are you missing an NPC Name or ID?");
-                }
+
                 if (Init.Player.BoundingBox.Intersects(npc.BoundingBox))
                 {
+
                     string message = "";
                     switch (npc.ID)
                     {
                         case ("15"):
-                            message = 
+                            message =
                                 "\nI am the warden of flame." +
                                 "\nYou'd be wise to heed my teachings.";
                             Init.DialogBox.Text = message;
@@ -246,15 +244,16 @@ namespace DungeonCrawler.Scenes
                             Init.DialogBox.StartDialog = true;
                             break;
                         case ("37"):
-                                foreach (Inventory inventory in Shop.Inventories) { 
-                                    if (inventory.InventoryType == "SELL_SHOP")
-                                    {
-                                        inventory.Contents = Init.ItemInventory.Contents;
-                                        inventory.ArmorList = Init.ItemInventory.ArmorList;
-                                    }
+                            foreach (Inventory inventory in Shop.Inventories)
+                            {
+                                if (inventory.InventoryType == "SELL_SHOP")
+                                {
+                                    inventory.Contents = Init.ItemInventory.Contents;
+                                    inventory.ArmorList = Init.ItemInventory.ArmorList;
                                 }
+                            }
 
-                                Init.shops.Open(Shop.ShopType.SELL_SHOP);
+                            Init.shops.Open(Shop.ShopType.SELL_SHOP);
                             break;
                     }
                 }

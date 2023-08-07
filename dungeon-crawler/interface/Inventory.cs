@@ -45,6 +45,10 @@ namespace DungeonCrawler.Interface
 
         public List<Item> Contents = new List<Item>();
 
+        // Store a mock event for selecting items in the menu.
+        // Otherwise items will sell upon entering the menu.
+        private int actionCount = 0;
+
         public override void LoadContent(ContentManager content)
         {
             inventoryTexture = new Texture2D(Game1.graphics.GraphicsDevice, 1, 1);
@@ -56,6 +60,7 @@ namespace DungeonCrawler.Interface
             selectedItemTexture.SetData(new[] { selectedItemTextureColor });
             InventoryOpen = false;
             GenerateGrid();
+            SelectedItem = 0;
         }
 
         public override void Update(GameTime gameTime)
@@ -102,7 +107,14 @@ namespace DungeonCrawler.Interface
             // Use Item
             if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E) && InventoryOpen)
             {
-                itemUsed = true;
+                if (actionCount == 0)
+                {
+                    actionCount++;
+                }
+                else
+                {
+                    itemUsed = true;
+                }
             }
 
             // Reset selection if reached the end.
@@ -114,6 +126,7 @@ namespace DungeonCrawler.Interface
             if (!InventoryOpen)
             {
                 frames = 0;
+                actionCount = 0;
             }
 
             if (InventoryOpen)
@@ -268,7 +281,7 @@ namespace DungeonCrawler.Interface
                 if (InventoryType == "SELL_SHOP")
                 {
                     Item itemToSell = null;
-                    foreach(Item item in Init.ItemInventory.Contents)
+                    foreach (Item item in Init.ItemInventory.Contents)
                     {
                         if (item.ID == ItemList[SelectedItem].ID)
                         {
@@ -283,7 +296,7 @@ namespace DungeonCrawler.Interface
                         Init.SpellInventory.Contents.Remove(itemToSell);
 
                         Armor armorToRemove = null;
-                        foreach(Armor armor in Init.ItemInventory.ArmorList)
+                        foreach (Armor armor in Init.ItemInventory.ArmorList)
                         {
                             if (armor.ID == itemToSell.ID)
                             {
@@ -319,11 +332,11 @@ namespace DungeonCrawler.Interface
                     Item foundItem = null;
 
                     // Equipping armor.
-                    foreach(Armor armor in ArmorList)
+                    foreach (Armor armor in ArmorList)
                     {
                         if (armor.ID == ItemList[SelectedItem].ID)
                         {
-                            switch(armor.Type)
+                            switch (armor.Type)
                             {
                                 case (Armor.ArmorType.BOOTS):
                                     Init.Player.Equipment.Unequip(Init.Player.Equipment.Boots);
@@ -362,7 +375,7 @@ namespace DungeonCrawler.Interface
                     {
                         if (item.ID == ItemList[SelectedItem].ID && item.ID < 500)
                         {
-                            switch(item.ID)
+                            switch (item.ID)
                             {
                                 // Health Potion
                                 case (3):
@@ -498,7 +511,7 @@ namespace DungeonCrawler.Interface
                         {
                             spriteBatch.DrawString(inventoryFont, ItemList[i].Quantity.ToString(), new Vector2(ItemList[i].ItemRectangle.X + 25, ItemList[i].ItemRectangle.Y + 22), Color.White, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
                         }
-       
+
                         spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Description, new Vector2(Position.X + 25, Position.Y + 185), Color.White, 0, new Vector2(0, 0), .7f, SpriteEffects.None, 0);
 
 
