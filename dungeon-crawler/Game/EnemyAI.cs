@@ -17,11 +17,24 @@ namespace DungeonCrawler.Engine
 {
     public class EnemyAI : IUpdate
     {
-        private Grid movementGrid;
+        // Map collision data
+        private Grid grid;
         private Entity player;
+        // List of all enemies
         private List<Entity> enemyList = new List<Entity>();
+        // List of enemies within range
         private List<Entity> enemiesInRange = new List<Entity>();
+        // Keep track of the nearest enemy to store pathfinding data
+        // to share with other entities.
+        Entity nearestEnemy = null;
+        float nearestEnemyDistance = 0;
+        // Throttle frames to reduce latency when invoking path finder.
+        int frameCount = 0;
+        bool nearestEnemyFound = false;
 
+        /// <summary>
+        /// Clears list of enemies.
+        /// </summary>
         public void Clear()
         {
             if (enemyList != null)
@@ -30,16 +43,62 @@ namespace DungeonCrawler.Engine
             }
         }
 
-        public EnemyAI(Grid movementGrid, List<Entity> enemyList, Entity player)
+        /// <summary>
+        /// Creates an instance of Enemy AI.
+        /// </summary>
+        /// <param name="grid">Map collision data</param>
+        /// <param name="enemyList">List of enemies</param>
+        /// <param name="player">Player object</param>
+        public EnemyAI(Grid grid, List<Entity> enemyList, Entity player)
         {
-            this.movementGrid = movementGrid;
+            this.grid = grid;
             this.enemyList = enemyList;
             this.player = player;
         }
+
         public void Update(GameTime gameTime)
         {
-
             int enemyDeathCount = 0;
+            frameCount++;
+            // Keep track of enemies within range.
+            foreach (Entity enemy in enemyList)
+            {
+                // Calculate enemy distances within an appropriate range.
+                float enemyDistance = Vector2.Distance(player.Position, enemy.Position);
+                if (enemyDistance < 125 && enemy.State != Action.Dead || enemy.Aggroed)
+                {
+                    if (!enemiesInRange.Contains(enemy))
+                    {
+                        enemiesInRange.Add(enemy);
+                    }
+                }
+                else
+                {
+                    // Remove enemy and reset path finding waypoints if out of range.
+                    enemy.PathFinder = null;
+                    enemiesInRange.Remove(enemy);
+                }
+
+                enemy.Update(gameTime);
+            }
+
+            // Throttle the amount of path finder instances.
+            if (frameCount < 10)
+            {
+                foreach (Entity enemy in enemiesInRange)
+                {
+                    if(!enemy.Dead && enemy.PathFinder == null)
+                    {
+                        enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange) ;
+                    }
+                }
+            }
+
+            // Sort enemies by distance.
+            if (enemiesInRange.Count > 0)
+            {
+                enemiesInRange.Sort((e1, e2) => e1.Distance.CompareTo(e2.Distance));
+            }
 
             foreach (Entity enemy in enemiesInRange)
             {
@@ -49,34 +108,44 @@ namespace DungeonCrawler.Engine
                 }
                 else
                 {
-                    enemy.PathFinder = new PathFinder(gameTime, movementGrid, enemiesInRange);
-                    enemy.PathFinder.FindPathToTarget(enemy, player);
-                    enemy.PathFinder.MoveUnit(enemy, 0.07f, 15, gameTime);
-                    enemy.Attack(player);
+                    if (enemy.PathFinder != null)
+                    {
+                        // Find the closest enemy and find path to player.
+                        if (!nearestEnemyFound)
+                        {
+                            enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
+                            enemy.PathFinder.FindPathToTarget(enemy, player);
+                            nearestEnemy = enemy;
+                            nearestEnemyFound = true;
+                        }
+                        else
+                        {
+                            if (nearestEnemy != null)
+                            {
+                                nearestEnemyDistance = Vector2.Distance(nearestEnemy.Position, player.Position);
+                                // If nearest enemy is still pursuing, share waypoints to other enemies.
+                                if (nearestEnemyDistance > 15 && nearestEnemy.PathFinder != null)
+                                {
+                                    enemy.PathFinder.SetWayPoints(nearestEnemy.PathFinder.GetWayPoints());
+                                }
+                                else if (enemiesInRange.Count <= 8)
+                                {
+                                    // Otherwise find their own path.
+                                    enemy.PathFinder.FindPathToTarget(enemy, player);
+                                   
+                                }
+                            }
+                            enemy.PathFinder.MoveUnit(enemy, 0.06f, 15, gameTime);
+                            enemy.Attack(player);
+                        }
+                    }
                 }
             }
 
-            // Attack the player if an enemy is within range.
-            foreach (Entity enemy in enemyList)
+            if (frameCount >= 30)
             {
-                float enemyDistance = Vector2.Distance(player.Position, enemy.Position);
-
-                if (enemyDistance < 90 && enemy.State != Action.Dead || enemy.Aggroed)
-                {
-                    // Keep a list to find paths of the nearest enemies.
-                    if (!enemiesInRange.Contains(enemy))
-                    {
-                        enemiesInRange.Add(enemy);
-                    }
-                }
-                else
-                {
-                    enemy.PathFinder = null;
-                    enemiesInRange.Remove(enemy);
-                }
-
-                enemy.Update(gameTime);
-
+                frameCount = 0;
+                nearestEnemyFound = false;
             }
         }
     }

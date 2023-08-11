@@ -26,22 +26,42 @@ namespace DungeonCrawler
         }
 
         List<Vector2> wayPoints = new List<Vector2>();
-
+        public bool PathFound = false;
+        public bool Continue = false;
         public void FindPathToTarget(Entity unit, Entity target)
         {
-    
-            var movementPattern = new[] { new Offset(-1, 0), new Offset(0, -1), new Offset(1, 0), new Offset(0, 1) };
 
-            Position targetPosition = new Position((int)target.Position.X, (int)target.Position.Y);
-            Position unitPosition = new Position((int)unit.Position.X, (int)unit.Position.Y);
-            Position[] path = movementGrid.GetPath(unitPosition, targetPosition, movementPattern);
-
-            foreach (Position position in path)
+            if (!PathFound || Continue)
             {
-                wayPoints.Add(new Vector2(position.X, position.Y));
+                var movementPattern = new[] { new Offset(-1, 0), new Offset(0, -1), new Offset(1, 0), new Offset(0, 1) };
+
+                Position targetPosition = new Position((int)target.Position.X, (int)target.Position.Y);
+                Position unitPosition = new Position((int)unit.Position.X, (int)unit.Position.Y);
+                Position[] path = movementGrid.GetPath(unitPosition, targetPosition, movementPattern);
+
+                foreach (Position position in path)
+                {
+                    wayPoints.Add(new Vector2(position.X, position.Y));
+                }
+                PathFound = true;
             }
+
         }
 
+        public List<Vector2> GetWayPoints()
+        {
+            return wayPoints;
+        }
+
+        public void SetWayPoints(List<Vector2> waypoints)
+        {
+            wayPoints = waypoints;
+        }
+
+        public void ClearWayPoints()
+        {
+            wayPoints.Clear();
+        }
 
         public void MoveUnit(Entity unit, float speed, int distanceLimit, GameTime gameTime)
         {

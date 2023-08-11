@@ -84,7 +84,7 @@ namespace DungeonCrawler
 
         public double MaxMana { get; set; } = 0;
         public double CurrentMana { get; set; } = 0;
-
+        public float Distance { get; set; }
         public double AttackDamage { get; set; } = 0;
         public bool Dead { get; set; } = false;
         public bool Aggroed { get; set; } = false;
@@ -227,7 +227,7 @@ namespace DungeonCrawler
         // Method to make an entity follow a path of waypoints.
         public void FollowPath(GameTime gameTime, Entity entity, List<Vector2> DestinationWaypoint, float Speed)
         {
-            if (DestinationWaypoint.Count > 0)
+            if (DestinationWaypoint.Count > 0 && WayPointIndex < DestinationWaypoint.Count)
             {
                 if (!ReachedDestination)
                 {
@@ -260,17 +260,17 @@ namespace DungeonCrawler
                     }
 
                     float Distance = Vector2.Distance(entity.Position, DestinationWaypoint[WayPointIndex]);
-
                     if (Distance > Direction.Length())
-                        entity.Position += Direction * (float)(Speed * gameTime.ElapsedGameTime.TotalMilliseconds);
+                    {
+                        entity.Position += Direction * (float)(Speed * 20f);
+                    }
                     else
                     {
-                        if (WayPointIndex >= DestinationWaypoint.Count - 1)
+                        if (WayPointIndex >= DestinationWaypoint.Count)
                         {
                             entity.Position += Direction;
                             ReachedDestination = true;
                         }
-                            if(WayPointIndex < 3)
                             WayPointIndex++;
                     }
                 }

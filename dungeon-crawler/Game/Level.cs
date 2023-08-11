@@ -249,9 +249,9 @@ namespace DungeonCrawler
                         Entity zombieEntity = new Entity(Sprites.GetSprite("ZOMBIE"));
                         zombieEntity.LoadContent(content);
                         zombieEntity.State = Action.IdleSouth1;
-                        zombieEntity.MaxHealth = 30;
-                        zombieEntity.CurrentHealth = 30;
-                        zombieEntity.AttackDamage = 0.08;
+                        zombieEntity.MaxHealth = 20;
+                        zombieEntity.CurrentHealth = 20;
+                        zombieEntity.AttackDamage = 0.1;
                         zombieEntity.Position = mapObject.GetPosition();
                         zombieEntity.Name = "ZOMBIE";
                         zombieEntity.XP = 10;

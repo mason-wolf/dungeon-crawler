@@ -73,7 +73,7 @@ namespace DungeonCrawler.Scenes
                         Init.MessageEnabled = true;
                         Player.ActionButtonPressed = false;
                         // TODO: Investigate why this is null.
-                        if (mapObject != null)
+                        if (mapObject.GetSprite() != null)
                         {
                             mapObject.Interact();
                             mapObject.GetSprite().Play("Opened");
