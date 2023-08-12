@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="921">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1032">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -138,96 +138,84 @@
 </data>
  </layer>
  <objectgroup id="4" name="Object Layer 1">
-  <object id="208" name="START" x="441" y="736.091"/>
+  <object id="208" name="START" x="397" y="233.424"/>
   <object id="210" name="GREEN_PORTAL" x="443.612" y="788.151"/>
   <object id="224" name="CASTLE" type="TELEPORTER" x="442.866" y="788.151">
    <properties>
     <property name="ID" type="float" value="9708"/>
    </properties>
   </object>
-  <object id="803" name="ZOMBIE" x="138.167" y="147.583"/>
-  <object id="838" name="ZOMBIE" x="164" y="146.25"/>
-  <object id="839" name="ZOMBIE" x="187.75" y="147"/>
-  <object id="840" name="ZOMBIE" x="221.5" y="150.5"/>
-  <object id="841" name="ZOMBIE" x="142.5" y="170"/>
-  <object id="842" name="ZOMBIE" x="169.75" y="169.25"/>
-  <object id="843" name="ZOMBIE" x="700.417" y="206.333"/>
-  <object id="844" name="ZOMBIE" x="726.25" y="205"/>
-  <object id="845" name="ZOMBIE" x="750" y="205.75"/>
-  <object id="846" name="ZOMBIE" x="783.75" y="209.25"/>
-  <object id="847" name="ZOMBIE" x="704.75" y="228.75"/>
-  <object id="848" name="ZOMBIE" x="732" y="228"/>
-  <object id="849" name="ZOMBIE" x="136.417" y="538.333"/>
-  <object id="850" name="ZOMBIE" x="162.25" y="537"/>
-  <object id="851" name="ZOMBIE" x="186" y="537.75"/>
-  <object id="852" name="ZOMBIE" x="219.75" y="541.25"/>
-  <object id="853" name="ZOMBIE" x="140.75" y="560.75"/>
-  <object id="854" name="ZOMBIE" x="168" y="560"/>
-  <object id="855" name="ZOMBIE" x="744.417" y="578.333"/>
-  <object id="856" name="ZOMBIE" x="770.25" y="577"/>
-  <object id="857" name="ZOMBIE" x="794" y="577.75"/>
-  <object id="858" name="ZOMBIE" x="827.75" y="581.25"/>
-  <object id="859" name="ZOMBIE" x="748.75" y="600.75"/>
-  <object id="860" name="ZOMBIE" x="776" y="600"/>
-  <object id="861" name="ZOMBIE" x="436.417" y="342.333"/>
-  <object id="862" name="ZOMBIE" x="462.25" y="341"/>
-  <object id="863" name="ZOMBIE" x="486" y="341.75"/>
-  <object id="864" name="ZOMBIE" x="519.75" y="345.25"/>
-  <object id="865" name="ZOMBIE" x="440.75" y="364.75"/>
-  <object id="866" name="ZOMBIE" x="468" y="364"/>
-  <object id="867" name="ZOMBIE" x="133.417" y="229.333"/>
-  <object id="868" name="ZOMBIE" x="159.25" y="228"/>
-  <object id="869" name="ZOMBIE" x="183" y="228.75"/>
-  <object id="870" name="ZOMBIE" x="216.75" y="232.25"/>
-  <object id="871" name="ZOMBIE" x="137.75" y="251.75"/>
-  <object id="872" name="ZOMBIE" x="165" y="251"/>
-  <object id="873" name="ZOMBIE" x="723.417" y="292.333"/>
-  <object id="874" name="ZOMBIE" x="749.25" y="291"/>
-  <object id="875" name="ZOMBIE" x="773" y="291.75"/>
-  <object id="876" name="ZOMBIE" x="806.75" y="295.25"/>
-  <object id="877" name="ZOMBIE" x="727.75" y="314.75"/>
-  <object id="878" name="ZOMBIE" x="755" y="314"/>
-  <object id="879" name="ZOMBIE" x="269.417" y="156.333"/>
-  <object id="880" name="ZOMBIE" x="295.25" y="155"/>
-  <object id="881" name="ZOMBIE" x="319" y="155.75"/>
-  <object id="882" name="ZOMBIE" x="352.75" y="159.25"/>
-  <object id="883" name="ZOMBIE" x="273.75" y="178.75"/>
-  <object id="884" name="ZOMBIE" x="301" y="178"/>
-  <object id="885" name="ZOMBIE" x="554.417" y="160.333"/>
-  <object id="886" name="ZOMBIE" x="580.25" y="159"/>
-  <object id="887" name="ZOMBIE" x="604" y="159.75"/>
-  <object id="888" name="ZOMBIE" x="637.75" y="163.25"/>
-  <object id="889" name="ZOMBIE" x="558.75" y="182.75"/>
-  <object id="890" name="ZOMBIE" x="586" y="182"/>
-  <object id="891" name="ZOMBIE" x="135.417" y="307.333"/>
-  <object id="892" name="ZOMBIE" x="161.25" y="306"/>
-  <object id="893" name="ZOMBIE" x="185" y="306.75"/>
-  <object id="894" name="ZOMBIE" x="218.75" y="310.25"/>
-  <object id="895" name="ZOMBIE" x="139.75" y="329.75"/>
-  <object id="896" name="ZOMBIE" x="167" y="329"/>
-  <object id="897" name="ZOMBIE" x="131.417" y="407.333"/>
-  <object id="898" name="ZOMBIE" x="157.25" y="406"/>
-  <object id="899" name="ZOMBIE" x="181" y="406.75"/>
-  <object id="900" name="ZOMBIE" x="214.75" y="410.25"/>
-  <object id="901" name="ZOMBIE" x="135.75" y="429.75"/>
-  <object id="902" name="ZOMBIE" x="163" y="429"/>
-  <object id="903" name="ZOMBIE" x="712.417" y="399.333"/>
-  <object id="904" name="ZOMBIE" x="738.25" y="398"/>
-  <object id="905" name="ZOMBIE" x="762" y="398.75"/>
-  <object id="906" name="ZOMBIE" x="795.75" y="402.25"/>
-  <object id="907" name="ZOMBIE" x="716.75" y="421.75"/>
-  <object id="908" name="ZOMBIE" x="744" y="421"/>
-  <object id="909" name="ZOMBIE" x="412.417" y="151.333"/>
-  <object id="910" name="ZOMBIE" x="438.25" y="150"/>
-  <object id="911" name="ZOMBIE" x="462" y="150.75"/>
-  <object id="912" name="ZOMBIE" x="495.75" y="154.25"/>
-  <object id="913" name="ZOMBIE" x="416.75" y="173.75"/>
-  <object id="914" name="ZOMBIE" x="444" y="173"/>
-  <object id="915" name="ZOMBIE" x="689.417" y="714.333"/>
-  <object id="916" name="ZOMBIE" x="715.25" y="713"/>
-  <object id="917" name="ZOMBIE" x="739" y="713.75"/>
-  <object id="918" name="ZOMBIE" x="772.75" y="717.25"/>
-  <object id="919" name="ZOMBIE" x="693.75" y="736.75"/>
-  <object id="920" name="ZOMBIE" x="721" y="736"/>
+  <object id="855" name="ZOMBIE" x="372.417" y="603.666"/>
+  <object id="921" name="ZOMBIE" x="398.333" y="595.667"/>
+  <object id="922" name="ZOMBIE" x="339.584" y="580.499"/>
+  <object id="923" name="ZOMBIE" x="365.5" y="572.5"/>
+  <object id="924" name="ZOMBIE" x="289.584" y="556.499"/>
+  <object id="925" name="ZOMBIE" x="315.5" y="548.5"/>
+  <object id="926" name="ZOMBIE" x="359.084" y="546.999"/>
+  <object id="927" name="ZOMBIE" x="385" y="539"/>
+  <object id="952" name="ZOMBIE" x="200.417" y="247.666"/>
+  <object id="953" name="ZOMBIE" x="226.333" y="239.667"/>
+  <object id="954" name="ZOMBIE" x="167.584" y="224.499"/>
+  <object id="955" name="ZOMBIE" x="193.5" y="216.5"/>
+  <object id="956" name="ZOMBIE" x="117.584" y="200.499"/>
+  <object id="957" name="ZOMBIE" x="143.5" y="192.5"/>
+  <object id="958" name="ZOMBIE" x="187.084" y="190.999"/>
+  <object id="959" name="ZOMBIE" x="213" y="183"/>
+  <object id="960" name="ZOMBIE" x="285.417" y="225.666"/>
+  <object id="961" name="ZOMBIE" x="311.333" y="217.667"/>
+  <object id="962" name="ZOMBIE" x="252.584" y="202.499"/>
+  <object id="963" name="ZOMBIE" x="278.5" y="194.5"/>
+  <object id="964" name="ZOMBIE" x="202.584" y="178.499"/>
+  <object id="965" name="ZOMBIE" x="228.5" y="170.5"/>
+  <object id="966" name="ZOMBIE" x="272.084" y="168.999"/>
+  <object id="967" name="ZOMBIE" x="298" y="161"/>
+  <object id="976" name="ZOMBIE" x="198.417" y="414.666"/>
+  <object id="977" name="ZOMBIE" x="224.333" y="406.667"/>
+  <object id="978" name="ZOMBIE" x="165.584" y="391.499"/>
+  <object id="979" name="ZOMBIE" x="191.5" y="383.5"/>
+  <object id="980" name="ZOMBIE" x="115.584" y="367.499"/>
+  <object id="981" name="ZOMBIE" x="141.5" y="359.5"/>
+  <object id="982" name="ZOMBIE" x="185.084" y="357.999"/>
+  <object id="983" name="ZOMBIE" x="211" y="350"/>
+  <object id="984" name="ZOMBIE" x="195.417" y="539.666"/>
+  <object id="985" name="ZOMBIE" x="221.333" y="531.667"/>
+  <object id="986" name="ZOMBIE" x="162.584" y="516.499"/>
+  <object id="987" name="ZOMBIE" x="188.5" y="508.5"/>
+  <object id="988" name="ZOMBIE" x="112.584" y="492.499"/>
+  <object id="989" name="ZOMBIE" x="138.5" y="484.5"/>
+  <object id="990" name="ZOMBIE" x="182.084" y="482.999"/>
+  <object id="991" name="ZOMBIE" x="208" y="475"/>
+  <object id="992" name="ZOMBIE" x="477.417" y="255.333"/>
+  <object id="993" name="ZOMBIE" x="503.333" y="247.334"/>
+  <object id="994" name="ZOMBIE" x="444.584" y="232.166"/>
+  <object id="995" name="ZOMBIE" x="470.5" y="224.167"/>
+  <object id="996" name="ZOMBIE" x="394.584" y="208.166"/>
+  <object id="997" name="ZOMBIE" x="420.5" y="200.167"/>
+  <object id="998" name="ZOMBIE" x="464.084" y="198.666"/>
+  <object id="999" name="ZOMBIE" x="490" y="190.667"/>
+  <object id="1000" name="ZOMBIE" x="276.75" y="363.999"/>
+  <object id="1001" name="ZOMBIE" x="302.666" y="356"/>
+  <object id="1002" name="ZOMBIE" x="243.917" y="340.832"/>
+  <object id="1003" name="ZOMBIE" x="269.833" y="332.833"/>
+  <object id="1004" name="ZOMBIE" x="193.917" y="316.832"/>
+  <object id="1005" name="ZOMBIE" x="219.833" y="308.833"/>
+  <object id="1006" name="ZOMBIE" x="263.417" y="307.332"/>
+  <object id="1007" name="ZOMBIE" x="289.333" y="299.333"/>
+  <object id="1016" name="ZOMBIE" x="300.084" y="505.333"/>
+  <object id="1017" name="ZOMBIE" x="326" y="497.334"/>
+  <object id="1018" name="ZOMBIE" x="267.251" y="482.166"/>
+  <object id="1019" name="ZOMBIE" x="293.167" y="474.167"/>
+  <object id="1020" name="ZOMBIE" x="217.251" y="458.166"/>
+  <object id="1021" name="ZOMBIE" x="243.167" y="450.167"/>
+  <object id="1022" name="ZOMBIE" x="286.751" y="448.666"/>
+  <object id="1023" name="ZOMBIE" x="312.667" y="440.667"/>
+  <object id="1024" name="ZOMBIE" x="404.75" y="436.666"/>
+  <object id="1025" name="ZOMBIE" x="430.666" y="428.667"/>
+  <object id="1026" name="ZOMBIE" x="371.917" y="413.499"/>
+  <object id="1027" name="ZOMBIE" x="397.833" y="405.5"/>
+  <object id="1028" name="ZOMBIE" x="321.917" y="389.499"/>
+  <object id="1029" name="ZOMBIE" x="347.833" y="381.5"/>
+  <object id="1030" name="ZOMBIE" x="391.417" y="379.999"/>
+  <object id="1031" name="ZOMBIE" x="417.333" y="372"/>
  </objectgroup>
 </map>

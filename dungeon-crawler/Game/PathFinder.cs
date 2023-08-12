@@ -1,7 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using DungeonCrawler.Engine;
+using DungeonCrawler.Scenes;
+using Microsoft.Xna.Framework;
+using MonoGame.Extended.Entities;
 using RoyT.AStar;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DungeonCrawler
 {
@@ -28,6 +32,7 @@ namespace DungeonCrawler
         List<Vector2> wayPoints = new List<Vector2>();
         public bool PathFound = false;
         public bool Continue = false;
+        public bool AvoidUnits { get; set; } = true;
         public void FindPathToTarget(Entity unit, Entity target)
         {
 
@@ -67,7 +72,11 @@ namespace DungeonCrawler
         {
             if (wayPoints.Count > distanceLimit && unit.CurrentHealth > 0)
             {
-                Avoid(gameTime, unit);
+                if (AvoidUnits)
+                {
+                    Avoid(gameTime, unit);
+                }
+
                 unit.FollowPath(gameTime, unit, wayPoints, speed);
             }
             else
@@ -77,11 +86,19 @@ namespace DungeonCrawler
             unit.Update(gameTime);
         }
 
-
-        public void Avoid(GameTime gameTime, Entity unit)
+        /// <summary>
+        /// Avoid other units on waypoint. Keeps some distance to avoid stacking
+        /// on top of each other.
+        /// </summary>
+        /// <param name="gameTime"></param>
+        /// <param name="unit"></param>
+        private void Avoid(GameTime gameTime, Entity unit)
         {
+            // Get cell cost.
+            float cellCost = movementGrid.GetCellCost(new Position(Convert.ToInt32(unit.Position.X), Convert.ToInt32(unit.Position.Y)));
             for (int i = 0; i < unitList.Count; i++)
             {
+                // If unit intersects another, seperation depth.
                 if (unitList[i].BoundingBox.Intersects(unit.BoundingBox) && unitList[i].State != Action.Dead)
                 {
                     float unitDistanceToDestination = Vector2.Distance(unit.Position, wayPoints[wayPoints.Count - 1]);
@@ -91,7 +108,11 @@ namespace DungeonCrawler
                     {
                         Vector2 oppositeDirection = unitList[i].Position - unit.Position;
                         oppositeDirection.Normalize();
-                        unit.Position -= oppositeDirection * (float)(0.01f * gameTime.ElapsedGameTime.TotalMilliseconds);
+                        // Only avoid if the tile is traversable.
+                        if (cellCost == 1)
+                        {
+                            unit.Position -= oppositeDirection * (float)(0.01f * gameTime.ElapsedGameTime.TotalMilliseconds);
+                        }
                     }
                 }
             }
@@ -134,7 +155,7 @@ namespace DungeonCrawler
                     var distance = Vector2.DistanceSquared(movingUnits[i].Position, target.Position);
                     if (distance < closestDistance)
                     {
-                        closest = movingUnits[i].Position;
+                       // closest = movingUnits[i].Position;
                         closestEntity = movingUnits[i];
                         closestDistance = distance;
                     }

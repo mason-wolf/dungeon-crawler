@@ -108,6 +108,8 @@ namespace DungeonCrawler
 
         public bool ReachedDestination;
 
+        public bool Moving;
+
         public List<Projectile> Projectiles = new List<Projectile>();
         public void LoadContent(ContentManager content)
         {
@@ -260,6 +262,7 @@ namespace DungeonCrawler
                     }
 
                     float Distance = Vector2.Distance(entity.Position, DestinationWaypoint[WayPointIndex]);
+ 
                     if (Distance > Direction.Length())
                     {
                         entity.Position += Direction * (float)(Speed * 20f);
@@ -270,6 +273,7 @@ namespace DungeonCrawler
                         {
                             entity.Position += Direction;
                             ReachedDestination = true;
+                            entity.Moving = false;
                         }
                             WayPointIndex++;
                     }

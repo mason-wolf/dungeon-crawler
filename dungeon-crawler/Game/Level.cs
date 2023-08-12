@@ -251,7 +251,7 @@ namespace DungeonCrawler
                         zombieEntity.State = Action.IdleSouth1;
                         zombieEntity.MaxHealth = 20;
                         zombieEntity.CurrentHealth = 20;
-                        zombieEntity.AttackDamage = 0.1;
+                        zombieEntity.AttackDamage = 0.01;
                         zombieEntity.Position = mapObject.GetPosition();
                         zombieEntity.Name = "ZOMBIE";
                         zombieEntity.XP = 10;
@@ -477,6 +477,7 @@ namespace DungeonCrawler
                 scene.MapObjects = MapObjects;
                 scene.ContentManager = content;
                 collisionGrid = map.GenerateAStarGrid();
+
                 enemyAI = new EnemyAI(collisionGrid, enemyList, Init.Player);
                 soundEffects = new List<SoundEffect>();
                 //soundEffects.Add(content.Load<SoundEffect>(@"sounds\destroyed-barrel"));
