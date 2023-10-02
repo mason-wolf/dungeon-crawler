@@ -17,6 +17,7 @@ namespace DungeonCrawler
         public void LoadContent(ContentManager content)
         {
             SpriteList = new List<SpriteLoader>();
+
             // Skeleton
             SpriteLoader skeletonSprite = new SpriteLoader(content, "SKELETON", @"spritesheets\Skeleton", 24, 24);
             float skeletonAnimationSpeed = .5f;
@@ -285,6 +286,11 @@ namespace DungeonCrawler
             SpriteLoader guardSprite = new SpriteLoader(content, "GUARD", @"spritesheets\knight", 24, 24);
             guardSprite.AddAnimation("idleSouth1", new[] { 0 }, 0.9f, false);
             SpriteList.Add(guardSprite);
+
+            // Portal
+            SpriteLoader portalSprite = new SpriteLoader(content, "PORTAL", @"spritesheets\portal", 32, 32);
+            portalSprite.AddAnimation("idleSouth1", new[] { 0, 1, 2, 3 }, 0.09f, true);
+            SpriteList.Add(portalSprite);
 
             // Green Portal
             SpriteLoader greenPortalSprite = new SpriteLoader(content, "GREEN_PORTAL", @"spritesheets\green_portal", 32, 32);

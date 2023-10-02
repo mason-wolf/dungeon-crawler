@@ -1,4 +1,5 @@
-﻿using DungeonCrawler.Engine;
+﻿using Demo.Game;
+using DungeonCrawler.Engine;
 
 using DungeonCrawler.Scenes;
 using Humper;
@@ -29,8 +30,10 @@ namespace DungeonCrawler
         RoyT.AStar.Grid collisionGrid;
         Map map;
         string levelName;
+        List<Portal> portals = new List<Portal>();
         List<SoundEffect> soundEffects;
         SceneLogic scene;
+        
         public List<MapObject> MapObjects { get; set; }
         private Vector2 startingPosition { get; set; }
 
@@ -377,6 +380,11 @@ namespace DungeonCrawler
                     case ("WHITE_MAGE"):
                         AddNpc(content, mapObject, "WHITE_MAGE");
                         break;
+                    case ("PORTAL"):
+                        Portal portal = new Portal(map, mapObject, content);
+                        portals.Add(portal);
+                        enemyList.Add(portal.GetEntity());
+                        break;
                     case ("GREEN_PORTAL"):
                         AnimatedSprite greenPortalSprite = new AnimatedSprite(Sprites.GetSprite("GREEN_PORTAL"));
                         greenPortalSprite.Play("idle");
@@ -524,8 +532,16 @@ namespace DungeonCrawler
             {
                 enemy.Update(gameTime);
 
+                if (enemy.Name == "PORTAL" && enemy.CurrentHealth <= 0)
+                {
+                    Portal portal = portals.Find(p => p.id == enemy.ID);
+                    Console.WriteLine(portal.id);
+                    MapObject mapObject = MapObjects.Find(mo => mo.GetId() == portal.MapObject.GetId());
+                    MapObjects.Remove(mapObject);
+                    map.GetWorld().Remove(portal.GetCollisionBoundaries());
+                }
                 // If enemy dies
-                if (enemy.CurrentHealth <= 0 && enemy.Dead == false)
+                if (enemy.CurrentHealth <= 0 && enemy.Dead == false && enemy.Movable)
                 {
                     Init.Player.EnemiesKilled += 1;
                     Init.Player.XP += enemy.XP;

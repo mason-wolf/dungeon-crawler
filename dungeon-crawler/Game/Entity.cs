@@ -104,6 +104,7 @@ namespace DungeonCrawler
         public int WayPointIndex;
 
         public bool SpellCaster { get; set; } = false;
+        public bool Movable { get; set; } = true;
         public int SpellID { get; set; } = 0;
 
         public bool ReachedDestination;
@@ -229,7 +230,7 @@ namespace DungeonCrawler
         // Method to make an entity follow a path of waypoints.
         public void FollowPath(GameTime gameTime, Entity entity, List<Vector2> DestinationWaypoint, float Speed)
         {
-            if (DestinationWaypoint.Count > 0 && WayPointIndex < DestinationWaypoint.Count)
+            if (DestinationWaypoint.Count > 0 && WayPointIndex < DestinationWaypoint.Count && Movable)
             {
                 if (!ReachedDestination)
                 {
@@ -293,7 +294,7 @@ namespace DungeonCrawler
             attackTimer.Start();
 
             // Cast spell at target
-            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 1500)
+            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 1500 && Movable)
             {
                 if (direction == -3 || direction == 4 || direction == -2)
                 {
@@ -630,7 +631,10 @@ namespace DungeonCrawler
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite);
+            if (Movable)
+            {
+                spriteBatch.Draw(Sprite);
+            }
 
             if (Buff != null)
             {

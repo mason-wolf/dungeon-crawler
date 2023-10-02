@@ -100,6 +100,11 @@ namespace DungeonCrawler.Scenes
         {
             newState = Keyboard.GetState();
 
+            if (newState.IsKeyDown(Keys.Escape) && oldState.IsKeyUp(Keys.S))
+            {
+                Player.PressedContinue = true;
+            }
+
             if (newState.IsKeyDown(Keys.S) && oldState.IsKeyUp(Keys.S))
             {
                 SelectedIndex++;

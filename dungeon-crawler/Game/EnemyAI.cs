@@ -67,7 +67,7 @@ namespace DungeonCrawler.Engine
                 float enemyDistance = Vector2.Distance(player.Position, enemy.Position);
                 if (enemyDistance < 200 && enemy.State != Action.Dead || enemy.Aggroed)
                 {
-                    if (!enemiesInRange.Contains(enemy))
+                    if (!enemiesInRange.Contains(enemy) && enemy.Movable)
                     {
                         enemiesInRange.Add(enemy);
                     }
@@ -111,7 +111,7 @@ namespace DungeonCrawler.Engine
                     if (enemy.PathFinder != null)
                     {
                         // Find the closest enemy and find path to player.
-                        if (!nearestEnemyFound || nearestEnemy.Dead)
+                        if (!nearestEnemyFound || nearestEnemy.Dead && nearestEnemy.Movable)
                         {
                             enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
                             enemy.PathFinder.FindPathToTarget(enemy, player);
@@ -125,7 +125,7 @@ namespace DungeonCrawler.Engine
                                 nearestEnemyDistance = Vector2.Distance(nearestEnemy.Position, player.Position);
                                 // If nearest enemy is still pursuing, share waypoints to other enemies.
                                 if (nearestEnemyDistance > 15 && nearestEnemy.PathFinder != null)
-                                {
+                                  {
                                     enemy.PathFinder.SetWayPoints(nearestEnemy.PathFinder.GetWayPoints());
                                 }
                                 else

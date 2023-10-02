@@ -99,7 +99,7 @@ namespace DungeonCrawler
             for (int i = 0; i < unitList.Count; i++)
             {
                 // If unit intersects another, seperation depth.
-                if (unitList[i].BoundingBox.Intersects(unit.BoundingBox) && unitList[i].State != Action.Dead)
+                if (unitList[i].BoundingBox.Intersects(unit.BoundingBox) && unitList[i].State != Action.Dead && unit.Movable)
                 {
                     float unitDistanceToDestination = Vector2.Distance(unit.Position, wayPoints[wayPoints.Count - 1]);
                     float movingUnitsDistanceToDestination = Vector2.Distance(unitList[i].Position, wayPoints[wayPoints.Count - 1]);
