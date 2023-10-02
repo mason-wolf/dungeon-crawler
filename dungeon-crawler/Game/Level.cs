@@ -381,7 +381,7 @@ namespace DungeonCrawler
                         AddNpc(content, mapObject, "WHITE_MAGE");
                         break;
                     case ("PORTAL"):
-                        Portal portal = new Portal(map, mapObject, content);
+                        Portal portal = new Portal(map, mapObject, content, enemyList);
                         portals.Add(portal);
                         enemyList.Add(portal.GetEntity());
                         break;
@@ -516,26 +516,35 @@ namespace DungeonCrawler
 
         public override void Update(GameTime gameTime)
         {
-
+            // Update scene.
             if (scene != null)
             {
                 scene.MapObjects = MapObjects;
                 scene.Update(gameTime);
             }
 
+            // Update enemy AI.
             if (enemyAI != null)
             {
                 enemyAI.Update(gameTime);
             }
 
+            // Update portals.
+            foreach(Portal portal in portals)
+            {
+                portal.Update(gameTime);
+            }
+
+            // Update enemies.
             foreach (Entity enemy in enemyList)
             {
                 enemy.Update(gameTime);
 
                 if (enemy.Name == "PORTAL" && enemy.CurrentHealth <= 0)
                 {
-                    Portal portal = portals.Find(p => p.id == enemy.ID);
-                    Console.WriteLine(portal.id);
+                    Portal portal = portals.Find(p => p.ID == enemy.ID);
+                    Console.WriteLine(portal.ID);
+                    portal.Destroyed = true;
                     MapObject mapObject = MapObjects.Find(mo => mo.GetId() == portal.MapObject.GetId());
                     MapObjects.Remove(mapObject);
                     map.GetWorld().Remove(portal.GetCollisionBoundaries());

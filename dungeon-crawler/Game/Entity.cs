@@ -256,8 +256,11 @@ namespace DungeonCrawler
                     {
                         entity.State = Action.WalkSouthPattern1;
                     }
-
-                    if (rotation < -0 && rotation > -90)
+                    else if (rotation < -0 && rotation > -90)
+                    {
+                        entity.State = Action.WalkSouthPattern1;
+                    }
+                    else
                     {
                         entity.State = Action.WalkSouthPattern1;
                     }
@@ -677,6 +680,7 @@ namespace DungeonCrawler
                 // Draw NPC Status and Health Bars
                 if (CurrentHealth > 0)
                 {
+                 //   spriteBatch.DrawString(Init.Font, RotationDebug.ToString(), new Vector2(position.X, position.Y + 20), Color.Red);
                     spriteBatch.Draw(NPCStatusBarTexture, position, new Rectangle(0, 0, 15, 2), Color.Black);
                     spriteBatch.Draw(StaminaBarTexture, position, new Rectangle(0, 0, (int)((CurrentHealth / MaxHealth) * 15), 2), Color.White);
                 }
