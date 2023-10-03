@@ -465,7 +465,7 @@ namespace DungeonCrawler.Scenes
             // Handle player's collision.
             playerCollision.Move(Player.Position.X, Player.Position.Y, (collision) => CollisionResponses.Slide);
 
-            Camera.Zoom = 3f;
+            Camera.Zoom = 3.2f;
 
             if (!InDialog && !TransitionState && !Player.Dead)
             {

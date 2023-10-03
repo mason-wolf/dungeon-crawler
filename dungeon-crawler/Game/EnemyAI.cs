@@ -27,11 +27,11 @@ namespace DungeonCrawler.Engine
         // Keep track of the nearest enemy to store pathfinding data
         // to s  hare with other entities.
         Entity nearestEnemy = null;
-        float nearestEnemyDistance = 0;
         // Throttle frames to reduce latency when invoking path finder.
         int frameCount = 0;
         bool nearestEnemyFound = false;
 
+        int pathFinderCount = 0;
         /// <summary>
         /// Clears list of enemies.
         /// </summary>
@@ -65,10 +65,12 @@ namespace DungeonCrawler.Engine
             {
                 // Calculate enemy distances within an appropriate range.
                 float enemyDistance = Vector2.Distance(player.Position, enemy.Position);
-                if (enemyDistance < 200 && enemy.State != Action.Dead || enemy.Aggroed)
+                if (enemyDistance < 200 && enemy.State != Action.Dead || enemy.Aggroed && !nearestEnemyFound)
                 {
                     if (!enemiesInRange.Contains(enemy) && enemy.Movable)
                     {
+                        enemy.Distance = enemyDistance;
+                        enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
                         enemiesInRange.Add(enemy);
                     }
                 }
@@ -82,26 +84,16 @@ namespace DungeonCrawler.Engine
                 enemy.Update(gameTime);
             }
 
-            // Throttle the amount of path finder instances.
-            if (frameCount < 10)
-            {
-                foreach (Entity enemy in enemiesInRange)
-                {
-                    if(!enemy.Dead && enemy.PathFinder == null)
-                    {
-                        enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange) ;
-                    }
-                }
-            }
 
-            // Sort enemies by distance.
-            if (enemiesInRange.Count > 0)
+          //  Sort enemies by distance.
+            if (enemiesInRange.Count > 0 && !nearestEnemyFound)
             {
                 enemiesInRange.Sort((e1, e2) => e1.Distance.CompareTo(e2.Distance));
             }
 
             foreach (Entity enemy in enemiesInRange)
             {
+
                 if (enemy.Dead)
                 {
                     enemyDeathCount++;
@@ -111,7 +103,7 @@ namespace DungeonCrawler.Engine
                     if (enemy.PathFinder != null)
                     {
                         // Find the closest enemy and find path to player.
-                        if (!nearestEnemyFound || nearestEnemy.Dead && nearestEnemy.Movable)
+                        if (!nearestEnemyFound && enemy.Movable)
                         {
                             enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
                             enemy.PathFinder.FindPathToTarget(enemy, player);
@@ -120,20 +112,16 @@ namespace DungeonCrawler.Engine
                         }
                         else
                         {
-                            if (nearestEnemy != null)
+                            if (nearestEnemyFound && nearestEnemy.PathFinder != null)
                             {
-                                nearestEnemyDistance = Vector2.Distance(nearestEnemy.Position, player.Position);
-                                // If nearest enemy is still pursuing, share waypoints to other enemies.
-                                if (nearestEnemyDistance > 15 && nearestEnemy.PathFinder != null)
-                                  {
-                                    enemy.PathFinder.SetWayPoints(nearestEnemy.PathFinder.GetWayPoints());
-                                }
-                                else
-                                {
-                                    // Otherwise find their own path.
-                                    enemy.PathFinder.FindPathToTarget(enemy, player);
-                                   
-                                }
+                                enemy.PathFinder.SetWayPoints(nearestEnemy.PathFinder.GetWayPoints());
+                            }
+
+                            if (nearestEnemy.PathFinder != null && nearestEnemy.PathFinder.GetWayPoints().Count == 0 && pathFinderCount < 50)
+                            {
+                                pathFinderCount++;
+                                enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
+                                enemy.PathFinder.FindPathToTarget(enemy, player);
                             }
                             enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
                             enemy.Attack(player);
@@ -145,6 +133,7 @@ namespace DungeonCrawler.Engine
             if (frameCount >= 30)
             {
                 frameCount = 0;
+                pathFinderCount = 0;
                 nearestEnemyFound = false;
             }
         }

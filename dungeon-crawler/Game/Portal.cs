@@ -52,8 +52,8 @@ namespace Demo.Game
             portalEntity.LoadContent(contentManager);
             portalEntity.State = DungeonCrawler.Action.IdleSouth1;
             portalEntity.Movable = false;
-            portalEntity.MaxHealth = 10;
-            portalEntity.CurrentHealth = 10;
+            portalEntity.MaxHealth = 250;
+            portalEntity.CurrentHealth = 250;
             portalEntity.Position = mapObject.GetPosition();
             portalEntity.Name = "PORTAL";
             spawnRate = 100;
@@ -88,7 +88,7 @@ namespace Demo.Game
                 newEnemy.State = DungeonCrawler.Action.IdleSouth1;
                 newEnemy.MaxHealth = 10;
                 newEnemy.CurrentHealth = 10;
-                newEnemy.AttackDamage = 0.01;
+                newEnemy.AttackDamage = 0.05;
                 newEnemy.Name = "ZOMBIE";
                 newEnemy.XP = 10;
                 newEnemy.Position = new Vector2(MapObject.GetPosition().X, MapObject.GetPosition().Y + 20);

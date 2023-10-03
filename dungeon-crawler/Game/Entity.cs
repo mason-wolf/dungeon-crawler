@@ -680,7 +680,7 @@ namespace DungeonCrawler
                 // Draw NPC Status and Health Bars
                 if (CurrentHealth > 0)
                 {
-                 //   spriteBatch.DrawString(Init.Font, RotationDebug.ToString(), new Vector2(position.X, position.Y + 20), Color.Red);
+                  //  spriteBatch.DrawString(Init.Font, EnemyAI.enemiesInRange.IndexOf(this).ToString(), new Vector2(position.X, position.Y + 20), Color.Red);
                     spriteBatch.Draw(NPCStatusBarTexture, position, new Rectangle(0, 0, 15, 2), Color.Black);
                     spriteBatch.Draw(StaminaBarTexture, position, new Rectangle(0, 0, (int)((CurrentHealth / MaxHealth) * 15), 2), Color.White);
                 }
