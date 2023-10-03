@@ -22,6 +22,6 @@ namespace DungeonCrawler
         public int Width { get; set; }
         public int Height { get; set; }
         public int Price { get; set; }
-        public bool Useable { get; set; }
+        public bool Useable { get; set; } = true;
     }
 }

@@ -266,6 +266,7 @@ namespace DungeonCrawler.Scenes
             // Health potion
             ItemShopInventory.Contents.Add(Items.GetItemById(3));
             // Mana potion
+            Item manaPotion = Items.GetItemById(4);
             ItemShopInventory.Contents.Add(Items.GetItemById(4));
             // Homing Crystal
             ItemShopInventory.Contents.Add(Items.GetItemById(11));
