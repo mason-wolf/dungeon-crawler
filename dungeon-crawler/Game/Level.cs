@@ -212,15 +212,8 @@ namespace DungeonCrawler
                         enemyList.Add(frostSkeletonEntity);
                         break;
                     case ("BAT"):
-                        Entity batEntity = new Entity(Sprites.GetSprite("BAT"));
-                        batEntity.LoadContent(content);
-                        batEntity.State = Action.IdleEast1;
-                        batEntity.MaxHealth = 30;
-                        batEntity.CurrentHealth = 30;
-                        batEntity.AttackDamage = 0.06;
+                        Entity batEntity = Enemies.GetEnemyByName("BAT");
                         batEntity.Position = mapObject.GetPosition();
-                        batEntity.Name = "BAT";
-                        batEntity.XP = 10;
                         enemyList.Add(batEntity);
                         break;
                     case ("CRAB"):
@@ -249,27 +242,13 @@ namespace DungeonCrawler
                         enemyList.Add(fireBatEntity);
                         break;
                     case ("ZOMBIE"):
-                        Entity zombieEntity = new Entity(Sprites.GetSprite("ZOMBIE"));
-                        zombieEntity.LoadContent(content);
-                        zombieEntity.State = Action.IdleSouth1;
-                        zombieEntity.MaxHealth = 20;
-                        zombieEntity.CurrentHealth = 20;
-                        zombieEntity.AttackDamage = 0.01;
+                        Entity zombieEntity = Enemies.GetEnemyByName("ZOMBIE");
                         zombieEntity.Position = mapObject.GetPosition();
-                        zombieEntity.Name = "ZOMBIE";
-                        zombieEntity.XP = 10;
                         enemyList.Add(zombieEntity);
                         break;
                     case ("BLUE_SLIME"):
-                        Entity blueSlimeEntity = new Entity(Sprites.GetSprite("BLUE_SLIME"));
-                        blueSlimeEntity.LoadContent(content);
-                        blueSlimeEntity.State = Action.IdleEast1;
-                        blueSlimeEntity.MaxHealth = 25;
-                        blueSlimeEntity.CurrentHealth = 25;
-                        blueSlimeEntity.AttackDamage = 0.08;
+                        Entity blueSlimeEntity = Enemies.GetEnemyByName("BLUE_SLIME");
                         blueSlimeEntity.Position = mapObject.GetPosition();
-                        blueSlimeEntity.Name = "BLUE_SLIME";
-                        blueSlimeEntity.XP = 10;
                         enemyList.Add(blueSlimeEntity);
                         break;
                     case ("YELLOW_SLIME"):

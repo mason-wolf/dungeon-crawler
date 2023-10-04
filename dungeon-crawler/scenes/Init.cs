@@ -93,6 +93,7 @@ namespace DungeonCrawler.Scenes
             Player.Level = 1;
             Player.XP = 0;
             Player.XPRemaining = 250;
+            Enemies.Load(Content);
             ItemInventory = new Inventory(Content);
             SpellInventory = new Inventory(Content);
             base.Initialize();

@@ -18,6 +18,8 @@ namespace Demo.Game
         Entity portalEntity;
         int frames = 0;
         int spawnRate;
+        private string levelType;
+        private IDictionary<string, string[]> enemyTypes = new Dictionary<string, string[]>();
 
         List<Entity> enemyList;
         ContentManager contentManager;
@@ -57,6 +59,12 @@ namespace Demo.Game
             portalEntity.Position = mapObject.GetPosition();
             portalEntity.Name = "PORTAL";
             spawnRate = 100;
+            enemyTypes.Add("PLAINS", new string[] { "BAT", "ZOMBIE" });
+
+            if (map.GetMapName().Contains("PLAINS"))
+            {
+                levelType = "PLAINS";
+            }
         }
 
         /// <summary>
@@ -83,16 +91,12 @@ namespace Demo.Game
             frames++;
             if (frames == spawnRate && enemyList.Count() < 100 && !Destroyed)
             {
-                Entity newEnemy = new Entity(Sprites.GetSprite("ZOMBIE"));
-                newEnemy.LoadContent(contentManager);
-                newEnemy.State = DungeonCrawler.Action.IdleSouth1;
-                newEnemy.MaxHealth = 10;
-                newEnemy.CurrentHealth = 10;
-                newEnemy.AttackDamage = 0.05;
-                newEnemy.Name = "ZOMBIE";
-                newEnemy.XP = 10;
-                newEnemy.Position = new Vector2(MapObject.GetPosition().X, MapObject.GetPosition().Y + 20);
-                enemyList.Add(newEnemy);
+                String[] enemies = enemyTypes["PLAINS"];
+                Random random = new Random();
+                int randomNum = random.Next(0, enemies.Length);
+                Entity randomEnemy = Enemies.GetEnemyByName(enemies[randomNum]);
+                randomEnemy.Position = new Vector2(MapObject.GetPosition().X, MapObject.GetPosition().Y + 20);
+                enemyList.Add(randomEnemy);
             }
 
             if (frames == spawnRate)

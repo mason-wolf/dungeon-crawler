@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1647">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1652">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -144,7 +144,7 @@
     <property name="ID" type="float" value="9708"/>
    </properties>
   </object>
-  <object id="1038" name="START" x="224.083" y="305.502"/>
+  <object id="1038" name="START" x="448.083" y="385.502"/>
   <object id="1627" name="PORTAL" x="216" y="183.667">
    <properties>
     <property name="id" type="float" value="9843"/>
