@@ -36,7 +36,7 @@ namespace Demo.Game
             fireball1.Name = "FIREBALL";
             fireball1.ID = 1;
             fireball1.Damage = 5;
-            fireball1.ManaCost = .5;
+            fireball1.ManaCost = .1;
             fireball1.Description = "Shoots a flame.";
             fireball1.Element = Spell.SpellElement.FIRE;
             ItemList.Add(fireball1);

@@ -240,10 +240,10 @@ namespace DungeonCrawler
             if (!InMenu && !Init.ItemInventory.InventoryOpen && !Init.SpellInventory.InventoryOpen && !Init.ItemShopInventory.InventoryOpen)
             {
                 // Attacking south
-                if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleSouth1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleSouth2 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkSouthPattern2)
+                if (newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.WalkSouthPattern1 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleSouth1 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleSouth2 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.WalkSouthPattern2)
                 {
                     if (SelectedItem != null)
                     {
@@ -254,9 +254,9 @@ namespace DungeonCrawler
 
                 // Attacking West
                 else if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkWestPattern1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleWest1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleWest2 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkWestPattern2)
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleWest1 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleWest2 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.WalkWestPattern2)
                 {
                     if (SelectedItem != null)
                     {
@@ -268,9 +268,9 @@ namespace DungeonCrawler
 
                 // Attacking East
                 else if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkEastPattern1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleEast1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkEastPattern2 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleEast2 && IsAttacking)
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleEast1 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.WalkEastPattern2 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleEast2 && IsAttacking)
                 {
                     if (SelectedItem != null)
                     {
@@ -280,10 +280,10 @@ namespace DungeonCrawler
                 }
 
                 // Attacking North
-                else if (newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkNorthPattern1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleNorth1 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.WalkNorthPattern2 ||
-                    newMouseState.LeftButton == ButtonState.Pressed && oldMouseState.LeftButton == ButtonState.Released && player.State == Action.IdleNorth2)
+                else if (newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.WalkNorthPattern1 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleNorth1 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.WalkNorthPattern2 ||
+                    newMouseState.LeftButton == ButtonState.Pressed && player.State == Action.IdleNorth2)
                 {
                     if (SelectedItem != null)
                     {
