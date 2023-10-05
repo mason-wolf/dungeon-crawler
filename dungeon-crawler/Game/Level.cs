@@ -24,6 +24,7 @@ namespace DungeonCrawler
 {
     public class Level : Scene
     {
+        ContentManager contentManager;
         EnemyAI enemyAI;
         private List<Entity> enemyList = new List<Entity>();
         public static List<Entity> NPCList = new List<Entity>();
@@ -31,13 +32,17 @@ namespace DungeonCrawler
         Map map;
         string levelName;
         List<Portal> portals = new List<Portal>();
+        int portalCount = 0;
         List<SoundEffect> soundEffects;
         SceneLogic scene;
         
         public List<MapObject> MapObjects { get; set; }
         private Vector2 startingPosition { get; set; }
 
-        private bool LeveledUp { get; set; } = false;
+        bool leveledUp { get; set; } = false;
+        bool nextLevel { get; set; } = false;
+
+        public static int Difficulty { get; set; } = 1;
         public Vector2 GetStartingPosition()
         {
             return startingPosition;
@@ -173,7 +178,7 @@ namespace DungeonCrawler
 
         public override void LoadContent(ContentManager content)
         {
-
+            this.contentManager = content;
             foreach (MapObject mapObject in MapObjects)
             {
                 switch (mapObject.GetName())
@@ -514,20 +519,41 @@ namespace DungeonCrawler
                 portal.Update(gameTime);
             }
 
+            Entity enemyToRemove = null;
+
+            // Start new level if portals are destroyed.
+            if (portalCount == 4 && enemyList.Count() == 0)
+            {
+                portalCount = 0;
+                nextLevel = true;
+                Difficulty++;
+                foreach (Portal portal in portals)
+                {
+                    portal.Respawn();
+                    MapObject mapObject = MapObjects.Find(mo => mo.GetId() == portal.MapObject.GetId());
+                    mapObject.Enabled = true;
+                    mapObject.SetCollisionBox(portal.GetCollisionBoundaries());
+                    enemyList.Add(portal.GetEntity());
+                }
+            }
+
             // Update enemies.
             foreach (Entity enemy in enemyList)
             {
                 enemy.Update(gameTime);
-
+                // Handle destruction of portals.
                 if (enemy.Name == "PORTAL" && enemy.CurrentHealth <= 0)
                 {
+                    portalCount++;
                     Portal portal = portals.Find(p => p.ID == enemy.ID);
-                    Console.WriteLine(portal.ID);
                     portal.Destroyed = true;
                     MapObject mapObject = MapObjects.Find(mo => mo.GetId() == portal.MapObject.GetId());
-                    MapObjects.Remove(mapObject);
+                    mapObject.Enabled = false;
+                    // MapObjects.Remove(mapObject);
                     map.GetWorld().Remove(portal.GetCollisionBoundaries());
+                    enemyToRemove = enemy;
                 }
+
                 // If enemy dies
                 if (enemy.CurrentHealth <= 0 && enemy.Dead == false && enemy.Movable)
                 {
@@ -542,7 +568,7 @@ namespace DungeonCrawler
                         Init.Player.MaxMana += 2;
                         Init.Player.XPRemaining = Init.Player.XPRemaining + (Init.Player.XPRemaining * .50);
                         Init.Player.XP = 0;
-                        LeveledUp = true;
+                        leveledUp = true;
                     }
                     enemy.State = Action.Dead;
                     enemy.Dead = true;
@@ -565,6 +591,11 @@ namespace DungeonCrawler
                             break;
                     }
                 }
+            }
+
+            if (enemyToRemove != null)
+            {
+                enemyList.Remove(enemyToRemove);
             }
 
             // Handle the player destroying objects.
@@ -602,8 +633,8 @@ namespace DungeonCrawler
         private Stopwatch stopWatch = new Stopwatch();
         public override void Draw(SpriteBatch spriteBatch)
         {
-
-            if (LeveledUp)
+            // Show message if player leveled up.
+            if (leveledUp)
             {
                 stopWatch.Start();
 
@@ -614,7 +645,28 @@ namespace DungeonCrawler
                 else
                 {
                     stopWatch.Stop();
-                    LeveledUp = false;
+                    stopWatch.Reset();
+                    leveledUp = false;
+                }
+            }
+
+            // Show next level message if player destroyed the protals.
+            if (nextLevel)
+            {
+                stopWatch.Start();
+
+                if (stopWatch.ElapsedMilliseconds <= 3000)
+                {
+                    Init.TransitionState = true;
+                    spriteBatch.DrawString(Init.Font, "Level " + Difficulty.ToString(), new Vector2(Init.Player.Position.X - 20, Init.Player.Position.Y - 50), Color.White);
+                }
+                else
+                {
+                    stopWatch.Stop();
+                    stopWatch.Reset();
+                    nextLevel = false;
+                    Init.FadeInMap("PLAINS_1");
+                    Init.Player.Position = GetStartingPosition();
                 }
             }
 
@@ -622,7 +674,7 @@ namespace DungeonCrawler
 
             foreach (MapObject mapObject in MapObjects)
             {
-                if (!mapObject.ItemPickedUp())
+                if (!mapObject.ItemPickedUp() && mapObject.Enabled)
                 {
                     mapObject.Draw(spriteBatch);
                 }

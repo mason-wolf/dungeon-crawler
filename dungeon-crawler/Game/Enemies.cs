@@ -24,7 +24,7 @@ namespace Demo.Game
                     zombieEntity.State = Action.IdleSouth1;
                     zombieEntity.MaxHealth = 20;
                     zombieEntity.CurrentHealth = 20;
-                    zombieEntity.AttackDamage = 0.01;
+                    zombieEntity.AttackDamage = 0.02;
                     zombieEntity.Name = "ZOMBIE";
                     zombieEntity.XP = 10;
                     enemy = zombieEntity;
@@ -44,9 +44,9 @@ namespace Demo.Game
                     Entity batEntity = new Entity(Sprites.GetSprite("BAT"));
                     batEntity.LoadContent(ContentManager);
                     batEntity.State = Action.IdleEast1;
-                    batEntity.MaxHealth = 30;
-                    batEntity.CurrentHealth = 30;
-                    batEntity.AttackDamage = 0.06;
+                    batEntity.MaxHealth = 15;
+                    batEntity.CurrentHealth = 15;
+                    batEntity.AttackDamage = 0.01;
                     batEntity.Name = "BAT";
                     batEntity.XP = 10;
                     enemy = batEntity;

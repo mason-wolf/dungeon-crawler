@@ -117,7 +117,7 @@ namespace DungeonCrawler.Engine
                                 enemy.PathFinder.SetWayPoints(nearestEnemy.PathFinder.GetWayPoints());
                             }
 
-                            if (nearestEnemy.PathFinder != null && nearestEnemy.PathFinder.GetWayPoints().Count == 0 && pathFinderCount < 50)
+                            if (nearestEnemy.PathFinder != null && nearestEnemy.PathFinder.GetWayPoints().Count == 0 && pathFinderCount < 25)
                             {
                                 pathFinderCount++;
                                 enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);

@@ -32,6 +32,11 @@ namespace DungeonCrawler
 
         IBox collisionBox;
 
+        /// <summary>
+        /// If enabled, the object will be drawn.
+        /// </summary>
+        public bool Enabled { get; set; } = true;
+
         public MapObject(int objectId, string objectName, string objectType, Vector2 position)
         {
             id = objectId;

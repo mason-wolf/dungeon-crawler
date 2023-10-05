@@ -467,7 +467,7 @@ namespace DungeonCrawler.Scenes
             // Handle player's collision.
             playerCollision.Move(Player.Position.X, Player.Position.Y, (collision) => CollisionResponses.Slide);
 
-            Camera.Zoom = 3.2f;
+            Camera.Zoom = 3f;
 
             if (!InDialog && !TransitionState && !Player.Dead)
             {
@@ -595,7 +595,7 @@ namespace DungeonCrawler.Scenes
         /// Creates a transition effect on the map.
         /// </summary>
         /// <param name="map">Map to fade in.</param>
-        public void FadeInMap(string mapName)
+        public static void FadeInMap(string mapName)
         {
             foreach (Level level in levelList)
             {
