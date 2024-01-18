@@ -147,6 +147,19 @@ namespace DungeonCrawler.Scenes
             }
         }
 
+        private int GetSpellIdFromSlot(int slotNum)
+        {
+            Item item = Init.SpellInventory.Contents.Find(i => i.ActionBarSlot == slotNum);
+            if (item != null)
+            {
+                return item.ID;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         void SaveGame(int saveSlot)
         {
             using (StreamWriter streamWriter = new StreamWriter("Save_" + saveSlot + ".txt", false))
@@ -160,7 +173,10 @@ namespace DungeonCrawler.Scenes
                 streamWriter.WriteLine("PLAYER_SPELLPOWER=" + Init.Player.SpellPower);
                 streamWriter.WriteLine("PLAYER_XP_REMAINING=" + Init.Player.XPRemaining);
                 streamWriter.WriteLine("ENEMIES_KILLED=" + Init.Player.EnemiesKilled);
-
+                streamWriter.WriteLine("SPELL_SLOT_1=" + GetSpellIdFromSlot(1));
+                streamWriter.WriteLine("SPELL_SLOT_2=" + GetSpellIdFromSlot(2));
+                streamWriter.WriteLine("SPELL_SLOT_3=" + GetSpellIdFromSlot(3));
+                streamWriter.WriteLine("SPELL_SLOT_4=" + GetSpellIdFromSlot(4));
                 // Save inventory
                 foreach (Item item in Init.ItemInventory.Contents)
                 {

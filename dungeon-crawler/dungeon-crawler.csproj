@@ -61,6 +61,7 @@
     <Compile Include="Game\Teleporter.cs" />
     <Compile Include="Game\Tile.cs" />
     <Compile Include="Game\Waypoint.cs" />
+    <Compile Include="Interface\ActionBar.cs" />
     <Compile Include="Interface\Background.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Game\Entity.cs" />

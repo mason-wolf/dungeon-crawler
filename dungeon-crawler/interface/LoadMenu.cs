@@ -187,6 +187,7 @@ namespace DungeonCrawler.Scenes
                 Init.ItemInventory.ArmorList.Clear();
                 Init.SpellInventory.Contents.Clear();
                 Random randomID = new Random();
+                List<int> spellSlotIds = new List<int>();
                 while ((line = streamReader.ReadLine()) != null)
                 {
                     lineCount++;
@@ -322,6 +323,41 @@ namespace DungeonCrawler.Scenes
                             Init.SpellInventory.Contents.Add(spell);
                             Player.SelectedItem = Items.GetItemById(1);
                             break;
+                        case ("SPELL_SLOT_1"):
+                            value = line.Split('=').Last();
+                            int spell_1 = Int32.Parse(value);
+                            spellSlotIds.Add(spell_1);
+                            break;
+                        case ("SPELL_SLOT_2"):
+                            value = line.Split('=').Last();
+                            int spell_2 = Int32.Parse(value);
+                            spellSlotIds.Add(spell_2);
+                            break;
+                        case ("SPELL_SLOT_3"):
+                            value = line.Split('=').Last();
+                            int spell_3 = Int32.Parse(value);
+                            spellSlotIds.Add(spell_3);
+                            break;
+                        case ("SPELL_SLOT_4"):
+                            value = line.Split('=').Last();
+                            int spell_4 = Int32.Parse(value);
+                            spellSlotIds.Add(spell_4);
+                            break;
+                    }
+                }
+
+                int spellSlot = 1;
+                foreach(int id in spellSlotIds)
+                {
+               
+                    if (id != 0)
+                    {
+                        Item spell = Init.SpellInventory.Contents.Find(s => s.ID == id);
+                        if (spell != null)
+                        {
+                            spell.ActionBarSlot = spellSlot;
+                            spellSlot++;
+                        }
                     }
                 }
             }

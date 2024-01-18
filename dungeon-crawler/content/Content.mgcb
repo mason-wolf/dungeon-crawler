@@ -994,3 +994,15 @@
 /processorParam:TextureFormat=Color
 /build:items/SPELL_POWER_UPGRADE.png
 
+#begin interface/ACTIONBAR.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:interface/ACTIONBAR.png
+

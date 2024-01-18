@@ -72,6 +72,7 @@ namespace DungeonCrawler
         public Texture2D HealthBarTexture;
         public Texture2D StaminaBarTexture;
         public Texture2D ManaBarTexture;
+        public Texture2D ActionBarTexture;
 
         public string ID { get; set; }
         public double MaxHealth { get; set; } = 0;
@@ -120,6 +121,7 @@ namespace DungeonCrawler
             HealthBarTexture = content.Load<Texture2D>(@"interface\healthbar");
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
             ManaBarTexture = content.Load<Texture2D>(@"interface\MANA_BAR");
+            ActionBarTexture = content.Load<Texture2D>(@"interface\ACTIONBAR");
         }
 
         // Create standard animation states for the entity.
@@ -682,8 +684,17 @@ namespace DungeonCrawler
                     spriteBatch.Draw(StatusBarTexture, position, new Rectangle(0, 0, (Convert.ToInt32(MaxHealth) + Convert.ToInt32(HealthBonus)), 6), Color.White);
                     spriteBatch.Draw(HealthBarTexture, healthPosition, new Rectangle(0, 100, Convert.ToInt32(CurrentHealth), 4), Color.White);
 
+                    // Draw mana bar
                     spriteBatch.Draw(StatusBarTexture, new Vector2(position.X + 1, Position.Y - 104), new Rectangle(0, 0, (Convert.ToInt32(MaxMana) + Convert.ToInt32(ManaBonus)), 6), Color.White);
                     spriteBatch.Draw(ManaBarTexture, new Vector2(healthPosition.X, healthPosition.Y + 6), new Rectangle(0, 100, Convert.ToInt32(CurrentMana), 4), Color.White);
+
+                    // Draw xp bar
+                    //spriteBatch.Draw(StatusBarTexture, new Vector2(position.X, Position.Y - 118), new Rectangle(0, 0, 300, 6), Color.White);
+                    //spriteBatch.Draw(ManaBarTexture, new Vector2(position.X, Position.Y - 118), new Rectangle(0, 100, Convert.ToInt32((XP * 100) / 300), 4), Color.White);
+
+              //      spriteBatch.Draw(ActionBarTexture, new Vector2(position.X + 125, Position.Y + 85), new Rectangle(0, 0, 100, 200), Color.White);
+
+
                 }
             }
             else

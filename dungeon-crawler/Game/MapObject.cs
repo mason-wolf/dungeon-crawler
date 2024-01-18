@@ -27,7 +27,7 @@ namespace DungeonCrawler
         Rectangle containedItemBoundingBox;
         bool destroyed = false;
         bool itemPickedUp = false;
-        bool interacted = false;
+        public bool interacted = false;
         Dictionary<string, string> customProperties;
 
         IBox collisionBox;

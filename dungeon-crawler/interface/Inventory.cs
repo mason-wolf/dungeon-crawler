@@ -64,6 +64,50 @@ namespace DungeonCrawler.Interface
             SelectedItem = 0;
         }
 
+        private void HandleActionBarAssignment()
+        {
+            if (newKeyboardState.IsKeyDown(Keys.D1) && oldKeyboardState.IsKeyUp(Keys.D1)
+                && InventoryOpen && ItemList.Count() != 0)
+            {
+                AssignActionBarSlot(1);
+            }
+            if (newKeyboardState.IsKeyDown(Keys.D2) && oldKeyboardState.IsKeyUp(Keys.D2)
+                && InventoryOpen && ItemList.Count() != 0)
+            {
+                AssignActionBarSlot(2);
+            }
+            if (newKeyboardState.IsKeyDown(Keys.D3) && oldKeyboardState.IsKeyUp(Keys.D3)
+                && InventoryOpen && ItemList.Count() != 0)
+            {
+                AssignActionBarSlot(3);
+            }
+            if (newKeyboardState.IsKeyDown(Keys.D4) && oldKeyboardState.IsKeyUp(Keys.D4)
+                 && InventoryOpen && ItemList.Count() != 0)
+            {
+                AssignActionBarSlot(4);
+            }
+        }
+
+        private void AssignActionBarSlot(int selectedSlot)
+        {
+            if (InventoryType == "spells")
+            {
+                foreach (Item item in Contents)
+                {
+                    if (item.ActionBarSlot == selectedSlot)
+                    {
+                        item.ActionBarSlot = 0;
+                    }
+                }
+                foreach (Item item in Contents)
+                {
+                    if (ItemList[SelectedItem].ID == item.ID)
+                    {
+                        item.ActionBarSlot = selectedSlot;
+                    }
+                }
+            }
+        }
         public override void Update(GameTime gameTime)
         {
             // Store & remember the selected item.
@@ -124,6 +168,8 @@ namespace DungeonCrawler.Interface
                     itemUsed = true;
                 }
             }
+
+            HandleActionBarAssignment();
 
             // Reset selection if reached the end.
             if (SelectedItem == 32)
@@ -491,6 +537,7 @@ namespace DungeonCrawler.Interface
                 ItemList[itemSlot].ID = item.ID;
                 ItemList[itemSlot].Price = item.Price;
                 ItemList[itemSlot].Quantity = item.Quantity;
+                ItemList[itemSlot].ActionBarSlot = item.ActionBarSlot;
             }
         }
 
@@ -525,6 +572,12 @@ namespace DungeonCrawler.Interface
                         }
                         // Draw the item name and description.
                         spriteBatch.DrawString(inventoryFont, ItemList[SelectedItem].Name, new Vector2(Position.X + 25, Position.Y + 175), Color.LightGreen, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+
+                        // Draw assigned action bar slot.
+                        if (ItemList[i].ActionBarSlot != 0)
+                        {
+                            spriteBatch.DrawString(inventoryFont, ItemList[i].ActionBarSlot.ToString(), new Vector2(ItemList[i].ItemRectangle.X + 25, ItemList[i].ItemRectangle.Y + 22), Color.Yellow, 0, new Vector2(0, 0), 1f, SpriteEffects.None, 0);
+                        }
 
                         // Draw player's inventory
                         if (ItemList[i].Quantity > 0 && InventoryType != "ITEM_SHOP" && InventoryType != "SPELL_SHOP")

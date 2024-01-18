@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1655">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1659">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -161,6 +161,26 @@
    </properties>
   </object>
   <object id="1654" name="PORTAL" x="741" y="762">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1655" name="CHEST" x="476" y="192">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1656" name="CHEST" x="201.333" y="490.667">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1657" name="CHEST" x="745.333" y="493.333">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1658" name="CHEST" x="502.667" y="765.333">
    <properties>
     <property name="id" type="float" value="9843"/>
    </properties>

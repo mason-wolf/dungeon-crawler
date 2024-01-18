@@ -52,6 +52,7 @@ namespace DungeonCrawler
         Random random = new Random();
         List<SoundEffect> soundEffects;
         float MovementSpeed = 1.5f;
+        ActionBar _actionBar;
 
         public new void LoadContent(ContentManager content)
         {
@@ -87,6 +88,11 @@ namespace DungeonCrawler
             StatusBarTexture = content.Load<Texture2D>(@"interface\statusbar");
             HealthBarTexture = content.Load<Texture2D>(@"interface\healthbar");
             StaminaBarTexture = content.Load<Texture2D>(@"interface\staminabar");
+
+            _actionBar = new ActionBar();
+            _actionBar.LoadContent(content);
+         //   ActionBarTexture = content.Load<Texture2D>(@"interface\actionbar");
+
             ManaBarTexture = content.Load<Texture2D>(@"interface\MANA_BAR");
             soundEffects = new List<SoundEffect>();
          //   soundEffects.Add(content.Load<SoundEffect>(@"sounds\sword-swing"));
@@ -207,25 +213,45 @@ namespace DungeonCrawler
                 }
             }
 
-            // Equip sword if 1 is pressed.
+            _actionBar.Update(gameTime);
+
             if (newState.IsKeyDown(Keys.D1) && oldState.IsKeyDown(Keys.D1))
             {
-                //EquipedWeapon = "Sword";
-                //PlayerWeapon = swordWeapon;
-                switch (State)
+                SelectedItem = Init.SpellInventory.Contents.Find(item => item.ActionBarSlot == 1);
+                if (SelectedItem != null && !Init.SpellInventory.InventoryOpen)
                 {
-                    case (Action.IdleEast2):
-                        State = Action.IdleEast1;
-                        break;
-                    case (Action.IdleWest2):
-                        State = Action.IdleWest1;
-                        break;
-                    case (Action.IdleNorth2):
-                        State = Action.IdleNorth1;
-                        break;
-                    case (Action.IdleSouth2):
-                        State = Action.IdleSouth1;
-                        break;
+                    Init.Message = SelectedItem.Name;
+                    Init.MessageEnabled = true;
+                }
+            }
+
+            if (newState.IsKeyDown(Keys.D2) && oldState.IsKeyDown(Keys.D2))
+            {
+                SelectedItem = Init.SpellInventory.Contents.Find(item => item.ActionBarSlot == 2);
+                if (SelectedItem != null && !Init.SpellInventory.InventoryOpen)
+                {
+                    Init.Message = SelectedItem.Name;
+                    Init.MessageEnabled = true;
+                }
+            }
+
+            if (newState.IsKeyDown(Keys.D3) && oldState.IsKeyDown(Keys.D3))
+            {
+                SelectedItem = Init.SpellInventory.Contents.Find(item => item.ActionBarSlot == 3);
+                if (SelectedItem != null && !Init.SpellInventory.InventoryOpen)
+                {
+                    Init.Message = SelectedItem.Name;
+                    Init.MessageEnabled = true;
+                }
+            }
+
+            if (newState.IsKeyDown(Keys.D4) && oldState.IsKeyDown(Keys.D4))
+            {
+                SelectedItem = Init.SpellInventory.Contents.Find(item => item.ActionBarSlot == 4);
+                if (SelectedItem != null && !Init.SpellInventory.InventoryOpen)
+                {
+                    Init.Message = SelectedItem.Name;
+                    Init.MessageEnabled = true;
                 }
             }
 
@@ -393,6 +419,11 @@ namespace DungeonCrawler
                 }
             }
             oldMouseState = newMouseState;
+        }
+
+        public void DrawActionBar(SpriteBatch spriteBatch)
+        {
+            _actionBar.Draw(spriteBatch);
         }
 
         /// <summary>

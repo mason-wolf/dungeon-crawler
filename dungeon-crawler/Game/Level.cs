@@ -422,19 +422,7 @@ namespace DungeonCrawler
                         mapObject.SetSprite(bedSprite);
                         break;
                     case ("CHEST"):
-                        // Randomly populate a chest.
-                        Random randomChest = new Random();
-                        int chance = randomChest.Next(1, 4);
- 
-                        if (chance == 2)
-                        {
-                            AnimatedSprite chestSprite = new AnimatedSprite(Sprites.GetSprite("CHEST"));
-                            chestSprite.Play("Unopened");
-                            chestSprite.Position = mapObject.GetPosition();
-                            IBox chestCollidable = map.GetWorld().Create(chestSprite.Position.X, chestSprite.Position.Y - 10, 16, 24);
-                            mapObject.SetCollisionBox(chestCollidable);
-                            mapObject.SetSprite(chestSprite);
-                        }
+                        GenerateChest(mapObject);
                         break;
                     case ("BOOKSHELF"):
                         AnimatedSprite bookshelfSprite = new AnimatedSprite(Sprites.GetSprite("BOOKSHELF"));
@@ -535,6 +523,14 @@ namespace DungeonCrawler
                     mapObject.SetCollisionBox(portal.GetCollisionBoundaries());
                     enemyList.Add(portal.GetEntity());
                 }
+
+                foreach(MapObject mapObject in MapObjects)
+                {
+                    if (mapObject.GetName() == "CHEST")
+                    {
+                        GenerateChest(mapObject);
+                    }
+                }
             }
 
             // Update enemies.
@@ -628,6 +624,24 @@ namespace DungeonCrawler
             if (map != null)
             {
                 map.Update(gameTime);
+            }
+        }
+
+        private void GenerateChest(MapObject mapObject)
+        {
+            // Randomly populate a chest.
+            Random randomChest = new Random();
+            int chance = randomChest.Next(1, 4);
+
+            if (chance == 2)
+            {
+                AnimatedSprite chestSprite = new AnimatedSprite(Sprites.GetSprite("CHEST"));
+                chestSprite.Play("Unopened");
+                chestSprite.Position = mapObject.GetPosition();
+                IBox chestCollidable = map.GetWorld().Create(chestSprite.Position.X, chestSprite.Position.Y - 10, 16, 24);
+                mapObject.SetCollisionBox(chestCollidable);
+                mapObject.SetSprite(chestSprite);
+                mapObject.interacted = false;
             }
         }
 

@@ -76,6 +76,7 @@ namespace DungeonCrawler.Scenes
         /// </summary>
         public static bool InDialog = false;
 
+        public static Texture2D _whiteTexture;
         public Init(Game game, GameWindow window) : base(game)
         {
             this.window = window;
@@ -255,9 +256,10 @@ namespace DungeonCrawler.Scenes
 
             ItemInventory.MenuTitle = "Items";
             ItemInventory.InventoryType = "PLAYER_INVENTORY";
-            ItemInventory.Contents.Add(Items.GetItemById(14));
+          //  ItemInventory.Contents.Add(Items.GetItemById(14));
             SpellInventory.MenuTitle = "Spells";
             SpellInventory.InventoryType = "spells";
+          
 
             ItemShopInventory = new Inventory(Content);
             ItemShopInventory.InventoryType = "ITEM_SHOP";
@@ -303,6 +305,10 @@ namespace DungeonCrawler.Scenes
             DialogBox = new DialogBox(game, Font);
 
             SelectedScene = Scene.CASTLE;
+
+            _whiteTexture = new Texture2D(GraphicsDevice, 1, 1);
+            _whiteTexture.SetData(new[] { Color.White });
+
             base.LoadContent();
         }
 
@@ -549,7 +555,7 @@ namespace DungeonCrawler.Scenes
 
                 Player.Draw(spriteBatch);
                 Player.DrawHUD(spriteBatch, playerHealthPosition, true);
-
+                Player.DrawActionBar(spriteBatch);
                 //int health = (int)Player.CurrentHealth;
                 //Vector2 healthStatus = new Vector2(playerHealthPosition.X + 10, playerHealthPosition.Y);
                 //spriteBatch.DrawString(Font, health.ToString() + " / 100", healthStatus, Color.White);
