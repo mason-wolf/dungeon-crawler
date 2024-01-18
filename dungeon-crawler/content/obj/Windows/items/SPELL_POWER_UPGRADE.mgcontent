@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/content/items/THUNDER_SHARD_ICON.png</SourceFile>
-  <SourceTime>2022-09-30T19:30:06.3495021-05:00</SourceTime>
-  <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/items/THUNDER_SHARD_ICON.xnb</DestFile>
-  <DestTime>2024-01-17T20:50:53.2014401-06:00</DestTime>
+  <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/content/items/SPELL_POWER_UPGRADE.png</SourceFile>
+  <SourceTime>2024-01-17T20:40:24.9407503-06:00</SourceTime>
+  <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/items/SPELL_POWER_UPGRADE.xnb</DestFile>
+  <DestTime>2024-01-17T20:50:53.277155-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -107,6 +107,7 @@ namespace DungeonCrawler
         public bool Movable { get; set; } = true;
         public int SpellID { get; set; } = 0;
 
+        public int SpellPower { get; set; } = 0;
         public bool ReachedDestination;
 
         public bool Moving;
@@ -421,8 +422,16 @@ namespace DungeonCrawler
         public void ShootProjectile(Spell spell)
         {
             Projectile projectile = new Projectile();
+            Spell spellToCast = new Spell();
+            spellToCast.ID = spell.ID;
+            spellToCast.Sprite = spell.Sprite;
+            spellToCast.Damage = (spell.Damage * SpellPower) / 10;
+            spellToCast.BoundingBox = spell.BoundingBox;
+            spellToCast.Direction = spell.Direction;
+            spellToCast.Element = spell.Element;
+
             projectile.ID = spell.ID;
-            projectile.Spell = spell;
+            projectile.Spell = spellToCast;
             // Thunderbolt spell requires two separate spritesheets. 
             // Spell ID is 5 so change sprite depending on direction.
             // TODO: Decouple custom spell logic in ShootProjectile() method on Entity class.
@@ -456,7 +465,7 @@ namespace DungeonCrawler
             projectile.Position = projectilePosition;
             projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;
-            projectile.Damage = spell.Damage;
+
             Projectiles.Add(projectile);
 
             if (Projectiles.Count > 25)
@@ -632,8 +641,10 @@ namespace DungeonCrawler
             Sprite.Update(gameTime);
         }
 
+  
         public void Draw(SpriteBatch spriteBatch)
         {
+
             if (Movable)
             {
                 spriteBatch.Draw(Sprite);

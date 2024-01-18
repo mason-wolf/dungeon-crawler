@@ -436,7 +436,12 @@ namespace DungeonCrawler
             SpriteLoader bookSprite = new SpriteLoader(content, "BOOK", @"items\BOOK", 16, 16);
             bookSprite.AddAnimation("idle", new[] { 0 }, 0.5f, false);
             SpriteList.Add(bookSprite);
-            
+
+            // Spell Upgrade Icon
+            SpriteLoader spellUpgrade = new SpriteLoader(content, "SPELL_POWER_UPGRADE", @"items\SPELL_POWER_UPGRADE", 16, 16);
+            spellUpgrade.AddAnimation("idle", new[] { 0 }, 0.5f, false);
+            SpriteList.Add(spellUpgrade);
+
             // Bed
             SpriteLoader bedSprite = new SpriteLoader(content, "BED", @"objects\BED", 24, 32);
             bedSprite.AddAnimation("idle", new[] { 0 }, 1f, true);

@@ -39,6 +39,7 @@ namespace Demo.Interface
                 spriteBatch.DrawString(font, "Spells Learned " + Init.SpellInventory.Contents.Count().ToString(), new Vector2(position.X + 25, position.Y + 75), Color.White, 0, new Vector2(0, 0), .8f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(font, "Enemies Defeated " + Init.Player.EnemiesKilled.ToString(), new Vector2(position.X + 25, position.Y + 85), Color.White, 0, new Vector2(0, 0), .8f, SpriteEffects.None, 0);
 
+                spriteBatch.DrawString(font, "Spell Power                 " + Init.Player.SpellPower.ToString(), new Vector2(position.X + 25, position.Y + 95), Color.White, 0, new Vector2(0, 0), .8f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(font, "Fire Resistance          " + Init.Player.FireResistance, new Vector2(position.X + 25, position.Y + 105), Color.White, 0, new Vector2(0, 0), .8f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(font, "Frost Resistance       " + Init.Player.FrostResistance, new Vector2(position.X + 25, position.Y + 115), Color.White, 0, new Vector2(0, 0), .8f, SpriteEffects.None, 0);
                 spriteBatch.DrawString(font, "Thunder Resistance   " + Init.Player.ThunderResistance, new Vector2(position.X + 25, position.Y + 125), Color.White, 0, new Vector2(0, 0), .8f, SpriteEffects.None, 0);

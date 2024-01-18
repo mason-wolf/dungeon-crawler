@@ -18,7 +18,7 @@ namespace DungeonCrawler.Scenes
 {
     class Init : SceneManager
     {
-        public static ViewportAdapter viewPortAdapter;
+        public static ViewportAdapter ViewportAdapter;
         // Monitor keyboard states.
         public static KeyboardState KeyBoardOldState;
         public static KeyboardState KeyBoardNewState;
@@ -27,9 +27,9 @@ namespace DungeonCrawler.Scenes
 
         public static SpriteFont Font;
 
-        public EscapeMenu escapeMenu;
-        public static SaveMenu saveMenu;
-        public static LoadMenu loadMenu;
+        public EscapeMenu EscapeMenu;
+        public static SaveMenu SaveMenu;
+        public static LoadMenu LoadMenu;
 
         public static Inventory ItemInventory;
         public static Inventory SpellInventory;
@@ -37,7 +37,7 @@ namespace DungeonCrawler.Scenes
         public static Inventory SpellShopInventory;
         public static Inventory SellShopInventory;
 
-        public static Shop shops;
+        public static Shop Shops;
         PlayerStatus PlayerStatus;
 
         // Stores list of global items.
@@ -57,7 +57,7 @@ namespace DungeonCrawler.Scenes
 
         public static bool Reloaded = false;
 
-        public static List<Level> levelList;
+        public static List<Level> LevelList;
         Level newLevel;
 
         /// <summary>
@@ -65,8 +65,11 @@ namespace DungeonCrawler.Scenes
         /// </summary>
         public static string Message = "";
         public static bool MessageEnabled = false;
-        private static int messageFrameCount = 0;
+        private static int MessageFrameCount = 0;
 
+        int transitionFrames = 0;
+        int pauseAfterDeathFrames = 0;
+        public static bool NewGame = false;
 
         /// <summary>
         ///  Flag for disabling other menus if in dialog.
@@ -76,8 +79,8 @@ namespace DungeonCrawler.Scenes
         public Init(Game game, GameWindow window) : base(game)
         {
             this.window = window;
-            viewPortAdapter = new BoxingViewportAdapter(window, GraphicsDevice, 1080, 720);
-            Camera = new Camera2D(viewPortAdapter);
+            ViewportAdapter = new BoxingViewportAdapter(window, GraphicsDevice, 1080, 720);
+            Camera = new Camera2D(ViewportAdapter);
             Player = new Player();
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
@@ -91,6 +94,7 @@ namespace DungeonCrawler.Scenes
             Player.AttackDamage = 3.5;
             Player.Gold = 200;
             Player.Level = 1;
+            Player.SpellPower = 1;
             Player.XP = 0;
             Player.XPRemaining = 250;
             Enemies.Load(Content);
@@ -132,7 +136,7 @@ namespace DungeonCrawler.Scenes
 
         public void LoadLevel(string levelName)
         {
-            Level newLevel = levelList.Find(level => level.GetLevelName() == levelName);
+            Level newLevel = LevelList.Find(level => level.GetLevelName() == levelName);
             if (Player.EnemyList.Count > 0)
             {
                 Player.EnemyList.Clear();
@@ -158,15 +162,15 @@ namespace DungeonCrawler.Scenes
             newLevel.SetLevelName(levelName);
             newLevel.LoadContent(Content);
             newLevel.GetScene().LoadScene();
-            levelList.Remove(levelList.Find(level => level.GetLevelName() == levelName));
-            levelList.Add(newLevel);
+            LevelList.Remove(LevelList.Find(level => level.GetLevelName() == levelName));
+            LevelList.Add(newLevel);
             SelectedLevel = newLevel;
         }
 
         protected override void LoadContent()
         {
             Teleporters = new List<Teleporter>();
-            levelList = new List<Level>();
+            LevelList = new List<Level>();
             Items = new Items();
             Font = Content.Load<SpriteFont>(@"interface\font");
 
@@ -176,7 +180,7 @@ namespace DungeonCrawler.Scenes
             newLevel.SetLevelName("CASTLE");
             newLevel.LoadContent(Content);
             newLevel.GetScene().LoadScene();
-            levelList.Add(newLevel);
+            LevelList.Add(newLevel);
 
             newLevel = new Level();
             newLevel.SetMap(new Map(Content, "Content/maps/PLAINS_1.tmx"));
@@ -242,12 +246,12 @@ namespace DungeonCrawler.Scenes
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
             Player.State = Action.IdleSouth1;
 
-            escapeMenu = new EscapeMenu(game, window, Content);
-            saveMenu = new SaveMenu(game, window, Content);
-            loadMenu = new LoadMenu(game, window, Content);
+            EscapeMenu = new EscapeMenu(game, window, Content);
+            SaveMenu = new SaveMenu(game, window, Content);
+            LoadMenu = new LoadMenu(game, window, Content);
 
             string[] items = { "Continue", "Save", "Load", "Quit" };
-            escapeMenu.SetMenuItems(items);
+            EscapeMenu.SetMenuItems(items);
 
             ItemInventory.MenuTitle = "Items";
             ItemInventory.InventoryType = "PLAYER_INVENTORY";
@@ -271,7 +275,9 @@ namespace DungeonCrawler.Scenes
             ItemShopInventory.Contents.Add(Items.GetItemById(4));
             // Homing Crystal
             ItemShopInventory.Contents.Add(Items.GetItemById(11));
-           
+            // Spell Power upgrade 
+            ItemShopInventory.Contents.Add(Items.GetItemById(62));
+
             SpellShopInventory = new Inventory(Content);
             SpellShopInventory.InventoryType = "SPELL_SHOP";
             SpellShopInventory.MenuTitle = "Spell Shop";
@@ -288,10 +294,10 @@ namespace DungeonCrawler.Scenes
             // Flame Shield Spell
             SpellShopInventory.Contents.Add(Items.GetItemById(13));
 
-            shops = new Shop();
-            shops.Add(ItemShopInventory);
-            shops.Add(SpellShopInventory);
-            shops.Add(SellShopInventory);
+            Shops = new Shop();
+            Shops.Add(ItemShopInventory);
+            Shops.Add(SpellShopInventory);
+            Shops.Add(SellShopInventory);
 
             PlayerStatus = new PlayerStatus(Content);
             DialogBox = new DialogBox(game, Font);
@@ -300,9 +306,6 @@ namespace DungeonCrawler.Scenes
             base.LoadContent();
         }
 
-        int transitionFrames = 0;
-        int pauseAfterDeathFrames = 0;
-        public static bool NewGame = false;
         public override void Update(GameTime gameTime)
         {
             // If save was loaded, create transition effects, assign the player's saved scene and position.
@@ -312,11 +315,11 @@ namespace DungeonCrawler.Scenes
                 LoadContent();
                 TransitionState = true;
                 SelectedScene = Scene.CASTLE;
-                SelectedMap = levelList.Find(map => map.GetLevelName() == "CASTLE").GetMap();
+                SelectedMap = LevelList.Find(map => map.GetLevelName() == "CASTLE").GetMap();
                 FadeInMap("CASTLE");
                 Player.State = Action.IdleSouth1;
                 Player.InMenu = false;
-                Player.Position = levelList.Find(level => level.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
+                Player.Position = LevelList.Find(level => level.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
                 Reloaded = false;
                 NewGame = false;
             }
@@ -366,7 +369,7 @@ namespace DungeonCrawler.Scenes
                                 GetRandomLevel(level);
                                 break;
                             default:
-                                SelectedLevel = levelList.Find(l => l.GetLevelName() == "CASTLE");
+                                SelectedLevel = LevelList.Find(l => l.GetLevelName() == "CASTLE");
                                 SelectedScene = (Scene)Enum.Parse(typeof(Scene), "CASTLE");
                                 Player.Position = SelectedLevel.GetStartingPosition();
                                 break;
@@ -378,26 +381,26 @@ namespace DungeonCrawler.Scenes
             switch (SelectedScene)
             {
                 case Scene.ESCAPE_MENU:
-                    escapeMenu.Update(gameTime);
+                    EscapeMenu.Update(gameTime);
                     break;
                 case Scene.SAVE_MENU:
-                    saveMenu.Update(gameTime);
+                    SaveMenu.Update(gameTime);
                     break;
                 case Scene.LOAD_MENU:
-                    loadMenu.Update(gameTime);
+                    LoadMenu.Update(gameTime);
                     break;
             }
 
             // Scene switching.
             if (SelectedScene == Scene.LOAD_MENU)
             {
-                Player.Position = levelList.Find(map => map.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
-                playerCollision = levelList.Find(level => level.GetLevelName() == "CASTLE").GetMap().GetCollisionWorld();
+                Player.Position = LevelList.Find(map => map.GetLevelName() == Scene.CASTLE.ToString()).GetStartingPosition();
+                playerCollision = LevelList.Find(level => level.GetLevelName() == "CASTLE").GetMap().GetCollisionWorld();
             }
             else
             {
                 // Find the selected scene.
-                foreach (Level level in levelList)
+                foreach (Level level in LevelList)
                 {
                     if (level.GetLevelName() == SelectedScene.ToString())
                     {
@@ -424,7 +427,7 @@ namespace DungeonCrawler.Scenes
                 if (Player.EnemyList.Count > 0)
                 {
                     Player.EnemyList.Clear();
-                    foreach (Level level in levelList)
+                    foreach (Level level in LevelList)
                     {
                         level.GetEnemyAI().Clear();
                     }
@@ -458,8 +461,8 @@ namespace DungeonCrawler.Scenes
             ItemInventory.Update(gameTime);
             SpellInventory.Update(gameTime);
 
-            shops.ListenForInput(KeyBoardNewState, KeyBoardOldState);
-            shops.Update(gameTime);
+            Shops.ListenForInput(KeyBoardNewState, KeyBoardOldState);
+            Shops.Update(gameTime);
 
             Player.Update(gameTime);
             PlayerStatus.Update(gameTime);
@@ -478,9 +481,9 @@ namespace DungeonCrawler.Scenes
             Camera.LookAt(Player.Position);
             KeyBoardOldState = KeyBoardNewState;
             KeyBoardNewState = Keyboard.GetState();
-            escapeMenu.Position = new Vector2(Player.Position.X, Player.Position.Y - 125);
-            saveMenu.Position = new Vector2(Player.Position.X, Player.Position.Y - 125);
-            loadMenu.Position = new Vector2(Player.Position.X, Player.Position.Y - 125);
+            EscapeMenu.Position = new Vector2(Player.Position.X, Player.Position.Y - 125);
+            SaveMenu.Position = new Vector2(Player.Position.X, Player.Position.Y - 125);
+            LoadMenu.Position = new Vector2(Player.Position.X, Player.Position.Y - 125);
 
             base.Update(gameTime);
         }
@@ -498,7 +501,7 @@ namespace DungeonCrawler.Scenes
             string levelName = "PLAINS_1";
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
-            SelectedLevel = levelList.Find(l => l.GetLevelName() == levelName);
+            SelectedLevel = LevelList.Find(l => l.GetLevelName() == levelName);
             SelectedMap = SelectedLevel.GetMap();
             Player.Position = SelectedLevel.GetStartingPosition();
             FadeInMap(SelectedLevel.GetLevelName());
@@ -508,7 +511,7 @@ namespace DungeonCrawler.Scenes
             spriteBatch.Begin(samplerState: SamplerState.PointClamp, transformMatrix: Camera.GetViewMatrix());
 
             // Draw the selected screen.
-            foreach (Level level in levelList)
+            foreach (Level level in LevelList)
             {
                 if (level.GetLevelName() == SelectedScene.ToString())
                 {
@@ -520,19 +523,19 @@ namespace DungeonCrawler.Scenes
             // Escape menu.
             if (SelectedScene == Scene.ESCAPE_MENU)
             {
-                escapeMenu.Draw(spriteBatch);
+                EscapeMenu.Draw(spriteBatch);
             }
             // Save menu.
             else if (SelectedScene == Scene.SAVE_MENU)
             {
-                saveMenu.Draw(spriteBatch);
+                SaveMenu.Draw(spriteBatch);
             }
             // Load menu.
             else if (SelectedScene == Scene.LOAD_MENU)
             {
                 if (!Reloaded)
                 {
-                    loadMenu.Draw(spriteBatch);
+                    LoadMenu.Draw(spriteBatch);
                 }
             }
             else if (SelectedScene == Scene.LOADING_SCREEN)
@@ -554,7 +557,7 @@ namespace DungeonCrawler.Scenes
                 DialogBox.Draw(spriteBatch);
                 ItemInventory.Draw(spriteBatch);
                 SpellInventory.Draw(spriteBatch);
-                shops.Draw(spriteBatch);
+                Shops.Draw(spriteBatch);
                 PlayerStatus.Draw(spriteBatch);
             }
 
@@ -568,7 +571,7 @@ namespace DungeonCrawler.Scenes
                 ShowMessage(Message, spriteBatch);
             }
 
-            shops.Draw(spriteBatch);
+            Shops.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -597,7 +600,7 @@ namespace DungeonCrawler.Scenes
         /// <param name="map">Map to fade in.</param>
         public static void FadeInMap(string mapName)
         {
-            foreach (Level level in levelList)
+            foreach (Level level in LevelList)
             {
                 if (level.GetLevelName() == mapName)
                 {
@@ -616,12 +619,12 @@ namespace DungeonCrawler.Scenes
 
         public static void OpenSaveMenu(Game game, GameWindow window, ContentManager content)
         {
-            saveMenu = new SaveMenu(game, window, content);
+            SaveMenu = new SaveMenu(game, window, content);
         }
 
         public static void OpenLoadMenu(Game game, GameWindow window, ContentManager content)
         {
-            loadMenu = new LoadMenu(game, window, content);
+            LoadMenu = new LoadMenu(game, window, content);
         }
         public override void Show()
         {
@@ -651,15 +654,15 @@ namespace DungeonCrawler.Scenes
 
         public static void ShowMessage(string message, SpriteBatch spriteBatch)
         {
-            if (messageFrameCount < 120)
+            if (MessageFrameCount < 120)
             {
                 spriteBatch.DrawString(Init.Font, message, new Vector2(Init.Player.Position.X - 165, Init.Player.Position.Y + 105), Color.White);
-                messageFrameCount++;
+                MessageFrameCount++;
             }
             else
             {
                 MessageEnabled = false;
-                messageFrameCount = 0;
+                MessageFrameCount = 0;
             }
         }
 

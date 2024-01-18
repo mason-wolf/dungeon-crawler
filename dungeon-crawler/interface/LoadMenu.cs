@@ -205,6 +205,10 @@ namespace DungeonCrawler.Scenes
                             value = line.Split('=').Last();
                             Init.Player.Level = Int32.Parse(value);
                             break;
+                        case ("PLAYER_SPELLPOWER"):
+                            value = line.Split('=').Last();
+                            Init.Player.SpellPower = Int32.Parse(value);
+                            break;
                         case ("PLAYER_XP"):
                             value = line.Split('=').Last();
                             Init.Player.XP = (int)Math.Round(Double.Parse(value));

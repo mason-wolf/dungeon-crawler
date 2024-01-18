@@ -566,6 +566,7 @@ namespace DungeonCrawler
                         Init.Message = "You reached Level " + Init.Player.Level + "!";
                         Init.Player.MaxHealth += 5;
                         Init.Player.MaxMana += 2;
+                        Init.Player.SpellPower += 1;
                         Init.Player.XPRemaining = Init.Player.XPRemaining + (Init.Player.XPRemaining * .50);
                         Init.Player.XP = 0;
                         leveledUp = true;

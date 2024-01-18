@@ -86,6 +86,15 @@ namespace Demo.Game
             flameShieldBook.Useable = true;
             ItemList.Add(flameShieldBook);
 
+            Item spellPowerUpgrade = new Item();
+            spellPowerUpgrade.ItemTexture = Sprites.GetTexture("SPELL_POWER_UPGRADE");
+            spellPowerUpgrade.Name = "Spell Power Upgrade";
+            spellPowerUpgrade.ID = 62;
+            spellPowerUpgrade.Price = 2500;
+            spellPowerUpgrade.Description = "Raises Spell Power";
+            spellPowerUpgrade.Useable = true;
+            ItemList.Add(spellPowerUpgrade);
+
             Spell icebolt1 = new Spell();
             icebolt1.ItemTexture = Sprites.GetTexture("ICEBOLT_1_ICON");
             icebolt1.Name = "ICEBOLT";

@@ -157,6 +157,7 @@ namespace DungeonCrawler.Scenes
                 streamWriter.WriteLine("PLAYER_GOLD=" + Init.Player.Gold);
                 streamWriter.WriteLine("PLAYER_LEVEL=" + Init.Player.Level);
                 streamWriter.WriteLine("PLAYER_XP=" + Init.Player.XP);
+                streamWriter.WriteLine("PLAYER_SPELLPOWER=" + Init.Player.SpellPower);
                 streamWriter.WriteLine("PLAYER_XP_REMAINING=" + Init.Player.XPRemaining);
                 streamWriter.WriteLine("ENEMIES_KILLED=" + Init.Player.EnemiesKilled);
 

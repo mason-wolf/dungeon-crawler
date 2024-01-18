@@ -145,7 +145,7 @@ namespace DungeonCrawler.Scenes
                             Init.DialogBox.StartDialog = true;
                             break;
                         case ("18"):
-                            Init.shops.Open(Shop.ShopType.ITEM_SHOP);
+                            Init.Shops.Open(Shop.ShopType.ITEM_SHOP);
                             break;
                         case ("19"):
                             message =
@@ -214,7 +214,7 @@ namespace DungeonCrawler.Scenes
                             Init.DialogBox.StartDialog = true;
                             break;
                         case ("30"):
-                            Init.shops.Open(Shop.ShopType.SPELL_SHOP);
+                            Init.Shops.Open(Shop.ShopType.SPELL_SHOP);
                             break;
                         case ("31"):
                             message =
@@ -253,7 +253,7 @@ namespace DungeonCrawler.Scenes
                                 }
                             }
 
-                            Init.shops.Open(Shop.ShopType.SELL_SHOP);
+                            Init.Shops.Open(Shop.ShopType.SELL_SHOP);
                             break;
                     }
                 }
