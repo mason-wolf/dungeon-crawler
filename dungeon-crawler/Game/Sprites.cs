@@ -412,6 +412,10 @@ namespace DungeonCrawler
             // Mana Potion Icon
             SpriteLoader manaPotionIcon = new SpriteLoader(content, "MANA_POTION_ICON", @"items\MANA_POTION_ICON", 16, 16);
 
+            // Elixir Potion Icon
+            SpriteLoader elixirPotionIcon = new SpriteLoader(content, "ELIXIR_POTION_ICON", @"items\ELIXIR_POTION_ICON", 16, 16);
+            SpriteList.Add(elixirPotionIcon);
+
             // Gold Icon
             SpriteLoader goldIcon = new SpriteLoader(content, "GOLD_ICON", @"items\GOLD_ICON", 16, 16);
 

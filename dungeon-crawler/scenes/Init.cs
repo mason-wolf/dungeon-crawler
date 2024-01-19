@@ -95,7 +95,7 @@ namespace DungeonCrawler.Scenes
             Player.AttackDamage = 3.5;
             Player.Gold = 200;
             Player.Level = 1;
-            Player.SpellPower = 1;
+            Player.SpellPower = 10;
             Player.XP = 0;
             Player.XPRemaining = 250;
             Enemies.Load(Content);
@@ -279,6 +279,8 @@ namespace DungeonCrawler.Scenes
             ItemShopInventory.Contents.Add(Items.GetItemById(11));
             // Spell Power upgrade 
             ItemShopInventory.Contents.Add(Items.GetItemById(62));
+            // Elixir 
+            ItemShopInventory.Contents.Add(Items.GetItemById(74));
 
             SpellShopInventory = new Inventory(Content);
             SpellShopInventory.InventoryType = "SPELL_SHOP";
@@ -346,34 +348,34 @@ namespace DungeonCrawler.Scenes
                             case ("RANDOM_FIRELANDS"):
                                 GetRandomLevel("FIRELANDS");
                                 break;
-                            case ("RANDOM_FROSTLANDS"):
-                                GetRandomLevel("FROSTLANDS");
-                                break;
-                            case ("RANDOM_THUNDERLANDS"):
-                                GetRandomLevel("THUNDERLANDS");
-                                break;
-                            case ("RANDOM_ALL"):
-                                Random randomLevel = new Random();
-                                int levelType = randomLevel.Next(1, 5);
-                                string level = "";
-                                switch(levelType)
-                                {
-                                    case (1):
-                                        level = "PLAINS";
-                                        break;
-                                    case (2):
-                                        level = "FIRELANDS";
-                                        break;
-                                    case (3):
-                                        level = "FROSTLANDS";
-                                        break;
-                                    case (4):
-                                        level = "THUNDERLANDS";
-                                        break;
-                                }
+                            //case ("RANDOM_FROSTLANDS"):
+                            //    GetRandomLevel("FROSTLANDS");
+                            //    break;
+                            //case ("RANDOM_THUNDERLANDS"):
+                            //    GetRandomLevel("THUNDERLANDS");
+                            //    break;
+                            //case ("RANDOM_ALL"):
+                            //    Random randomLevel = new Random();
+                            //    int levelType = randomLevel.Next(1, 5);
+                            //    string level = "";
+                            //    switch(levelType)
+                            //    {
+                            //        case (1):
+                            //            level = "PLAINS";
+                            //            break;
+                            //        case (2):
+                            //            level = "FIRELANDS";
+                            //            break;
+                            //        case (3):
+                            //            level = "FROSTLANDS";
+                            //            break;
+                            //        case (4):
+                            //            level = "THUNDERLANDS";
+                            //            break;
+                            //    }
 
-                                GetRandomLevel(level);
-                                break;
+                            //    GetRandomLevel(level);
+                            //    break;
                             default:
                                 SelectedLevel = LevelList.Find(l => l.GetLevelName() == "CASTLE");
                                 SelectedScene = (Scene)Enum.Parse(typeof(Scene), "CASTLE");
@@ -503,8 +505,8 @@ namespace DungeonCrawler.Scenes
             FadeInMap("CASTLE");
             Random randomLevel = new Random();
             int levelNum = randomLevel.Next(1, 6);
-            //string levelName = levelType + "_" + levelNum;
-            string levelName = "PLAINS_1";
+            string levelName = levelType + "_" + 1;
+            //string levelName = "PLAINS_1";
             LoadLevel(levelName);
             SelectedScene = (Scene)Enum.Parse(typeof(Scene), levelName);
             SelectedLevel = LevelList.Find(l => l.GetLevelName() == levelName);

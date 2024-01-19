@@ -15,11 +15,25 @@ namespace Demo.Interface
     public class ActionBar : Scene
     {
         private Texture2D _actionBarTexture;
+        private bool _showAcionBar = false;
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             Vector2 position = new Vector2(Init.Player.Position.X - 170, Init.Player.Position.Y - 110);
-            spriteBatch.Draw(_actionBarTexture, new Vector2(position.X + 135, position.Y + 190), new Rectangle(0, 0, 80, 200), Color.White);
+
+            foreach (Item item in Init.SpellInventory.Contents)
+            {
+                if (item.ActionBarSlot != 0)
+                {
+                    _showAcionBar = true;
+                }
+            }
+
+            if (_showAcionBar)
+            {
+                spriteBatch.Draw(_actionBarTexture, new Vector2(position.X + 135, position.Y + 190), new Rectangle(0, 0, 80, 200), Color.White);
+            }
+
             foreach (Item item in Init.SpellInventory.Contents)
             {
                 // Draw action bar items.

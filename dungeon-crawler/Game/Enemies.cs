@@ -51,6 +51,21 @@ namespace Demo.Game
                     batEntity.XP = 10;
                     enemy = batEntity;
                     break;
+                case ("SKELETON"):
+                    Entity skeletonEntity = new Entity(Sprites.GetSprite("SKELETON"));
+                    skeletonEntity.LoadContent(ContentManager);
+                    skeletonEntity.State = Action.IdleSouth1;
+                    skeletonEntity.MaxHealth = 30;
+                    skeletonEntity.CurrentHealth = 30;
+                    skeletonEntity.AttackDamage = 0.08;
+                    skeletonEntity.Name = "SKELETON";
+                    skeletonEntity.XP = 10;
+                    //skeletonEntity.SpellCaster = true;
+                    //skeletonEntity.SpellID = 1;
+                    //skeletonEntity.CurrentMana = 1000;
+                    skeletonEntity.FireResistance = 50;
+                    enemy = skeletonEntity;
+                    break;
             }
 
             return enemy;

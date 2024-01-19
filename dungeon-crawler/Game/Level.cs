@@ -184,19 +184,8 @@ namespace DungeonCrawler
                 switch (mapObject.GetName())
                 {
                     case ("SKELETON"):
-                        Entity skeletonEntity = new Entity(Sprites.GetSprite("SKELETON"));
-                        skeletonEntity.LoadContent(content);
-                        skeletonEntity.State = Action.IdleSouth1;
-                        skeletonEntity.MaxHealth = 30;
-                        skeletonEntity.CurrentHealth = 30;
-                        skeletonEntity.AttackDamage = 0.08;
+                        Entity skeletonEntity = Enemies.GetEnemyByName("SKELETON");
                         skeletonEntity.Position = mapObject.GetPosition();
-                        skeletonEntity.Name = "SKELETON";
-                        skeletonEntity.XP = 10;
-                        skeletonEntity.SpellCaster = true;
-                        skeletonEntity.SpellID = 1;
-                        skeletonEntity.CurrentMana = 1000;
-                        skeletonEntity.FireResistance = 50;
                         enemyList.Add(skeletonEntity);
                         break;
                     case ("FROST_SKELETON"):
@@ -510,7 +499,7 @@ namespace DungeonCrawler
             Entity enemyToRemove = null;
 
             // Start new level if portals are destroyed.
-            if (portalCount == 4 && enemyList.Count() == 0)
+            if (portalCount >= 4 && enemyList.Count() == 0)
             {
                 portalCount = 0;
                 nextLevel = true;

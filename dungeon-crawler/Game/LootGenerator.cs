@@ -36,7 +36,7 @@ namespace Demo.Game
             switch(goldOrArmor)
             {
                 case (1):
-                    loot.Gold = random.Next(1, 50);
+                    loot.Gold = random.Next(1, 500);
                     break;
                 case (2):
                     loot.Armor = GenerateArmor();
@@ -49,7 +49,7 @@ namespace Demo.Game
                     }
                     if (Level == LevelType.PLAINS)
                     {
-                        loot.Gold = random.Next(1, 25);
+                        loot.Gold = random.Next(1, 500);
                     }
                     if (Level == LevelType.FROSTLANDS)
                     {

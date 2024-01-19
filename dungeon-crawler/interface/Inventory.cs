@@ -447,6 +447,10 @@ namespace DungeonCrawler.Interface
                                 case (4):
                                     Init.Player.RestoreMana(50);
                                     break;
+                                case (74):
+                                    Init.Player.RestoreHealth(10000);
+                                    Init.Player.RestoreMana(10000);
+                                    break;
                                 case (11):
                                     Init.SelectedMap.FadeIn();
                                     Init.ItemInventory.InventoryOpen = false;

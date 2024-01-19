@@ -72,10 +72,17 @@ namespace Demo.Game
             portalEntity.Name = "PORTAL";
             spawnRate = 100;
             enemyTypes.Add("PLAINS", new string[] { "BAT", "ZOMBIE" });
+            enemyTypes.Add("FIRELANDS", new string[] { "SKELETON" });
+
+            Console.WriteLine(map.GetMapName());
 
             if (map.GetMapName().Contains("PLAINS"))
             {
                 levelType = "PLAINS";
+            }
+            else if (map.GetMapName().Contains("FIRELANDS"))
+            {
+                levelType = "FIRELANDS";
             }
         }
 
@@ -110,6 +117,16 @@ namespace Demo.Game
             if (frames == spawnRate && enemyList.Count() < maxSpawn && !Destroyed && Enabled)
             {
                 String[] enemies = enemyTypes["PLAINS"];
+                switch(levelType)
+                {
+                    case ("PLAINS"):
+                        enemies = enemyTypes["PLAINS"];
+                            break;
+                    case ("FIRELANDS"):
+                        enemies = enemyTypes["FIRELANDS"];
+                        break;
+                }
+                
                 Random random = new Random();
                 int randomNum = random.Next(0, enemies.Length);
                 Entity randomEnemy = Enemies.GetEnemyByName(enemies[randomNum]);

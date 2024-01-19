@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1659">
+<map version="1.2" tiledversion="1.2.3536" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="1668">
  <tileset firstgid="1" source="plains.tsx"/>
  <layer id="11" name="Layer 1" width="64" height="64">
   <data encoding="csv">
@@ -139,12 +139,12 @@
  </layer>
  <objectgroup id="4" name="Object Layer 1">
   <object id="210" name="GREEN_PORTAL" x="490.703" y="493.015"/>
-  <object id="224" name="CASTLE" type="TELEPORTER" x="490.696" y="493.015">
+  <object id="224" name="CASTLE" type="TELEPORTER" x="496" y="496">
    <properties>
     <property name="ID" type="float" value="9708"/>
    </properties>
   </object>
-  <object id="1038" name="START" x="491.75" y="416.502"/>
+  <object id="1038" name="START" x="489.75" y="459.502"/>
   <object id="1627" name="PORTAL" x="191.333" y="223.667">
    <properties>
     <property name="id" type="float" value="9843"/>
@@ -181,6 +181,46 @@
    </properties>
   </object>
   <object id="1658" name="CHEST" x="502.667" y="765.333">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1659" name="PORTAL" x="496.667" y="302.667">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1661" name="PORTAL" x="495.333" y="568.667">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1662" name="PORTAL" x="346" y="491">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1663" name="PORTAL" x="630" y="495">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1664" name="PORTAL" x="344" y="639">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1665" name="PORTAL" x="648" y="635">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1666" name="PORTAL" x="298" y="303">
+   <properties>
+    <property name="id" type="float" value="9843"/>
+   </properties>
+  </object>
+  <object id="1667" name="PORTAL" x="686" y="307">
    <properties>
     <property name="id" type="float" value="9843"/>
    </properties>

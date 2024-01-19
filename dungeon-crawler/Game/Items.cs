@@ -31,6 +31,15 @@ namespace Demo.Game
             manaPotion.Useable = true;
             ItemList.Add(manaPotion);
 
+            Item elixirPotion = new Item();
+            elixirPotion.ItemTexture = Sprites.GetTexture("ELIXIR_POTION_ICON");
+            elixirPotion.Name = "ELIXIR POTION";
+            elixirPotion.Description = "Fully restores health and mana.";
+            elixirPotion.ID = 74;
+            elixirPotion.Price = 1000;
+            elixirPotion.Useable = true;
+            ItemList.Add(elixirPotion);
+
             Spell fireball1 = new Spell();
             fireball1.ItemTexture = Sprites.GetTexture("FIREBALL_1_ICON");
             fireball1.Name = "FIREBALL";
