@@ -144,7 +144,7 @@
     <property name="ID" type="float" value="9708"/>
    </properties>
   </object>
-  <object id="1038" name="START" x="489.75" y="459.502"/>
+  <object id="1038" name="START" x="492.417" y="421.835"/>
   <object id="1627" name="PORTAL" x="191.333" y="223.667">
    <properties>
     <property name="id" type="float" value="9843"/>
@@ -185,7 +185,7 @@
     <property name="id" type="float" value="9843"/>
    </properties>
   </object>
-  <object id="1659" name="PORTAL" x="496.667" y="302.667">
+  <object id="1659" name="PORTAL" x="526" y="247.334">
    <properties>
     <property name="id" type="float" value="9843"/>
    </properties>

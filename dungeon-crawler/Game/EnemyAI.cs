@@ -77,7 +77,7 @@ namespace DungeonCrawler.Engine
                 else
                 {
                     // Remove enemy and reset path finding waypoints if out of range.
-                    enemy.PathFinder = null;
+                //    enemy.PathFinder = null;
                     enemiesInRange.Remove(enemy);
                 }
 
@@ -100,14 +100,20 @@ namespace DungeonCrawler.Engine
                 }
                 else
                 {
+                    enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
+
                     if (enemy.PathFinder != null)
                     {
                         // Find the closest enemy and find path to player.
-                        if (!nearestEnemyFound && enemy.Movable)
+                        if (!nearestEnemyFound && enemy.Movable || nearestEnemy.Dead && pathFinderCount < 25)
                         {
-                            enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
-                            enemy.PathFinder.FindPathToTarget(enemy, player);
-                            nearestEnemy = enemy;
+                            Entity closestEnemy = enemyList
+                            .Where(e => e.Movable)
+                            .OrderBy(e => Vector2.Distance(e.Position, player.Position))
+                            .FirstOrDefault();
+                            closestEnemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
+                            closestEnemy.PathFinder.FindPathToTarget(closestEnemy, player);
+                            nearestEnemy = closestEnemy;
                             nearestEnemyFound = true;
                         }
                         else
@@ -117,15 +123,17 @@ namespace DungeonCrawler.Engine
                                 enemy.PathFinder.SetWayPoints(nearestEnemy.PathFinder.GetWayPoints());
                             }
 
-                            if (nearestEnemy.PathFinder != null && nearestEnemy.PathFinder.GetWayPoints().Count == 0 && pathFinderCount < 25)
+                            if (nearestEnemy.PathFinder != null && 
+                                nearestEnemy.PathFinder.GetWayPoints().Count == 0 && 
+                                pathFinderCount < 25)
                             {
                                 pathFinderCount++;
                                 enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
                                 enemy.PathFinder.FindPathToTarget(enemy, player);
                             }
-                            enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
-                            enemy.Attack(player);
                         }
+                    //    enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
+                        enemy.Attack(player);
                     }
                 }
             }

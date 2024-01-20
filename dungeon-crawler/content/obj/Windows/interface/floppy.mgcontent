@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/content/interface/floppy.png</SourceFile>
-  <SourceTime>2021-01-04T12:11:09.5502279-06:00</SourceTime>
+  <SourceTime>2024-01-19T11:13:36.5260729-06:00</SourceTime>
   <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/interface/floppy.xnb</DestFile>
-  <DestTime>2024-01-18T23:02:03.2951128-06:00</DestTime>
+  <DestTime>2024-01-20T11:44:49.2051341-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

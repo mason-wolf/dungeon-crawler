@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/content/objects/BARREL.png</SourceFile>
-  <SourceTime>2022-01-20T15:42:17.146862-06:00</SourceTime>
+  <SourceTime>2024-01-19T11:13:36.6125734-06:00</SourceTime>
   <DestFile>C:/Users/Mason/Documents/GitHub/dungeon-crawler/dungeon-crawler/Content/bin/Windows/objects/BARREL.xnb</DestFile>
-  <DestTime>2024-01-18T23:02:03.358613-06:00</DestTime>
+  <DestTime>2024-01-20T11:44:49.3116837-06:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T01:36:08-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
