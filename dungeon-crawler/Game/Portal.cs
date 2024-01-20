@@ -114,7 +114,7 @@ namespace Demo.Game
         public override void Update(GameTime gameTime)
         {
             frames++;
-            if (frames == spawnRate && enemyList.Count() < maxSpawn && !Destroyed && Enabled)
+            if (frames == spawnRate && enemyList.Count() < maxSpawn && !Destroyed && Enabled && !Level.NextLevel)
             {
                 String[] enemies = enemyTypes["PLAINS"];
                 switch(levelType)

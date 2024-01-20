@@ -40,7 +40,7 @@ namespace DungeonCrawler
         private Vector2 startingPosition { get; set; }
 
         bool leveledUp { get; set; } = false;
-        bool nextLevel { get; set; } = false;
+       public static bool NextLevel { get; set; } = false;
 
         public static int Difficulty { get; set; } = 1;
         public Vector2 GetStartingPosition()
@@ -502,7 +502,7 @@ namespace DungeonCrawler
             if (portalCount >= 4 && enemyList.Count() == 0)
             {
                 portalCount = 0;
-                nextLevel = true;
+                NextLevel = true;
                 Difficulty++;
                 foreach (Portal portal in portals)
                 {
@@ -655,7 +655,7 @@ namespace DungeonCrawler
             }
 
             // Show next level message if player destroyed the protals.
-            if (nextLevel)
+            if (NextLevel)
             {
                 stopWatch.Start();
 
@@ -668,7 +668,7 @@ namespace DungeonCrawler
                 {
                     stopWatch.Stop();
                     stopWatch.Reset();
-                    nextLevel = false;
+                    NextLevel = false;
                     Init.FadeInMap("PLAINS_1");
                     Init.Player.Position = GetStartingPosition();
                 }
