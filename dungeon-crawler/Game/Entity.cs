@@ -113,6 +113,9 @@ namespace DungeonCrawler
 
         public bool Moving;
 
+        // Controls the spawn rate of the entity by %.
+        public int SpawnRate { get; set; } = 100;
+
         public List<Projectile> Projectiles = new List<Projectile>();
         public void LoadContent(ContentManager content)
         {

@@ -71,7 +71,7 @@ namespace Demo.Game
             portalEntity.Position = mapObject.GetPosition();
             portalEntity.Name = "PORTAL";
             spawnRate = 100;
-            enemyTypes.Add("PLAINS", new string[] { "BAT", "ZOMBIE" });
+            enemyTypes.Add("PLAINS", new string[] { "BAT", "ZOMBIE", "BLUE_SLIME" });
             enemyTypes.Add("FIRELANDS", new string[] { "SKELETON" });
 
             Console.WriteLine(map.GetMapName());
@@ -111,29 +111,46 @@ namespace Demo.Game
             throw new NotImplementedException();
         }
 
+        private Entity GetRandomSpawn(String[] enemies)
+        {
+            Random random = new Random();
+            int randomNum = random.Next(0, enemies.Length);
+            int spawnChance = random.Next(0, 100);
+            Entity randomEnemy = Enemies.GetEnemyByName(enemies[randomNum]);
+
+            while (spawnChance >= randomEnemy.SpawnRate)
+            {
+                randomNum = random.Next(0, enemies.Length);
+                randomEnemy = Enemies.GetEnemyByName(enemies[randomNum]);
+                spawnChance = random.Next(0, 100);
+            }
+
+            randomEnemy.Position = new Vector2(MapObject.GetPosition().X, MapObject.GetPosition().Y + 20);
+            randomEnemy.MaxHealth += (int)((Level.Difficulty * 0.01) * 100);
+            randomEnemy.CurrentHealth += (int)((Level.Difficulty * 0.01) * 100);
+            randomEnemy.AttackDamage *= (1 + (Level.Difficulty * 0.025));
+
+            return randomEnemy;
+        }
+
+
         public override void Update(GameTime gameTime)
         {
             frames++;
             if (frames == spawnRate && enemyList.Count() < maxSpawn && !Destroyed && Enabled && !Level.NextLevel)
             {
                 String[] enemies = enemyTypes["PLAINS"];
-                switch(levelType)
+                switch (levelType)
                 {
                     case ("PLAINS"):
                         enemies = enemyTypes["PLAINS"];
-                            break;
+                        break;
                     case ("FIRELANDS"):
                         enemies = enemyTypes["FIRELANDS"];
                         break;
                 }
-                
-                Random random = new Random();
-                int randomNum = random.Next(0, enemies.Length);
-                Entity randomEnemy = Enemies.GetEnemyByName(enemies[randomNum]);
-                randomEnemy.Position = new Vector2(MapObject.GetPosition().X, MapObject.GetPosition().Y + 20);
-                randomEnemy.MaxHealth = randomEnemy.MaxHealth + ((Level.Difficulty * .01) * 100);
-                randomEnemy.CurrentHealth = randomEnemy.CurrentHealth + ((Level.Difficulty * .01) * 100);
-                randomEnemy.AttackDamage = randomEnemy.AttackDamage * ((Level.Difficulty * .025) * 100);
+
+                Entity randomEnemy = GetRandomSpawn(enemies);
                 enemyList.Add(randomEnemy);
             }
 

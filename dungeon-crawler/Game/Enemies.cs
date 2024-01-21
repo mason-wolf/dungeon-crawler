@@ -38,6 +38,8 @@ namespace Demo.Game
                     blueSlimeEntity.AttackDamage = 0.08;
                     blueSlimeEntity.Name = "BLUE_SLIME";
                     blueSlimeEntity.XP = 10;
+                    // 10% spawn rate.
+                    blueSlimeEntity.SpawnRate = 10;
                     enemy = blueSlimeEntity;
                     break;
                 case ("BAT"):
