@@ -1018,3 +1018,15 @@
 /processorParam:TextureFormat=Color
 /build:items/ELIXIR_POTION_ICON.png
 
+#begin spritesheets/fire_golem.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spritesheets/fire_golem.png
+

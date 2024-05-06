@@ -234,6 +234,24 @@ namespace DungeonCrawler
             crabSprite.AddAnimation("dead", new[] { 3 }, crabSpeed, true);
             SpriteList.Add(crabSprite);
 
+            // Fire Golem
+            SpriteLoader fireGolem = new SpriteLoader(content, "FIRE_GOLEM", @"spritesheets\fire_golem", 32, 32);
+            float fireGolemSpeed = 0.6f;
+            fireGolem.AddAnimation("idleSouth1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, false);
+            fireGolem.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("walkWestPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("attackWestPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("idleWest1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("walkEastPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("attackEastPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("idleEast1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("idleNorth1", new[] { 0, 1, 2, 3 }, fireGolemSpeed, true);
+            fireGolem.AddAnimation("dead", new[] { 4 }, fireGolemSpeed, true);
+            SpriteList.Add(fireGolem);
+
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
             torchSprite.AddAnimation("BURNING", new[] { 0, 1, 2 }, 0.09f, true);

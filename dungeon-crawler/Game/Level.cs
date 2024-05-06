@@ -223,17 +223,19 @@ namespace DungeonCrawler
                         enemyList.Add(crabEntity);
                         break;
                     case ("FIRE_BAT"):
-                        Entity fireBatEntity = new Entity(Sprites.GetSprite("FIRE_BAT"));
-                        fireBatEntity.LoadContent(content);
-                        fireBatEntity.State = Action.IdleEast1;
-                        fireBatEntity.MaxHealth = 50;
-                        fireBatEntity.CurrentHealth = 50;
-                        fireBatEntity.AttackDamage = 0.12;
-                        fireBatEntity.Position = mapObject.GetPosition();
-                        fireBatEntity.Name = "FIRE_BAT";
-                        fireBatEntity.FireResistance = 90;
-                        fireBatEntity.XP = 10;
-                        enemyList.Add(fireBatEntity);
+                        Entity fireBat = Enemies.GetEnemyByName("FIRE_BAT");
+                        fireBat.Position = mapObject.GetPosition();
+                        enemyList.Add(fireBat);
+                        //Entity fireBatEntity = new Entity(Sprites.GetSprite("FIRE_BAT"));
+                        //fireBatEntity.LoadContent(content);
+                        //fireBatEntity.State = Action.IdleEast1;
+                        //fireBatEntity.MaxHealth = 50;
+                        //fireBatEntity.CurrentHealth = 50;
+                        //fireBatEntity.AttackDamage = 0.12;
+                        //fireBatEntity.Position = mapObject.GetPosition();
+                        //fireBatEntity.Name = "FIRE_BAT";
+                        //fireBatEntity.FireResistance = 90;
+                        //fireBatEntity.XP = 10;
                         break;
                     case ("ZOMBIE"):
                         Entity zombieEntity = Enemies.GetEnemyByName("ZOMBIE");

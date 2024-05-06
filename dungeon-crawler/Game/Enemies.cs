@@ -68,6 +68,62 @@ namespace Demo.Game
                     skeletonEntity.FireResistance = 50;
                     enemy = skeletonEntity;
                     break;
+                case ("FIRE_BAT"):
+                    Entity fireBatEntity = new Entity(Sprites.GetSprite("FIRE_BAT"));
+                    fireBatEntity.LoadContent(ContentManager);
+                    fireBatEntity.State = Action.IdleEast1;
+                    fireBatEntity.MaxHealth = 50;
+                    fireBatEntity.CurrentHealth = 50;
+                    fireBatEntity.AttackDamage = 0.12;
+                    fireBatEntity.Name = "FIRE_BAT";
+                    fireBatEntity.FireResistance = 90;
+                    fireBatEntity.XP = 10;
+                    enemy = fireBatEntity;
+                    break;
+                case ("GREEN_SNAKE"):
+                    Entity greenSnakeEntity = new Entity(Sprites.GetSprite("GREEN_SNAKE"));
+                    greenSnakeEntity.LoadContent(ContentManager);
+                    greenSnakeEntity.State = Action.IdleSouth1;
+                    greenSnakeEntity.MaxHealth = 50;
+                    greenSnakeEntity.CurrentHealth = 50;
+                    greenSnakeEntity.AttackDamage = 0.12;
+                    greenSnakeEntity.FireResistance = 50;
+                    greenSnakeEntity.FrostResistance = 0;
+                    greenSnakeEntity.Name = "GREEN_SNAKE";
+                    greenSnakeEntity.XP = 20;
+                    enemy = greenSnakeEntity;
+                    break;
+                case ("FROST_ELEMENTAL"):
+                    Entity frostElementalEntity = new Entity(Sprites.GetSprite("FROST_ELEMENTAL"));
+                    frostElementalEntity.LoadContent(ContentManager);
+                    frostElementalEntity.State = Action.IdleWest1;
+                    frostElementalEntity.MaxHealth = 50;
+                    frostElementalEntity.CurrentHealth = 50;
+                    frostElementalEntity.AttackDamage = .15;
+                    frostElementalEntity.FireResistance = 0;
+                    frostElementalEntity.FrostResistance = 99;
+                    frostElementalEntity.ThunderResistance = 99;
+
+                    frostElementalEntity.Name = "FROST_ELEMENTAL";
+                    frostElementalEntity.XP = 25;
+                    //frostElementalEntity.SpellCaster = true;
+                    //frostElementalEntity.SpellID = 2;
+                    //frostElementalEntity.MaxMana = 100;
+                    //frostElementalEntity.CurrentMana = 100;
+                    enemy = frostElementalEntity;
+                    break;
+                case ("FIRE_GOLEM"):
+                    Entity fireGolem = new Entity(Sprites.GetSprite("FIRE_GOLEM"));
+                    fireGolem.LoadContent(ContentManager);
+                    fireGolem.MaxHealth = 65;
+                    fireGolem.CurrentHealth = 60;
+                    fireGolem.AttackDamage = .15;
+                    fireGolem.FireResistance = 70;
+                    fireGolem.FrostResistance = 0;
+                    fireGolem.Name = "FIRE_GOLEM";
+                    fireGolem.XP = 35;
+                    enemy = fireGolem;
+                    break;
             }
 
             return enemy;
