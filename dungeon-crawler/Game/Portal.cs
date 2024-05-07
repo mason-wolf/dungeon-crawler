@@ -72,9 +72,7 @@ namespace Demo.Game
             portalEntity.Name = "PORTAL";
             spawnRate = 100;
             enemyTypes.Add("PLAINS", new string[] { "BAT", "ZOMBIE", "BLUE_SLIME" });
-            enemyTypes.Add("FIRELANDS", new string[] { "SKELETON", "FIRE_BAT", "GREEN_SNAKE", "FIRE_GOLEM"});
-
-            Console.WriteLine(map.GetMapName());
+            enemyTypes.Add("FIRELANDS", new string[] { "SKELETON", "FIRE_BAT", "GREEN_SNAKE", "FIRE_GOLEM", "GREEN_DRAKE"});
 
             if (map.GetMapName().Contains("PLAINS"))
             {

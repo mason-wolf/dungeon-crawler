@@ -103,7 +103,6 @@ namespace Demo.Game
                     frostElementalEntity.FireResistance = 0;
                     frostElementalEntity.FrostResistance = 99;
                     frostElementalEntity.ThunderResistance = 99;
-
                     frostElementalEntity.Name = "FROST_ELEMENTAL";
                     frostElementalEntity.XP = 25;
                     //frostElementalEntity.SpellCaster = true;
@@ -123,6 +122,18 @@ namespace Demo.Game
                     fireGolem.Name = "FIRE_GOLEM";
                     fireGolem.XP = 35;
                     enemy = fireGolem;
+                    break;
+                case ("GREEN_DRAKE"):
+                    Entity greenDrake = new Entity(Sprites.GetSprite("GREEN_DRAKE"));
+                    greenDrake.LoadContent(ContentManager);
+                    greenDrake.MaxHealth = 100;
+                    greenDrake.CurrentHealth = 100;
+                    greenDrake.AttackDamage = .30;
+                    greenDrake.FireResistance = 100;
+                    greenDrake.FrostResistance = 0;
+                    greenDrake.Name = "GREEN_DRAKE";
+                    greenDrake.XP = 50;
+                    enemy = greenDrake;
                     break;
             }
 

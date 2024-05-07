@@ -139,7 +139,7 @@
  </layer>
  <objectgroup id="4" name="Object Layer 1">
   <object id="201" name="DESK" x="87" y="865.5" width="15.6667" height="15.3333"/>
-  <object id="202" name="START" x="633.954" y="307.026" width="15.6667" height="15.3333"/>
+  <object id="202" name="START" x="599.24" y="339.493" width="15.6667" height="15.3333"/>
   <object id="203" name="DESK" x="173" y="866.75" width="15.6667" height="15.3333"/>
   <object id="204" name="DESK" x="129" y="867.5" width="15.6667" height="15.3333"/>
   <object id="205" name="DESK" x="87" y="907.5" width="15.6667" height="15.3333"/>
@@ -272,8 +272,8 @@
     <property name="id" type="float" value="29"/>
    </properties>
   </object>
-  <object id="331" name="BOOKSHELF" x="851.741" y="548.333" width="15.6667" height="15.3333"/>
-  <object id="332" name="BOOKSHELF" x="833.803" y="548.333" width="15.6667" height="15.3333"/>
+  <object id="331" name="BOOKSHELF" x="851.85" y="548.52" width="15.6667" height="15.3333"/>
+  <object id="332" name="BOOKSHELF" x="833.272" y="548.864" width="15.6667" height="15.3333"/>
   <object id="333" name="BOOKSHELF" x="870.297" y="548.521" width="15.6667" height="15.3333"/>
   <object id="335" name="BOOKSHELF" x="888.348" y="548.879" width="15.6667" height="15.3333"/>
   <object id="336" name="BOOKSHELF" x="906.479" y="549.021" width="15.6667" height="15.3333"/>

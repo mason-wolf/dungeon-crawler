@@ -252,6 +252,24 @@ namespace DungeonCrawler
             fireGolem.AddAnimation("dead", new[] { 4 }, fireGolemSpeed, true);
             SpriteList.Add(fireGolem);
 
+            // Green Drake
+            SpriteLoader greenDrake = new SpriteLoader(content, "GREEN_DRAKE", @"spritesheets\green_drake", 32, 32);
+            float greenDrakeSpeed = 0.6f;
+            greenDrake.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, greenDrakeSpeed, false);
+            greenDrake.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("walkWestPattern1", new[] { 5 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("attackWestPattern1", new[] { 5 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("idleWest1", new[] { 5 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("walkEastPattern1", new[] { 3 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("attackEastPattern1", new[] { 3 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("idleEast1", new[] { 3 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, greenDrakeSpeed, true);
+            greenDrake.AddAnimation("dead", new[] { 4 }, greenDrakeSpeed, true);
+            SpriteList.Add(greenDrake);
+
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
             torchSprite.AddAnimation("BURNING", new[] { 0, 1, 2 }, 0.09f, true);

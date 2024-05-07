@@ -139,7 +139,7 @@
  </layer>
  <objectgroup id="3" name="Object Layer 1">
   <object id="119" name="PORTAL" x="212.667" y="192.667" width="28" height="22"/>
-  <object id="120" name="START" x="524" y="458" width="28" height="22"/>
+  <object id="120" name="START" x="530" y="470" width="28" height="22"/>
   <object id="122" name="CASTLE" type="TELEPORTER" x="542.273" y="539.379">
    <properties>
     <property name="ID" type="float" value="9761"/>
@@ -151,7 +151,7 @@
   <object id="126" name="PORTAL" x="189" y="823" width="28" height="22"/>
   <object id="127" name="PORTAL" x="247" y="496" width="28" height="22"/>
   <object id="128" name="PORTAL" x="793" y="504" width="28" height="22"/>
-  <object id="129" name="PORTAL" x="524" y="193" width="28" height="22"/>
+  <object id="129" name="PORTAL" x="596" y="188" width="28" height="22"/>
   <object id="130" name="PORTAL" x="529" y="630" width="28" height="22"/>
  </objectgroup>
 </map>
