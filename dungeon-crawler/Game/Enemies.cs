@@ -121,6 +121,7 @@ namespace Demo.Game
                     fireGolem.FrostResistance = 0;
                     fireGolem.Name = "FIRE_GOLEM";
                     fireGolem.XP = 35;
+                    fireGolem.SpawnRate = 30;
                     enemy = fireGolem;
                     break;
                 case ("GREEN_DRAKE"):
@@ -134,6 +135,19 @@ namespace Demo.Game
                     greenDrake.Name = "GREEN_DRAKE";
                     greenDrake.XP = 50;
                     enemy = greenDrake;
+                    break;
+                case ("COBRA"):
+                    Entity cobra = new Entity(Sprites.GetSprite("COBRA"));
+                    cobra.LoadContent(ContentManager);
+                    cobra.MaxHealth = 50;
+                    cobra.CurrentHealth = 50;
+                    cobra.AttackDamage = 0.12;
+                    cobra.FireResistance = 50;
+                    cobra.FrostResistance = 0;
+                    cobra.Name = "COBRA";
+                    cobra.XP = 20;
+                    cobra.SpawnRate = 10;
+                    enemy = cobra;
                     break;
             }
 

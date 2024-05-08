@@ -270,6 +270,25 @@ namespace DungeonCrawler
             greenDrake.AddAnimation("dead", new[] { 4 }, greenDrakeSpeed, true);
             SpriteList.Add(greenDrake);
 
+            // Cobra
+            SpriteLoader cobra = new SpriteLoader(content, "COBRA", @"spritesheets\cobra", 32, 32);
+            float cobraSpeed = 0.6f;
+            cobra.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, cobraSpeed, false);
+            cobra.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("walkWestPattern1", new[] { 4, 5, 7 }, cobraSpeed, true);
+            cobra.AddAnimation("attackWestPattern1", new[] { 4, 5, 7 }, cobraSpeed, true);
+            cobra.AddAnimation("idleWest1", new[] { 4 }, cobraSpeed, true);
+            cobra.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("idleEast1", new[] { 0 }, cobraSpeed, true);
+            cobra.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("idleNorth1", new[] { 0, 1, 2 }, cobraSpeed, true);
+            cobra.AddAnimation("dead", new[] { 4 }, cobraSpeed, true);
+            SpriteList.Add(cobra);
+
+
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
             torchSprite.AddAnimation("BURNING", new[] { 0, 1, 2 }, 0.09f, true);
