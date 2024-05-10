@@ -138,7 +138,7 @@
 </data>
  </layer>
  <objectgroup id="3" name="Object Layer 1">
-  <object id="119" name="PORTAL" x="212.667" y="192.667" width="28" height="22"/>
+  <object id="119" name="PORTAL" x="338" y="332.667" width="28" height="22"/>
   <object id="120" name="START" x="530" y="470" width="28" height="22"/>
   <object id="122" name="CASTLE" type="TELEPORTER" x="542.273" y="539.379">
    <properties>
@@ -146,12 +146,12 @@
    </properties>
   </object>
   <object id="123" name="RED_PORTAL" x="536.167" y="535.167" width="12" height="10"/>
-  <object id="124" name="PORTAL" x="821" y="190" width="28" height="22"/>
-  <object id="125" name="PORTAL" x="817" y="815" width="28" height="22"/>
-  <object id="126" name="PORTAL" x="189" y="823" width="28" height="22"/>
+  <object id="124" name="PORTAL" x="399.667" y="684.667" width="28" height="22"/>
+  <object id="125" name="PORTAL" x="697" y="688.333" width="28" height="22"/>
+  <object id="126" name="PORTAL" x="274.333" y="620.333" width="28" height="22"/>
   <object id="127" name="PORTAL" x="247" y="496" width="28" height="22"/>
-  <object id="128" name="PORTAL" x="793" y="504" width="28" height="22"/>
-  <object id="129" name="PORTAL" x="596" y="188" width="28" height="22"/>
+  <object id="128" name="PORTAL" x="705" y="514.667" width="28" height="22"/>
+  <object id="129" name="PORTAL" x="696" y="338.667" width="28" height="22"/>
   <object id="130" name="PORTAL" x="529" y="630" width="28" height="22"/>
  </objectgroup>
 </map>

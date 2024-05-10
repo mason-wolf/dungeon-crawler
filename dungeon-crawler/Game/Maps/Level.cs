@@ -181,6 +181,7 @@ namespace DungeonCrawler
             this.contentManager = content;
             foreach (MapObject mapObject in MapObjects)
             {
+                // TODO: remove duplicate logic, moved to Enemies.cs
                 switch (mapObject.GetName())
                 {
                     case ("SKELETON"):

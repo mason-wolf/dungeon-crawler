@@ -134,6 +134,7 @@ namespace Demo.Game
                     greenDrake.FrostResistance = 0;
                     greenDrake.Name = "GREEN_DRAKE";
                     greenDrake.XP = 50;
+                    greenDrake.SpawnRate = 50;
                     enemy = greenDrake;
                     break;
                 case ("COBRA"):
@@ -146,7 +147,7 @@ namespace Demo.Game
                     cobra.FrostResistance = 0;
                     cobra.Name = "COBRA";
                     cobra.XP = 20;
-                    cobra.SpawnRate = 10;
+                    cobra.SpawnRate = 50;
                     enemy = cobra;
                     break;
             }
