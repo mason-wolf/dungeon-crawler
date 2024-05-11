@@ -324,6 +324,24 @@ namespace DungeonCrawler
             kimodo.AddAnimation("dead", new[] { 4 }, kimodoSpeed, true);
             SpriteList.Add(kimodo);
 
+            // Cinder Beetle
+            SpriteLoader cinderBeetle = new SpriteLoader(content, "CINDER_BEETLE", @"spritesheets\cinder_beetle", 32, 32);
+            float cinderBeetleSpeed = 0.2f;
+            cinderBeetle.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, cinderBeetleSpeed, false);
+            cinderBeetle.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("walkWestPattern1", new[] { 4, 5, 7 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("attackWestPattern1", new[] { 4, 5, 7 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("idleWest1", new[] { 4 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("walkEastPattern1", new[] { 0, 1, 2 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("attackEastPattern1", new[] { 0, 1, 2 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("idleEast1", new[] { 4 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("idleNorth1", new[] { 0 }, cinderBeetleSpeed, true);
+            cinderBeetle.AddAnimation("dead", new[] { 4 }, cinderBeetleSpeed, true);
+            SpriteList.Add(cinderBeetle);
+
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);
             torchSprite.AddAnimation("BURNING", new[] { 0, 1, 2 }, 0.09f, true);

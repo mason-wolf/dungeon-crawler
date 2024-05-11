@@ -121,7 +121,6 @@ namespace Demo.Game
                     fireGolem.FrostResistance = 0;
                     fireGolem.Name = "FIRE_GOLEM";
                     fireGolem.XP = 35;
-                    fireGolem.SpawnRate = 40;
                     enemy = fireGolem;
                     break;
                 case ("GREEN_DRAKE"):
@@ -134,7 +133,6 @@ namespace Demo.Game
                     greenDrake.FrostResistance = 0;
                     greenDrake.Name = "GREEN_DRAKE";
                     greenDrake.XP = 50;
-                    greenDrake.SpawnRate = 50;
                     enemy = greenDrake;
                     break;
                 case ("COBRA"):
@@ -147,7 +145,6 @@ namespace Demo.Game
                     cobra.FrostResistance = 0;
                     cobra.Name = "COBRA";
                     cobra.XP = 20;
-                    cobra.SpawnRate = 20;
                     enemy = cobra;
                     break;
                 case ("CINDER_DWARF"):
@@ -160,7 +157,6 @@ namespace Demo.Game
                     cinderDwarf.FrostResistance = 0;
                     cinderDwarf.Name = "CINDER_DWARF";
                     cinderDwarf.XP = 20;
-                    cinderDwarf.SpawnRate = 30;
                     enemy = cinderDwarf;
                     break;
                 case ("KIMODO"):
@@ -173,8 +169,31 @@ namespace Demo.Game
                     kimodo.FrostResistance = 0;
                     kimodo.Name = "KIMODO";
                     kimodo.XP = 20;
-                    kimodo.SpawnRate = 30;
                     enemy = kimodo;
+                    break;
+                case ("CINDER_BEETLE"):
+                    Entity cinderBeetle = new Entity(Sprites.GetSprite("CINDER_BEETLE"));
+                    cinderBeetle.LoadContent(ContentManager);
+                    cinderBeetle.MaxHealth = 50;
+                    cinderBeetle.CurrentHealth = 50;
+                    cinderBeetle.AttackDamage = 0.12;
+                    cinderBeetle.FireResistance = 50;
+                    cinderBeetle.FrostResistance = 0;
+                    cinderBeetle.Name = "CINDER_BEETLE";
+                    cinderBeetle.XP = 20;
+                    enemy = cinderBeetle;
+                    break;
+                case ("GREEN_GHOST"):
+                    Entity greenGhost = new Entity(Sprites.GetSprite("GREEN_GHOST"));
+                    greenGhost.LoadContent(ContentManager);
+                    greenGhost.MaxHealth = 20;
+                    greenGhost.CurrentHealth = 20;
+                    greenGhost.AttackDamage = 0.12;
+                    greenGhost.FireResistance = 50;
+                    greenGhost.FrostResistance = 0;
+                    greenGhost.Name = "GREEN_GHOST";
+                    greenGhost.XP = 50;
+                    enemy = greenGhost;
                     break;
             }
 

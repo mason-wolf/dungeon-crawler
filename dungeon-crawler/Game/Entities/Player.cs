@@ -338,7 +338,7 @@ namespace DungeonCrawler
                         else
                         {
                             // Walk north.
-                            MotionVector.Y -= 1.8f ;
+                            MotionVector.Y -= MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkNorthPattern1;
                         }
@@ -364,7 +364,7 @@ namespace DungeonCrawler
                         else
                         {
                             // Walk south
-                            MotionVector.Y += 1.8f;
+                            MotionVector.Y += MovementSpeed;
                             player.Position = MotionVector;
                             player.State = Action.WalkSouthPattern1;
                         }
