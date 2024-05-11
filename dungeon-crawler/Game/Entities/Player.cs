@@ -51,7 +51,7 @@ namespace DungeonCrawler
         Init.Scene currentScene = Init.SelectedScene;
         Random random = new Random();
         List<SoundEffect> soundEffects;
-        float MovementSpeed = 1.5f;
+        float MovementSpeed = 2.0f;
         ActionBar _actionBar;
 
         public new void LoadContent(ContentManager content)
@@ -338,7 +338,7 @@ namespace DungeonCrawler
                         else
                         {
                             // Walk north.
-                            MotionVector.Y -= MovementSpeed;
+                            MotionVector.Y -= 1.8f ;
                             player.Position = MotionVector;
                             player.State = Action.WalkNorthPattern1;
                         }
@@ -364,7 +364,7 @@ namespace DungeonCrawler
                         else
                         {
                             // Walk south
-                            MotionVector.Y += MovementSpeed;
+                            MotionVector.Y += 1.8f;
                             player.Position = MotionVector;
                             player.State = Action.WalkSouthPattern1;
                         }

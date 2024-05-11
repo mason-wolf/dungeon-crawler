@@ -121,7 +121,7 @@ namespace Demo.Game
                     fireGolem.FrostResistance = 0;
                     fireGolem.Name = "FIRE_GOLEM";
                     fireGolem.XP = 35;
-                    fireGolem.SpawnRate = 30;
+                    fireGolem.SpawnRate = 40;
                     enemy = fireGolem;
                     break;
                 case ("GREEN_DRAKE"):
@@ -147,8 +147,34 @@ namespace Demo.Game
                     cobra.FrostResistance = 0;
                     cobra.Name = "COBRA";
                     cobra.XP = 20;
-                    cobra.SpawnRate = 50;
+                    cobra.SpawnRate = 20;
                     enemy = cobra;
+                    break;
+                case ("CINDER_DWARF"):
+                    Entity cinderDwarf = new Entity(Sprites.GetSprite("CINDER_DWARF"));
+                    cinderDwarf.LoadContent(ContentManager);
+                    cinderDwarf.MaxHealth = 50;
+                    cinderDwarf.CurrentHealth = 50;
+                    cinderDwarf.AttackDamage = 0.12;
+                    cinderDwarf.FireResistance = 50;
+                    cinderDwarf.FrostResistance = 0;
+                    cinderDwarf.Name = "CINDER_DWARF";
+                    cinderDwarf.XP = 20;
+                    cinderDwarf.SpawnRate = 30;
+                    enemy = cinderDwarf;
+                    break;
+                case ("KIMODO"):
+                    Entity kimodo = new Entity(Sprites.GetSprite("KIMODO"));
+                    kimodo.LoadContent(ContentManager);
+                    kimodo.MaxHealth = 50;
+                    kimodo.CurrentHealth = 50;
+                    kimodo.AttackDamage = 0.12;
+                    kimodo.FireResistance = 50;
+                    kimodo.FrostResistance = 0;
+                    kimodo.Name = "KIMODO";
+                    kimodo.XP = 20;
+                    kimodo.SpawnRate = 30;
+                    enemy = kimodo;
                     break;
             }
 

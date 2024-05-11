@@ -288,6 +288,41 @@ namespace DungeonCrawler
             cobra.AddAnimation("dead", new[] { 4 }, cobraSpeed, true);
             SpriteList.Add(cobra);
 
+            // Cinder Dwarf
+            SpriteLoader cinderDwarf = new SpriteLoader(content, "CINDER_DWARF", @"spritesheets\cinder_dwarf", 32, 32);
+            float cinderDwarfSpeed = 0.6f;
+            cinderDwarf.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, cinderDwarfSpeed, false);
+            cinderDwarf.AddAnimation("walkSouthPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("attackSouthPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("walkWestPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("attackWestPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("idleWest1", new[] { 0 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("walkEastPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("attackEastPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("idleEast1", new[] { 0 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("walkNorthPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("attackNorthPattern1", new[] { 1, 2 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("idleNorth1", new[] { 0 }, cinderDwarfSpeed, true);
+            cinderDwarf.AddAnimation("dead", new[] { 4 }, cinderDwarfSpeed, true);
+            SpriteList.Add(cinderDwarf);
+
+            // Kimodo
+            SpriteLoader kimodo = new SpriteLoader(content, "KIMODO", @"spritesheets\kimodo", 32, 32);
+            float kimodoSpeed = 0.2f;
+            kimodo.AddAnimation("idleSouth1", new[] { 0, 1, 2 }, kimodoSpeed, false);
+            kimodo.AddAnimation("walkSouthPattern1", new[] { 0, 1, 2, 3}, kimodoSpeed, true);
+            kimodo.AddAnimation("attackSouthPattern1", new[] { 0, 1, 2, 3}, kimodoSpeed, true);
+            kimodo.AddAnimation("walkWestPattern1", new[] { 4, 5, 6, 7 }, kimodoSpeed, true);
+            kimodo.AddAnimation("attackWestPattern1", new[] { 4, 5, 6, 7 }, kimodoSpeed, true);
+            kimodo.AddAnimation("idleWest1", new[] { 4 }, kimodoSpeed, true);
+            kimodo.AddAnimation("walkEastPattern1", new[] { 0, 1, 2, 3 }, kimodoSpeed, true);
+            kimodo.AddAnimation("attackEastPattern1", new[] { 0, 1, 2, 3 }, kimodoSpeed, true);
+            kimodo.AddAnimation("idleEast1", new[] { 0 }, kimodoSpeed, true);
+            kimodo.AddAnimation("walkNorthPattern1", new[] { 0, 1, 2, 3}, kimodoSpeed, true);
+            kimodo.AddAnimation("attackNorthPattern1", new[] { 0, 1, 2, 3}, kimodoSpeed, true);
+            kimodo.AddAnimation("idleNorth1", new[] { 0 }, kimodoSpeed, true);
+            kimodo.AddAnimation("dead", new[] { 4 }, kimodoSpeed, true);
+            SpriteList.Add(kimodo);
 
             // Torch
             SpriteLoader torchSprite = new SpriteLoader(content, "TORCH", @"objects\torch", 32, 32);

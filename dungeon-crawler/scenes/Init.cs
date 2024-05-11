@@ -486,6 +486,7 @@ namespace DungeonCrawler.Scenes
                 Player.CheckPlayerStatus(gameTime);
             }
 
+            Vector2 cameraPosition = new Vector2((int)(Player.Position.X + 0.5), (int)(Player.Position.Y + 0.5));
             Camera.LookAt(Player.Position);
             KeyBoardOldState = KeyBoardNewState;
             KeyBoardNewState = Keyboard.GetState();

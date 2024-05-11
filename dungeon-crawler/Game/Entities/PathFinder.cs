@@ -111,7 +111,7 @@ namespace DungeonCrawler
                         // Only avoid if the tile is traversable.
                         if (cellCost == 1)
                         {
-                            unit.Position -= oppositeDirection * (float)(0.01f * gameTime.ElapsedGameTime.TotalMilliseconds);
+                            unit.Position -= oppositeDirection * (float)(0.02f * gameTime.ElapsedGameTime.TotalMilliseconds);
                         }
                     }
                 }

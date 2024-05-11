@@ -109,7 +109,7 @@ namespace Demo.Game
             icebolt1.Name = "ICEBOLT";
             icebolt1.ID = 2;
             icebolt1.Damage = 5;
-            icebolt1.ManaCost = .5;
+            icebolt1.ManaCost = .05;
             icebolt1.Element = Spell.SpellElement.FROST;
             icebolt1.Description = "Casts a bolt of ice.";
             ItemList.Add(icebolt1);
