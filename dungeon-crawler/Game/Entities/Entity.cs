@@ -117,6 +117,7 @@ namespace DungeonCrawler
         public int SpawnRate { get; set; } = 100;
 
         public List<Projectile> Projectiles = new List<Projectile>();
+
         public void LoadContent(ContentManager content)
         {
             StatusBarTexture = content.Load<Texture2D>(@"interface\statusbar");
@@ -370,15 +371,39 @@ namespace DungeonCrawler
                 {
                     case (1):
                         spell.Sprite = new AnimatedSprite(Sprites.GetSprite("FIREBALL_1"));
-                        ShootProjectile(spell);
+                        ShootProjectile(spell, default);
                         break;
+                    // Spread Spell
                     case (2):
-                        spell.Sprite = new AnimatedSprite(Sprites.GetSprite("ICEBOLT_1"));
-                        ShootProjectile(spell);
+                        // Place the spell a little further from the player.
+                        int xOffset = 30;
+                        int yOffset = 15;
+
+                        //Positions starting from left to right.
+                        List<Vector2> spellSpreadLocations = new List<Vector2>();
+                        Vector2 pos1 = new Vector2(Position.X - xOffset, Position.Y + yOffset);
+                        spellSpreadLocations.Add(pos1);
+                        Vector2 pos2 = new Vector2(Position.X - (xOffset / 2), Position.Y + yOffset);
+                        spellSpreadLocations.Add(pos2);
+                        Vector2 pos3 = new Vector2(Position.X + (xOffset / 2), Position.Y + yOffset);
+                        spellSpreadLocations.Add(pos3);
+                        Vector2 pos4 = new Vector2(Position.X + xOffset, Position.Y + yOffset);
+                        spellSpreadLocations.Add(pos4);
+
+                        List<Spell> spreadSpells = new List<Spell>();
+                        foreach (Vector2 position in spellSpreadLocations)
+                        {
+                            // Generate copies of the spell to cast.
+                            Spell spreadSpell = Copy(spell);
+                            spreadSpell.Position = position;
+                            spreadSpell.Sprite = new AnimatedSprite(Sprites.GetSprite("ICEBOLT_1"));
+                            spreadSpells.Add(spreadSpell);
+                        }
+                        CastSpreadSpell(spreadSpells);
                         break;
                     case (5):
                         spell.Sprite = new AnimatedSprite(Sprites.GetSprite("THUNDERBOLT_1"));
-                        ShootProjectile(spell);
+                        ShootProjectile(spell, default);
                         break;
                     case (6):
                         stopWatch.Restart();
@@ -400,6 +425,44 @@ namespace DungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Casts a spread spell. Spread spells handle projectile
+        /// positions differently than single projectiles. 
+        /// </summary>
+        /// <param name="spells">List of spells to cast.</param>
+        public void CastSpreadSpell(List<Spell> spells)
+        {
+            foreach(Spell spell in spells)
+            {
+                Projectile projectile = CreateProjectile(spell);
+                projectile.Sprite = spell.Sprite;
+                switch (State)
+                {
+                    // Positions are normal for north & south directions.
+                    // Need custom positions for east and west.
+                    case (Action.AttackEastPattern1):
+                        spells[0].Position = new Vector2(spells[0].Position.X + 55, spells[0].Position.Y + 25);
+                        spells[1].Position = new Vector2(spells[1].Position.X + 20, spells[1].Position.Y + 5);
+                        spells[2].Position = new Vector2(spells[2].Position.X + 4, spells[2].Position.Y + -5);
+                        spells[3].Position = new Vector2(spells[3].Position.X - 1, spells[3].Position.Y + -8);
+                        break;
+                    case (Action.AttackWestPattern1):
+                        spells[0].Position = new Vector2(spells[0].Position.X - 1, spells[0].Position.Y - 25);
+                        spells[1].Position = new Vector2(spells[1].Position.X - 8, spells[1].Position.Y - 5);
+                        spells[2].Position = new Vector2(spells[2].Position.X - 15, spells[2].Position.Y + 5);
+                        spells[3].Position = new Vector2(spells[3].Position.X - 15, spells[3].Position.Y - -8);
+                        break;
+                }
+                projectile.Position = spell.Position;
+                projectile.Direction = spell.Direction.ToString();
+                projectile.TargetHit = false;
+                QueueProjectile(projectile);
+            }
+        }
+
+        /// <summary>
+        /// Applies equipment bonuses to armor slots.
+        /// </summary>
         public void ApplyArmorStats()
         {
             Dictionary<string, double> bonuses = Equipment.GetBonuses();
@@ -420,23 +483,35 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// Shoots a projectile.
+        /// Creates a projectile from a spell.
         /// </summary>
-        /// <param name="sprite">AnimatedSprite of the projectile.</param>
-        /// <param name="direction">Direction (North, South, East, West)</param>
-        public void ShootProjectile(Spell spell)
+        /// <param name="spell">Spell to make a projectile with.</param>
+        /// <returns></returns>
+        public Projectile CreateProjectile(Spell spell)
         {
             Projectile projectile = new Projectile();
             Spell spellToCast = new Spell();
+            // Copy the spell data. Could use IClonable but this
+            // will work for now.
             spellToCast.ID = spell.ID;
             spellToCast.Sprite = spell.Sprite;
             spellToCast.Damage = (spell.Damage * SpellPower) / 10;
             spellToCast.BoundingBox = spell.BoundingBox;
             spellToCast.Direction = spell.Direction;
             spellToCast.Element = spell.Element;
-
             projectile.ID = spell.ID;
             projectile.Spell = spellToCast;
+            return projectile;
+        }
+
+        /// <summary>
+        /// Shoots a projectile.
+        /// </summary>
+        /// <param name="spell">Name of spell</param>
+        /// <param name="startingPosition">Projectile position</param>
+        public void ShootProjectile(Spell spell, Vector2 projectilePosition)
+        {
+            Projectile projectile = CreateProjectile(spell);
             // Thunderbolt spell requires two separate spritesheets. 
             // Spell ID is 5 so change sprite depending on direction.
             // TODO: Decouple custom spell logic in ShootProjectile() method on Entity class.
@@ -449,31 +524,37 @@ namespace DungeonCrawler
                 projectile.Sprite = spell.Sprite;
             }
 
-            // TODO: Better position projectile launch relative to player position.
-            Vector2 projectilePosition = new Vector2(Position.X, Position.Y);
-
             switch (State)
             {
                 case (Action.AttackEastPattern1):
-                    projectilePosition = new Vector2(Position.X + 15, Position.Y + 5);
+                    projectilePosition = new Vector2(projectilePosition.X + 15, projectilePosition.Y + 5);
                     break;
                 case (Action.AttackWestPattern1):
-                    projectilePosition = new Vector2(Position.X - 15, Position.Y + 5);
+                    projectilePosition = new Vector2(projectilePosition.X - 15, projectilePosition.Y + 5);
                     break;
                 case (Action.AttackNorthPattern1):
-                    projectilePosition = new Vector2(Position.X, Position.Y - 15);
+                    projectilePosition = new Vector2(projectilePosition.X, projectilePosition.Y - 15);
                     break;
                 case (Action.AttackSouthPattern1):
-                    projectilePosition = new Vector2(Position.X, Position.Y + 15);
+                    projectilePosition = new Vector2(projectilePosition.X, projectilePosition.Y + 15);
                     break;
             }
             projectile.Position = projectilePosition;
             projectile.Direction = spell.Direction.ToString();
             projectile.TargetHit = false;
+            QueueProjectile(projectile);
+        }
 
+        /// <summary>
+        /// Adds projectile to the list to be fired.
+        /// Throttles the list for performance.
+        /// </summary>
+        /// <param name="projectile"></param>
+        public void QueueProjectile(Projectile projectile)
+        {
             Projectiles.Add(projectile);
 
-            if (Projectiles.Count > 25)
+            if (Projectiles.Count > 50)
             {
                 Projectiles.Clear();
             }
@@ -501,6 +582,10 @@ namespace DungeonCrawler
             return collided;
         }
 
+        /// <summary>
+        /// Restores health.
+        /// </summary>
+        /// <param name="healAmount">Amount to heal</param>
         public void RestoreHealth(double healAmount)
         {
             double healthToHeal = (MaxHealth + HealthBonus) - CurrentHealth;
@@ -514,6 +599,10 @@ namespace DungeonCrawler
             }
         }
 
+        /// <summary>
+        /// Restores mana.
+        /// </summary>
+        /// <param name="manaAmount">Amount to restore</param>
         public void RestoreMana(double manaAmount)
         {
             double manaToHeal = (MaxMana + ManaBonus) - CurrentMana;

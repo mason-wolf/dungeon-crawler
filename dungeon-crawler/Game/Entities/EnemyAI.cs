@@ -65,7 +65,7 @@ namespace DungeonCrawler.Engine
             {
                 // Calculate enemy distances within an appropriate range.
                 float enemyDistance = Vector2.Distance(player.Position, enemy.Position);
-                if (enemyDistance < 200 && enemy.State != Action.Dead || enemy.Aggroed && !nearestEnemyFound)
+                if (enemyDistance < 250 && enemy.State != Action.Dead || enemy.Aggroed && !nearestEnemyFound)
                 {
                     if (!enemiesInRange.Contains(enemy) && enemy.Movable)
                     {

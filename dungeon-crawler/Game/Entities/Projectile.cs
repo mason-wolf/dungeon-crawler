@@ -8,6 +8,11 @@ using System.Threading.Tasks;
 
 namespace Demo.Game
 {
+    /// <summary>
+    /// Represents a projectile. A projectile is an entity
+    /// with an attached spell containing target and hitbox
+    /// data.
+    /// </summary>
     public class Projectile : Entity
     {
         new public int ID { get; set; }

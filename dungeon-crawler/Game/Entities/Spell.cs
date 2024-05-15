@@ -1,4 +1,5 @@
 ﻿using DungeonCrawler;
+using Microsoft.Xna.Framework;
 using MonoGame.Extended.Shapes;
 using MonoGame.Extended.Sprites;
 using System;
@@ -20,6 +21,7 @@ namespace Demo.Game
         public RectangleF BoundingBox { get; set; }
         public int Duration { get; set; }
         public SpellDirection Direction { get; set; }
+        public Vector2 Position { get; set; }
 
         public SpellElement Element { get; set; }
 
@@ -57,7 +59,24 @@ namespace Demo.Game
             }
 
             return damage;
+        }
 
+        /// <summary>
+        /// Creates a copy of a specified spell.
+        /// </summary>
+        /// <param name="spell"></param>
+        /// <returns></returns>
+        public static Spell Copy(Spell spellToCopy)
+        {
+            Spell spell = new Spell();
+            spell.Name = spellToCopy.Name;
+            spell.ID = spellToCopy.ID;
+            spell.Damage = spellToCopy.Damage;
+            spell.ManaCost = spellToCopy.ManaCost;
+            spell.Element = spellToCopy.Element;
+            spell.Direction = spellToCopy.Direction;
+            spell.Description = spellToCopy.Description;
+            return spell;
         }
     }
 }
