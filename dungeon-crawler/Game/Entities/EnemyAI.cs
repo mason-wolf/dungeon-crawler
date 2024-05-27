@@ -56,6 +56,7 @@ namespace DungeonCrawler.Engine
             this.player = player;
         }
 
+        int maxPathFinders = 25;
         public void Update(GameTime gameTime)
         {
             int enemyDeathCount = 0;
@@ -100,12 +101,12 @@ namespace DungeonCrawler.Engine
                 }
                 else
                 {
-                    enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
+                    enemy.PathFinder.MoveUnit(enemy, 0.1f, 1, gameTime);
 
                     if (enemy.PathFinder != null)
                     {
                         // Find the closest enemy and find path to player.
-                        if (!nearestEnemyFound && enemy.Movable || nearestEnemy.Dead && pathFinderCount < 25)
+                        if (!nearestEnemyFound && enemy.Movable || nearestEnemy.Dead && pathFinderCount < maxPathFinders)
                         {
                             Entity closestEnemy = enemyList
                             .Where(e => e.Movable)
@@ -115,6 +116,7 @@ namespace DungeonCrawler.Engine
                             closestEnemy.PathFinder.FindPathToTarget(closestEnemy, player);
                             nearestEnemy = closestEnemy;
                             nearestEnemyFound = true;
+                            pathFinderCount++;
                         }
                         else
                         {
@@ -125,14 +127,13 @@ namespace DungeonCrawler.Engine
 
                             if (nearestEnemy.PathFinder != null && 
                                 nearestEnemy.PathFinder.GetWayPoints().Count == 0 && 
-                                pathFinderCount < 25)
+                                pathFinderCount < maxPathFinders)
                             {
                                 pathFinderCount++;
                                 enemy.PathFinder = new PathFinder(gameTime, grid, enemiesInRange);
                                 enemy.PathFinder.FindPathToTarget(enemy, player);
                             }
                         }
-                    //    enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
                         enemy.Attack(player);
                     }
                 }

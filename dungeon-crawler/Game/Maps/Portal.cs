@@ -70,7 +70,7 @@ namespace Demo.Game
             portalEntity.CurrentHealth = currentHealth;
             portalEntity.Position = mapObject.GetPosition();
             portalEntity.Name = "PORTAL";
-            spawnRate = 100;
+            spawnRate = 60;
             enemyTypes.Add("PLAINS", new string[] { "BAT", "ZOMBIE", "BLUE_SLIME" });
             enemyTypes.Add("FIRELANDS", new string[] { 
                 "SKELETON", "FIRE_BAT", 
@@ -129,9 +129,9 @@ namespace Demo.Game
             }
 
             randomEnemy.Position = new Vector2(MapObject.GetPosition().X, MapObject.GetPosition().Y + 20);
-            randomEnemy.MaxHealth += (int)((Level.Difficulty * 0.01) * 100);
-            randomEnemy.CurrentHealth += (int)((Level.Difficulty * 0.01) * 100);
-            randomEnemy.AttackDamage *= (1 + (Level.Difficulty * 0.025));
+            randomEnemy.MaxHealth += (int)((Level.Difficulty * 0.25) * 100);
+            randomEnemy.CurrentHealth += (int)((Level.Difficulty * 0.25) * 100);
+            randomEnemy.AttackDamage *= (1 + (Level.Difficulty * 0.25));
 
             return randomEnemy;
         }
