@@ -101,7 +101,7 @@ namespace DungeonCrawler.Engine
                 }
                 else
                 {
-                    enemy.PathFinder.MoveUnit(enemy, 0.1f, 1, gameTime);
+                    enemy.PathFinder.MoveUnit(enemy, 0.06f, 1, gameTime);
 
                     if (enemy.PathFinder != null)
                     {

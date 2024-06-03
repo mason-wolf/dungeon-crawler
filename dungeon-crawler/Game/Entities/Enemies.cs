@@ -50,7 +50,7 @@ namespace Demo.Game
                     batEntity.CurrentHealth = 15;
                     batEntity.AttackDamage = 0.01;
                     batEntity.Name = "BAT";
-                    batEntity.XP = 10;
+                    batEntity.XP = 10; 
                     enemy = batEntity;
                     break;
                 case ("SKELETON"):
@@ -62,9 +62,9 @@ namespace Demo.Game
                     skeletonEntity.AttackDamage = 0.08;
                     skeletonEntity.Name = "SKELETON";
                     skeletonEntity.XP = 10;
-                    //skeletonEntity.SpellCaster = true;
-                    //skeletonEntity.SpellID = 1;
-                    //skeletonEntity.CurrentMana = 1000;
+                    skeletonEntity.SpellCaster = true;
+                    skeletonEntity.SpellID = 1;
+                    skeletonEntity.CurrentMana = 1000;
                     skeletonEntity.FireResistance = 50;
                     enemy = skeletonEntity;
                     break;

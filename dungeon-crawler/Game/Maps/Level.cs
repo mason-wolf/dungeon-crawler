@@ -478,6 +478,7 @@ namespace DungeonCrawler
             }
         }
 
+        private int ProjectileCount = 0;
         public override void Update(GameTime gameTime)
         {
             // Update scene.
@@ -525,10 +526,16 @@ namespace DungeonCrawler
                 }
             }
 
+
             // Update enemies.
             foreach (Entity enemy in enemyList)
             {
                 enemy.Update(gameTime);
+
+                enemy.Projectiles.ForEach(projectile =>
+                {
+                    ProjectileCount++;
+                });
                 // Handle destruction of portals.
                 if (enemy.Name == "PORTAL" && enemy.CurrentHealth <= 0)
                 {
@@ -580,6 +587,16 @@ namespace DungeonCrawler
                             break;
                     }
                 }
+            }
+
+            // Limit the amount of total projectiles on screen for performance.
+            if (ProjectileCount > 2500)
+            {
+                enemyList.ForEach(e =>
+                {
+                    e.Projectiles.Clear();
+                });
+                ProjectileCount = 0;
             }
 
             if (enemyToRemove != null)

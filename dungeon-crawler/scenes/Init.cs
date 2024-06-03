@@ -77,12 +77,14 @@ namespace DungeonCrawler.Scenes
         public static bool InDialog = false;
 
         public static Texture2D _whiteTexture;
+
         public Init(Game game, GameWindow window) : base(game)
         {
             this.window = window;
             ViewportAdapter = new BoxingViewportAdapter(window, GraphicsDevice, 1080, 720);
             Camera = new Camera2D(ViewportAdapter);
             Player = new Player();
+            Player.Name = "player";
             Player.LoadContent(Content);
             Player.Sprite = new AnimatedSprite(Player.playerAnimation);
             Player.State = Action.IdleSouth1;
@@ -91,7 +93,7 @@ namespace DungeonCrawler.Scenes
             Player.MaxMana = 100;
             Player.CurrentMana = 100;
             Player.MaxStamina = 75;
-            Player.CurrentStamina = 75;
+            Player.CurrentStamina = 75; 
             Player.AttackDamage = 3.5;
             Player.Gold = 200;
             Player.Level = 1;

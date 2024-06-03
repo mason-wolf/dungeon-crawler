@@ -113,6 +113,7 @@ namespace DungeonCrawler
 
         public bool Moving;
 
+        public bool CanCast { get; set; } = true;
         // Controls the spawn rate of the entity by %.
         public int SpawnRate { get; set; } = 100;
 
@@ -304,7 +305,7 @@ namespace DungeonCrawler
             attackTimer.Start();
 
             // Cast spell at target
-            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 1500 && Movable)
+            if (SpellCaster && distance < 200 & CurrentHealth > 0 && attackTimer.ElapsedMilliseconds > 1500 && Movable && CanCast)
             {
                 if (direction == -3 || direction == 4 || direction == -2)
                 {
@@ -371,7 +372,7 @@ namespace DungeonCrawler
                 {
                     case (1):
                         spell.Sprite = new AnimatedSprite(Sprites.GetSprite("FIREBALL_1"));
-                        ShootProjectile(spell, default);
+                        ShootProjectile(spell, new Vector2(this.Position.X, Position.Y));
                         break;
                     // Spread Spell
                     case (2):
@@ -553,7 +554,6 @@ namespace DungeonCrawler
         public void QueueProjectile(Projectile projectile)
         {
             Projectiles.Add(projectile);
-
             if (Projectiles.Count > 50)
             {
                 Projectiles.Clear();
@@ -570,15 +570,15 @@ namespace DungeonCrawler
             bool collided = false;
             Vector2 offsetPosition = new Vector2(projectile.Position.X + 5, projectile.Position.Y + 5);
             projectile.HitBox = new RectangleF(offsetPosition, new SizeF(2, 2));
-            foreach (Tile tile in Init.SelectedMap.GetCollisionTiles())
-            {
-                if (projectile.HitBox.Intersects(tile.Rectangle))
-                {
-                    collided = true;
-                    // Toggle false to show when projectile hits obstacle.
-                    projectile.TargetHit = true;
-                }
-            }
+            //foreach (Tile tile in Init.SelectedMap.GetCollisionTiles())
+            //{
+            //    if (projectile.HitBox.Intersects(tile.Rectangle))
+            //    {
+            //        collided = true;
+            //        // Toggle false to show when projectile hits obstacle.
+            //        projectile.TargetHit = true;
+            //    }
+            //}
             return collided;
         }
 
